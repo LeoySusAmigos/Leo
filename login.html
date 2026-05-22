@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+   <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main class="contenedorLogin">
+        
+        <div class="login-wrapper">
+            <div class="logoArea">
+                <img src="images/cartelito2.png" alt="Leo & Friends">
+            </div>
+
+            <img src="images/Leito.png" class="personaje camaleon" alt="Leo">
+            <div class="info-box box-leo">
+                <h3>LEO</h3>
+                <p>Enseña a<br><strong>LEER</strong></p>
+            </div>
+
+            <img src="images/finxhidden.png" class="personaje gato" alt="Finx">
+            <div class="info-box box-finx">
+                <h3>FINX</h3>
+                <p>Acompaña en la<br><strong>LECTURA</strong></p>
+            </div>
+
+            <img src="images/capyhidden.png" class="personaje capibara" alt="Capy">
+            <div class="info-box box-capy">
+                <h3>CAPY</h3>
+                <p>Ayuda con la<br><strong>GRAMÁTICA</strong></p>
+            </div>
+
+            <form class="form" method="POST" action="php/login.php">
+                <div class="header-text">
+                    <h1>¡Bienvenido de nuevo!</h1>
+                    <p>Inicia sesión para continuar tu aventura.</p>
+                </div>
+
+                <div class="input-container">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="email" class="inputs" placeholder="Correo electrónico" name="correo">
+                </div>
+
+                <div class="input-container">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" class="inputs" placeholder="Contraseña" name="password">
+                </div>
+
+                <a href="#" class="forgot-pass"><u>¿Olvidaste tu contraseña?</u></a>
+
+                <button class="btn-submit" type="submit">Iniciar sesión</button>
+
+                <div class="divider">o continúa con</div>
+
+                <div class="social-login">
+                    <button class="social-btn"><img src="https://authjs.dev/img/providers/google.svg" alt="G"></button>
+                    <button class="social-btn"><img src="https://authjs.dev/img/providers/apple.svg" alt="A"></button>
+                    <button class="social-btn"><img src="images/microsoft-logo.png" alt="M"></button>
+                </div>
+
+                <p class="signup-text">¿No tienes cuenta? <a href="register.html"><u>Regístrate</u></a></p>
+            </form>
+        </div>
+
+    </main>
+
+</body>
+</html>
