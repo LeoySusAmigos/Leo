@@ -79,7 +79,7 @@
                             </li>
 
                             <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="configuracion.php">
 
                                     <i class="fa-solid fa-gear me-2"></i>
 
