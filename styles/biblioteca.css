@@ -84,10 +84,27 @@ body {
     padding: 15px 60px;
     border-radius: 30px;
     box-shadow: 0 8px 0 #B57422, 0 10px 15px rgba(0,0,0,0.2);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+
+    animation:floatCard 4s ease-in-out infinite;
 }
 
-.banner-titulo:hover{
-    transform: translateZ(10px) scale(1.05);
+@keyframes floatCard{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
 }
 
 .banner-titulo h1 {
@@ -144,6 +161,12 @@ body {
     position: relative;
     margin-bottom: 20px;
     width: 100%;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+
+    animation:floatCard 1s ease-in-out infinite;
 }
 
 .bocadillo::after {
@@ -190,6 +213,7 @@ body {
     width: 500px;
     height: auto;
     transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
 .img-finx:hover {
@@ -233,28 +257,19 @@ body {
     transform: translateZ(10px) scale(1.1);
 }
 
-/* MENÚ */
 .menu-filtro{
     position: absolute;
     top: 50px;
     right: 0;
-
     background: #28A745;
-
     border-radius: 15px;
-
     overflow: hidden;
-
     display: none;
-
     min-width: 140px;
-
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-
     z-index: 1000;
 }
 
-/* OPCIONES */
 .opcion{
     padding: 12px;
     cursor: pointer;
