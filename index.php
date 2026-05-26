@@ -203,15 +203,17 @@
 
         </div>
 
-        <div class="feature-card green-card">
+        <a href="progreso.php" class="card-link">
+            <div class="feature-card green-card">
+
             <div class="icon-circle green-circle">
-                <img src="images/arco.png" class="feature-icon2">
-            </div>
-
-            <h3 id="progreso">Progreso del niño</h3>
-
+                <img src="images/arco.png" class="feature-icon2" alt="Progreso">
         </div>
 
+        <h3>Progreso del niño</h3>
+
+    </div>
+    </a>
     </section>
 
 <!-- BOTÓN FINAL -->

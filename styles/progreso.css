@@ -1,0 +1,75 @@
+body{
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+.contenedor{
+    max-width: 1000px;
+    margin: auto;
+    background: #dfe7dd;
+    padding: 25px;
+    border-radius: 20px;
+}
+
+.tarjetas{
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.tarjeta{
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.barra-progreso{
+    width:100%;
+    height:25px;
+    background:#ffffff;
+    border-radius:30px;
+    overflow:hidden;
+    margin-top:20px;
+}
+.relleno{
+    width:0%;
+    height:100%;
+    background:#0f2010;
+}
+.porcentaje{
+    text-align:center;
+    font-weight:bold;
+}
+
+.mensaje{
+    font-size: 18px;
+    color:#040804;
+    margin-top: -10px;
+}
+
+.saludo-container{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.foto-perfil img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.info-usuario h1{
+    margin:0;
+}
+
+.mensaje{
+    margin-top:5px;
+}
+
