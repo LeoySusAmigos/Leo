@@ -1,25 +1,37 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #d9f0e4;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../images/fondo_configuracion.jpeg);
+    background-size: cover;      
+    background-position: center;    
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+html{
+    height: 100%;
 }
 
 .container {
     display: flex;
+    background: transparent;
 }
 
 /* SIDEBAR */
 .sidebar {
     width: 250px;
-    background: #6bbf8f;
     padding: 20px;
     height: 100vh;
-    color: white;
 }
 
 .logo {
-    font-size: 26px;
-    margin-bottom: 30px;
+    position: absolute;
+    top: -10px; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+    margin-bottom: 5px;
 }
 
 .sidebar ul {
@@ -48,6 +60,7 @@ body {
 
 /* MAIN */
 .main {
+    background: transparent;
     padding: 20px;
     width: 100%;
 }
@@ -59,7 +72,6 @@ body {
 
 /* CARD */
 .card {
-    background: #7fbcd2;
     border-radius: 12px;
     margin-top: 20px;
     overflow: hidden;

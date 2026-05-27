@@ -7,14 +7,13 @@
 body {
     font-family: 'Quicksand', sans-serif;
     overflow: hidden; 
-    
 }
 
 .contenedorLogin {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(images/fondoselva.png);
+    background-image: url(../images/fondoselva.png);
     background-size: cover;
     background-position: center;
     height: 100vh;
