@@ -16,63 +16,32 @@ body, html {
   width: 100%;
   display: block;
 }
-
-.boton-piedra {
-  
-
-     bottom: -30%;
-    left: 49%;
-  
-
-  width: 120px;
-  height: 80px;
+.nivel-link {
+  position: absolute;   
+  width: 120px;          
+  height: 80px;          
   background-image: url('images/piedra.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
   background-color: transparent;
-  border: none;
+  
+  text-decoration: none;
   cursor: pointer;
-  transition: transform 0.2s ease, filter 0.2s ease;
-}
-
-
-.boton-piedra:hover {
-  transform: scale(1.05); 
-  filter: brightness(1.1); /
-}
-
-
-.boton-piedra:active {
-  transform: scale(0.95);
-}
-
-.nivel-link {
-  position: absolute;
-  width: 100px;        
-  height: 70px;        
-
-  background-image: url('images/piedra.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
+  z-index: 10;           
   
-  text-decoration: none; 
-  
-
   transition: transform 0.2s ease;
 }
 
 
 .nivel-link:hover {
-  transform: scale(1.1); 
+  transform: scale(1.1);
 }
 
 .nivel-1 {
-bottom: 5%;
-    left: 69%;
+  bottom: 12%;  
+  left: 72%;    
 }
-
 
 .nivel-texto {
   position: absolute;
@@ -86,18 +55,13 @@ bottom: 5%;
   white-space: nowrap; 
 }
 
+
 .estrellas {
   position: absolute;
-  bottom: -22px;      
+  bottom: -25px;      
   left: 50%;
   transform: translateX(-50%);
-  
-  color: #ffcc00;     
-  font-size: 20px;    
+  color: #ffcc00;
+  font-size: 22px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
-}
-
-.nivel-2 {
-bottom: 5%;
-    left: 69%;
 }

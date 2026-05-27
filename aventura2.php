@@ -7,24 +7,13 @@
     <link rel="stylesheet" href="aventura2.css">
 </head>
 <body>
-   <div class="mapa-contenedor">
-        <img src="images/fondo.png" alt="Mapa de Capibaras" class="mapa-fondo">
+  <div class="mapa-contenedor">
+    <img src="images/fondo.png" alt="Mapa de Capibaras" class="mapa-fondo">
 
-        <a href="juegos.php" class="nivel-link nivel-1">
-            <span class="nivel-texto">Nivel 1</span>
-            <div class="estrellas">★★★</div>
-        </a>
-        
-    </div>
-
-       <div class="mapa-contenedor">
-        <img src="images/fondo.png" alt="Mapa de Capibaras" class="mapa-fondo">
-
-        <a href="juegos.php" class="nivel-link nivel-2">
-            <span class="nivel-texto">Nivel 2</span>
-            <div class="estrellas">★★★</div>
-        </a>
-        
-    </div>
+    <a href="juegos.php" class="nivel-link nivel-1">
+        <span class="nivel-texto">Nivel 1</span>
+        <div class="estrellas">★★★</div>
+    </a>
+</div>
 </body>
 </html>
