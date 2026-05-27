@@ -233,7 +233,9 @@ body{
     align-items:center;
     justify-content:space-between;
     width:100%;
+    
 }
+
 
 /* TEXTO */
 
@@ -247,11 +249,13 @@ body{
 }
 
 .titulo-leito{
-  font-size: 5rem;
-  margin-left: 70px;
-  font-style: initial;
-  text-shadow:2px 2px 0 black,-1px 1px 0 black,2px -2px 0 black,-2px -2px 0 black;
+    font-size: 5rem;
+    margin-left: 70px;
+    font-style: initial;
+    text-shadow:2px 2px 0 black,-1px 1px 0 black,2px -2px 0 black,-2px -2px 0 black;
+    
 }
+
 
 
 .hero-text, #verde{
@@ -400,28 +404,107 @@ body{
     padding-bottom:60px;
 }
 
-.feature-card{
-    font-family:'Fredoka', sans-serif;
-    text-decoration: none;
-    width:300px;
-    height:150px;
-    border-radius:30px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    box-shadow:0 10px 20px rgba(0,0,0,0.2);
-    overflow:visible;
-    cursor:pointer;
+.feature-card h3{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    text-shadow:
+        3px 3px 0 black,
+        -1px 1px 0 black;
+
     transition:0.3s;
 }
 
+.feature-card:hover h3{
+    transform:scale(1.08);
+}
+
+.feature-card{
+
+    font-family:'Fredoka', sans-serif;
+
+    text-decoration:none;
+
+    width:300px;
+    height:150px;
+
+    border-radius:35px;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    position:relative;
+
+    box-shadow:
+        0 12px 0 rgba(0,0,0,0.18),
+        0 20px 25px rgba(0,0,0,0.15);
+
+    overflow:visible;
+
+    cursor:pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+
+    animation:floatCard 3s ease-in-out infinite;
+}
+
+@keyframes floatCard{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+.feature-card:hover{
+
+    transform:
+        translateY(-18px)
+        scale(1.06)
+        rotate(-1deg);
+
+    box-shadow:
+        0 18px 0 rgba(0,0,0,0.18),
+        0 28px 35px rgba(0,0,0,0.22);
+
+    filter:brightness(1.08);
+}
+
 .feature-icon{
+
     width:130px;
+
     height:auto;
+
     object-fit:contain;
+
     z-index:10;
+
     transition:0.3s;
+}
+
+.feature-card:hover .feature-icon{
+
+    transform:
+        scale(1.12)
+        rotate(-8deg);
 }
 
 .feature-icon2{
@@ -433,17 +516,43 @@ body{
     transition:0.3s;
 }
 
+.feature-card:hover .feature-icon2{
+
+    transform:
+        scale(1.12)
+        rotate(8deg);
+}
+
 .icon-circle{
+
     position:absolute;
+
     top:-65px;
-    width:218px;
+
+    width:220px;
     height:130px;
+
     border-radius:50%;
+
     display:flex;
+
     justify-content:center;
     align-items:center;
-    box-shadow:0 10px 20px rgba(0,0,0,0.15);
+
+    box-shadow:
+        inset 0 -8px 0 rgba(0,0,0,0.08),
+        0 10px 20px rgba(0,0,0,0.18);
+
     z-index:5;
+
+    transition:0.3s;
+}
+
+.feature-card:hover .icon-circle{
+
+    transform:
+        translateY(-8px)
+        scale(1.05);
 }
 
 .blue-circle{
@@ -480,14 +589,17 @@ body{
 
 .orange-card{
     background:#ffb347;
+    animation-delay:0.5s;
 }
 
 .green-card{
     background:#43d843;
+    animation-delay:1s;
 }
 
 .blue-card{
     background: #2b73b9;
+    animation-delay:0s;
 }
 
 /* BOTÓN FINAL */
@@ -547,3 +659,7 @@ body{
    
 }
 
+.card-link{
+    text-decoration: none;
+    color: inherit;
+}

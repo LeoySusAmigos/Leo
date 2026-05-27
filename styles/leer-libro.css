@@ -1,0 +1,31 @@
+body{
+    background-image:url(../images/lectura/minibiblioteca2.png);
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    min-height:100vh;
+}
+
+.btn-back img {
+    width: 40px; 
+    height: auto;
+    display: block; 
+}
+
+.btn-back {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    background-color: #FFA500;
+    padding: 10px;
+    border-radius: 50%;
+    border: 3px solid #f17800;
+    transition: all 0.1s ease;
+    z-index: 10;
+}
+
+.btn-back:active {
+    transform: translateY(6px);
+    box-shadow: 0 0px 0 #CC7A00;
+}
