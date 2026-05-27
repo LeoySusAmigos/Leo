@@ -1,8 +1,33 @@
 <?php
-$puntos = 0;
-$racha = 0;
-$nivel = 1;
-$progreso = 0;
+session_start();
+
+if (!isset($_SESSION['userID'])) {
+    header("Location: login.html");
+    exit();
+}
+
+include("php/conexion.php");
+
+$nombre = $_SESSION['nombre_nino'];
+
+$idUsuario = $_SESSION['userID'];
+
+$sql = "SELECT * FROM progreso WHERE userID = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $idUsuario);
+$stmt->execute();
+
+$datos = $stmt->get_result()->fetch_assoc();
+
+if (!$datos) {
+    $datos = [
+        'nivel' => 1,
+        'porcentaje' => 0,
+        'leccion_actual' => 1,
+        'puntos' => 0,
+        'racha' => 0
+    ];
+}
 ?>
 
 <!DOCTYPE html>
@@ -60,66 +85,56 @@ $progreso = 0;
                     </div>
 
                 </div>
-                <p class ="nivel-texto">Nivel 1</p>
+                <p class="nivel-texto">
+    Nivel <?php echo $datos['nivel']; ?>
+</p>
 
                 <!-- BARRA -->
                 <div class="barra-progreso-fondo">
 
-                    <div class="barra-progreso"></div>
-
+                   <div class="barra-progreso"
+     style="width: <?php echo $datos['porcentaje']; ?>%;">
+</div>
                 </div>
 
-                <div class="texto-progreso">
-
-                    0%
-
-                </div>
+               <div class="texto-progreso">
+    <?php echo $datos['porcentaje']; ?>%
+</div>
 
             </div>
- <!-- ESTADISTICAS -->
-<div class="estadisticas">
+ <div class="estadisticas">
 
     <!-- LECCION -->
     <div class="card-figma">
-
         <img src="images/libro.png" alt="">
-
         <div>
             <h3>Lección:</h3>
-            <p>1</p>
+            <p><?php echo $datos['leccion_actual']; ?></p>
         </div>
-
     </div>
 
     <!-- PUNTOS -->
     <div class="card-figma">
-
         <img src="images/estrella.png" alt="">
-
         <div>
             <h3>Puntos:</h3>
-            <p>0</p>
+            <p><?php echo $datos['puntos']; ?></p>
         </div>
-
     </div>
 
     <!-- RACHA -->
     <div class="card-figma">
-
         <img src="images/mochila.png" alt="">
-
         <div>
             <h3>Racha:</h3>
-            <p>0 días</p>
+            <p><?php echo $datos['racha']; ?> días</p>
         </div>
-
     </div>
 
 </div>
 
 <!-- AVANCE -->
 <div class="avance">
-
     <h3 class="titulo-avance">Mi avance:</h3>
 
     <div class="contenedor-avance">
@@ -188,8 +203,8 @@ $progreso = 0;
                 <div class="texto-racha">
 
                     <h2>
-                        ¡0 días de racha!
-                    </h2>
+    ¡<?php echo $datos['racha']; ?> días de racha!
+</h2>
 
                     <p>
                         Muy bien, comienza hoy tu primera racha.
