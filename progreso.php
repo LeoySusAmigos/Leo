@@ -5,74 +5,217 @@ $nivel = 1;
 $progreso = 0;
 ?>
 
-<?php
-session_start();
-
-if (!isset($_SESSION['userID'])) {
-    header("Location: login.html");
-    exit();
-}
-
-include("php/conexion.php");
-
-$nombre = $_SESSION['nombre_nino'];
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Progreso</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Progreso del Niño</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/progreso.css">
 </head>
 <body>
 
-<body>
+    <div class="contenedor">
 
-<div class="contenedor">
+        <!-- BARRA SUPERIOR -->
+        <div class="barra-superior">
 
-    <div class="saludo-container">
+            <div class="titulo-barra">
 
-        <div class="foto-perfil">
-            <img src="images/nino.png" alt="Foto de perfil">
+                <!-- CAMALEON -->
+                <img src="images/Leo-1.png" alt="Camaleón">
+
+                <h2>Progreso</h2>
+
+            </div>
+
         </div>
 
-        <div class="info-usuario">
-            <h1>¡Hola, <?php echo htmlspecialchars($nombre); ?>!</h1>
+        <!-- CONTENIDO -->
+        <div class="contenido">
 
-            <p class="mensaje">
-                Sigue aprendiendo y ganando logros.
-            </p>
+            <!-- TARJETA PRINCIPAL -->
+            <div class="tarjeta-principal">
+
+                <div class="info-superior">
+
+                    <!-- FOTO DEL NIÑO -->
+                    <div class="avatar">
+
+                        <img src="images/nino.png" alt="Niño">
+
+                    </div>
+
+                    <!-- TEXTO -->
+                    <div>
+
+                        <h1>¡Hola, amiguito!</h1>
+
+                        <p>
+                            Sigue aprendiendo y ganando logros.
+                        </p>
+
+                    </div>
+
+                </div>
+                <p class ="nivel-texto">Nivel 1</p>
+
+                <!-- BARRA -->
+                <div class="barra-progreso-fondo">
+
+                    <div class="barra-progreso"></div>
+
+                </div>
+
+                <div class="texto-progreso">
+
+                    0%
+
+                </div>
+
+            </div>
+ <!-- ESTADISTICAS -->
+<div class="estadisticas">
+
+    <!-- LECCION -->
+    <div class="card-figma">
+
+        <img src="images/libro.png" alt="">
+
+        <div>
+            <h3>Lección:</h3>
+            <p>1</p>
         </div>
 
     </div>
 
-    <div class="barra-progreso">
-        <div class="relleno"></div>
+    <!-- PUNTOS -->
+    <div class="card-figma">
+
+        <img src="images/estrella.png" alt="">
+
+        <div>
+            <h3>Puntos:</h3>
+            <p>0</p>
+        </div>
+
     </div>
 
-<p class="porcentaje">0% completado</p>
+    <!-- RACHA -->
+    <div class="card-figma">
 
+        <img src="images/mochila.png" alt="">
+
+        <div>
+            <h3>Racha:</h3>
+            <p>0 días</p>
+        </div>
+
+    </div>
 
 </div>
-<div class="tarjetas">
-     <div class="tarjeta">
-        <h3>📚 Lección</h3>
-        <p>1</p>
+
+<!-- AVANCE -->
+<div class="avance">
+
+    <h3 class="titulo-avance">Mi avance:</h3>
+
+    <div class="contenedor-avance">
+
+        <!-- LETRAS -->
+        <div class="bloque-avance letras-box">
+
+            <h1>A</h1>
+
+            <div class="barra-abajo verde">
+                Letras ✔
+            </div>
+
+        </div>
+
+        <!-- SILABAS -->
+        <div class="bloque-avance silabas-box">
+
+            <h1>BA</h1>
+
+            <div class="barra-abajo amarilla">
+                Sílabas 🔒
+            </div>
+
+        </div>
+
+        <!-- PALABRAS -->
+        <div class="bloque-avance palabras-box">
+
+            <h1>SOL</h1>
+
+            <div class="barra-abajo gris">
+                Palabras 🔒
+            </div>
+
+        </div>
+
+        <!-- ORACIONES -->
+        <div class="bloque-avance palabras-box">
+
+            <h1>☁</h1>
+
+            <div class="barra-abajo gris">
+                Oraciones 🔒
+            </div>
+
+        </div>
+
     </div>
 
-     <div class="tarjeta">
-        <h3>⭐ Puntos</h3>
-        <p>0</p>
+</div>       
+                           
+           
+            <h3 class ="titulo-racha">Racha:</h3>
+
+            <!-- GATITO -->
+            <img src="images/finx2.png" class="gatito-superior" alt="Gatito">
+
+            <!-- RACHA -->
+            <div class="racha">
+
+                <!-- MOCHILA -->
+                <img src="images/mochila.png" class="mochila" alt="Mochila">
+
+                <!-- TEXTO -->
+                <div class="texto-racha">
+
+                    <h2>
+                        ¡0 días de racha!
+                    </h2>
+
+                    <p>
+                        Muy bien, comienza hoy tu primera racha.
+                    </p>
+
+                    <!-- CIRCULOS -->
+                    <div class="circulos">
+
+                        <span>⚪</span>
+                        <span>⚪</span>
+                        <span>⚪</span>
+                        <span>⚪</span>
+                        <span>⚪</span>
+
+                    </div>
+
+                </div>
+
+                <!-- CAPIBARA -->
+                <img src="images/capy2.png" class="capibara" alt="Capibara">
+
+            </div>
+
+        </div>
+
     </div>
-
-     <div class="tarjeta">
-        <h3>🔥 Racha</h3>
-        <p>0 días</p>
-    </div>
-
-</div>
-
 
 </body>
 </html>

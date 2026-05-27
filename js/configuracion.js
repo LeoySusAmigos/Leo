@@ -10,4 +10,4 @@ function toggleCard(element) {
 
 function irProgreso() {
     window.location.href = "progreso.php";
-}
+} 
