@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../images/fondo_configuracion.jpeg);
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(images/fondo_configuracion.jpeg);
     background-size: cover;      
     background-position: center;    
     background-repeat: no-repeat;
