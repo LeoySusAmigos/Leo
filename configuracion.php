@@ -11,7 +11,7 @@
 
         <!-- SIDEBAR -->
         <div class="sidebar">
-            <h2 class="logo">Leo & Friends</h2>
+            <img src="" alt="">
 
             <ul>
                 <li class="active">Configuración</li>
@@ -32,22 +32,31 @@
 
             <!-- PERSONAJES -->
             <div class="characters">
-                <img src="Finx.png" alt="">
-                <img src="Capy.png" alt="">
-                <img src="Leito.png" alt="">
+                <img src="images/Finx.png" alt="">
+                <img src="images/Capy.png" alt="">
+                <img src="images/Leito.png" alt="">
             </div>
 
             <!-- PERFIL -->
             <div class="card">
-                <div class="card-header">
-                    <img src="cartelito.png" alt="">
-                    <div>
-                        <h3>Perfil de usuario</h3>
-                        <p>Edita la información personal y la edad de tu hijo</p>
+                <div class="card-header" onclick="toggleCard(this)">
+                    <div class="card-header">
+                        <img src="" alt="">
+                        <div>
+                            <h3>Perfil de usuario</h3>
+                            <p>Edita la información personal y la edad de tu hijo</p>
+                        </div>
+                        <button class="arrow">→</button>
                     </div>
-                    <button class="arrow">→</button>
+
+                    <div class="card-content">
+                        <p><strong>Nombre de usuario:</strong> </p>
+                        <p><strong>Edad del niño:</strong> </p>
+                    </div>
                 </div>
             </div>
+            
+            
 
             <!-- APRENDIZAJE -->
             <div class="card">
