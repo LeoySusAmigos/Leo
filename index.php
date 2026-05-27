@@ -121,24 +121,9 @@
 
             <div class="hero-text">
 
-                <h1 class="titulo-leito">
-                    <svg width="500" height="200" viewBox="0 0 500 150"> 
-                        <path id="curve1" d="M40,160 A110,100 0 0,1 310,175" fill="transparent"/>
-                        <path id="curve2" d="M40,180 A180,105 0 0,1 350,185" fill="transparent"/>
-                        <text font-size="80" font-family="'Baloo 2', cursive" font-weight="bold" text-shadow="2px 2px 0 black,-2px 2px 0 black, 2px -2px 0 black,-2px -2px 0 black">
-                            <textPath href="#curve1" startOffset="50%" text-anchor="middle">
-                                <tspan fill="#30d430">Leo</tspan>
-                                <tspan fill="#2b73b9"> & </tspan>
-                            </textPath>
-                        </text>
-
-                        <text font-size="80" font-family="'Baloo 2', cursive" font-weight="bold" text-shadow="2px 2px 0 black,-2px 2px 0 black, 2px -2px 0 black,-2px -2px 0 black">
-                            <textPath href="#curve2" startOffset="50%" text-anchor="middle">
-                                <tspan fill="#ff7b00">Friends</tspan>
-                            </textPath>
-                        </text>
-                    </svg>
-                </h1>
+                <div class="logo-hero">
+                    <img src="images/logo.png" alt="Leo & Friends Logo">
+                </div>
 
 
 
@@ -221,6 +206,7 @@
             ¡Comienza a explorar!
         </a>
     </section>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

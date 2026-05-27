@@ -96,15 +96,11 @@ body{
 }
 
 .player-name{
-
     font-size:1.4rem;
-
     color:black;
-
     font-weight:700;
-
     font-family:'Fredoka', sans-serif;
-
+    text-decoration: none;
 }
 
 .player-menu{
@@ -237,6 +233,17 @@ body{
 }
 
 
+.logo-hero{
+    text-align: center;
+    width: 560px;
+}
+
+.logo-hero img{
+    width: 310px;
+    margin-bottom: 20px;
+}
+
+
 /* TEXTO */
 
 .hero-text{
@@ -246,14 +253,6 @@ body{
 .hero-logo{
     width:250px;
     margin-bottom:20px;
-}
-
-.titulo-leito{
-    font-size: 5rem;
-    margin-left: 70px;
-    font-style: initial;
-    text-shadow:2px 2px 0 black,-1px 1px 0 black,2px -2px 0 black,-2px -2px 0 black;
-    
 }
 
 
