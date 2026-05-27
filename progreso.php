@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['userID'])) {
-    header("Location: login.html");
+    header("Location: register.html");
     exit();
 }
 
@@ -50,8 +50,9 @@ if (!$datos) {
             <div class="titulo-barra">
 
                 <!-- CAMALEON -->
-                <img src="images/Leo-1.png" alt="Camaleón">
-
+                <a href="index.php">
+    <img src="images/Leo-1.png" alt="Camaleón">
+</a>
                 <h2>Progreso</h2>
 
             </div>
@@ -115,9 +116,9 @@ if (!$datos) {
 
     <!-- PUNTOS -->
     <div class="card-figma">
-        <img src="images/estrella.png" alt="">
+        <img src="images/coin.png" alt="">
         <div>
-            <h3>Puntos:</h3>
+            <h3>Monedas:</h3>
             <p><?php echo $datos['puntos']; ?></p>
         </div>
     </div>

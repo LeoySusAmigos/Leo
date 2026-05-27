@@ -416,3 +416,15 @@ body{
     color: #444;
 }
 
+.titulo-barra a{
+    cursor: pointer;
+}
+
+.titulo-barra img{
+    transition: 0.3s;
+}
+
+.titulo-barra img:hover{
+    transform: scale(1.05);
+}
+
