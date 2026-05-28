@@ -1,67 +1,126 @@
-body, html {
+/* ==========================================================================
+   1. CONFIGURACIÓN GENERAL (PANTALLA COMPLETA TOTAL)
+   ========================================================================== */
+html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background-color: #000000;
 }
 
 .mapa-contenedor {
   position: relative;
- width: 100vw;  
-  height: 100vh; 
+  width: 100vw;
+  height: 100vh;
 }
 
 .mapa-fondo {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
-.nivel-link {
-  position: absolute;   
-  width: 120px;          
-  height: 80px;          
-  background-image: url('images/piedra.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: transparent;
+
+/* ==========================================================================
+   2. DISEÑO DE LOS BOTONES ESTILO NUGGET / CÁPSULA FLOTANTE
+   ========================================================================== */
+.boton-nivel {
+  position: absolute;
+  display: flex;
+  flex-direction: column; /* Hace que el número quede arriba y las estrellas abajo */
+  align-items: center;
+  justify-content: center;
+  
+  /* Se amplía el alto a 65px para albergar cómodamente las estrellas */
+  width: 85px;  
+  height: 65px;
+  
+  /* Color naranja vivo idéntico a tus marcas con borde blanco grueso */
+  background-color: #ff9f43; 
+  border: 3px solid #ffffff;
+  border-radius: 20px;
   
   text-decoration: none;
+  z-index: 999; /* Se superpone obligatoriamente al mapa */
   cursor: pointer;
-  z-index: 10;           
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
   
-  transition: transform 0.2s ease;
+  /* Suavizado de transiciones para animaciones */
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-
-.nivel-link:hover {
-  transform: scale(1.1);
+/* NUEVO: Texto "Nivel" en la parte superior */
+.etiqueta-nivel {
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  margin-bottom: 1px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-.nivel-1 {
-  bottom: 12%;  
-  left: 72%;    
+/* Número interior */
+.numero-nivel {
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  font-size: 22px; /* Ajustado ligeramente para balancear el espacio */
+  font-weight: bold;
+  line-height: 1;
+  margin-bottom: 2px; /* Pequeño margen antes de mostrar las estrellas */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-.nivel-texto {
-  position: absolute;
-  top: -10px;      
-  left: 50%;
-  transform: translateX(-50%); 
-  color: #ffffff;  
-  font-weight: bold;  
-  font-family: Arial, sans-serif;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-  white-space: nowrap; 
-}
-
-
+/* NUEVO: Estilo para las estrellas amarillas bajo el número */
 .estrellas {
-  position: absolute;
-  bottom: -25px;      
-  left: 50%;
-  transform: translateX(-50%);
-  color: #ffcc00;
-  font-size: 22px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+  color: #ffea00; /* Color amarillo brillante */
+  font-size: 14px;
+  letter-spacing: 1px; /* Espaciado entre caracteres */
+  line-height: 1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Animación Interactiva */
+.boton-nivel:hover {
+  transform: scale(1.12) translateY(-3px);
+  background-color: #ff6b6b; /* Cambia a rojo-coral al pasar el cursor */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   3. COORDENADAS PRECISAS (MANTENIDAS EXÁCTAMENTE IGUAL)
+   ========================================================================== */
+
+/* Nivel 1: Esquina inferior derecha (Inicio del camino) */
+.nivel-1 {
+  bottom: 8%;
+  left: 78%;
+}
+
+/* Nivel 2: Primer descanso del sendero a la derecha */
+.nivel-2 {
+  bottom: 27%;
+  left: 70%;
+}
+
+/* Nivel 3: Justo en la mitad de la subida */
+.nivel-3 {
+  bottom: 39%;
+  left: 60%;
+}
+
+/* Nivel 4: Curva superior izquierda antes de las termas de arriba */
+.nivel-4 {
+  bottom: 52%;
+  left: 55%;
+}
+
+/* Nivel 5: Parte más alta del camino al fondo */
+.nivel-5 {
+  bottom: 65%;
+  left: 60%;
 }
