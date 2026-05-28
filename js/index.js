@@ -46,3 +46,14 @@ opciones.forEach(opcion => {
     });
 
 });
+
+const buyButton = document.getElementById("buy-book");
+
+buyButton.onclick = function() {
+    if (puntos >= precio_monedas) {
+        puntos -= precio_monedas;
+        alert("¡Libro comprado!");
+    } else {
+        alert("No tienes suficientes monedas para comprar este libro.");
+    }
+};
