@@ -1,9 +1,41 @@
+<?php
+session_start();
+
+$conexion = new mysqli("localhost", "root", "", "leo_and_friends");
+
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
+}
+
+// Verificar si existe la sesión
+if (isset($_SESSION['userID'])) {
+
+    $userID = $_SESSION['userID'];
+
+    $sql = "SELECT nombre_nino, correo FROM usuarios WHERE userID = $userID";
+    $resultado = $conexion->query($sql);
+
+    if ($resultado->num_rows > 0) {
+        $usuario = $resultado->fetch_assoc();
+        $nombre = $usuario['nombre_nino'];
+        $correo = $usuario['correo'];
+    } else {
+        $nombre = "Usuario no encontrado";
+        $correo = "";
+    }
+
+} else {
+    $nombre = "No hay sesión";
+    $correo = "";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="configuracion.css">
+    <link rel="stylesheet" href="styles/configuracion.css">
     <title>Configuración</title>
 </head>
 <body>
@@ -11,14 +43,10 @@
 
         <!-- SIDEBAR -->
         <div class="sidebar">
-            <h2 class="logo">Leo & Friends</h2>
+            <img src="" alt="">
 
             <ul>
-                <li class="active">Configuración</li>
-                <li>Perfil del niño</li>
-                <li>Aprendizaje</li>
-                <li>Progreso</li>
-                <li>Sonido</li>
+                <li onclick="irProgreso()">Progreso</li>
             </ul>
 
             <button class="logout">Cerrar Sesión</button>
@@ -32,22 +60,30 @@
 
             <!-- PERSONAJES -->
             <div class="characters">
-                <img src="Finx.png" alt="">
-                <img src="Capy.png" alt="">
-                <img src="Leito.png" alt="">
+                <img src="images/Finx.png" alt="">
+                <img src="images/Capy.png" alt="">
+                <img src="images/Leito.png" alt="">
             </div>
 
             <!-- PERFIL -->
             <div class="card">
-                <div class="card-header">
-                    <img src="cartelito.png" alt="">
+                <div class="card-header" onclick="toggleCard(this)">
+                    
                     <div>
                         <h3>Perfil de usuario</h3>
                         <p>Edita la información personal y la edad de tu hijo</p>
                     </div>
-                    <button class="arrow">→</button>
+
+                    <button class="arrow">↓</button>
+                </div>
+
+                <div class="card-content">
+                    <p><strong>Nombre:</strong> <?php echo $nombre; ?></p>
+                    <p><strong>Correo:</strong> <?php echo $correo; ?></p>
                 </div>
             </div>
+            
+            
 
             <!-- APRENDIZAJE -->
             <div class="card">

@@ -18,11 +18,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $conn->prepare($sql); 
     $stmt->bind_param("sss", $nombre, $correo, $password); 
 
-
     if ($stmt->execute()) {
-    echo "Usuario registrado correctamente";
+        header("Location: ../index.php");
+        exit();
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conexion);
+        echo "Error: " . $conn->connect_error;
     }
+
+    $stmt->close();
+    $conn->close();
+
 }
 ?>

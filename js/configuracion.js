@@ -7,3 +7,7 @@ function toggleCard(element) {
         content.style.display = "block";
     }
 }
+
+function irProgreso() {
+    window.location.href = "progreso.php";
+} 

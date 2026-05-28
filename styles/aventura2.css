@@ -1,0 +1,67 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.mapa-contenedor {
+  position: relative;
+ width: 100vw;  
+  height: 100vh; 
+}
+
+.mapa-fondo {
+  width: 100%;
+  display: block;
+}
+.nivel-link {
+  position: absolute;   
+  width: 120px;          
+  height: 80px;          
+  background-image: url('images/piedra.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 10;           
+  
+  transition: transform 0.2s ease;
+}
+
+
+.nivel-link:hover {
+  transform: scale(1.1);
+}
+
+.nivel-1 {
+  bottom: 12%;  
+  left: 72%;    
+}
+
+.nivel-texto {
+  position: absolute;
+  top: -10px;      
+  left: 50%;
+  transform: translateX(-50%); 
+  color: #ffffff;  
+  font-weight: bold;  
+  font-family: Arial, sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  white-space: nowrap; 
+}
+
+
+.estrellas {
+  position: absolute;
+  bottom: -25px;      
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffcc00;
+  font-size: 22px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+}

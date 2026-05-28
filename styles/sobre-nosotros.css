@@ -1,0 +1,317 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: 'Baloo 2', cursive;
+    background:#efefef;
+    color:#222;
+}
+
+/* NAVBAR */
+
+.navbar{
+    background: linear-gradient(to right, #24d11d, #0d6b05);
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    padding:15px 60px;
+    flex-wrap:wrap;
+}
+
+.logo img{
+    width:110px;
+}
+
+.navbar ul{
+    display:flex;
+    gap:50px;
+    list-style:none;
+}
+
+.navbar a{
+    text-decoration:none;
+    color:white;
+    font-size:2rem;
+    font-weight:700;
+    transition:0.3s;
+}
+
+.navbar a:hover{
+    transform:scale(1.08);
+    color:#fff7b0;
+}
+
+.active{
+    border-bottom:4px solid white;
+}
+
+/* HERO */
+
+.hero{
+    text-align:center;
+    padding:50px 20px 20px;
+}
+
+.hero h1{
+    font-size:3.2rem;
+    line-height:1.2;
+    color:#17166b;
+    max-width:900px;
+    margin:auto;
+}
+
+/* CARDS */
+
+.cards-container{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    flex-wrap:wrap;
+    margin-top:40px;
+    padding:20px;
+}
+
+.info-card{
+    position:relative;
+    width:420px;
+    border-radius:35px;
+    padding:50px 30px 30px;
+}
+
+.mission{
+    background:#e7d7c9;
+}
+
+.vision{
+    background:#d8deef;
+}
+
+.card-content{
+    background:#edf2ea;
+    border:2px solid #7a7a7a;
+    border-radius:25px;
+    padding:90px 25px 40px;
+    min-height:470px;
+}
+
+.card-content h2{
+    text-align:center;
+    font-size:2.3rem;
+    margin-bottom:20px;
+}
+
+.card-content p{
+    font-size:1.6rem;
+    line-height:1.5;
+}
+
+/* ICONOS */
+
+.icon-circle{
+    position:absolute;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:3rem;
+    color:#111;
+    z-index:5;
+}
+
+.orange{
+    background:#ff8b3d;
+}
+
+.blue{
+    background:#5ab3ff;
+}
+
+.green{
+    background:#63e32c;
+}
+
+/* METODOLOGIA */
+
+.methodology-section{
+    display:flex;
+    justify-content:center;
+    padding:60px 20px 100px;
+}
+
+.methodology-card{
+    position:relative;
+    background:#ffffff;
+    border-radius:40px;
+    padding:80px 50px 50px;
+    width:90%;
+    max-width:1200px;
+}
+
+.methodology-card h2{
+    text-align:center;
+    font-size:2.8rem;
+    margin-bottom:20px;
+}
+
+.intro{
+    text-align:center;
+    font-size:1.5rem;
+    margin-bottom:50px;
+}
+
+.steps{
+    background:#dce6d7;
+    border-radius:35px;
+    padding:50px 30px;
+    display:flex;
+    gap:30px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.step-card{
+    background:#eef2f6;
+    border:2px solid #8a8a8a;
+    border-radius:25px;
+    width:290px;
+    padding:30px 20px;
+    transition:0.3s;
+}
+
+.step-card:hover{
+    transform:translateY(-10px);
+}
+
+.step-card h3{
+    text-align:center;
+    font-size:2rem;
+}
+
+.step-card span{
+    display:block;
+    text-align:center;
+    font-size:1.3rem;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.step-card p{
+    font-size:1.3rem;
+    line-height:1.5;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .navbar{
+        flex-direction:column;
+        gap:20px;
+        padding:20px;
+    }
+
+    .navbar ul{
+        gap:25px;
+    }
+
+    .navbar a{
+        font-size:1.4rem;
+    }
+
+    .hero h1{
+        font-size:2.2rem;
+    }
+
+    .card-content{
+        min-height:auto;
+    }
+
+    .methodology-card{
+        padding:80px 20px 40px;
+    }
+
+    .methodology-card h2{
+        font-size:2rem;
+    }
+
+    .intro{
+        font-size:1.2rem;
+    }
+}
+
+/* HORIZONTAL ACCORDION */
+
+.horizontal-accordion{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    margin-top:50px;
+}
+
+.accordion-card{
+    background:#edf2ea;
+    border-radius:25px;
+    width:300px;
+    overflow:hidden;
+    transition:0.4s;
+    border:2px solid #a0a0a0;
+}
+
+.accordion-card:hover{
+    transform:translateY(-8px);
+}
+
+.accordion-btn{
+    width:100%;
+    border:none;
+    background:#dce6d7;
+    padding:25px;
+    cursor:pointer;
+    font-family:'Baloo 2', cursive;
+    font-size:2rem;
+    font-weight:700;
+    transition:0.3s;
+}
+
+.accordion-btn:hover{
+    background:#c8d5c2;
+}
+
+.accordion-content{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.5s ease;
+    padding:0 20px;
+}
+
+.accordion-content h3{
+    margin-top:20px;
+    font-size:1.8rem;
+    text-align:center;
+}
+
+.accordion-content p{
+    padding:20px 0 30px;
+    font-size:1.3rem;
+    line-height:1.5;
+    text-align:center;
+}
+
+/* ACTIVO */
+
+.accordion-card.active .accordion-content{
+    max-height:300px;
+}
+
+.accordion-card.active .accordion-btn{
+    background:#b7d6ab;
+}

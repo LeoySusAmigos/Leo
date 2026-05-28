@@ -217,7 +217,7 @@ body {
 }
 
 .img-finx:hover {
-    transform: translateY(-5px) scale(1.02);
+    transform: translateY(-8px) scale(1.05);
 }
 
 .estanteria {
