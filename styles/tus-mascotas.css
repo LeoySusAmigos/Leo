@@ -1,0 +1,192 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fredoka', sans-serif;
+}
+
+body{
+    background: #dff0d8;
+}
+
+/* CONTENEDOR */
+
+.contenedor{
+    min-height: 100vh;
+    background-image: url('../images/mascotas-fondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+/* BOTON VOLVER */
+
+.btn-volver{
+    width: 60px;
+    height: 60px;
+
+    background: #0da300;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    text-decoration: none;
+    font-size: 35px;
+    font-weight: bold;
+
+    margin-bottom: 20px;
+}
+
+/* TITULO */
+
+.titulo{
+    width: 320px;
+
+    margin: auto;
+
+    background: #8b5a2b;
+
+    border-radius: 20px;
+
+    padding: 18px;
+
+    text-align: center;
+
+    color: white;
+
+    margin-bottom: 20px;
+
+    border: 5px solid #6b3f16;
+}
+
+.titulo h1{
+    font-size: 35px;
+}
+
+/* SUBTITULO */
+
+.subtitulo{
+    width: fit-content;
+
+    margin: auto;
+
+    background: white;
+
+    padding: 10px 25px;
+
+    border-radius: 30px;
+
+    margin-bottom: 40px;
+
+    font-size: 18px;
+}
+
+/* TARJETAS */
+
+.mascotas{
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* CARD */
+
+.card{
+    width: 260px;
+
+    border-radius: 30px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    position: relative;
+
+    border: 6px solid white;
+}
+
+/* COLORES */
+
+.verde{
+    background: #70e85a;
+}
+
+.azul{
+    background: #7fc7ff;
+}
+
+.amarillo{
+    background: #ffd400;
+}
+
+/* NOMBRE */
+
+.nombre{
+    position: absolute;
+
+    top: -20px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 8px 25px;
+
+    border-radius: 20px;
+
+    color: white;
+
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.leo{
+    background: #57c442;
+}
+
+.capy{
+    background: #5ea8e0;
+}
+
+.finx{
+    background: #ff9800;
+}
+
+/* IMAGEN */
+
+.card img{
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+
+    margin-top: 20px;
+}
+
+/* BOTON */
+
+.card button{
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    margin-top: 15px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    background: #1ca300;
+    color: white;
+
+    cursor: pointer;
+}
+
