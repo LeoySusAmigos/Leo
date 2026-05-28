@@ -24,7 +24,7 @@ if (!$datos) {
         'nivel' => 1,
         'porcentaje' => 0,
         'leccion_actual' => 1,
-        'puntos' => 0,
+        'puntos' => 50,
         'racha' => 0
     ];
 }
