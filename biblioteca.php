@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['userID'])) {
+    header("Location: register.html");
+    exit();
+}
+
 include 'php/conexion.php';
 
 // Consultas limpias sin caracteres invisibles

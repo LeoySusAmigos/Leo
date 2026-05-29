@@ -1,0 +1,91 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    font-family:Arial, sans-serif;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.contenedor{
+    position:relative;
+    width:100vw;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* IMAGEN DEL MAPA */
+.mapa{
+    max-width:100%;
+    max-height:100%;
+
+    width:auto;
+    height:auto;
+}
+
+/* BOTONES */
+.nivel{
+    position:absolute;
+
+    width:80px;
+    height:80px;
+
+    border-radius:50%;
+    border:none;
+
+    font-size:30px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    box-shadow:0 4px 10px rgba(0,0,0,0.5);
+}
+
+.nivel:hover{
+    transform:scale(1.1);
+}
+
+/* POSICIONES EXACTAS */
+
+/* Aa */
+.nivel1{
+    top:58%;
+    left:72%;
+    background:#69ff69;
+}
+
+/* Ee */
+.nivel2{
+    top:80%;
+    left:74%;
+    background:#4db8ff;
+}
+
+/* Ii */
+.nivel3{
+    top:80%;
+    left:28%;
+    background:#ffee66;
+}
+
+/* Oo */
+.nivel4{
+    top:50%;
+    left:30%;
+    background:#cc66ff;
+}
+
+/* Uu */
+.nivel5{
+    top:28%;
+    left:58%;
+    background:#ff99dd;
+}
