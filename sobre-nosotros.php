@@ -11,8 +11,8 @@
 </head>
 
 <body>
-    <header class="navbar">
 
+    <header class="navbar">
         <div class="logo">
             <img src="images/Leo-1.png" alt="Logo">
         </div>
@@ -24,7 +24,6 @@
                 <li><a href="juegos.php">Juegos</a></li>
             </ul>
         </nav>
-
     </header>
 
     <!-- TITULO -->
@@ -38,10 +37,10 @@
     <section class="cards-container">
 
         <!-- MISION -->
-        <div class="info-card mission">
+        <div class="info-card mision">
 
             <div class="icon-circle orange">
-                <i class="fa-solid fa-rocket"></i>
+                <img src="images/sobreNosotros/mision.png" alt="Misión">
             </div>
 
             <div class="card-content">
@@ -59,7 +58,7 @@
         <div class="info-card vision">
 
             <div class="icon-circle blue">
-                <i class="fa-solid fa-telescope"></i>
+                <img src="images/sobreNosotros/vision.png" alt="Visión">
             </div>
 
             <div class="card-content">
@@ -75,110 +74,85 @@
 
     </section>
 
-    <!-- METODOLOGIA -->
     <section class="methodology-section">
 
         <div class="methodology-card">
 
             <div class="icon-circle green">
-                <i class="fa-solid fa-bullseye"></i>
+                <img src="images/SobreNosotros/metodologia.png" alt="Metodología">
             </div>
 
-            <h2>Nuestra Metodología</h2>
+            <div class="metodhology-content">
+                <h2>Nuestra Metodología</h2>
 
-            <p class="intro">
-                Nuestro sitio web sigue una ruta de aprendizaje progresiva en tres etapas.
-            </p>
+                <p class="intro">
+                    Nuestro sitio web sigue una ruta de aprendizaje en tres etapas progresivas que garantiza bases sólidas y éxito continuo.
+                </p>
 
-            <!-- ACORDEON -->
-
-            <div class="horizontal-accordion">
+                <div class="horizontal-accordion">
 
                     <!-- ETAPA 1 -->
-                <div class="accordion-card">
-                    <button class="accordion-btn">🌟 Etapa 1</button>
+                    <div class="accordion-card">
 
-                    <div class="accordion-content">
+                        <button class="accordion-btn">
+                            🌟 Etapa 1
+                            <span>Fundamentos</span>
+                        </button>
 
-                        <h3>Fundamentos</h3>
+                        <div class="accordion-content">
 
-                        <p>
-                            El Método de los 20 Días estructurado donde los niños dominan las vocales y las combinaciones silábicas del español con audios.
-                        </p>
+                            <p>
+                                El Método de los 20 Días permite que los niños dominen las vocales y combinaciones silábicas mediante actividades auditivas y visuales que fortalecen la decodificación y el reconocimiento de palabras.
+                            </p>
 
-                </div>
+                        </div>
 
-                </div>
+                    </div>
 
                     <!-- ETAPA 2 -->
-                <div class="accordion-card">
+                    <div class="accordion-card">
 
-                    <button class="accordion-btn">✏️ Etapa 2</button>
+                        <button class="accordion-btn">
+                            ✏️ Etapa 2
+                            <span>Construcción</span>
+                        </button>
 
-                    <div class="accordion-content">
+                        <div class="accordion-content">
 
-                        <h3>Construcción</h3>
+                            <p>
+                                Los niños utilizan el vocabulario aprendido para formar oraciones completas, comprender estructuras gramaticales y expresar ideas de forma clara y organizada.
+                            </p>
 
-                        <p>
-                            Gramática y oraciones utilizando el vocabulario aprendido para formar ideas y expresarse correctamente.
-                        </p>
+                        </div>
 
                     </div>
-
-                </div>
 
                     <!-- ETAPA 3 -->
-                <div class="accordion-card">
+                    <div class="accordion-card">
 
-                    <button class="accordion-btn">
-                        📚 Etapa 3
-                    </button>
+                        <button class="accordion-btn">
+                            📚 Etapa 3
+                            <span>Dominio</span>
+                        </button>
 
-                    <div class="accordion-content">
+                        <div class="accordion-content">
 
-                        <h3>Dominio</h3>
+                            <p>
+                                A través de cuentos progresivos y ejercicios de comprensión lectora, los estudiantes fortalecen la fluidez, interpretación y análisis de textos.
+                            </p>
 
-                        <p>
-                            Cuentos y comprensión lectora para reforzar el aprendizaje mediante historias progresivas.
-                        </p>
+                        </div>
 
                     </div>
 
                 </div>
-
             </div>
+
 
         </div>
 
     </section>
 
-    <script>
-
-        const cards = document.querySelectorAll(".accordion-card");
-
-        cards.forEach(card => {
-
-        const button = card.querySelector(".accordion-btn");
-
-        button.addEventListener("click", () => {
-
-        // cerrar las demás
-        cards.forEach(otherCard => {
-
-            if(otherCard !== card){
-                otherCard.classList.remove("active");
-            }
-
-        });
-
-        // abrir actual
-        card.classList.toggle("active");
-
-        });
-
-        });
-
-    </script>
-
+    <script src="js/sobre-nosotros.js"></script>
 </body>
 </html>

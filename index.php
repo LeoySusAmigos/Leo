@@ -148,7 +148,7 @@
 
             <div class="characters">
 
-                <img src="images/Leo.png" class="character leo">
+                <img src="images/Leito.png" class="character leo">
 
                 <img src="images/Finx.png" class="character finx">
 

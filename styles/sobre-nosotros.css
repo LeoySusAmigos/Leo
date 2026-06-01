@@ -19,10 +19,16 @@ body{
     justify-content:flex-start;
     padding:15px 60px;
     flex-wrap:wrap;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
 .logo img{
     width:110px;
+    animation:float 3s ease-in-out infinite;
+    margin-right: 20px;
 }
 
 .navbar ul{
@@ -68,7 +74,7 @@ body{
 .cards-container{
     display:flex;
     justify-content:center;
-    gap:40px;
+    gap:80px;
     flex-wrap:wrap;
     margin-top:40px;
     padding:20px;
@@ -76,12 +82,12 @@ body{
 
 .info-card{
     position:relative;
-    width:420px;
+    width:590px;
     border-radius:35px;
     padding:50px 30px 30px;
 }
 
-.mission{
+.mision{
     background:#e7d7c9;
 }
 
@@ -116,7 +122,7 @@ body{
     left:50%;
     transform:translateX(-50%);
     width:110px;
-    height:110px;
+    height:108px;
     border-radius:50%;
     display:flex;
     justify-content:center;
@@ -124,6 +130,38 @@ body{
     font-size:3rem;
     color:#111;
     z-index:5;
+}
+
+.icon-circle img{
+    width:65px;
+    height:65px;
+    object-fit:contain;
+    transition:0.3s;
+}
+
+.icon-circle:hover img{
+    transform:scale(1.1) rotate(-5deg);
+}
+
+
+@keyframes pulse{
+
+    0%{
+        transform:translateX(-50%) scale(1);
+    }
+
+    50%{
+        transform:translateX(-50%) scale(1.05);
+    }
+
+    100%{
+        transform:translateX(-50%) scale(1);
+    }
+
+}
+
+.icon-circle{
+    animation:pulse 2.5s infinite;
 }
 
 .orange{
@@ -146,164 +184,144 @@ body{
     padding:60px 20px 100px;
 }
 
+.methodology-content{
+
+    background:#eaf2e4;
+
+    border:2px solid #a6b89d;
+
+    border-radius:35px;
+
+    padding:80px 40px 50px;
+}
+
 .methodology-card{
+
     position:relative;
-    background:#ffffff;
-    border-radius:40px;
-    padding:80px 50px 50px;
     width:90%;
-    max-width:1200px;
+    max-width:1400px;
+    background:#dfead9;
+    border-radius:40px;
+    padding:100px 50px 90px;
+    border:2px solid #c2d4b8;
 }
 
 .methodology-card h2{
     text-align:center;
-    font-size:2.8rem;
+    font-size:3rem;
+    margin-top: 40px;
     margin-bottom:20px;
 }
 
 .intro{
     text-align:center;
-    font-size:1.5rem;
+    font-size:1.4rem;
     margin-bottom:50px;
 }
 
-.steps{
-    background:#dce6d7;
-    border-radius:35px;
-    padding:50px 30px;
-    display:flex;
-    gap:30px;
-    justify-content:center;
-    flex-wrap:wrap;
-}
-
-.step-card{
-    background:#eef2f6;
-    border:2px solid #8a8a8a;
-    border-radius:25px;
-    width:290px;
-    padding:30px 20px;
-    transition:0.3s;
-}
-
-.step-card:hover{
-    transform:translateY(-10px);
-}
-
-.step-card h3{
-    text-align:center;
-    font-size:2rem;
-}
-
-.step-card span{
-    display:block;
-    text-align:center;
-    font-size:1.3rem;
-    font-weight:700;
-    margin-bottom:20px;
-}
-
-.step-card p{
-    font-size:1.3rem;
-    line-height:1.5;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-
-    .navbar{
-        flex-direction:column;
-        gap:20px;
-        padding:20px;
-    }
-
-    .navbar ul{
-        gap:25px;
-    }
-
-    .navbar a{
-        font-size:1.4rem;
-    }
-
-    .hero h1{
-        font-size:2.2rem;
-    }
-
-    .card-content{
-        min-height:auto;
-    }
-
-    .methodology-card{
-        padding:80px 20px 40px;
-    }
-
-    .methodology-card h2{
-        font-size:2rem;
-    }
-
-    .intro{
-        font-size:1.2rem;
-    }
-}
-
-/* HORIZONTAL ACCORDION */
+/* ACORDEON HORIZONTAL */
 
 .horizontal-accordion{
+
     display:flex;
     justify-content:center;
     gap:25px;
     flex-wrap:wrap;
-    margin-top:50px;
 }
 
 .accordion-card{
-    background:#edf2ea;
-    border-radius:25px;
+
     width:300px;
+
+    background:#eef2ea;
+
+    border-radius:25px;
+
     overflow:hidden;
-    transition:0.4s;
-    border:2px solid #a0a0a0;
+
+    border:2px solid #a9b3a3;
+
+    transition:.3s;
 }
 
 .accordion-card:hover{
-    transform:translateY(-8px);
+    transform:translateY(-6px);
 }
 
 .accordion-btn{
+
     width:100%;
+
     border:none;
-    background:#dce6d7;
-    padding:25px;
+
+    background:#d6e4cf;
+
     cursor:pointer;
+
+    padding:25px;
+
     font-family:'Baloo 2', cursive;
+
     font-size:2rem;
+
     font-weight:700;
-    transition:0.3s;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:5px;
 }
 
-.accordion-btn:hover{
-    background:#c8d5c2;
+.accordion-btn span{
+    font-size:1.2rem;
 }
 
 .accordion-content{
-    max-height:0;
-    overflow:hidden;
-    transition:max-height 0.5s ease;
-    padding:0 20px;
-}
 
-.accordion-content h3{
-    margin-top:20px;
-    font-size:1.8rem;
-    text-align:center;
+    max-height:0;
+
+    overflow:hidden;
+
+    transition:max-height .5s ease;
+
+    background:white;
 }
 
 .accordion-content p{
-    padding:20px 0 30px;
-    font-size:1.3rem;
-    line-height:1.5;
-    text-align:center;
+
+    padding:25px;
+
+    font-size:1.25rem;
+
+    line-height:1.6;
+}
+
+.accordion-card.active .accordion-content{
+    max-height:300px;
+}
+
+.accordion-card.active .accordion-btn{
+    background:#c5ddb8;
+}
+
+.info-card,
+.accordion-card,
+.step-card{
+    transition:0.4s;
+}
+
+.info-card:hover,
+.accordion-card:hover,
+.step-card:hover{
+
+    transform:
+    translateY(-12px)
+    scale(1.02);
+
+    box-shadow:0 15px 30px rgba(0,0,0,0.15);
 }
 
 /* ACTIVO */
