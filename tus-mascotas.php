@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['userID'])) {
+    header("Location: register.html");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +17,7 @@ session_start();
     <link rel="stylesheet" href="styles/tus-mascotas.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -19,13 +25,19 @@ session_start();
 
     <!-- BOTON VOLVER -->
     <a href="index.php" class="btn-volver">
-        ←
-    </a>
+
+    <img src="images/flecha.png" alt="Volver">
+
+</a>
 
     <!-- TITULO -->
     <div class="titulo">
-        <h1>TUS MASCOTAS</h1>
-    </div>
+
+    <img src="images/cartel-mascotas.png" alt="">
+
+    <h1>TUS MASCOTAS</h1>
+
+</div>
 
     <!-- SUBTITULO -->
     <div class="subtitulo">
@@ -44,10 +56,9 @@ session_start();
 
             <img src="images/leo.png" alt="Leo">
 
-            <button>
+            <a href="aventura1.html" class="btn-aventura btn verde">
                 ⭐ Aventura 1
-            </button>
-
+            </a>
         </div>
 
         <!-- CAPY -->
@@ -58,10 +69,9 @@ session_start();
             </div>
 
             <img src="images/capy3.png" alt="Capy">
-
-            <button>
+            <a href="aventura2.php" class="btn-aventura btn-celeste">
                 ⭐ Aventura 2
-            </button>
+            </a>
 
         </div>
 
@@ -73,10 +83,9 @@ session_start();
             </div>
 
             <img src="images/finx3.png" alt="Finx">
-
-            <button>
-                ⭐ Mini Biblioteca
-            </button>
+             <a href="biblioteca.php" class="btn-aventura btn- amarillo">
+               ⭐ Mini Biblioteca
+            </a>
 
         </div>
 

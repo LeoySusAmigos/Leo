@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Fredoka', sans-serif;
+    font-family: 'Itim', cursive;
 }
 
 body{
@@ -12,61 +12,68 @@ body{
 /* CONTENEDOR */
 
 .contenedor{
+    width: 100%;
     min-height: 100vh;
-    background-image: url('../images/mascotas-fondo.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 
+    background-image: url('../images/mascotas-fondo.png');
+
+    background-repeat: no-repeat;
+    background-position: center;
+
+    background-size: 100% 100%;
+
+    padding: 30px;
 }
 
 /* BOTON VOLVER */
 
 .btn-volver{
-    width: 60px;
-    height: 60px;
-
-    background: #0da300;
-    color: white;
+    width: 70px;
+    height: 70px;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    border-radius: 50%;
-
     text-decoration: none;
-    font-size: 35px;
-    font-weight: bold;
+    position: relative;
+left: 90px;
+top: 10px;
+}
 
-    margin-bottom: 20px;
+.btn-volver img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 /* TITULO */
 
 .titulo{
-    width: 320px;
+    position: relative;
 
-    margin: auto;
-
-    background: #8b5a2b;
-
-    border-radius: 20px;
-
-    padding: 18px;
-
-    text-align: center;
-
-    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     margin-bottom: 20px;
+}
 
-    border: 5px solid #6b3f16;
+.titulo img{
+    width: 500px;
 }
 
 .titulo h1{
-    font-size: 35px;
+    position: absolute;
+
+    color: white;
+
+    font-size: 42px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.25);
 }
 
 /* SUBTITULO */
@@ -110,6 +117,10 @@ body{
     position: relative;
 
     border: 6px solid white;
+    border: 5px solid rgba(255,255,255,0.8);
+    box-shadow: 
+0 6px 0 rgba(0,0,0,0.18),
+inset 0 4px 10px rgba(255,255,255,0.35);
 }
 
 /* COLORES */
@@ -155,14 +166,18 @@ body{
 }
 
 .finx{
-    background: #ff9800;
+    background: linear-gradient(
+        to bottom,
+        #ffcc00,
+        #ff9900
+    );
 }
 
 /* IMAGEN */
 
 .card img{
-    width: 180px;
-    height: 180px;
+    width: 210px;
+    height: 210px;
     object-fit: contain;
 
     margin-top: 20px;
@@ -170,23 +185,65 @@ body{
 
 /* BOTON */
 
-.card button{
+.btn-aventura{
     width: 100%;
-
     padding: 14px;
-
-    border: none;
-
     border-radius: 20px;
-
     margin-top: 15px;
 
     font-size: 18px;
     font-weight: bold;
 
-    background: #1ca300;
+    display: block;
+    text-align: center;
+    text-decoration: none;
     color: white;
 
-    cursor: pointer;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.20);
+    border: 3px solid rgba(255,255,255,0.5);
+}
+
+/* VERDE */
+
+.btn-verde{
+    background: #23b000;
+}
+
+/* CELESTE */
+
+.btn-celeste{
+    background: #1fa2ff;
+}
+
+/* AMARILLO */
+
+.btn-amarillo{
+    background: #ff9f00;
+}
+
+.verde{
+    background: linear-gradient(
+        to bottom,
+        #25CA25,
+        #007904
+    );
+}
+
+.azul{
+    background: linear-gradient(to bottom, #a9dcff, #5eb6ff);
+}
+
+.amarillo{
+    background: linear-gradient(to bottom, #ffe978, #ffbe00);
+}
+
+.amarillo{
+    background: linear-gradient(
+        to bottom,
+        #fff35a 0%,
+        #ffcf00 30%,
+        #ffae00 65%,
+        #ff9200 100%
+    );
 }
 

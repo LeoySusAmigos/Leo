@@ -117,22 +117,24 @@ if (!$res_niveles || !$res_nuevos) {
                 <div class="grid-nuevos">
                     <?php if (mysqli_num_rows($res_nuevos) > 0): ?>
                         <?php while($nuevo = mysqli_fetch_assoc($res_nuevos)): ?>
-                            <div class="card-mini card-nuevo-<?php echo $nuevo['nivel']; ?>">
-                                
-                                <div class="badge-mini-nuevo">Nuevo</div>
-                                
-                                <h4 class="titulo-mini-cuento"><?php echo $nuevo['titulo']; ?></h4>
-                                
-                                <div class="wrapper-imagen-mini">
-                                    <img src="images/cuentos/<?php echo $nuevo['imagen']; ?>" alt="Portada Cuento" class="img-locked">
-                                </div>
-                                
-                                <div class="footer-card-lock">
-                                    <span class="precio-texto"><?php echo $nuevo['precio_monedas']; ?> Monedas</span>
-                                    <span class="icon-lock">🔒</span>
-                                </div>
+                            <button id="buy-book">
+                                <div class="card-mini card-nuevo-<?php echo $nuevo['nivel']; ?>">
+                                    
+                                    <div class="badge-mini-nuevo">Nuevo</div>
+                                    
+                                    <h4 class="titulo-mini-cuento"><?php echo $nuevo['titulo']; ?></h4>
+                                    
+                                    <div class="wrapper-imagen-mini">
+                                        <img src="images/cuentos/<?php echo $nuevo['imagen']; ?>" alt="Portada Cuento" class="img-locked">
+                                    </div>
+                                    
+                                    <div class="footer-card-lock">
+                                        <span class="precio-texto"><?php echo $nuevo['precio_monedas']; ?> Monedas</span>
+                                        <span class="icon-lock">🔒</span>
+                                    </div>
 
-                            </div>
+                                </div>
+                            </button>
                         <?php endwhile; ?>
                     <?php else: ?>
                         <p class="no-data">No hay cuentos nuevos por ahora.</p>

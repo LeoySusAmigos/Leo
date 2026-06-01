@@ -179,14 +179,20 @@
             <h3 id="cuentos">Cuentos</h3>
         </a>
 
-        <div class="feature-card orange-card">
-            <div class="icon-circle orange-circle">
-                <img src="images/game.png" class="feature-icon">
-            </div>
+        <a href="tus-mascotas.php" class="card-link">
 
-                <h3 id="mascotas">Tus Mascotas</h3>
+    <div class="feature-card orange-card">
 
+        <div class="icon-circle orange-circle">
+            <img src="images/game.png" class="feature-icon">
         </div>
+
+        <h3 id="mascotas">Tus Mascotas</h3>
+
+    </div>
+
+        </a>
+        
 
         <a href="progreso.php" class="card-link">
             <div class="feature-card green-card">
