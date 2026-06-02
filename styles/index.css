@@ -15,9 +15,10 @@ body{
     background-repeat:no-repeat;
     background-attachment:fixed;
     min-height:100vh;
-    cursor: auto;
+    cursor:auto;
     
 }
+
 
 /* NAVBAR */
 
@@ -486,16 +487,23 @@ body{
     filter:brightness(1.08);
 }
 
+#cuentos {
+    margin-top: 45px;
+}
+
+#mascotas {
+    margin-top: 40px;
+}
+
+#progreso {
+    margin-top: 40px;
+}
+
 .feature-icon{
-
     width:130px;
-
     height:auto;
-
     object-fit:contain;
-
     z-index:10;
-
     transition:0.3s;
 }
 
@@ -510,6 +518,16 @@ body{
     width:103px;
     height:auto;
     margin-left: 15px;
+    margin-bottom: 10px;
+    object-fit:contain;
+    z-index:10;
+    transition:0.3s;
+}
+
+.feature-icon3{
+    width:110px;
+    margin-bottom: 10px;
+    height:auto;
     object-fit:contain;
     z-index:10;
     transition:0.3s;
@@ -525,25 +543,15 @@ body{
 .icon-circle{
 
     position:absolute;
-
     top:-65px;
-
     width:220px;
     height:130px;
-
     border-radius:50%;
-
     display:flex;
-
     justify-content:center;
     align-items:center;
-
-    box-shadow:
-        inset 0 -8px 0 rgba(0,0,0,0.08),
-        0 10px 20px rgba(0,0,0,0.18);
-
+    box-shadow: inset 0 -8px 0 rgba(0,0,0,0.08), 0 10px 20px rgba(0,0,0,0.18);
     z-index:5;
-
     transition:0.3s;
 }
 

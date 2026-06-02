@@ -17,7 +17,7 @@ body{
     display:flex;
     align-items:center;
     justify-content:flex-start;
-    padding:15px 60px;
+    padding:5px 60px;
     flex-wrap:wrap;
     position:sticky;
     top:0;
@@ -26,7 +26,7 @@ body{
 }
 
 .logo img{
-    width:110px;
+    width:105px;
     animation:float 3s ease-in-out infinite;
     margin-right: 20px;
 }

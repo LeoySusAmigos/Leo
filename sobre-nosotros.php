@@ -14,7 +14,9 @@
 
     <header class="navbar">
         <div class="logo">
-            <img src="images/Leo-1.png" alt="Logo">
+            <a href="index.php">
+                <img src="images/Leo-1.png" alt="Logo">
+            </a>
         </div>
 
         <nav>
@@ -48,7 +50,7 @@
                 <h2>Nuestra Misión</h2>
 
                 <p>
-                    Empoderar a cada niño en su aprendizaje de la lectura mediante un sistema integral que combina vocales, gramática y cuentos progresivos, transformando la alfabetización en una aventura emocionante.
+                    Empoderar a cada niño en su aprendizaje de la lectura mediante un sistema integral que combina vocales, gramática y cuentos progresivos, transformando la alfabetización en una aventura divertida y emocionante.
                 </p>
 
             </div>

@@ -184,7 +184,7 @@
     <div class="feature-card orange-card">
 
         <div class="icon-circle orange-circle">
-            <img src="images/game.png" class="feature-icon">
+            <img src="images/huella.png" class="feature-icon3">
         </div>
 
         <h3 id="mascotas">Tus Mascotas</h3>
@@ -201,7 +201,7 @@
                     <img src="images/arco.png" class="feature-icon2" alt="Progreso">
                 </div>
 
-                <h3>Progreso del niño</h3>
+                <h3 id="progreso">Progreso del niño</h3>
 
             </div>
         </a>
