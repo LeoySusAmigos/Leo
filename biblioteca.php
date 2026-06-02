@@ -8,7 +8,6 @@ if (!isset($_SESSION['userID'])) {
 
 include 'php/conexion.php';
 
-// Consultas limpias sin caracteres invisibles
 $res_niveles = mysqli_query($conn, "SELECT * FROM cuentos WHERE categoria = 'principal' ORDER BY orden ASC");
 $res_nuevos  = mysqli_query($conn, "SELECT * FROM cuentos WHERE categoria = 'nuevo' ORDER BY orden ASC");
 
