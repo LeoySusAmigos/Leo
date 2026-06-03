@@ -30,19 +30,19 @@ function mostrar(){
             div.classList.add("dragging");
         });
 
-        // Cuando termina
+
         div.addEventListener("dragend", () => {
 
             div.classList.remove("dragging");
         });
 
-        // Permitir soltar
+
         div.addEventListener("dragover", (e) => {
 
             e.preventDefault();
         });
 
-        // Soltar letra
+
         div.addEventListener("drop", () => {
 
             let temp = letras[letraArrastrada];

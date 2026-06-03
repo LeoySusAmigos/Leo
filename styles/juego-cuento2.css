@@ -45,6 +45,25 @@ body{
     transform: scale(1.05);
 }
 
+.bottom-panel{
+    margin-top: 40px;
+
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.bottom-panel button{
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.bottom-panel img{
+    width: 80px;
+}
+
 .dragging{
     opacity: 0.5;
 }

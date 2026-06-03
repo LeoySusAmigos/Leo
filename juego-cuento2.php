@@ -32,6 +32,18 @@ include("php/oraciones.php");
 
     </script>
 
+    <div class="bottom-panel">
+
+        <button onclick="location.reload()">
+            <img src="images/juego-cuento/retry button.png">
+        </button>
+
+        <button>
+            <img src="images/juego-cuento/track button.png">
+        </button>
+
+    </div>
+
     <script src="js/juego-cuento2.js"></script>
 
 </body>
