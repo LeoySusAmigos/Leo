@@ -11,7 +11,7 @@
     <div class="mapa-contenedor">
         <img src="images/fondo.png" alt="Mapa de Capibaras" class="mapa-fondo">
 
-        <a href="juego_oraciones.php" class="boton-nivel nivel-1" title="Ir al Nivel 1">
+        <a href="juego-palabras.php" class="boton-nivel nivel-1" title="Ir al Nivel 1">
             <span class="etiqueta-nivel">Nivel</span>
             <span class="numero-nivel">1</span>
             <div class="estrellas">★★★</div>
