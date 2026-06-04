@@ -1,91 +1,100 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+
+.mapa {
+    position: relative; 
+
+    width: 95vw;
+    max-width: 1400px;
+    height: 80vh;
+
+    margin: 30px auto;
+
+    background: url('../images/mapaleo.png') no-repeat center;
+    background-size: cover;
+
+    border-radius: 15px;
+    overflow: hidden;
 }
 
-body{
-    overflow:hidden;
-    font-family:Arial, sans-serif;
+
+/* Contenedor general */
+.nivel {
+    position: absolute;
 }
 
-/* CONTENEDOR PRINCIPAL */
-.contenedor{
-    position:relative;
-    width:100vw;
-    height:100vh;
+/* Estilo de los círculos */
+.circulo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    /* efecto tipo juego */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    border: 3px solid white;
 }
 
-/* IMAGEN DEL MAPA */
-.mapa{
-    max-width:100%;
-    max-height:100%;
-
-    width:auto;
-    height:auto;
+/* Texto */
+.circulo h2 {
+    margin: 0;
+    font-size: 24px;
 }
 
-/* BOTONES */
-.nivel{
-    position:absolute;
-
-    width:80px;
-    height:80px;
-
-    border-radius:50%;
-    border:none;
-
-    font-size:30px;
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:0.3s;
-
-    box-shadow:0 4px 10px rgba(0,0,0,0.5);
+.circulo p {
+    margin: 0;
+    font-size: 12px;
 }
 
-.nivel:hover{
-    transform:scale(1.1);
+.estrellas {
+    font-size: 14px;
 }
 
-/* POSICIONES EXACTAS */
+/* Colores */
+.verde { background: #4CAF50; }
+.azul { background: #4A90E2; }
+.amarillo { background: #F4C542; color: black; }
+.morado { background: #8E44AD; }
+.rosa { background: #E91E63; }
 
-/* Aa */
-.nivel1{
-    top:58%;
-    left:72%;
-    background:#69ff69;
+/* POSICIONES (ajústalas según tu imagen) */
+
+/* Aa - abajo izquierda */
+.nivel-1 { 
+    top: 72%; 
+    left: 14%; 
 }
 
-/* Ee */
-.nivel2{
-    top:80%;
-    left:74%;
-    background:#4db8ff;
+/* Ee - centro izquierda */
+.nivel-2 { 
+    top: 52%; 
+    left: 35%; 
 }
 
-/* Ii */
-.nivel3{
-    top:80%;
-    left:28%;
-    background:#ffee66;
+/* Ii - centro abajo */
+.nivel-3 { 
+    top: 68%; 
+    left: 55%; 
 }
 
-/* Oo */
-.nivel4{
-    top:50%;
-    left:30%;
-    background:#cc66ff;
+/* Oo - derecha media */
+.nivel-4 { 
+    top: 48%; 
+    left: 75%; 
 }
 
-/* Uu */
-.nivel5{
-    top:28%;
-    left:58%;
-    background:#ff99dd;
+/* Uu - arriba derecha */
+.nivel-5 { 
+    top: 30%; 
+    left: 62%; 
+}
+
+
+/* Animación ligera */
+.circulo:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
 }
