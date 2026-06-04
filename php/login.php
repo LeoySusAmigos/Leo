@@ -30,12 +30,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             exit(); 
 
-        } else { 
-            echo "Contraseña incorrecta"; 
-        } 
+        } else {
+            header("Location: ../login.html?error=password");
+            exit();
+        }
 
     } else { 
-        echo "Usuario no encontrado"; 
+        header("Location: ../login.html?error=user");
+        exit();
     }
 } 
 ?>

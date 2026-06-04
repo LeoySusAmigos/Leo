@@ -48,6 +48,7 @@ opciones.forEach(opcion => {
 });
 
 const buyButton = document.getElementById("buy-book");
+let puntos = document.getElementById("puntos").textContent;
 
 buyButton.onclick = function() {
     if (puntos >= precio_monedas) {

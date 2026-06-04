@@ -19,7 +19,7 @@
     <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
 
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php"> <img src="images/logo.png" alt="Logo Leo" width="95" height="70"></a>
+            <a class="navbar-brand" href="index.php"> <img src="images/logonuevo.png" alt="Logo Leo" width="95" height="70"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -27,9 +27,15 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tus Mascotas</a>
+                        <?php if(isset($_SESSION['userID'])): ?>
+                            <a class="nav-link" href="tus-mascotas.php">Tus mascotas</a>
+                        <?php else: ?>
+                            <a class="nav-link" href="register.html">Tus mascotas</a>
+                        <?php endif; ?>
                     </li>
-
+                </ul>
+            </div>
+  
                     <li class="nav-item">
                         <a class="nav-link" href="sobre-nosotros.php">Sobre Nosotros</a>
                     </li>
@@ -37,6 +43,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Paquetes Salvajes</a>
                     </li>
+                </ul>
+            </div>
+            
+
+                <ul class="navbar-nav">
+                    
                 </ul>
 
                 <div class="ms-auto"> 
@@ -210,7 +222,7 @@
 <!-- BOTÓN FINAL -->
 
     <section class="bottom-button">
-        <a href="#" class="btn-start">
+        <a href="tus-mascotas.php" class="btn-start">
             ¡Comienza a explorar!
         </a>
     </section>
