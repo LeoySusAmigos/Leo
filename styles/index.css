@@ -30,7 +30,7 @@ body{
 .nav-link{
     font-size:1.2rem;
     font-weight:600;
-    color:black !important;
+    color:black;
     margin-right:18px;
 }
 
