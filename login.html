@@ -62,5 +62,29 @@
 
     </main>
 
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get('error');
+
+    if (error === 'password') {
+        Swal.fire({
+            icon: 'error',
+            title: '¡Ups!',
+            text: 'La contraseña es incorrecta.',
+            confirmButtonText: 'Intentar de nuevo'
+        });
+    }
+
+    if (error === 'user') {
+        Swal.fire({
+            icon: 'warning',
+            title: '¡No te encontramos!',
+            text: 'No existe una cuenta con ese correo.',
+            confirmButtonText: 'Entendido'
+        });
+    }
+    </script>
 </body>
 </html>

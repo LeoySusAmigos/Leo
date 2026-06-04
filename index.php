@@ -25,25 +25,15 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-<<<<<<< HEAD
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <?php if(isset($_SESSION['userID'])): ?>
-                <a class="nav-link" href="tus-mascotas.php">Tus mascotas</a>
-            <?php else: ?>
-                <a class="nav-link" href="register.html">Tus mascotas</a>
-            <?php endif; ?>
-        </li>
-    </ul>
-</div>
-  
-=======
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="tus-mascotas.php">Tus Mascotas</a>
+                        <?php if(isset($_SESSION['userID'])): ?>
+                            <a class="nav-link" href="tus-mascotas.php">Tus mascotas</a>
+                        <?php else: ?>
+                            <a class="nav-link" href="register.html">Tus mascotas</a>
+                        <?php endif; ?>
                     </li>
 
->>>>>>> a91a5ea58fe957b61f3f4d2f33f049ca63eb630c
                     <li class="nav-item">
                         <a class="nav-link" href="sobre-nosotros.php">Sobre Nosotros</a>
                     </li>
@@ -51,6 +41,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Paquetes Salvajes</a>
                     </li>
+                </ul>
+            </div>
+            
+
+                <ul class="navbar-nav">
+                    
                 </ul>
 
                 <div class="ms-auto"> 
