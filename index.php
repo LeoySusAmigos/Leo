@@ -19,7 +19,7 @@
     <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
 
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php"> <img src="images/logo.png" alt="Logo Leo" width="95" height="70"></a>
+            <a class="navbar-brand" href="index.php"> <img src="images/logonuevo.png" alt="Logo Leo" width="95" height="70"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -43,6 +43,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Paquetes Salvajes</a>
                     </li>
+                </ul>
+            </div>
+            
+
+                <ul class="navbar-nav">
+                    
                 </ul>
 
                 <div class="ms-auto"> 
