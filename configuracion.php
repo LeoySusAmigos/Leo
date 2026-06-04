@@ -43,13 +43,18 @@ if (isset($_SESSION['userID'])) {
 
         <!-- SIDEBAR -->
         <div class="sidebar">
-            <img src="" alt="">
+            <img src="images/logo.png" alt="">
+
+            <!-- BOTON VOLVER -->
+            <a href="index.php" class="btn-volver">
+            <img src="images/flecha.png" alt="Volver">
+            </a>
 
             <ul>
                 <li onclick="irProgreso()">Progreso</li>
             </ul>
+            
 
-            <button class="logout">Cerrar Sesión</button>
         </div>
 
         <!-- MAIN CONTENT -->

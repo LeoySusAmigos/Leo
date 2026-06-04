@@ -1,20 +1,16 @@
 body {
     margin: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(images/fondo_configuracion.jpeg);
-    background-size: cover;      
-    background-position: center;    
+    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/configuracion_fondo.png');
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
-    height: 100%;
-}
-
-html{
-    height: 100%;
+    background-attachment: fixed;
+    min-height: 100vh;
 }
 
 .container {
     display: flex;
-    background: transparent;
 }
 
 /* SIDEBAR */
@@ -22,16 +18,6 @@ html{
     width: 250px;
     padding: 20px;
     height: 100vh;
-}
-
-.logo {
-    position: absolute;
-    top: -10px; 
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    z-index: 10;
-    margin-bottom: 5px;
 }
 
 .sidebar ul {
@@ -42,27 +28,26 @@ html{
 .sidebar li {
     padding: 12px;
     margin: 10px 0;
-    background: rgba(255,255,255,0.2);
     border-radius: 10px;
     cursor: pointer;
-}
-
-.sidebar li.active {
-    background: white;
-    color: black;
-}
-
-.logout {
-    margin-top: 30px;
-    padding: 10px;
-    width: 100%;
+    color: white;
+    font-weight: bold;
 }
 
 /* MAIN */
 .main {
-    background: transparent;
     padding: 20px;
     width: 100%;
+}
+
+.main h1 {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.main > p {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
 }
 
 .characters img {
@@ -70,30 +55,62 @@ html{
     margin-right: 10px;
 }
 
-/* CARD */
+/* CARD — color azul claro como el Figma */
 .card {
-    border-radius: 12px;
-    margin-top: 20px;
+    background-color: rgba(100, 180, 220, 0.75); /* azul claro semitransparente */
+    border-radius: 16px;
+    margin-top: 16px;
     overflow: hidden;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .card-header {
-    padding: 15px;
+    padding: 15px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+    color: white;
 }
 
+.card-header h3 {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+}
+
+.card-header p {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+/* SUBDIVISIONES — un azul un poco más oscuro */
 .card-content {
     display: none;
-    padding: 15px;
-    background: #bde1ec;
+    padding: 15px 20px;
+    background-color: rgba(70, 150, 200, 0.6); /* subdivisiòn más oscura */
+    color: white;
+    border-top: 1px solid rgba(255,255,255,0.2);
 }
 
+.card-content p {
+    margin: 8px 0;
+}
+
+/* FLECHA con transición suave */
 .arrow {
     border: none;
     background: none;
     font-size: 20px;
     cursor: pointer;
+    color: white;
+    transition: transform 0.3s ease; /* animación suave */
+}
+
+/* SLIDER */
+input[type="range"] {
+    width: 100%;
+    accent-color: #4caf50; /* verde como en el Figma */
+    margin-top: 8px;
 }

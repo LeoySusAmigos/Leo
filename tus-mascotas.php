@@ -28,7 +28,7 @@ if (!isset($_SESSION['userID'])) {
 
     <img src="images/flecha.png" alt="Volver">
 
-</a>
+    </a>
 
     <!-- TITULO -->
     <div class="titulo">
