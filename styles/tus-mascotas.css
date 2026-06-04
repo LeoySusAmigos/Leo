@@ -13,7 +13,6 @@ body{
 .contenedor{
     width: 100%;
     min-height: 100vh;
-
     background-image: url('../images/mascotas-fondo.png');
     background-repeat: no-repeat;
     background-position: center -90px;
