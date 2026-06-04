@@ -25,6 +25,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
+<<<<<<< HEAD
     <ul class="navbar-nav">
         <li class="nav-item">
             <?php if(isset($_SESSION['userID'])): ?>
@@ -36,6 +37,13 @@
     </ul>
 </div>
   
+=======
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="tus-mascotas.php">Tus Mascotas</a>
+                    </li>
+
+>>>>>>> a91a5ea58fe957b61f3f4d2f33f049ca63eb630c
                     <li class="nav-item">
                         <a class="nav-link" href="sobre-nosotros.php">Sobre Nosotros</a>
                     </li>
@@ -216,7 +224,7 @@
 <!-- BOTÓN FINAL -->
 
     <section class="bottom-button">
-        <a href="#" class="btn-start">
+        <a href="tus-mascotas.php" class="btn-start">
             ¡Comienza a explorar!
         </a>
     </section>
