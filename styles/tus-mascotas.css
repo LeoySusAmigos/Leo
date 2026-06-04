@@ -1,3 +1,4 @@
+
 *{
     margin: 0;
     padding: 0;
@@ -9,23 +10,15 @@ body{
     background: #dff0d8;
 }
 
-/* CONTENEDOR */
-
 .contenedor{
     width: 100%;
     min-height: 100vh;
 
     background-image: url('../images/mascotas-fondo.png');
-
     background-repeat: no-repeat;
-    background-position: center;
-
-    background-size: 100% 100%;
-
-    padding: 30px;
+    background-position: center -90px;
+    background-size: cover;
 }
-
-/* BOTON VOLVER */
 
 .btn-volver{
     width: 70px;
@@ -36,18 +29,23 @@ body{
     align-items: center;
 
     text-decoration: none;
+
     position: relative;
-left: 90px;
-top: 10px;
+    left: 105px;
+    top: 10px;
 }
 
 .btn-volver img{
-    width: 100%;
-    height: 100%;
+    width: 70px;
+    height: 70px;
     object-fit: contain;
+
+    transition: transform 0.3s ease;
 }
 
-/* TITULO */
+.btn-volver img:hover{
+    transform: scale(1.15);
+}
 
 .titulo{
     position: relative;
@@ -76,12 +74,11 @@ top: 10px;
     text-shadow: 3px 3px 0 rgba(0,0,0,0.25);
 }
 
-/* SUBTITULO */
-
 .subtitulo{
     width: fit-content;
 
     margin: auto;
+    margin-bottom: 40px;
 
     background: white;
 
@@ -89,12 +86,8 @@ top: 10px;
 
     border-radius: 30px;
 
-    margin-bottom: 40px;
-
     font-size: 18px;
 }
-
-/* TARJETAS */
 
 .mascotas{
     display: flex;
@@ -103,147 +96,137 @@ top: 10px;
     flex-wrap: wrap;
 }
 
-/* CARD */
-
 .card{
     width: 260px;
 
-    border-radius: 30px;
+    position: relative;
 
     padding: 20px;
 
     text-align: center;
 
-    position: relative;
+    border-radius: 40px;
 
-    border: 6px solid white;
-    border: 5px solid rgba(255,255,255,0.8);
-    box-shadow: 
-0 6px 0 rgba(0,0,0,0.18),
-inset 0 4px 10px rgba(255,255,255,0.35);
+    border: 10px solid white;
+
+    box-shadow:
+        0 6px 0 rgba(0,0,0,0.18),
+        inset 0 4px 10px rgba(255,255,255,0.35);
 }
 
-/* COLORES */
-
 .verde{
-    background: #70e85a;
+    background: linear-gradient(
+        to bottom,
+        #79FF75 0%,
+        #6FD74F 25%,
+        #4EAC47 50%,
+        #157D0D 75%,
+        #00A305 100%
+    );
 }
 
 .azul{
-    background: #7fc7ff;
+    background: linear-gradient(
+        to bottom,
+        #83C9FF 0%,
+        #56B2EB 35%,
+        #4892C0 65%,
+        #2388D6 85%,
+        #089AF5 100%
+    );
 }
 
 .amarillo{
-    background: #ffd400;
+    background: linear-gradient(
+        to bottom,
+        #FFD200 0%,
+        #F4EC0D 20%,
+        #F3A108 50%,
+        #FF8E05 75%,
+        #E25C0A 100%
+    );
 }
-
-/* NOMBRE */
 
 .nombre{
     position: absolute;
 
-    top: -20px;
+    top: -18px;
     left: 50%;
 
     transform: translateX(-50%);
 
-    padding: 8px 25px;
+    padding: 8px 28px;
 
-    border-radius: 20px;
+    border-radius: 25px;
+
+    border: 4px solid white;
 
     color: white;
 
-    font-size: 25px;
+    font-size: 22px;
     font-weight: bold;
 }
 
 .leo{
-    background: #57c442;
+    background: #57C442;
 }
 
 .capy{
-    background: #5ea8e0;
+    background: #5EA8E0;
 }
 
 .finx{
     background: linear-gradient(
         to bottom,
-        #ffcc00,
-        #ff9900
+        #FFCC00,
+        #FF9900
     );
 }
-
-/* IMAGEN */
 
 .card img{
     width: 210px;
     height: 210px;
+
     object-fit: contain;
 
     margin-top: 20px;
 }
 
-/* BOTON */
-
 .btn-aventura{
     width: 100%;
-    padding: 14px;
-    border-radius: 20px;
+
+    display: block;
+
     margin-top: 15px;
+
+    padding: 14px;
+
+    text-align: center;
+    text-decoration: none;
+
+    color: white;
 
     font-size: 18px;
     font-weight: bold;
 
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    color: white;
+    border-radius: 20px;
+
+    border: 3px solid rgba(255,255,255,0.5);
 
     box-shadow: 0 4px 0 rgba(0,0,0,0.20);
-    border: 3px solid rgba(255,255,255,0.5);
 }
-
-/* VERDE */
 
 .btn-verde{
-    background: #23b000;
+    background: #00A305;
+    border: 2px solid rgba(255,255,255,0.5);
 }
-
-/* CELESTE */
 
 .btn-celeste{
-    background: #1fa2ff;
+    background: #0074E8;
+    border: 2px solid rgba(255,255,255,0.5);
 }
-
-/* AMARILLO */
 
 .btn-amarillo{
-    background: #ff9f00;
+    background: #FF8E05;
+    border: 2px solid rgba(255,255,255,0.5);
 }
-
-.verde{
-    background: linear-gradient(
-        to bottom,
-        #25CA25,
-        #007904
-    );
-}
-
-.azul{
-    background: linear-gradient(to bottom, #a9dcff, #5eb6ff);
-}
-
-.amarillo{
-    background: linear-gradient(to bottom, #ffe978, #ffbe00);
-}
-
-.amarillo{
-    background: linear-gradient(
-        to bottom,
-        #fff35a 0%,
-        #ffcf00 30%,
-        #ffae00 65%,
-        #ff9200 100%
-    );
-}
-

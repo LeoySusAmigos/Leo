@@ -25,11 +25,17 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Tus Mascotas</a>
-                    </li>
-
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <?php if(isset($_SESSION['userID'])): ?>
+                <a class="nav-link" href="tus-mascotas.php">Tus mascotas</a>
+            <?php else: ?>
+                <a class="nav-link" href="register.html">Tus mascotas</a>
+            <?php endif; ?>
+        </li>
+    </ul>
+</div>
+  
                     <li class="nav-item">
                         <a class="nav-link" href="sobre-nosotros.php">Sobre Nosotros</a>
                     </li>
