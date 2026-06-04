@@ -37,7 +37,7 @@ if (!$res_niveles || !$res_nuevos) {
         <div class="top-bar">
             <div class="coin-display">
                 <img src="images/coin.png" alt="Moneda">
-                <span><?php echo isset($_SESSION['monedas']) ? $_SESSION['monedas'] : 50; ?></span>
+                <span><?php echo isset($_SESSION['puntos']) ? $_SESSION['puntos'] : 50; ?></span>
             </div>
             
         </div>
