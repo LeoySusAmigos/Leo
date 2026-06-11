@@ -17,7 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         if (password_verify($password, $usuario['password'])) { 
             $_SESSION['userID'] = $usuario['userID']; 
-            $_SESSION['nombre_nino'] = $usuario['nombre_nino']; 
+            $_SESSION['nombre_nino'] = $usuario['nombre_nino'];
+            $_SESSION['nombre_papa'] = $usuario['nombre_papa']; 
             $_SESSION['rol'] = $usuario['rol']; 
 
 // REDIRECCIONES (IMPORTANTE POR LA CARPETA /php) 

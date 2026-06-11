@@ -2,7 +2,8 @@
 include ("conexion.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = $_POST['nombre'];
+    $nombre_nino = $_POST['nombre_nino'];
+    $nombre_papa = $_POST['nombre_papa'];
     $correo = $_POST['correo'];
     $pass   = $_POST['password'];
     $confirm_pass = $_POST['confirm_password'];
@@ -13,10 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $password = password_hash($pass, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO usuarios (nombre_nino, correo, password, rol) VALUES (?, ?, ?, 'usuario')";
+    $sql = "INSERT INTO usuarios (nombre_nino, nombre_papa, correo, password, rol) VALUES (?, ?, ?, ?, 'usuario')";
 
     $stmt = $conn->prepare($sql); 
-    $stmt->bind_param("sss", $nombre, $correo, $password); 
+    $stmt->bind_param("ssss", $nombre_nino, $nombre_papa, $correo, $password); 
 
     if ($stmt->execute()) {
         header("Location: ../index.php");
