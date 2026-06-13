@@ -8,33 +8,36 @@ if (!isset($_SESSION['userID']) || $_SESSION['rol'] != 'admin') {
     exit();
 }
 
-// 2. RECOGER LOS DATOS DE TEXTO: Guardamos los inputs en variables simples
-$titulo              = $_POST['titulo'];
-$tiempo_estimado_min = $_POST['tiempo_estimado_min'];
-$nivel               = $_POST['nivel'];
+// 2. RECOGER LOS DATOS DE TEXTO: Coinciden al 100% con tu nuevo-libro.php
+$titulo          = $_POST['titulo'];
+$tiempo_estimado = $_POST['tiempo_estimado']; 
+$nivel_id        = $_POST['nivel']; // Recibe el valor numérico del select
 
 // 3. PROCESAR LA IMAGEN DE PORTADA
-$nombre_imagen = $_FILES['imagen_url']['name'];      // Nombre original del archivo (ej: 'arana.png')
-$ruta_temporal = $_FILES['imagen_url']['tmp_name'];  // Dónde está guardado temporalmente por PHP
-$carpeta_destino = "../img/libros/" . $nombre_imagen; // Ruta final donde queremos guardarlo
+$nombre_imagen   = $_FILES['portada']['name'];      
+$ruta_temporal   = $_FILES['portada']['tmp_name'];  
+$carpeta_destino = "../images/cuentos/" . $nombre_imagen; // IMPORTANTE: La carpeta 'cuentos' debe existir dentro de 'img'
 
-// Movemos el archivo de la carpeta temporal a nuestra carpeta real de imágenes
-move_uploaded_file($ruta_temporal, $carpeta_destino);
+// 4. MOVER ARCHIVO Y EJECUTAR CONSULTA
+// Validamos primero si la imagen realmente se pudo mover a la carpeta destino
+if (move_uploaded_file($ruta_temporal, $carpeta_destino)) {
 
+    // Cambiado para usar exactamente tus columnas de la base de datos: tiempo_estimado y nivel_id
+    $sql = "INSERT INTO libros (titulo, portada, tiempo_estimado, nivel_id) 
+            VALUES ('$titulo', '$nombre_imagen', '$tiempo_estimado', '$nivel_id')";
 
-// 4. CONSULTA SQL: Insertar los datos directamente en tu tabla 'libros'
-// Guardamos la variable $nombre_imagen en la columna 'imagen_url'
-$sql = "INSERT INTO libros (titulo, tiempo_estimado_min, nivel, imagen_url) 
-        VALUES ('$titulo', '$tiempo_estimado_min', '$nivel', '$nombre_imagen')";
+    // 5. EJECUTAR Y COMPROBAR
+    if ($conn->query($sql) === TRUE) {
+        // Redirige de vuelta al formulario con éxito
+        header("Location: ../admin/nuevo-libro.php?status=success");
+        exit();
+    } else {
+        // Si hay algún error en el SQL, lo sabremos aquí
+        echo "Error en la base de datos al guardar el libro: " . $conn->error;
+    }
 
-
-// 5. EJECUTAR Y COMPROBAR
-if ($conn->query($sql) === TRUE) {
-    // Redirige de vuelta al formulario con un mensaje de éxito en la URL
-    header("Location: ../admin/agregar-libro.php?status=success");
-    exit();
 } else {
-    // Si hay un error, lo muestra en pantalla para saber qué falló
-    echo "Error al guardar el libro: " . $conn->error;
+    // Este es el error que te apareció. Desaparecerá en cuanto la carpeta 'cuentos' exista.
+    echo "Error: No se pudo subir la imagen de portada. Verifica que la ruta '../images/cuentos/' exista en tu servidor local.";
 }
 ?>

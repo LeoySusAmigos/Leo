@@ -2,11 +2,15 @@
 session_start();
 include("../php/conexion.php");
 
-// SOLO ADMIN 
+// 1. SEGURIDAD: Solo admin 
 if (!isset($_SESSION['userID']) || $_SESSION['rol'] != 'admin') {
     header("Location: ../index.php");
     exit();
 }
+
+// 2. CONSULTAR NIVELES DISPONIBLES DE LA BASE DE DATOS
+$sqlNiveles = "SELECT * FROM niveles ORDER BY nivel_id ASC";
+$resultadoNiveles = $conn->query($sqlNiveles);
 ?>
 
 <!DOCTYPE html>
@@ -14,66 +18,97 @@ if (!isset($_SESSION['userID']) || $_SESSION['rol'] != 'admin') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Libro</title>
+    <title>Agregar Nuevo Libro - Leo & Friends</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> 
 </head>
-<body>
+<body class="bg-light">
     
-    <nav class="navbar navbar-dark bg-dark"> 
+    <nav class="navbar navbar-dark bg-dark shadow-sm"> 
         <div class="container-fluid"> 
-            <span class="navbar-brand">Panel de Control - Cuentos</span> 
-            <a href="dashboard.php" class="btn btn-secondary">Volver</a> 
+            <span class="navbar-brand fw-bold">
+                <i class="fa-solid fa-book me-2 text-success"></i>Panel de Control - Cuentos
+            </span> 
+            <a href="dashboard.php" class="btn btn-outline-light btn-sm px-3">Volver al Inicio</a> 
         </div> 
     </nav> 
 
-    <div class="container mt-5"> 
+    <div class="container mt-5 mb-5"> 
     
-        <div class="card shadow p-4" style="max-width: 600px; margin: 0 auto;"> 
+        <div class="card shadow border-0 p-4" style="max-width: 600px; margin: 0 auto; border-radius: 12px;"> 
     
-            <h2 class="mb-4">Nuevo Libro Infantil</h2> 
+            <div class="text-center mb-4">
+                <div class="p-3 bg-success bg-opacity-10 rounded-circle d-inline-block mb-2">
+                    <i class="fa-solid fa-folder-plus fa-2x text-success"></i>
+                </div>
+                <h2 class="fw-bold text-dark m-0">Nuevo Libro Infantil</h2> 
+                <p class="text-muted small">Registra un cuento base para luego añadirle sus páginas.</p>
+            </div>
+
+            <?php if (isset($_GET['status']) && $_GET['status'] == 'success'): ?>
+                <div class="alert alert-success alert-dismissible fade show shadow-sm border-0 mb-4" role="alert">
+                    <i class="fa-solid fa-circle-check me-2"></i> ¡Cuento registrado con éxito en el catálogo!
+                    <button type="button" class="btn-close" data-bs-alert="dismiss" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
     
             <form method="POST" action="../php/crear-libro.php" enctype="multipart/form-data"> 
     
                 <div class="mb-3"> 
-                    <label class="form-label">Título del Cuento</label> 
-                    <input type="text" 
-                        name="titulo" 
-                        class="form-control" 
-                        placeholder="Ej: La araña y la manzana"
-                        required> 
+                    <label class="form-label fw-semibold text-secondary">Título del Cuento</label> 
+                    <div class="input-group">
+                        <span class="input-group-text bg-white text-muted"><i class="fa-solid fa-font"></i></span>
+                        <input type="text" 
+                            name="titulo" 
+                            class="form-control" 
+                            placeholder="Ej: Leo y sus Amigos"
+                            required> 
+                    </div>
                 </div> 
     
                 <div class="mb-3"> 
-                    <label class="form-label">Tiempo Estimado de Lectura (en minutos)</label> 
-                    <input type="number" 
-                        name="tiempo_estimado_min" 
-                        class="form-control" 
-                        placeholder="Ej: 2"
-                        required> 
+                    <label class="form-label fw-semibold text-secondary">Tiempo Estimado de Lectura (minutos)</label> 
+                    <div class="input-group">
+                        <span class="input-group-text bg-white text-muted"><i class="fa-regular fa-clock"></i></span>
+                        <input type="number" 
+                            name="tiempo_estimado" 
+                            class="form-control" 
+                            placeholder="Ej: 5"
+                            min="1"
+                            required> 
+                    </div>
                 </div> 
     
                 <div class="mb-3"> 
-                    <label class="form-label">Nivel de Dificultad</label> 
-                    <select name="nivel" class="form-control" required>
-                        <option value="">-- Selecciona un nivel --</option>
-                        <option value="1">Nivel 1 (4 líneas • palabras simples)</option>
-                        <option value="2">Nivel 2 (6 líneas • palabras completas)</option>
-                        <option value="3">Nivel 3</option>
-                        <option value="4">Nivel 4</option>
-                        <option value="5">Nivel 5</option>
-                    </select>
+                    <label class="form-label fw-semibold text-secondary">Nivel de Dificultad</label> 
+                    <div class="input-group">
+                        <span class="input-group-text bg-white text-muted"><i class="fa-solid fa-layer-group"></i></span>
+                        <select name="nivel" class="form-select" required>
+                            <option value="">Selecciona un nivel...</option>
+                            <?php while($nivel = $resultadoNiveles->fetch_assoc()): ?>
+                                <option value="<?php echo $nivel['nivel_id']; ?>">
+                                    <?php echo $nivel['niveles']; ?>
+                                </option>
+                            <?php endwhile; ?>
+                        </select>
+                    </div>
                 </div> 
                 
-                <div class="mb-3"> 
-                    <label class="form-label">Imagen de Portada</label> 
-                    <input type="file" 
-                        name="imagen_url" 
-                        class="form-control" 
-                        required> 
+                <div class="mb-4"> 
+                    <label class="form-label fw-semibold text-secondary">Imagen de Portada</label> 
+                    <div class="input-group">
+                        <span class="input-group-text bg-white text-muted"><i class="fa-regular fa-image"></i></span>
+                        <input type="file" 
+                            name="portada" 
+                            class="form-control" 
+                            accept="image/*"
+                            required> 
+                    </div>
+                    <small class="text-muted d-block mt-1">El archivo se guardará automáticamente en la carpeta de cuentos.</small>
                 </div> 
         
-                <button type="submit" class="btn btn-success w-100 mt-2"> 
-                    Guardar Cuento en Catálogo
+                <button type="submit" class="btn btn-success w-100 fw-bold py-2 shadow-sm"> 
+                    <i class="fa-solid fa-cloud-arrow-up me-2"></i> Guardar Cuento en Catálogo
                 </button>
             
             </form>     
@@ -82,5 +117,6 @@ if (!isset($_SESSION['userID']) || $_SESSION['rol'] != 'admin') {
     
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script> 
 </body>
 </html>

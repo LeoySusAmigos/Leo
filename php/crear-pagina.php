@@ -14,17 +14,16 @@ $numero_pagina  = $_POST['numero_pagina'];
 $texto_pagina   = $_POST['texto_pagina'];
 
 // 3. CONSULTA SQL: Insertar los datos directamente en tu tabla
-// No ponemos 'pagina_id' porque tu base de datos lo crea solo (Auto Increment)
 $sql = "INSERT INTO paginas_libro (libro_id, numero_pagina, texto_pagina) 
         VALUES ('$libro_id', '$numero_pagina', '$texto_pagina')";
 
-// 4. EJECUTAR Y COMPROBAR: Si se guarda con éxito, regresamos al formulario
+// 4. EJECUTAR Y COMPROBAR
 if ($conn->query($sql) === TRUE) {
-    // Redirige de vuelta con un mensaje de éxito en la URL
-    header("Location: ../admin/agregar-pagina.php?status=success");
+    // CORRECCIÓN: Redirige de vuelta a paginas-libro.php que es tu formulario real
+    header("Location: ../admin/paginas-libro.php?status=success");
     exit();
 } else {
-    // Si hay un error, lo muestra en pantalla para saber qué pasó
-    echo "Error al guardar la página: " . $conn->error;
+    // Si hay un error en las columnas o tablas de MySQL, lo sabremos aquí
+    echo "Error al guardar la página en la base de datos: " . $conn->error;
 }
 ?>

@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-   <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
     <main class="contenedorLogin">
-        
+
         <div class="logoArea">
             <img src="images/cartelito2.png" alt="Leo & Friends">
         </div>
@@ -50,29 +52,30 @@
 
     </main>
 
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-    const params = new URLSearchParams(window.location.search);
-    const error = params.get('error');
+        const params = new URLSearchParams(window.location.search);
+        const error = params.get('error');
 
-    if (error === 'password') {
-        Swal.fire({
-            icon: 'error',
-            title: '¡Ups!',
-            text: 'La contraseña es incorrecta.',
-            confirmButtonText: 'Intentar de nuevo'
-        });
-    }
+        if (error === 'password') {
+            Swal.fire({
+                icon: 'error',
+                title: '¡Ups!',
+                text: 'La contraseña es incorrecta.',
+                confirmButtonText: 'Intentar de nuevo'
+            });
+        }
 
-    if (error === 'user') {
-        Swal.fire({
-            icon: 'warning',
-            title: '¡No te encontramos!',
-            text: 'No existe una cuenta con ese correo.',
-            confirmButtonText: 'Entendido'
-        });
-    }
+        if (error === 'user') {
+            Swal.fire({
+                icon: 'warning',
+                title: '¡No te encontramos!',
+                text: 'No existe una cuenta con ese correo.',
+                confirmButtonText: 'Entendido'
+            });
+        }
     </script>
 </body>
+
 </html>
