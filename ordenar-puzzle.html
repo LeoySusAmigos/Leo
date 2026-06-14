@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>¡Ordená la portada del libro!</title>
+  <link rel="stylesheet" href="styles/juego-ordenar.css" />
+</head>
+<body>
+
+  <div id="pantallaLibros">
+    <h1>📚 ¿Qué libro leíste?</h1>
+    <p>Elegí la portada de tu libro para armar el rompecabezas</p>
+    <div class="grid-libros" id="gridLibros">
+      <div class="loading">Cargando libros...</div>
+    </div>
+  </div>
+
+  <div id="pantallaJuego">
+    <h1>¡Ordená la portada!</h1>
+    <p class="subtitulo" id="tituloLibro"></p>
+    <p class="subtitulo">Arrastrá las franjas para armar la imagen. Si no podés, pedí ayuda 😊</p>
+
+    <div class="prog-row">
+      <div class="prog-bar">
+        <div class="prog-fill" id="progFill" style="width:0%"></div>
+      </div>
+      <span class="prog-lbl" id="progLbl">0%</span>
+    </div>
+
+    <div class="strips-wrap" id="stripsWrap"></div>
+
+    <div class="win-msg" id="winMsg">🎉 ¡Muy bien! ¡Lo lograste!</div>
+    <div class="info"    id="info">Arrastrá las franjas para ordenarlas.</div>
+
+    <div class="btn-row">
+      <button class="btn btn-volver"  id="volverBtn">← Volver</button>
+      <button class="btn btn-mezclar" id="mezclarBtn">🔀 Mezclar</button>
+      <button class="btn btn-ayuda"   id="ayudaBtn">¡Ayudame! 🤖</button>
+    </div>
+  </div>
+
+  <script src="js/juego-ordenar.js"></script>
+</body>
+</html>

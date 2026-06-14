@@ -1,0 +1,257 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f4ff;
+  min-height: 100vh;
+}
+
+/* PANTALLA 1: Elegir libro */
+#pantallaLibros {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+#pantallaLibros h1 {
+  font-size: 28px;
+  color: #2d4a8a;
+  margin-bottom: 0.4rem;
+  text-align: center;
+}
+
+#pantallaLibros p {
+  text-align: center;
+  color: #555;
+  margin-bottom: 1.5rem;
+  font-size: 16px;
+}
+
+.grid-libros {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1.2rem;
+}
+
+.libro-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  border: 3px solid transparent;
+}
+
+.libro-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  border-color: #5b8dee;
+}
+
+.libro-card img {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  display: block;
+}
+
+.libro-card .titulo {
+  padding: 0.6rem;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2d4a8a;
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+  color: #888;
+  padding: 2rem;
+  font-size: 15px;
+}
+
+/*PANTALLA 2: Juego*/
+#pantallaJuego {
+  display: none;
+  padding: 1.5rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+#pantallaJuego h1 {
+  font-size: 24px;
+  color: #2d4a8a;
+  margin-bottom: 0.2rem;
+  text-align: center;
+}
+
+.subtitulo {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 0.5rem;
+}
+
+/* Barra de progreso */
+.prog-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+  margin-top: 0.75rem;
+}
+
+.prog-bar {
+  flex: 1;
+  height: 10px;
+  background: #dde4f5;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.prog-fill {
+  height: 100%;
+  background: #5b8dee;
+  border-radius: 99px;
+  transition: width 0.3s;
+}
+
+.prog-lbl {
+  font-size: 13px;
+  color: #555;
+  min-width: 38px;
+  text-align: right;
+}
+
+/* Franjas */
+.strips-wrap {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 2px solid #c8d6f5;
+  margin-bottom: 1rem;
+}
+
+.strip {
+  position: relative;
+  cursor: grab;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.strip:last-child {
+  border-bottom: none;
+}
+
+.strip.dragging {
+  opacity: 0.35;
+}
+
+.strip.over {
+  outline: 3px solid #5b8dee;
+}
+
+.strip canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.strip .lbl {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.strip .grip {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  pointer-events: none;
+}
+
+/* Mensaje de victoria */
+.win-msg {
+  display: none;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #2e7d32;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem;
+  background: #e8f5e9;
+  border-radius: 12px;
+}
+
+.info {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  min-height: 20px;
+  margin-bottom: 0.75rem;
+}
+
+/* Botones */
+.btn-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.btn-volver {
+  background: #f5f5f5;
+  color: #444;
+}
+
+.btn-volver:hover:not(:disabled) {
+  background: #e0e0e0;
+}
+
+.btn-mezclar {
+  background: #e8edff;
+  color: #2d4a8a;
+}
+
+.btn-mezclar:hover:not(:disabled) {
+  background: #c8d6f5;
+}
+
+.btn-ayuda {
+  background: #5b8dee;
+  color: #fff;
+}
+
+.btn-ayuda:hover:not(:disabled) {
+  background: #3a6fd8;
+}
