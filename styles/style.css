@@ -6,31 +6,34 @@
 
 body {
     font-family: 'Quicksand', sans-serif;
-    overflow-x: hidden; 
-    background-image: url(../images/fondoselva.png);
-    background-size: 150vh 150wh;
-    background-position: center;
-     background-repeat: no-repeat;
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
-}
 
 .contenedorLogin {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 95vh;
+    height: 100vh; 
     width: 100%;
     position: relative;
+    
+    
+    background-image: url(../images/fondoselva.png);
+    background-size: cover;       
+    background-position: center;  
+    background-repeat: no-repeat;
+    overflow: hidden;             
+}
+
+.contenedorLogin::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2); 
+    z-index: 1;
 }
 
 .login-wrapper {

@@ -1,0 +1,8 @@
+
+
+Esto deben pegarlo en el head de su documento HTML o PHP para que las fuentes se apliquen correctamente:
+<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&family=Fredoka:wght@600;900&family=Nunito:wght@700;900&family=Quicksand:wght@500;700;900&display=swap" rel="stylesheet">
+
+Esta será la fuente principal para el sitio: 
+
+font-family: 'Quicksand', sans-serif;
