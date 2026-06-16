@@ -10,7 +10,7 @@ body {
   min-height: 100vh;
 }
 
-/* PANTALLA 1: Elegir libro */
+/* ── PANTALLA 1: Elegir libro ── */
 #pantallaLibros {
   padding: 2rem;
   max-width: 900px;
@@ -32,19 +32,33 @@ body {
 }
 
 .grid-libros {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.2rem;
+  justify-content: center;
 }
 
 .libro-card {
   background: #fff;
   border-radius: 14px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  overflow: hidden;
   cursor: pointer;
   transition: transform 0.15s, box-shadow 0.15s;
   border: 3px solid transparent;
+  width: fit-content;    
+  max-width: 220px;         
+  min-width: 130px;
+}
+
+.libro-card img {
+  border-radius: 11px 11px 0 0;
+  width: 100%;
+  height: auto;
+  min-height: 160px;       
+  object-fit: contain;      
+  object-position: center;
+  background: #fff;       
+  display: block;
 }
 
 .libro-card:hover {
@@ -53,12 +67,7 @@ body {
   border-color: #5b8dee;
 }
 
-.libro-card img {
-  width: 100%;
-  aspect-ratio: 2/3;
-  object-fit: cover;
-  display: block;
-}
+
 
 .libro-card .titulo {
   padding: 0.6rem;
@@ -75,7 +84,7 @@ body {
   font-size: 15px;
 }
 
-/*PANTALLA 2: Juego*/
+/* ── PANTALLA 2: Juego ── */
 #pantallaJuego {
   display: none;
   padding: 1.5rem;
@@ -128,61 +137,35 @@ body {
   text-align: right;
 }
 
-/* Franjas */
+/* ── Tablero jigsaw ──
+   El contenedor NO debe tener overflow:hidden ni border-radius
+   para que las orejitas de las piezas se vean fuera de la celda */
 .strips-wrap {
-  border-radius: 14px;
-  overflow: hidden;
-  border: 2px solid #c8d6f5;
-  margin-bottom: 1rem;
-}
-
-.strip {
+  /* sin overflow:hidden  ← esto era lo que recortaba las orejitas */
   position: relative;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.13));
+}
+
+/* ── Pieza individual ── */
+.puzzle-cell {
+  position: absolute;
   cursor: grab;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: filter 0.1s;
 }
 
-.strip:last-child {
-  border-bottom: none;
+.puzzle-cell:hover {
+  filter: brightness(1.06);
+  z-index: 5 !important;
 }
 
-.strip.dragging {
-  opacity: 0.35;
-}
-
-.strip.over {
-  outline: 3px solid #5b8dee;
-}
-
-.strip canvas {
+.puzzle-cell canvas {
   display: block;
-  width: 100%;
-  height: auto;
 }
 
-.strip .lbl {
-  position: absolute;
-  left: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.45);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 20px;
-  pointer-events: none;
-}
-
-.strip .grip {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-  color: rgba(255,255,255,0.85);
-  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  pointer-events: none;
+/* Highlight al arrastrar sobre una celda */
+.puzzle-cell.over canvas {
+  filter: brightness(0.85) sepia(0.4);
 }
 
 /* Mensaje de victoria */
@@ -233,25 +216,16 @@ body {
   background: #f5f5f5;
   color: #444;
 }
-
-.btn-volver:hover:not(:disabled) {
-  background: #e0e0e0;
-}
+.btn-volver:hover:not(:disabled) { background: #e0e0e0; }
 
 .btn-mezclar {
   background: #e8edff;
   color: #2d4a8a;
 }
-
-.btn-mezclar:hover:not(:disabled) {
-  background: #c8d6f5;
-}
+.btn-mezclar:hover:not(:disabled) { background: #c8d6f5; }
 
 .btn-ayuda {
   background: #5b8dee;
   color: #fff;
 }
-
-.btn-ayuda:hover:not(:disabled) {
-  background: #3a6fd8;
-}
+.btn-ayuda:hover:not(:disabled) { background: #3a6fd8; }
