@@ -1,6 +1,3 @@
-/* ==========================================================================
-   1. CONFIGURACIÓN GENERAL (PANTALLA COMPLETA TOTAL)
-   ========================================================================== */
 html, body {
   margin: 0;
   padding: 0;
@@ -23,35 +20,45 @@ html, body {
   display: block;
 }
 
-/* ==========================================================================
-   2. DISEÑO DE LOS BOTONES ESTILO NUGGET / CÁPSULA FLOTANTE
-   ========================================================================== */
 .boton-nivel {
   position: absolute;
   display: flex;
-  flex-direction: column; /* Hace que el número quede arriba y las estrellas abajo */
+  flex-direction: column; 
   align-items: center;
   justify-content: center;
-  
-  /* Se amplía el alto a 65px para albergar cómodamente las estrellas */
+
   width: 85px;  
   height: 65px;
-  
-  /* Color naranja vivo idéntico a tus marcas con borde blanco grueso */
+
   background-color: #ff9f43; 
   border: 3px solid #ffffff;
   border-radius: 20px;
-  
-  text-decoration: none;
-  z-index: 999; /* Se superpone obligatoriamente al mapa */
+
   cursor: pointer;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
   
-  /* Suavizado de transiciones para animaciones */
   transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  color: inherit; 
+  text-decoration: none;  
+  transform: translate(-50%, -50%); 
+  z-index: 10;
+
 }
 
-/* NUEVO: Texto "Nivel" en la parte superior */
+.boton-nivel, 
+.boton-nivel:link,
+.boton-nivel:visited, 
+.boton-nivel:active {
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
+.boton-nivel .etiqueta-nivel,
+.boton-nivel .numero-nivel {
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
 .etiqueta-nivel {
   color: #ffffff;
   font-family: 'Arial', sans-serif;
@@ -64,22 +71,20 @@ html, body {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Número interior */
 .numero-nivel {
   color: #ffffff;
   font-family: 'Arial', sans-serif;
-  font-size: 22px; /* Ajustado ligeramente para balancear el espacio */
+  font-size: 22px;
   font-weight: bold;
   line-height: 1;
-  margin-bottom: 2px; /* Pequeño margen antes de mostrar las estrellas */
+  margin-bottom: 2px; 
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-/* NUEVO: Estilo para las estrellas amarillas bajo el número */
 .estrellas {
-  color: #ffea00; /* Color amarillo brillante */
+  color: #ffea00; 
   font-size: 14px;
-  letter-spacing: 1px; /* Espaciado entre caracteres */
+  letter-spacing: 1px; 
   line-height: 1;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
 }
@@ -87,39 +92,31 @@ html, body {
 /* Animación Interactiva */
 .boton-nivel:hover {
   transform: scale(1.12) translateY(-3px);
-  background-color: #ff6b6b; /* Cambia a rojo-coral al pasar el cursor */
+  background-color: #ff6b6b; 
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* ==========================================================================
-   3. COORDENADAS PRECISAS (MANTENIDAS EXÁCTAMENTE IGUAL)
-   ========================================================================== */
-
-/* Nivel 1: Esquina inferior derecha (Inicio del camino) */
 .nivel-1 {
   bottom: 8%;
   left: 78%;
 }
 
-/* Nivel 2: Primer descanso del sendero a la derecha */
 .nivel-2 {
   bottom: 27%;
   left: 70%;
 }
 
-/* Nivel 3: Justo en la mitad de la subida */
 .nivel-3 {
   bottom: 39%;
   left: 60%;
 }
 
-/* Nivel 4: Curva superior izquierda antes de las termas de arriba */
+
 .nivel-4 {
   bottom: 52%;
   left: 55%;
 }
 
-/* Nivel 5: Parte más alta del camino al fondo */
 .nivel-5 {
   bottom: 65%;
   left: 60%;
