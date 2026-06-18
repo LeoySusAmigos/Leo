@@ -9,23 +9,16 @@ if (!isset($_SESSION['userID'])) {
 include 'php/conexion.php';
 $userID = $_SESSION['userID'];
 
-// ==========================================
-// TRUCO BÁSICO 1: OBTENER LO QUE EL NIÑO YA LEYÓ
-// ==========================================
-// Guardaremos los IDs en una lista simple para revisarla fácilmente abajo
 $libros_leidos = array();
 $sql_progreso = "SELECT libro_id FROM progreso_libros WHERE userID = $userID";
 $res_progreso = mysqli_query($conn, $sql_progreso);
 
 if ($res_progreso) {
     while ($progreso = mysqli_fetch_assoc($res_progreso)) {
-        $libros_leidos[] = $progreso['libro_id']; // Guarda números como: 1, 2, 4...
+        $libros_leidos[] = $progreso['libro_id'];
     }
 }
 
-// ==========================================
-// TRUCO BÁSICO 2: TRAER TODOS LOS LIBROS POR NIVEL
-// ==========================================
 $sql_libros = "SELECT * FROM libros ORDER BY nivel_id ASC, libro_id ASC";
 $res_libros = mysqli_query($conn, $sql_libros);
 
@@ -119,24 +112,20 @@ if (!$res_libros) {
 
             <div class="estanteria-por-niveles">
                 <?php 
-                // Variables de control básicas para el ciclo
                 $nivel_actual = 0; 
                 $id_libro_anterior = 0; 
 
                 if (mysqli_num_rows($res_libros) > 0) {
                     while ($libro = mysqli_fetch_assoc($res_libros)) {
-                        
-                        // ¿Cambiamos de nivel? Creamos el encabezado de la fila automáticamente
+              
                         if ($libro['nivel_id'] != $nivel_actual) {
                             
-                            // Si no es el primer nivel que recorremos, cerramos la fila anterior
                             if ($nivel_actual != 0) {
                                 echo '</div></div>'; 
                             }
                             
                             $nivel_actual = $libro['nivel_id'];
-                            
-                            // Subtítulos informativos según el nivel
+                           
                             $subtitulo = "4 líneas • Palabras simples";
                             if ($nivel_actual == 2) { $subtitulo = "6 líneas • Una idea por oración"; }
                             if ($nivel_actual == 3) { $subtitulo = "2 páginas • Comprensión fluida"; }
@@ -154,14 +143,8 @@ if (!$res_libros) {
                             <?php
                         }
 
-                        // ==========================================
-                        // LÓGICA DE INTERFAZ: ¿LEÍDO O BLOQUEADO?
-                        // ==========================================
-                        
-                        // 1. Verificar si este libro ya está leído
                         $ya_leido = in_array($libro['libro_id'], $libros_leidos);
 
-                        // 2. Verificar si está bloqueado (Si tiene un libro antes y ese anterior NO está leído)
                         $esta_bloqueado = false;
                         if ($id_libro_anterior != 0 && !in_array($id_libro_anterior, $libros_leidos)) {
                             $esta_bloqueado = true;
@@ -204,11 +187,9 @@ if (!$res_libros) {
                         <?php 
                         endif;
 
-                        // Al terminar de pintar la tarjeta, su ID se vuelve "el anterior" para la que sigue
                         $id_libro_anterior = $libro['libro_id'];
                     }
                     
-                    // Cerramos la última fila abierta al salir del bucle
                     echo '</div></div>';
                 } else {
                     echo '<p class="text-muted text-center p-4">Aún no hay cuentos registrados en la plataforma.</p>';
