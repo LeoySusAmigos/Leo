@@ -1,6 +1,3 @@
-/* ==========================================================================
-   RESET & TIPOGRAFÍA DE BASE
-   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -8,24 +5,20 @@
 }
 
 body {
-    background-color: #FAFAFA; /* Fondo limpio y claro de fondo */
+    background-color: #FAFAFA;
     min-height: 100vh;
     font-family: 'Quicksand', 'Nunito', sans-serif;
     padding: 20px;
     color: #3C3C3C;
 }
 
-/* --- CONTENEDOR DE LA BIBLIOTECA --- */
 .biblioteca-container {
     width: 100%;
     max-width: 1100px;
-    margin: 90px auto 40px auto; /* Espacio para que respire bajo la navbar */
+    margin: 90px auto 40px auto; 
     padding: 0 15px;
 }
 
-/* ==========================================================================
-   HEADER MODERNO (MOCKUP ESTILO LISO)
-   ========================================================================== */
 .biblio-header-modern {
     display: flex;
     justify-content: space-between;
@@ -34,7 +27,6 @@ body {
     position: relative;
 }
 
-/* Botón Circular Naranja */
 .btn-circular-back {
     width: 48px;
     height: 48px;
@@ -56,7 +48,6 @@ body {
     box-shadow: 0 0px 0 #D36500;
 }
 
-/* Título de la interfaz */
 .header-center-title {
     text-align: center;
 }
@@ -65,7 +56,7 @@ body {
     font-family: 'Fredoka', sans-serif;
     font-size: 38px;
     font-weight: 700;
-    color: #2F7A2F; /* Verde natural */
+    color: #2F7A2F; 
     letter-spacing: 0.5px;
 }
 
@@ -76,11 +67,8 @@ body {
     margin-top: -2px;
 }
 
-/* ==========================================================================
-   NUEVO: BLOQUE DE FILTROS FLOTANTES (CORREGIDO)
-   ========================================================================== */
 .filtrar {
-    position: relative; /* Clave para que el menú se posicione alineado al botón */
+    position: relative; 
     display: inline-block;
 }
 
@@ -106,14 +94,14 @@ body {
 
 .menu-filtro {
     position: absolute;
-    top: 115%; /* Se despliega justo debajo del botón */
-    right: 0;   /* Alineado a la derecha para pantallas pequeñas */
+    top: 115%; 
+    right: 0;   
     background-color: white;
     border: 2px solid #E5E5E5;
     border-radius: 16px;
     width: 150px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    z-index: 100; /* Flota sobre los cuentos sin empujarlos */
+    z-index: 100; 
     overflow: hidden;
     padding: 5px 0;
 }
@@ -134,9 +122,6 @@ body {
     color: #2F7A2F;
 }
 
-/* ==========================================================================
-   PESTAÑAS DE MASCOTAS (TABS SUPERIORES)
-   ========================================================================== */
 .tabs-mascotas-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -181,23 +166,19 @@ body {
     color: #8A8A8A;
 }
 
-/* Estado Activo para Finx (Cuentos) */
 .tab-item.active {
     background-color: white;
-    border-bottom: 5px solid #2F7A2F; /* Subrayado verde de pestaña activa */
+    border-bottom: 5px solid #2F7A2F; 
     box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     
 }
 
 .active{
-    transform: scale(1, 1.10); /* Agranda la pestaña un 4% de su tamaño original */
+    transform: scale(1, 1.10); 
     z-index: 10;
-    margin-bottom: 3px; /* Compensa el borde inferior para que no se mueva el contenido */
+    margin-bottom: 3px;
 }
 
-/* ==========================================================================
-   CONTENIDO CENTRAL & CAJA INFORMATIVA
-   ========================================================================== */
 .content-wrapper-modern {
     background-color: white;
     border: 2px solid #E5E5E5;
@@ -206,7 +187,6 @@ body {
     box-shadow: 0 8px 24px rgba(0,0,0,0.02);
 }
 
-/* Banner de información de niveles */
 .info-banner-niveles {
     display: flex;
     align-items: center;
@@ -241,9 +221,6 @@ body {
     margin-top: 2px;
 }
 
-/* ==========================================================================
-   FILAS DE NIVELES Y ACORDEÓN
-   ========================================================================== */
 .estanteria-por-niveles {
     display: flex;
     flex-direction: column;
@@ -278,25 +255,20 @@ body {
     color: #2F7A2F;
     cursor: pointer;
     font-size: 18px;
-    transition: transform 0.2s ease; /* ¡Agrega esta línea para la animación del giro! */
+    transition: transform 0.2s ease; 
 }
 
-/* Contenedor Flex Horizontal para los Cuentos */
 .nivel-row-cards-flex {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
 
-/* Enlaces limpios para las tarjetas */
 .card-cuento-modern-link {
     text-decoration: none;
     color: inherit;
 }
 
-/* ==========================================================================
-   ANATOMÍA DE LAS TARJETAS (ESTILO COMPACTO DUOLINGO)
-   ========================================================================== */
 .card-cuento-modern {
     background-color: white;
     border: 2px solid #E5E5E5;
@@ -315,7 +287,6 @@ body {
     box-shadow: 0 5px 0 #E5E5E5;
 }
 
-/* Miniatura de la Portada */
 .card-left-thumb {
     width: 72px;
     height: 72px;
@@ -331,7 +302,6 @@ body {
     object-fit: cover;
 }
 
-/* Información Central */
 .card-center-data {
     flex-grow: 1;
 }
@@ -353,7 +323,6 @@ body {
     gap: 5px;
 }
 
-/* Estados del Check Derecho */
 .status-check-circle {
     width: 26px;
     height: 26px;
@@ -364,21 +333,16 @@ body {
     flex-shrink: 0;
 }
 
-/* No jugado / Círculo vacío */
 .status-check-circle.empty {
     border: 2px solid #E5E5E5;
 }
 
-/* Completado / Círculo Verde con Check */
 .status-check-circle.completed {
-    background-color: #58CC02; /* Verde brillante de logro */
+    background-color: #58CC02; 
     color: white;
     font-size: 12px;
 }
 
-/* ==========================================================================
-   ESTADO BLOQUEADO (MISIÓN PENDIENTE)
-   ========================================================================== */
 .card-cuento-modern.locked {
     background-color: #FAFAFA;
     border-color: #E5E5E5;
@@ -406,14 +370,11 @@ body {
     color: #B8B8B8;
 }
 
-/* ==========================================================================
-   MODIFICADO: CONTROL DE LA MASCOTA FLOTANTE (FINX)
-   ========================================================================== */
 .mascota {
-    position: fixed;   /* Esto le dice al navegador: "Quédate pegado a la pantalla" */
-    bottom: 1.05px;      /* Subido un poco (1.05px es casi el ras de la pantalla y puede ocultarse) */
-    left: 5px;        /* Separado un poco del borde izquierdo para que respire */
-    z-index: 999;     /* Un número muy alto para asegurar que ninguna tarjeta tape a Finx */
+    position: fixed;  
+    bottom: 1.05px; 
+    left: 5px;  
+    z-index: 999;    
     pointer-events: none; 
 }
 
