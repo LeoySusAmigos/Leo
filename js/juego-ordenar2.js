@@ -1,5 +1,3 @@
-
-
 const COLS    = 4;
 const ROWS    = 4;
 const API_URL = 'php/ordenar-puzzle.php';
@@ -221,12 +219,14 @@ function renderPuzzle() {
   const BOARD_W = cellW * COLS;
   const BOARD_H = cellH * ROWS;
 
-  // Contenedor con tamaño exacto del tablero (sin padding extra)
+  // Contenedor con padding igual al pad de las orejitas para que no se salgan
   wrap.style.cssText = `
     position: relative;
-    width: ${BOARD_W}px;
-    height: ${BOARD_H}px;
+    width: ${BOARD_W + pad * 2}px;
+    height: ${BOARD_H + pad * 2}px;
     margin: 0 auto;
+    padding: ${pad}px;
+    box-sizing: content-box;
   `;
 
   positions.forEach((pieceIdx, cellPos) => {
@@ -239,14 +239,15 @@ function renderPuzzle() {
     cell.draggable       = true;
     cell.dataset.cellPos = cellPos;
 
-    // Posicionamos la celda: la esquina top-left de la celda real está en (col*cellW, row*cellH)
-    // Pero el canvas tiene padding extra, entonces lo desplazamos negativamente
+    // Con el padding del contenedor, las orejitas quedan dentro del wrap
     cell.style.cssText = `
       position: absolute;
-      left: ${col * cellW - pad}px;
-      top:  ${row * cellH - pad}px;
+      left: ${col * cellW}px;
+      top:  ${row * cellH}px;
       width: ${canvas.width}px;
       height: ${canvas.height}px;
+      margin-left: -${pad}px;
+      margin-top: -${pad}px;
       cursor: grab;
       z-index: 1;
     `;

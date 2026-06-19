@@ -97,7 +97,7 @@ $nino = [
  
   <!-- Google Fonts: Nunito (redondeada, amigable para niños) -->
   <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&family=Fredoka:wght@600;900&family=Nunito:wght@700;900&family=Quicksand:wght@500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="configuracion.css" />
+  <link rel="stylesheet" href="styles/configuracion.css" />
 </head>
 <body>
  
@@ -394,7 +394,7 @@ $nino = [
  
  
 <!-- Script separado: maneja el guardado AJAX de los toggles -->
-<script src="configuracion.js"></script>
+<script src="js/configuracion.js"></script>
  
 </body>
 </html>
