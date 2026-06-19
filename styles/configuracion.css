@@ -1,99 +1,380 @@
+/* ═══════════════════════════════════════════
+   TOKENS DE COLOR  (paleta Leo & Friends)
+═══════════════════════════════════════════ */
+:root {
+  --verde-oscuro:  #1a6e2e;   /* barra de navegación */
+  --verde-medio:   #2d9e4e;   /* botones primarios  */
+  --verde-claro:   #e8f7ec;   /* fondos suaves      */
+  --verde-toggle:  #34c759;   /* toggles activos    */
+  --amarillo:      #f5c518;   /* estrella / acento  */
+  --gris-fondo:    #f2f4f6;
+  --gris-card:     #ffffff;
+  --gris-borde:    #e0e4e8;
+  --gris-texto:    #4a5568;
+  --gris-claro:    #9aa5b4;
+  --rojo-salir:    #e53e3e;
+  --negro:         #1a202c;
+  --radio:         14px;
+  --sombra:        0 2px 10px rgba(0,0,0,.08);
+}
+ 
+/* ═══════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
 body {
-    margin: 0;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(images/fondo_configuracion.jpeg);
-    background-size: cover;      
-    background-position: center;    
-    background-repeat: no-repeat;
-    height: 100%;
+  font-family: 'Nunito', sans-serif;
+  background: var(--gris-fondo);
+  color: var(--negro);
+  min-height: 100vh;
 }
-
-html{
-    height: 100%;
+ 
+/* ═══════════════════════════════════════════
+   BARRA DE NAVEGACIÓN SUPERIOR
+═══════════════════════════════════════════ */
+.topbar {
+  background: var(--verde-oscuro);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
-
-.container {
-    display: flex;
-    background: transparent;
+ 
+/* Logo Leo & Friends */
+.topbar__logo img {
+  height: 38px;
+  /* ← PON AQUÍ: img/logo-leo-friends.png */
 }
-
-/* SIDEBAR */
-.sidebar {
-    width: 250px;
-    padding: 20px;
-    height: 100vh;
+.topbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
 }
-
-.logo {
-    position: absolute;
-    top: -10px; 
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    z-index: 10;
-    margin-bottom: 5px;
+.topbar__logo-text {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
 }
-
-.sidebar ul {
-    list-style: none;
-    padding: 0;
+ 
+/* Navegación central */
+.topbar__nav {
+  display: flex;
+  gap: 6px;
 }
-
-.sidebar li {
-    padding: 12px;
-    margin: 10px 0;
-    background: rgba(255,255,255,0.2);
-    border-radius: 10px;
-    cursor: pointer;
+.topbar__nav a {
+  color: rgba(255,255,255,.85);
+  text-decoration: none;
+  font-size: .82rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  transition: background .2s;
 }
-
-.sidebar li.active {
-    background: white;
-    color: black;
+.topbar__nav a:hover,
+.topbar__nav a.active {
+  background: rgba(255,255,255,.18);
+  color: #fff;
 }
-
-.logout {
-    margin-top: 30px;
-    padding: 10px;
-    width: 100%;
+.topbar__nav a img {
+  height: 20px;
+  /* íconos de las secciones: img/icono-lectura.png, img/icono-gramatica.png, img/icono-biblioteca.png */
 }
-
-/* MAIN */
+ 
+/* Área del usuario (derecha) */
+.topbar__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-weight: 700;
+  font-size: .9rem;
+}
+.topbar__user img.avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,.5);
+  /* ← PON AQUÍ img/avatar-nino.png */
+}
+.topbar__stars {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(255,255,255,.15);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: .82rem;
+}
+.topbar__stars::before { content: '⭐'; font-size: .9rem; }
+.topbar__gear { font-size: 1.2rem; cursor: pointer; opacity: .8; }
+ 
+/* ═══════════════════════════════════════════
+   CONTENIDO PRINCIPAL
+═══════════════════════════════════════════ */
 .main {
-    background: transparent;
-    padding: 20px;
-    width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 28px 16px 60px;
 }
-
-.characters img {
-    width: 80px;
-    margin-right: 10px;
+ 
+h1.page-title {
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--negro);
+  margin-bottom: 24px;
 }
-
-/* CARD */
-.card {
-    border-radius: 12px;
-    margin-top: 20px;
-    overflow: hidden;
+ 
+/* ═══════════════════════════════════════════
+   SECCIÓN COLAPSABLE  ← ─────────────────
+   Cada bloque (Mi Cuenta / Niño / Cuenta)
+   es un <details> nativo de HTML5
+═══════════════════════════════════════════ */
+.seccion {
+  margin-bottom: 24px;
 }
-
-.card-header {
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
+ 
+/* Título de sección (ej. "1. MI CUENTA") */
+.seccion__titulo {
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  color: var(--gris-claro);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  padding-left: 4px;
 }
-
-.card-content {
-    display: none;
-    padding: 15px;
-    background: #bde1ec;
+ 
+/* El elemento <details> actúa como acordeón */
+.accordion {
+  background: var(--gris-card);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  overflow: hidden;
 }
-
-.arrow {
-    border: none;
-    background: none;
-    font-size: 20px;
-    cursor: pointer;
+ 
+/* El <summary> es la cabecera clicable */
+.accordion > summary {
+  list-style: none;   /* quita el triángulo nativo */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--negro);
+}
+.accordion > summary::-webkit-details-marker { display: none; }
+ 
+/* Flecha animada  ▼ */
+.accordion > summary .flecha {
+  font-size: 1rem;
+  color: var(--gris-claro);
+  transition: transform .3s;
+}
+.accordion[open] > summary .flecha {
+  transform: rotate(180deg);
+}
+ 
+/* Contenido dentro del acordeón */
+.accordion__body {
+  border-top: 1px solid var(--gris-borde);
+  animation: slideDown .2s ease;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+ 
+/* ═══════════════════════════════════════════
+   FILA GENÉRICA DENTRO DEL ACORDEÓN
+═══════════════════════════════════════════ */
+.fila {
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--gris-borde);
+  gap: 14px;
+}
+.fila:last-child { border-bottom: none; }
+ 
+.fila__icono {
+  width: 36px; height: 36px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.fila__icono img {
+  width: 28px; height: 28px; object-fit: contain;
+  /* íconos individuales indicados en el HTML */
+}
+ 
+.fila__info { flex: 1; }
+.fila__label {
+  font-weight: 700;
+  font-size: .95rem;
+  color: var(--negro);
+}
+.fila__sub {
+  font-size: .8rem;
+  color: var(--gris-claro);
+  margin-top: 2px;
+}
+ 
+.fila__derecha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+ 
+/* ── Perfil de usuario dentro del acordeón ─ */
+.perfil-fila {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  gap: 14px;
+}
+.perfil-fila img.avatar-lg {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--verde-claro);
+  /* ← img/avatar-mama.png  o  img/avatar-nino.png */
+}
+.perfil-fila__datos { flex: 1; }
+.perfil-fila__nombre { font-weight: 800; font-size: 1.05rem; }
+.perfil-fila__correo { font-size: .82rem; color: var(--gris-claro); margin-top: 2px; }
+ 
+/* ── Botones ─────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 18px;
+  border-radius: 20px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: .88rem;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+}
+.btn--outline-verde {
+  border: 2px solid var(--verde-medio);
+  color: var(--verde-medio);
+  background: transparent;
+}
+.btn--outline-verde:hover { background: var(--verde-claro); }
+ 
+.btn--rojo {
+  color: var(--rojo-salir);
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  width: 100%;
+}
+.btn--rojo:hover { background: #fff0f0; }
+ 
+/* ── Select de idioma ─────────────────────── */
+.select-idioma {
+  border: none;
+  background: transparent;
+  color: var(--negro);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: .9rem;
+  cursor: pointer;
+  appearance: none;
+  padding-right: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239aa5b4' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+ 
+/* ── Toggle switch ────────────────────────── */
+.toggle-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.toggle-label {
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--gris-claro);
+  text-align: center;
+}
+.toggle {
+  position: relative;
+  width: 46px; height: 26px;
+  flex-shrink: 0;
+}
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: #ccc;
+  border-radius: 26px;
+  transition: background .25s;
+  cursor: pointer;
+}
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  top: 3px; left: 3px;
+  transition: transform .25s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.25);
+}
+.toggle input:checked + .toggle-slider { background: var(--verde-toggle); }
+.toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
+ 
+/* ── Flecha de enlace (→) ─────────────────── */
+.arrow-link {
+  color: var(--gris-claro);
+  font-size: 1.1rem;
+}
+ 
+/* ── Grupo de toggles (Sonido) ─────────────── */
+.toggles-grupo {
+  display: flex;
+  gap: 10px;
+}
+ 
+/* ═══════════════════════════════════════════
+   PIE DE PÁGINA
+═══════════════════════════════════════════ */
+.footer-version {
+  text-align: center;
+  font-size: .75rem;
+  color: var(--gris-claro);
+  margin-top: 30px;
+}
+ 
+/* ═══════════════════════════════════════════
+   RESPONSIVE BÁSICO
+═══════════════════════════════════════════ */
+@media (max-width: 480px) {
+  h1.page-title { font-size: 1.4rem; }
+  .topbar__nav a span { display: none; }
 }

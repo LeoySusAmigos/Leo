@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego de Oraciones - Leo & Friends</title>
-    <link rel="stylesheet" href="style_juego.css">
+    <link rel="stylesheet" href="styles/style_juego.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>

@@ -26,23 +26,23 @@ include("php/oraciones.php");
 
     <div id="mensaje"></div>
 
-    <script>
-
-        let oracionCorrecta = <?php echo json_encode($oracion); ?>;
-
-    </script>
-
     <div class="bottom-panel">
 
         <button onclick="location.reload()">
             <img src="images/juego-cuento/retry button.png">
         </button>
 
-        <button>
+        <button id="botonPista" onclick="mostrarPista()">
             <img src="images/juego-cuento/track button.png">
         </button>
 
     </div>
+
+    <script>
+        let oracionCorrecta = <?php echo json_encode($oracion); ?>;
+        let pista = <?php echo json_encode($fila['Pista']); ?>;
+        let pista2 = <?php echo json_encode($fila['pista2']); ?>;
+    </script>
 
     <script src="js/juego-cuento2.js"></script>
 

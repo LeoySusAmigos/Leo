@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-   <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
     <main class="contenedorLogin">
-        
+
         <div class="logoArea">
             <img src="images/cartelito2.png" alt="Leo & Friends">
         </div>
@@ -19,22 +21,10 @@
         <div class="login-wrapper">
 
             <img src="images/Leito.png" class="personaje camaleon" alt="Leo">
-            <div class="info-box box-leo">
-                <h3>LEO</h3>
-                <p>Enseña a<br><strong>LEER</strong></p>
-            </div>
 
             <img src="images/finxhidden.png" class="personaje gato" alt="Finx">
-            <div class="info-box box-finx">
-                <h3>FINX</h3>
-                <p>Acompaña en la<br><strong>LECTURA</strong></p>
-            </div>
 
             <img src="images/capyhidden.png" class="personaje capibara" alt="Capy">
-            <div class="info-box box-capy">
-                <h3>CAPY</h3>
-                <p>Ayuda con la<br><strong>GRAMÁTICA</strong></p>
-            </div>
 
             <form class="form" method="POST" action="php/login.php">
                 <div class="header-text">
@@ -44,15 +34,15 @@
 
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
-                    <input type="email" class="inputs" placeholder="Correo electrónico" name="correo">
+                    <input type="email" class="inputs" placeholder="Correo electrónico" name="correo" required>
                 </div>
 
                 <div class="input-container">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" class="inputs" placeholder="Contraseña" name="password">
+                    <input type="password" class="inputs" placeholder="Contraseña" name="password" required>
                 </div>
 
-                <a href="#" class="forgot-pass"><u>¿Olvidaste tu contraseña?</u></a>
+                <a href="recuperar-contrasena.php" class="forgot-pass"><u>¿Olvidaste tu contraseña?</u></a>
 
                 <button class="btn-submit" type="submit">Iniciar sesión</button>
 
@@ -62,29 +52,30 @@
 
     </main>
 
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-    const params = new URLSearchParams(window.location.search);
-    const error = params.get('error');
+        const params = new URLSearchParams(window.location.search);
+        const error = params.get('error');
 
-    if (error === 'password') {
-        Swal.fire({
-            icon: 'error',
-            title: '¡Ups!',
-            text: 'La contraseña es incorrecta.',
-            confirmButtonText: 'Intentar de nuevo'
-        });
-    }
+        if (error === 'password') {
+            Swal.fire({
+                icon: 'error',
+                title: '¡Ups!',
+                text: 'La contraseña es incorrecta.',
+                confirmButtonText: 'Intentar de nuevo'
+            });
+        }
 
-    if (error === 'user') {
-        Swal.fire({
-            icon: 'warning',
-            title: '¡No te encontramos!',
-            text: 'No existe una cuenta con ese correo.',
-            confirmButtonText: 'Entendido'
-        });
-    }
+        if (error === 'user') {
+            Swal.fire({
+                icon: 'warning',
+                title: '¡No te encontramos!',
+                text: 'No existe una cuenta con ese correo.',
+                confirmButtonText: 'Entendido'
+            });
+        }
     </script>
 </body>
+
 </html>

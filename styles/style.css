@@ -4,34 +4,54 @@
     box-sizing: border-box;
 }
 
+html {
+    height: auto;
+    min-height: 100%;
+}
+ 
 body {
     font-family: 'Quicksand', sans-serif;
-    overflow: hidden; 
+    height: auto;             
+    min-height: 100vh;
+    background-image: url(../images/fondoselva.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
 }
-
+ 
 .contenedorLogin {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(../images/fondoselva.png);
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
+    height: auto;              
+    min-height: 100vh;         
     width: 100%;
     position: relative;
+    padding: 40px 0;         
 }
-
+ 
+.contenedorLogin::before {
+    content: "";
+    position: fixed;       
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+ 
 .login-wrapper {
     position: relative;
-    width: 100%;
-    max-width: 420px; 
+    width: 85%;
+    max-width: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 100px;
-    
+    margin-bottom: 40px;     
 }
-
+ 
 .logoArea {
     position: absolute;
     top: -10px; 
@@ -41,7 +61,7 @@ body {
     z-index: 10;
     margin-bottom: 5px;
 }
-
+ 
 .logoArea1 {
     position: absolute;
     top: -10px;
@@ -51,148 +71,105 @@ body {
     z-index: 10;
     margin-bottom: 5px;
 }
-
+ 
 .logoArea img {
-    width: 260px;
+    width: 215px;
     filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
 }
-
+ 
 .logoArea1 img {
-    width: 260px;
+    width: 215px;
     filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
 }
-
+ 
 .form {
     background-color: #fffbdc;
-    padding: 60px 40px 20px 40px;
+    padding: 40px 20px 15px 20px;
     border-radius: 35px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     position: relative;
     z-index: 2;
     text-align: center;
-    width: 100%;
+    width: 85%;
     margin-top: 20px;
 }
-
+ 
 h1 {
-    font-size: 24px;
+    font-size: 25px;
     color: #107417;
     margin-bottom: 10px;
     font-weight: 700;
 }
-
+ 
 .header-text p {
     font-size: 15px;
     color: #666;
     margin-bottom: 25px;
 }
-
+ 
 .personaje {
     position: absolute;
     pointer-events: none;
 }
-
+ 
 .camaleon {
-    width: 195px;
-    top: -140px;
-    left: -80px;
+    width: 165px;
+    top: -80px;
+    left: -55px;
     z-index: 2;
-    rotate: -15deg;
+    rotate: -24deg;
 }
-
+ 
 .gato {
     width: 185px;
-    left: -153px;
-    bottom: 11px;
+    left: -124px;
+    bottom: 12.5px;
     z-index: 5;
     rotate: 0.2deg;
 }
-
+ 
 .capibara {
     width: 175px;
-    right: -152px;
+    right: -122px;
     bottom: 5px;
     z-index: 5;
+    rotate: -0.3deg;
 }
-
-.info-box {
-    position: absolute;
-    z-index: 1; 
-    padding: 15px 20px;
-    border-radius: 15px;
-    color: white;
-    text-align: center;
-    width: 160px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.info-box h3 {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 5px;
-}
-
-.info-box p {
-    font-size: 12px;
-    line-height: 1.3;
-}
-
-.box-leo {
-    background-color: #27952d; 
-    top: -70px;
-    left: -200px;
-    border: solid #038621 5px;
-}
-
-.box-finx {
-    background-color: #efa300; 
-    top: 56%;
-    left: -285px;
-    border: solid #f58f01 5px;
-    transform: translateY(-50%);
-}
-
-.box-capy {
-    background-color: #2479da; 
-    top: 45%;
-    right: -285px;
-    border: solid #025a95 5px;
-    transform: translateY(-50%);
-}
-
+ 
 .input-container {
     display: flex;
     align-items: center;
     background-color: white;
     border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 12px 15px;
+    border-radius: 15px;
+    padding: 10px 12px;
     margin-bottom: 15px;
 }
-
+ 
 .input-container i { 
-    color: #999; font-size: 16px;
+    color: #999; 
+    font-size: 14px;
 }
-
+ 
 .inputs {
     border: none;
     background: transparent;
     width: 100%;
     padding: 0 10px;
-    font-size: 15px;
+    font-size: 13px;
     outline: none;
     font-family: 'Quicksand', sans-serif;
 }
-
+ 
 .forgot-pass {
     display: block;
     color: #4caf50;
     font-size: 13px;
     text-decoration: none;
     margin-bottom: 20px;
-    text-align: center;
+    text-align: right;
 }
-
+ 
 .btn-submit {
     width: 100%;
     padding: 15px;
@@ -207,16 +184,19 @@ h1 {
     transition: all 0.1s;
     margin-bottom: 15px;
 }
-
+ 
 .btn-submit:active {
     transform: translateY(3px);
     box-shadow: 0 2px 0 #009624;
 }
-
+ 
 .signup-text { 
-    font-size: 13px; color: #666; 
+    font-size: 13px; 
+    color: #666; 
 }
-
+ 
 .signup-text a { 
-    color: #4caf50; text-decoration: none; font-weight: 700; 
+    color: #4caf50; 
+    text-decoration: none; 
+    font-weight: 700; 
 }

@@ -89,3 +89,9 @@ body{
         transform: translate(-50%, -50%);
     }
 }
+
+.bloqueado{
+    opacity: 0.5;
+    pointer-events: none;
+    filter: grayscale(100%);
+}

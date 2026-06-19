@@ -1,9 +1,9 @@
 <?php
 session_start(); 
 include("conexion.php"); 
-
+ 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
+ 
     $correo = $_POST['correo']; 
     $password = $_POST['password']; 
     
@@ -16,12 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($usuario = $resultado->fetch_assoc()) { 
     
         if (password_verify($password, $usuario['password'])) { 
-            $_SESSION['userID'] = $usuario['userID']; 
-            $_SESSION['nombre_nino'] = $usuario['nombre_nino']; 
-            $_SESSION['rol'] = $usuario['rol']; 
-
+            $_SESSION['userID']      = $usuario['userID']; 
+            $_SESSION['nombre_nino'] = $usuario['nombre_nino'];
+            $_SESSION['nombre_padre'] = $usuario['nombre_padre']; // antes: nombre_papa (columna ya no existe)
+            $_SESSION['foto_nino']   = $usuario['foto_nino'];     // ← nuevo: foto de perfil del niño
+            $_SESSION['rol']         = $usuario['rol']; 
+ 
 // REDIRECCIONES (IMPORTANTE POR LA CARPETA /php) 
-
+ 
             if ($usuario['rol'] == 'admin') { 
                 header("Location: ../admin/dashboard.php"); 
             } else { 
@@ -29,12 +31,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } 
             
             exit(); 
-
+ 
         } else {
             header("Location: ../login.html?error=password");
             exit();
         }
-
+ 
     } else { 
         header("Location: ../login.html?error=user");
         exit();

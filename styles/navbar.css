@@ -1,0 +1,204 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* --- BARRA GENERAL --- */
+.custom-navbar {
+    background-color: #00942a; 
+    padding: 10px 20px;
+    position: absolute; /* Cambiado para sacarlo del contenedor rebelde */
+    top: 0;
+    left: 0;
+    width: 100%;        /* Obliga a expandirse al 100% de la pantalla */
+    z-index: 1000;      /* Se superpone al fondo del mapa */
+    font-family: 'Quicksand', sans-serif;
+}
+   
+
+.nav-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* --- LOGO EN TEXTO --- */
+.logo-container {
+    display: flex;
+    gap: 5px;
+    background-color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 15px;
+}
+
+.logo-text {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Quicksand', sans-serif;
+}
+/* Colores divertidos para las letras */
+.logo-text.leo { color: #00bf63; }
+.logo-text.and { color: #539aed; }
+.logo-text.friends { color: #ff8d08; }
+
+
+/* --- MENÚ DE MASCOTAS (CENTRO) --- */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-element {
+    display: flex;
+    align-items: center;
+    margin: 0 18px; /* Espacio entre cada sección */
+}
+
+.mascota-img {
+    width: 65px;
+    height: 70px;
+    object-fit: contain;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.mascota-img:hover {
+    transform: translateY(-3px) scale(1.1);
+}
+
+.menu-link {
+    color: #ffffff; /* Texto blanco idéntico a tu foto */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.menu-link:hover {
+    color: #d1ffd1;
+    font-weight: 700;
+}
+
+
+/* --- SECCIÓN USUARIO (DERECHA) --- */
+.usuario-container {
+    display: flex;
+    align-items: center;
+}
+
+.profile-box {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.avatar-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.avatar-circle i {
+    color: #555555;
+    font-size: 16px;
+}
+
+.user-info {
+    color: #ffffff;
+    font-size: 14px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.user-name {
+    font-weight: 600;
+    display: block;
+}
+
+.user-points {
+    color: #ffca28; /* Color amarillo para la estrella y puntos */
+    font-weight: 600;
+}
+
+
+
+/* --- BOTONES LOGIN / REGISTRO --- */
+.btn-login, .btn-register {
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.btn-login {
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.btn-register {
+    background-color: #ff9900;
+    color: #333333;
+}
+
+
+/* --- BOTÓN HAMBURGUESA (MÓVIL) --- */
+.nav-toggle {
+    display: none; /* Oculto en PC */
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+/* --- RESPONSIVE PARA DISPOSITIVOS MÓVILES --- */
+@media screen and (max-width: 850px) {
+    .nav-toggle {
+        display: block; /* Muestra el botón de tres líneas */
+    }
+
+    .mascotas-container {
+        display: none; /* Esconde las mascotas para que no se amontonen */
+    }
+
+    /* Clase que activará JavaScript en celular */
+    .mascotas-container.active {
+        display: block;
+        position: absolute;
+        top: 58px;
+        left: 0;
+        width: 100%;
+        background-color: #0f6828;
+        padding: 15px 0;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .nav-menu {
+        flex-direction: column; /* Coloca las mascotas una debajo de otra */
+        align-items: center;
+    }
+
+    .nav-element {
+        margin: 12px 0;
+    }
+}

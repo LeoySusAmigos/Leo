@@ -29,9 +29,45 @@ if (!isset($_SESSION['userID'])) {
             <img src="images/flecha.png" alt="Volver">
         </a>
 
+<<<<<<< HEAD
+    <img src="images/flecha.png" alt="Volver">
+
+    </a>
+
+    <!-- TITULO -->
+    <div class="titulo">
+
+    <img src="images/cartel-mascotas.png" alt="">
+
+    <h1>TUS MASCOTAS</h1>
+
+</div>
+
+    <!-- SUBTITULO -->
+    <div class="subtitulo">
+        Tu mascota te está esperando con una aventura
+    </div>
+
+    <!-- TARJETAS -->
+    <div class="mascotas">
+
+        <!-- LEO -->
+        <div class="card verde">
+
+            <div class="nombre leo">
+                Leo
+            </div>
+
+            <img src="images/leo.png" alt="Leo">
+
+            <a href="aventura1.html" class="btn-aventura btn verde">
+                ⭐ Aventura 1
+            </a>
+=======
         <div class="titulo">
             <img src="images/cartel-mascotas.png" alt="Cartel Mascotas">
             <h1>TUS MASCOTAS</h1>
+>>>>>>> fb570a80994abd00f13bf0cc901fa2d454302555
         </div>
 
         

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <main class="contenedorLogin">
-        
+
         <div class="logoArea1">
             <img src="images/cartelito2.png" alt="Leo & Friends">
         </div>
@@ -18,22 +20,10 @@
         <div class="login-wrapper">
 
             <img src="images/Leito.png" class="personaje camaleon" alt="Leo">
-            <div class="info-box box-leo">
-                <h3>LEO</h3>
-                <p>Enseña a<br><strong>LEER</strong></p>
-            </div>
 
             <img src="images/finxhidden.png" class="personaje gato" alt="Finx">
-            <div class="info-box box-finx">
-                <h3>FINX</h3>
-                <p>Acompaña en la<br><strong>LECTURA</strong></p>
-            </div>
 
             <img src="images/capyhidden.png" class="personaje capibara" alt="Capy">
-            <div class="info-box box-capy">
-                <h3>CAPY</h3>
-                <p>Ayuda con la<br><strong>GRAMÁTICA</strong></p>
-            </div>
 
             <form class="form" method="POST" action="php/register.php">
                 <div class="header-text">
@@ -46,25 +36,27 @@
 
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
-                    <input type="text" class="inputs" placeholder="Nombre del padre/madre/responsable" name="nombre">
+                    <input type="text" class="inputs" placeholder="Nombre del padre/madre/responsable"
+                        name="nombre_papa" required>
                 </div>
 
                 <div class="input-container">
                     <i class="fa-regular fa-envelope"></i>
-                    <input type="email" class="inputs" placeholder="Correo electrónico" name="correo">
-                </div>                
+                    <input type="email" class="inputs" placeholder="Correo electrónico" name="correo" required>
+                </div>
 
                 <div class="input-container">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" class="inputs" placeholder="Contraseña" name="password">
+                    <input type="password" class="inputs" placeholder="Contraseña" name="password" required>
                 </div>
                 <div class="input-container">
-                    <input type="password" class="inputs" placeholder="Confirmar contraseña" name="confirm_password">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" class="inputs" placeholder="Confirmar contraseña" name="confirm_password" required>
                 </div>
 
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
-                    <input type="text" class="inputs" placeholder="Nombre del niño/a" name="nombre">
+                    <input type="text" class="inputs" placeholder="Nombre del niño/a" name="nombre_nino" required>
                 </div>
 
                 <button class="btn-submit" type="submit">Registrarse</button>
@@ -75,4 +67,5 @@
 
     </main>
 </body>
+
 </html>
