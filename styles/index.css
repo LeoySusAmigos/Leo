@@ -2,13 +2,13 @@
     margin: 0;
     padding: 0;
 }
-
+ 
 body{
     overflow-x:hidden;
 }
-
+ 
 /* NAVBAR */
-
+ 
 .custom-navbar{
     background:#fff;
     padding:8px 0;
@@ -16,15 +16,15 @@ body{
     position:relative;
     z-index:1000;
 }
-
+ 
 .navbar .container{
     display:flex;
     align-items:center;
     justify-content:space-between;
 }
-
+ 
 /* LOGO */
-
+ 
 .logo{
     display:flex;
     align-items:center;
@@ -33,49 +33,49 @@ body{
     font-size:2rem;
     font-weight:900;
 }
-
+ 
 .leo{
     color:#2ca02c;
     font-family:'Fredoka', sans-serif;
 }
-
+ 
 .ampersand{
     color:#1e88e5;
     font-family:'Fredoka', sans-serif;
 }
-
+ 
 .friends{
     color:#ff7a00;
     font-family:'Fredoka', sans-serif;
 }
-
+ 
 /* MENÚ */
-
+ 
 .menu-center{
     display:flex;
     align-items:center;
     gap:40px;
 }
-
+ 
 .menu-center .nav-link{
     color:#333;
     font-weight:700;
     font-size:1.10rem;
     transition:.3s;
 }
-
+ 
 .menu-center .nav-link:hover{
     color:#2ca02c;
 }
-
+ 
 /* BOTONES */
-
+ 
 .nav-buttons{
     display:flex;
     align-items:center;
     gap:18px;
 }
-
+ 
 .login-btn{
     background:#ffffff;
     border:2px solid #4caf50;
@@ -85,12 +85,12 @@ body{
     font-weight:700;
     transition:.3s ease;
 }
-
+ 
 .login-btn:hover{
     background:#e8f5e9;
     color:#2e7d32;
 }
-
+ 
 .register-btn{
     background:#4caf50;
     color:white;
@@ -99,15 +99,15 @@ body{
     font-weight:700;
     transition:.3s ease;
 }
-
+ 
 .register-btn:hover{
     background:#388e3c;
     color:white;
 }
-
-
+ 
+ 
 /* PERFIL */
-
+ 
 .profile-btn{
     border:2px solid #43a047;
     border-radius:12px;
@@ -115,8 +115,40 @@ body{
     font-weight:700;
 }
 
+.settings-link{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    color:#1a6e2e;               
+    font-size:1.15rem;
+    text-decoration:none;
+    transition:.35s ease;
+    flex-shrink:0;
+    background:#e9f5ec;       
+}
+ 
+.settings-link:hover{
+    background:linear-gradient(135deg, #d9efe0 0%, #ffe8d1 55%, #dbe9fb 100%);
+    color:#ff7a00;                 /* naranja de la paleta */
+    transform:rotate(35deg) scale(1.05);
+    box-shadow:0 4px 14px rgba(0,0,0,.10);
+}
+ 
+/* FOTO DE PERFIL DEL NIÑO dentro del botón profile-btn,
+   por si foto_nino no es NULL en la base de datos */
+.profile-avatar-img{
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-right:6px;
+}
+ 
 /* HERO */
-
+ 
 .hero{
     position:relative;
     height:550px;
@@ -137,7 +169,7 @@ body{
     background-position:center;
     color:white;
 }
-
+ 
 .hero-content{
     width:45%;
     display:flex;
@@ -146,7 +178,7 @@ body{
     align-items:flex-start;
     z-index:2;
 }
-
+ 
 .hero-content h1{
     font-family:'Fredoka', sans-serif;
     font-size:4.5rem;
@@ -158,7 +190,7 @@ body{
     margin-bottom:25px;
     text-shadow: 0 3px 8px rgba(0,0,0,.25);
 }
-
+ 
 .hero-content p{
     font-family:'Nunito', sans-serif;
     font-size:1.40rem;
@@ -169,7 +201,7 @@ body{
     margin-bottom:35px;
     text-shadow:0 2px 6px rgba(0,0,0,.25);
 }
-
+ 
 .hero-btn{
     display:inline-block;
     background:#57c84d;
@@ -183,13 +215,13 @@ body{
     transition:.3s ease;
     box-shadow: 0 6px 18px rgba(88,200,76,.35);
 }
-
+ 
 .hero-btn:hover{
     background:#45b43d;
     transform:translateY(-3px);
     box-shadow: 0 10px 25px rgba(88,200,76,.5);
 }
-
+ 
 .hero-characters{
     display:flex;
     align-items:flex-end;
@@ -197,7 +229,7 @@ body{
     right:110px;
     bottom:70px;
 }
-
+ 
 .hero-characters img{
     width:230px;
     object-fit:contain;
@@ -205,11 +237,11 @@ body{
     drop-shadow(0 18px 18px rgba(0,0,0,.25));
     transition:.3s;
 }
-
+ 
 .hero-characters img:hover{
     transform: translateY(-10px) scale(1.03);
 }
-
+ 
 .hero::after{
     content:"";
     position:absolute;
@@ -221,143 +253,143 @@ body{
     filter:blur(20px);  
     border-radius:50%;
 }
-
+ 
 /* ================= BENEFICIOS ================= */
-
+ 
 .beneficios{
     padding:70px 90px;
     background:#ffffff;
 }
-
+ 
 .beneficios h2{
     font-family:'Fredoka', sans-serif;
     font-size:3.5rem;
     text-align:center;
     margin-bottom:70px;
 }
-
+ 
 .beneficios-grid{
-
+ 
     display:flex;
-
+ 
     justify-content:space-between;
-
+ 
     gap:40px;
 }
-
+ 
 .beneficio{
-
+ 
     flex:1;
-
+ 
     text-align:center;
-
+ 
     padding:35px 25px;
-
+ 
     border-radius:25px;
-
+ 
     transition:.3s ease;
 }
-
+ 
 .beneficio:hover{
-
+ 
     transform:translateY(-8px);
-
+ 
     box-shadow:
-
+ 
     0 10px 25px rgba(0,0,0,.08);
 }
-
+ 
 /* ICONOS */
-
+ 
 .benefit-icon{
-
+ 
     font-size:65px;
-
+ 
     color:#2E8B57;
-
+ 
     margin-bottom:25px;
-
+ 
     transition:.3s ease;
 }
-
+ 
 .beneficio:hover .benefit-icon{
-
+ 
     transform:scale(1.1);
-
+ 
     color:#1f6d40;
 }
-
+ 
 .beneficio h3{
-
+ 
     font-family:'Fredoka', sans-serif;
-
+ 
     font-size:1.8rem;
-
+ 
     font-weight:600;
-
+ 
     margin-bottom:18px;
-
+ 
     color:#222;
 }
-
+ 
 .beneficio p{
-
+ 
     font-family:'Nunito', sans-serif;
-
+ 
     font-size:1.1rem;
-
+ 
     line-height:1.6;
-
+ 
     color:#666;
 }
-
+ 
 /* ================= METODOLOGÍA ================= */
-
+ 
 .metodologia{
     padding:90px;
     background:#faf8f3;
 }
-
-
+ 
+ 
 /* TÍTULO */
-
+ 
 .metodologia h2{
     text-align:center;
     font-family:'Fredoka',sans-serif;
     font-size:3.5rem;
     margin-bottom:80px;
 }
-
-
+ 
+ 
 /* CONTENEDOR GENERAL */
-
+ 
 .metodologia-contenedor{
     display:flex;
     justify-content:space-between;
     gap:35px;
 }
-
-
+ 
+ 
 /* CADA ETAPA */
-
+ 
 .etapa{
     flex:1;
     display:flex;
     flex-direction:column;
 }
-
+ 
 .encabezado-etapa{
-
+ 
     display:flex;
-
+ 
     align-items:flex-start;
-
+ 
     gap:20px;
 }
-
-
+ 
+ 
 /* NÚMERO */
-
+ 
 .numero{
     font-family:'Fredoka',sans-serif;
     font-size:10rem;
@@ -366,53 +398,53 @@ body{
     line-height:1;
     flex-shrink:0;
 }
-
-
+ 
+ 
 /* CONTENIDO */
-
+ 
 .contenido-etapa{
-
+ 
     flex:1;
 }
-
-
+ 
+ 
 /* TÍTULO */
-
+ 
 .contenido-etapa h3{
-
+ 
     font-family:'Fredoka',sans-serif;
-
+ 
     font-size:2rem;
-
+ 
     color:#2e7d32;
-
+ 
     margin-bottom:15px;
 }
-
-
+ 
+ 
 /* TEXTO */
-
+ 
 .contenido-etapa p{
-
+ 
     font-family:'Nunito',sans-serif;
-
+ 
     font-size:1.1rem;
-
+ 
     line-height:1.7;
-
+ 
     color:#666;
 }
-
-
+ 
+ 
 /* ELEMENTO DERECHO */
-
+ 
 .elemento-etapa{
     display:flex;
     justify-content:center;
     align-items:center;
     margin-top:5px;
 }
-
+ 
 .audio-silaba{
     width:200px;
     height:80px;
@@ -425,7 +457,7 @@ body{
     gap:20px;
     box-shadow: 0 6px 15px rgba(0,0,0,.08);
 }
-
+ 
 .audio-silaba span{
     font-family:'Fredoka',sans-serif;
     font-size:3.5rem;
@@ -433,7 +465,7 @@ body{
     color:#2e7d32;
     margin-bottom:10px;
 }
-
+ 
 .boton-audio{
     width:50px;
     height:50px;
@@ -444,14 +476,14 @@ body{
     cursor:pointer;
     transition:.3s;
 }
-
+ 
 .boton-audio:hover{
-
+ 
     background:#43a047;
-
+ 
     transform:scale(1.08);
 }
-
+ 
 .imagen-oracion{
     width:220px;
     border:#ebebeb solid 4px;
@@ -462,12 +494,12 @@ body{
     transition:.3s;
     margin-left: 50px;
 }
-
+ 
 .imagen-oracion:hover{
-
+ 
     transform:translateY(-5px);
 }
-
+ 
 .imagen-finx{
     width:220px;
     border-radius:18px;
@@ -475,22 +507,22 @@ body{
     transition:.3s;
     margin-left: 50px;
 }
-
+ 
 .imagen-finx:hover{
     transform:translateY(-5px);
 }
-
-
+ 
+ 
 /* ============= TESTIMONIOS ================ */
-
+ 
 .testimonios{
     padding:100px;
     background:#ffffff;
 }
-
-
+ 
+ 
 /* TÍTULO */
-
+ 
 .testimonios h2{
     font-family:'Fredoka',sans-serif;
     text-align:center;
@@ -498,18 +530,18 @@ body{
     color:#222;
     margin-bottom:70px;
 }
-
-
+ 
+ 
 /* CONTENEDOR */
-
+ 
 .testimonios-grid{
     display:flex;
     gap:35px;
 }
-
-
+ 
+ 
 /* TARJETAS */
-
+ 
 .testimonio{
     flex:1;
     background:#fafafa;
@@ -519,23 +551,23 @@ body{
     0 8px 25px rgba(0,0,0,.08);
     transition:.3s ease;
 }
-
+ 
 .testimonio:hover{
     transform:translateY(-8px);
     box-shadow:
     0 12px 30px rgba(0,0,0,.12);
 }
-
+ 
 .estrellas{
     margin-bottom:25px;
 }
-
+ 
 .estrellas i{
     color:#ffc107;
     font-size:1.2rem;
     margin-right:5px;
 }
-
+ 
 .testimonio p{
     font-family:'Nunito',sans-serif;
     font-size:1.1rem;
@@ -543,36 +575,36 @@ body{
     color:#555;
     margin-bottom:30px;
 }
-
+ 
 .persona{
     display:flex;
     align-items:center;
     gap:15px;
 }
-
+ 
 .persona img{
     width:60px;
     height:60px;
     border-radius:50%;
     object-fit:cover;
 }
-
+ 
 .persona h4{
     font-family:'Fredoka',sans-serif;
     font-size:1.2rem;
     color:#222;
     margin-bottom:5px;
 }
-
+ 
 .persona span{
     font-family:'Nunito',sans-serif;
     color:#777;
     font-size:0.95rem;
 }
-
-
+ 
+ 
 /* ============= CTA ================ */
-
+ 
 .cta-section{
     background:linear-gradient(135deg,#354237 0%,#66db6a 55%,#3e533f 100%);
     padding:45px 30px;
@@ -582,28 +614,28 @@ body{
     overflow:hidden;
     position:relative;
 }
-
-
+ 
+ 
 /* CONTENEDOR */
-
+ 
 .cta-content{
     max-width:900px;
     margin:auto;
 }
-
-
+ 
+ 
 /* TÍTULO */
-
+ 
 .cta-section h2{
     font-family:'Fredoka',sans-serif;
     font-size:2.2rem;
     font-weight:700;
     margin-bottom:18px;
 }
-
-
+ 
+ 
 /* TEXTO */
-
+ 
 .cta-section p{
     font-family:'Nunito',sans-serif;
     font-size:1.05rem;
@@ -611,10 +643,10 @@ body{
     margin-bottom:28px;
     opacity:.95;
 }
-
-
+ 
+ 
 /* BOTÓN */
-
+ 
 .cta-btn{
     display:inline-flex;
     align-items:center;
@@ -630,19 +662,19 @@ body{
     transition:.3s ease;
     box-shadow: 0 5px 15px rgba(0,0,0,.15);
 }
-
-
+ 
+ 
 /* HOVER */
-
+ 
 .cta-btn:hover{
     transform:translateY(-3px);
     background:#f4f4f4;
     color:#2e7d32;
 }
-
-
+ 
+ 
 /* TEXTO PEQUEÑO */
-
+ 
 .cta-section small{
     display:block;
     margin-top:18px;

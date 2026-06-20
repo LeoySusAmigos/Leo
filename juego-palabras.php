@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego de Oraciones - Leo & Friends</title>
+    <title>Juego de Oraciones</title>
     <link rel="stylesheet" href="styles/juego-palabras.css">
 </head>
 <body>
