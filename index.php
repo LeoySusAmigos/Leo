@@ -71,6 +71,14 @@
 
                     </li>
 
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="resenas.php">
+                            Reseñas
+                        </a>
+
+                    </li>
+
                 </ul>
 
                 <!-- DERECHA -->
@@ -394,143 +402,93 @@
 
         <div class="testimonios-grid">
 
-            <!-- TESTIMONIO 1 -->
+    <?php
 
-            <div class="testimonio">
+    $consulta=$conexion->query("
 
-                <div class="estrellas">
+    SELECT
 
-                    <i class="fa-solid fa-star"></i>
+    r.*,
 
-                    <i class="fa-solid fa-star"></i>
+    u.nombre_papa,
 
-                    <i class="fa-solid fa-star"></i>
+    u.nombre_nino
 
-                    <i class="fa-solid fa-star"></i>
+    FROM resenas r
 
-                    <i class="fa-solid fa-star"></i>
+    JOIN usuarios u
 
-                </div>
+    ON r.userID=u.userID
 
-                <p>
+    ORDER BY calificacion DESC, fecha DESC
 
-                    "Mi hija empezó a leer sus primeras palabras en pocas semanas. ¡Le encanta!"
+    LIMIT 3
 
-                </p>
+    ");
 
-                <div class="persona">
+    while($fila=$consulta->fetch_assoc()){
 
-                    <img
+    ?>
 
-                    src="images/mama1.jpg"
+    <div class="testimonio">
 
-                    alt="Ana">
+    <div class="estrellas">
 
-                    <div>
+    <?php
 
-                        <h4>Ana</h4>
+    for($i=1;$i<=5;$i++){
 
-                        <span>Mamá de Sofía (7 años)</span>
+    if($i<=$fila['calificacion']){
 
-                    </div>
+    echo '<i class="fa-solid fa-star"></i>';
 
-                </div>
+    }
 
-            </div>
+    }
 
+    ?>
 
-            <!-- TESTIMONIO 2 -->
+    </div>
 
-            <div class="testimonio">
+    <p>
 
-                <div class="estrellas">
+    "<?php echo $fila['comentario']; ?>"
 
-                    <i class="fa-solid fa-star"></i>
+    </p>
 
-                    <i class="fa-solid fa-star"></i>
+    <div class="persona">
 
-                    <i class="fa-solid fa-star"></i>
+    <div>
 
-                    <i class="fa-solid fa-star"></i>
+    <h4>
 
-                    <i class="fa-solid fa-star"></i>
+    <?php echo $fila['nombre_papa']; ?>
 
-                </div>
+    </h4>
 
-                <p>
+    <span>
 
-                    "Los reportes me dan tranquilidad porque puedo ver su avance día a día."
+    Papá/Mamá de
 
-                </p>
+    <?php echo $fila['nombre_nino']; ?>
 
-                <div class="persona">
+    </span>
 
-                    <img
+    </div>
 
-                    src="images/papa1.jpg"
+    </div>
 
-                    alt="Carlos">
+    </div>
 
-                    <div>
+    <?php
 
-                        <h4>Carlos</h4>
+    }
 
-                        <span>Papá de Mateo (6 años)</span>
+    ?>
 
-                    </div>
+    </div>
 
-                </div>
-
-            </div>
-
-
-            <!-- TESTIMONIO 3 -->
-
-            <div class="testimonio">
-
-                <div class="estrellas">
-
-                    <i class="fa-solid fa-star"></i>
-
-                    <i class="fa-solid fa-star"></i>
-
-                    <i class="fa-solid fa-star"></i>
-
-                    <i class="fa-solid fa-star"></i>
-
-                    <i class="fa-solid fa-star"></i>
-
-                </div>
-
-                <p>
-
-                    "El método es claro y efectivo. Mi hijo está más motivado que nunca."
-
-                </p>
-
-                <div class="persona">
-
-                    <img
-
-                    src="images/mama2.jpg"
-
-                    alt="Lucía">
-
-                    <div>
-
-                        <h4>Lucía</h4>
-
-                        <span>Mamá de Tomás (8 años)</span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
+        </section>
 
 
 <!-- FOOTER CTA -->
