@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+
+include("php/conexion.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,163 +18,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/navbar1.css">
     <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg custom-navbar">
-
-        <div class="container">
-
-            <!-- LOGO -->
-
-            <a class="navbar-brand logo" href="index.php">
-
-                <span class="leo">Leo</span>
-
-                <span class="ampersand">&</span>
-
-                <span class="friends">Friends</span>
-
-            </a>
-
-            <!-- BOTÓN RESPONSIVE -->
-
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
-
-                <span class="navbar-toggler-icon"></span>
-
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-
-                <!-- MENÚ CENTRADO -->
-
-                <ul class="navbar-nav mx-auto menu-center">
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="#">
-                            Cómo funciona
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="sobre-nosotros.php">
-                            Sobre Nosotros
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="#">
-                            Paquetes Salvajes
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link" href="resenas.php">
-                            Reseñas
-                        </a>
-
-                    </li>
-
-                </ul>
-
-                <!-- DERECHA -->
-
-                <div class="nav-buttons">
-
-                    <?php if (isset($_SESSION['userID'])): ?>
-
-                        <div class="dropdown">
-
-                            <a
-                            class="btn profile-btn dropdown-toggle"
-
-                            href="#"
-
-                            data-bs-toggle="dropdown">
-
-                                <i class="fa-solid fa-circle-user"></i>
-
-                                <?php echo $_SESSION['nombre_nino']; ?>
-
-                            </a>
-
-                            <ul class="dropdown-menu dropdown-menu-end">
-
-                                <li>
-
-                                    <a class="dropdown-item"
-
-                                    href="profile.php">
-
-                                        Perfil
-
-                                    </a>
-
-                                </li>
-
-                                <li>
-
-                                    <hr class="dropdown-divider">
-
-                                </li>
-
-                                <li>
-
-                                    <a
-
-                                    class="dropdown-item text-danger"
-
-                                    href="php/logout.php">
-
-                                        Cerrar sesión
-
-                                    </a>
-
-                                </li>
-
-                            </ul>
-
-                        </div>
-
-                    <?php else: ?>
-
-                        <a class="btn login-btn"
-
-                        href="login.html">
-
-                            Iniciar sesión
-
-                        </a>
-
-                        <a class="btn register-btn"
-
-                        href="register.html">
-
-                            Registrarse gratis
-
-                        </a>
-
-                    <?php endif; ?>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </nav>
+   
+    <?php include("navbar1.php"); ?>
 
     <section class="hero">
         <div class="hero-content">
@@ -186,9 +43,9 @@
         </div>
 
         <div class="hero-characters">
+            <img src="images/capy1.png" alt="Capy">
             <img src="images/leito.png" alt="Leo">
             <img src="images/finx.png" alt="Finx">
-            <img src="images/capy1.png" alt="Capy">
         </div>
     </section>
 
@@ -404,87 +261,95 @@
 
     <?php
 
-    $consulta=$conexion->query("
+$resenas=$conn->query("
 
-    SELECT
+SELECT
 
-    r.*,
+r.*,
 
-    u.nombre_papa,
+u.nombre_papa,
+u.nombre_nino,
+u.foto_padre
 
-    u.nombre_nino
+FROM resenas r
 
-    FROM resenas r
+JOIN usuarios u
 
-    JOIN usuarios u
+ON r.userID=u.userID
 
-    ON r.userID=u.userID
+ORDER BY calificacion DESC, fecha DESC
 
-    ORDER BY calificacion DESC, fecha DESC
+LIMIT 3
 
-    LIMIT 3
+");
 
-    ");
+while($fila=$resenas->fetch_assoc()){
 
-    while($fila=$consulta->fetch_assoc()){
+?>
 
-    ?>
+<div class="testimonio">
 
-    <div class="testimonio">
+<div class="estrellas">
 
-    <div class="estrellas">
+<?php
 
-    <?php
+for($i=1;$i<=5;$i++){
 
-    for($i=1;$i<=5;$i++){
+if($i<=$fila['calificacion']){
 
-    if($i<=$fila['calificacion']){
+echo '<i class="fa-solid fa-star"></i>';
 
-    echo '<i class="fa-solid fa-star"></i>';
+}
 
-    }
+}
 
-    }
+?>
 
-    ?>
+</div>
 
-    </div>
+<p>
 
-    <p>
+"<?php echo $fila['comentario']; ?>"
 
-    "<?php echo $fila['comentario']; ?>"
+</p>
 
-    </p>
+<div class="persona">
 
-    <div class="persona">
+<img
 
-    <div>
+src="images/fotopadre/<?php echo $fila['foto_padre']; ?>"
 
-    <h4>
+alt="Foto">
 
-    <?php echo $fila['nombre_papa']; ?>
+<div>
 
-    </h4>
+<h4>
 
-    <span>
+<?php echo $fila['nombre_papa']; ?>
 
-    Papá/Mamá de
+</h4>
 
-    <?php echo $fila['nombre_nino']; ?>
+<span>
 
-    </span>
+Papá/Mamá de
 
-    </div>
+<?php echo $fila['nombre_nino']; ?>
 
-    </div>
+</span>
 
-    </div>
+</div>
 
-    <?php
+</div>
 
-    }
+</div>
 
-    ?>
+<?php
+
+}
+
+?>
+
+</div>
 
     </div>
 
@@ -544,5 +409,7 @@
         }
 
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

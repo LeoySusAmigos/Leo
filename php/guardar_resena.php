@@ -4,19 +4,82 @@ session_start();
 
 include("conexion.php");
 
+if(!isset($_SESSION['userID'])){
+
+header("Location:../resenas.php");
+
+exit();
+
+}
+
 $userID=$_SESSION['userID'];
 
 $comentario=$_POST['comentario'];
 
 $calificacion=$_POST['calificacion'];
 
-$sql="INSERT INTO resenas(
+
+// Verificar si ya existe una reseña
+
+$sql="
+
+SELECT *
+
+FROM resenas
+
+WHERE userID='$userID'
+
+LIMIT 1
+
+";
+
+$resultado=$conn->query($sql);
+
+
+// SI YA EXISTE -> EDITAR
+
+if(isset($_POST['editar'])){
+
+$sql="
+
+UPDATE resenas
+
+SET
+
+comentario='$comentario',
+
+calificacion='$calificacion',
+
+fecha_edicion=NOW()
+
+WHERE userID='$userID'
+
+";
+
+$conn->query($sql);
+
+header("Location:../resenas.php");
+
+exit();
+
+}
+
+
+// SI NO EXISTE -> CREAR
+
+else{
+
+$sql="
+
+INSERT INTO resenas(
 
 userID,
 
 comentario,
 
-calificacion
+calificacion,
+
+fecha
 
 )
 
@@ -26,90 +89,21 @@ VALUES(
 
 '$comentario',
 
-'$calificacion'
+'$calificacion',
 
-)";
+NOW()
 
-$conexion->query($sql);
+)
 
-header("Location:resenas.php");
-
-?>
-
-<div class="lista-resenas">
-
-<?php
-
-$resenas=$conexion->query("
-
-SELECT
-
-r.*,
-
-u.nombre_papa,
-
-u.nombre_nino
-
-FROM resenas r
-
-JOIN usuarios u
-
-ON r.userID=u.userID
-
-ORDER BY fecha DESC
-
-");
-
-while($fila=$resenas->fetch_assoc()){
-
-?>
-
-<div class="card-resena">
-
-<h3>
-
-<?php echo $fila['nombre_papa']; ?>
-
-</h3>
-
-<span>
-
-Papá/Mamá de
-
-<?php echo $fila['nombre_nino']; ?>
-
-</span>
-
-<div class="estrellas">
-
-<?php
-
-for($i=1;$i<=5;$i++){
-
-if($i<=$fila['calificacion']){
-
-echo "⭐";
+";
 
 }
 
-}
+
+$conn->query($sql);
+
+header("Location:../resenas.php");
+
+exit();
 
 ?>
-
-</div>
-
-<p>
-
-<?php echo $fila['comentario']; ?>
-
-</p>
-
-</div>
-
-<?php
-
-}
-
-?>
-
-</div>
