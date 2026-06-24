@@ -45,8 +45,8 @@ body {
   cursor: pointer;
   transition: transform 0.15s, box-shadow 0.15s;
   border: 3px solid transparent;
-  width: fit-content;    
-  max-width: 220px;         
+  width: fit-content;       
+  max-width: 220px;     
   min-width: 130px;
 }
 
@@ -54,10 +54,10 @@ body {
   border-radius: 11px 11px 0 0;
   width: 100%;
   height: auto;
-  min-height: 160px;       
-  object-fit: contain;      
+  min-height: 160px;  
+  object-fit: contain;    
   object-position: center;
-  background: #fff;       
+  background: #fff;  
   display: block;
 }
 
@@ -137,13 +137,10 @@ body {
   text-align: right;
 }
 
-/* ── Tablero jigsaw ──
-   El contenedor NO debe tener overflow:hidden ni border-radius
-   para que las orejitas de las piezas se vean fuera de la celda */
 .strips-wrap {
-  /* sin overflow:hidden  ← esto era lo que recortaba las orejitas */
   position: relative;
   margin-bottom: 1.5rem;
+  overflow: visible;
   filter: drop-shadow(0 4px 16px rgba(0,0,0,0.13));
 }
 
@@ -163,7 +160,6 @@ body {
   display: block;
 }
 
-/* Highlight al arrastrar sobre una celda */
 .puzzle-cell.over canvas {
   filter: brightness(0.85) sepia(0.4);
 }

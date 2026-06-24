@@ -1,21 +1,12 @@
 <?php
-// ════════════════════════════════════════════════════════
-//  configuracion.php — Leo & Friends
-//  Archivo principal: solo HTML + llamadas a config.php / style.css / script.js
-// ════════════════════════════════════════════════════════
-require_once 'configuracion.php';   // ← trae $usuario, $nino y la conexión $pdo · PHP
-// ════════════════════════════════════════════════════════
-//  config.php — Lógica y conexión a base de datos
-//  Leo & Friends  |  Base de datos: leo_and_friends  |  Tabla: usuarios
-// ════════════════════════════════════════════════════════
 session_start();
- 
+
 // ── 1. PROTECCIÓN: si no hay sesión activa, redirige al login ───────────────
 if (!isset($_SESSION['userID'])) {
     header('Location: login.php');
     exit;
 }
- 
+
 // ── 2. CONEXIÓN A LA BASE DE DATOS ─────────────────────────────────────────
 //    Ajusta host/usuario/contraseña si tu servidor es diferente
 $host    = 'localhost';
@@ -23,9 +14,9 @@ $db      = 'leo_and_friends';
 $dbUser  = 'root';          // ← cambia si tienes otro usuario MySQL
 $dbPass  = '';               // ← cambia si tienes contraseña
 $charset = 'utf8mb4';
- 
+
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
- 
+
 try {
     $pdo = new PDO($dsn, $dbUser, $dbPass, [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -37,23 +28,23 @@ try {
     die('<p style="font-family:sans-serif;color:red;padding:20px;">
          Error de conexión a la base de datos. Intenta más tarde.</p>');
 }
- 
+
 // ── 3. OBTENER DATOS DEL USUARIO EN SESIÓN ──────────────────────────────────
-//    Columnas reales: userID | nombre_nino | correo | password | rol | fecha_registro
-$stmt = $pdo->prepare('SELECT userID, nombre_nino, correo, rol, fecha_registro
+//    Columnas reales: userID | nombre_nino | nombre_papa | correo | password | rol | fecha_registro | foto_nino | foto_padre
+$stmt = $pdo->prepare('SELECT userID, nombre_nino, nombre_papa, correo, rol, fecha_registro, foto_nino, foto_padre
                         FROM usuarios
                         WHERE userID = ?
                         LIMIT 1');
 $stmt->execute([$_SESSION['userID']]);
 $fila = $stmt->fetch();
- 
+
 // Si el userID de sesión no existe en BD, cierra sesión por seguridad
 if (!$fila) {
     session_destroy();
     header('Location: login.php');
     exit;
 }
- 
+
 // ── 4. OBTENER PROGRESO DEL NIÑO (tabla: progreso) ──────────────────────────
 //    Usamos COUNT de registros como "estrellas" acumuladas.
 //    Ajusta la consulta si tu tabla progreso tiene otra estructura.
@@ -61,31 +52,31 @@ $stmtProg = $pdo->prepare('SELECT COUNT(*) AS estrellas FROM progreso WHERE user
 $stmtProg->execute([$fila['userID']]);
 $progreso = $stmtProg->fetch();
 $estrellas = $progreso['estrellas'] ?? 0;
- 
+
 // ── 5. PREPARAR VARIABLES PARA LA VISTA ────────────────────────────────────
+//    "Mi cuenta" (sección 1) pertenece al PADRE/TUTOR: usa nombre_padre y foto_padre.
 $usuario = [
     'id'      => $fila['userID'],
-    'nombre'  => $fila['nombre_nino'],           // nombre_nino = nombre del niño registrado
+    'nombre'  => $fila['nombre_papa'],                         // antes: nombre_nino (incorrecto, es cuenta del padre)
     'correo'  => $fila['correo'],
-    'rol'     => $fila['rol'],                   // 'usuario' según tus datos
+    'rol'     => $fila['rol'],
     'desde'   => date('d/m/Y', strtotime($fila['fecha_registro'])),
-    'foto'    => 'img/avatar-nino.png',          // ← imagen del usuario
+    'foto'    => $fila['foto_padre'] ?: 'img/avatar-mama.png', // usa la foto real si existe, si no cae al genérico
     'idioma'  => 'Español',                      // puedes añadir col. "idioma" a la BD si quieres
     'plan'    => 'Plan Safari — $12.99/mes',     // puedes añadir col. "plan" a la BD si quieres
 ];
- 
-// Nota: en tu BD el nombre guardado ES el nombre del niño (nombre_nino),
-// así que lo usamos para ambas secciones de la página.
+
+// "Configuración del niño" (sección 2) sigue perteneciendo al NIÑO: nombre_nino y foto_nino.
 $nino = [
     'nombre'          => $fila['nombre_nino'],
-    'foto'            => 'img/avatar-nino.png',  // ← avatar del niño
+    'foto'            => $fila['foto_nino'] ?: 'img/avatar-nino.png',
     'estrellas'       => $estrellas,
     'musica'          => true,   // puedes agregar columna "musica" a la tabla usuarios
     'efectos'         => true,   // puedes agregar columna "efectos"
     'narracion'       => true,   // puedes agregar columna "narracion"
     'notificaciones'  => true,   // puedes agregar columna "notificaciones"
 ];
- 
+
 ?>
 
 <!DOCTYPE html>
@@ -94,28 +85,20 @@ $nino = [
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Configuración</title>
- 
+
   <!-- Google Fonts: Nunito (redondeada, amigable para niños) -->
   <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&family=Fredoka:wght@600;900&family=Nunito:wght@700;900&family=Quicksand:wght@500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="configuracion.css" />
+  <link rel="stylesheet" href="styles/configuracion.css" />
 </head>
 <body>
- 
-<!-- ══════════════════════════════════════════════════
-     BARRA DE NAVEGACIÓN SUPERIOR
-     Imágenes necesarias:
-       img/logo-leo-friends.png   → logo del koala en la esquina
-       img/icono-lectura.png      → ícono "Lectura con Leo"
-       img/icono-gramatica.png    → ícono "Gramática con Capy"
-       img/icono-biblioteca.png   → ícono "Biblioteca con Fina"
-       img/avatar-nino.png        → foto redonda del niño (topbar)
-══════════════════════════════════════════════════ -->
+
+
 <nav class="topbar">
   <a href="index.php" class="topbar__logo">
     <img src="images/cartelito.png" alt="Leo & Friends" />
     <span class="topbar__logo-text">Leo &amp;<br>Friends</span>
   </a>
- 
+
   <div class="topbar__nav">
     <a href="lectura.php">
       <img src="images/Leito.png" alt="" />
@@ -130,7 +113,7 @@ $nino = [
       <span>Biblioteca con Finx</span>
     </a>
   </div>
- 
+
   <div class="topbar__user">
     <span><?= htmlspecialchars($nino['nombre']) ?></span>
     <div class="topbar__stars"><?= (int)$nino['estrellas'] ?></div>
@@ -138,29 +121,29 @@ $nino = [
     <span class="topbar__gear">⚙</span>
   </div>
 </nav>
- 
- 
+
+
 <!-- ══════════════════════════════════════════════════
      CONTENIDO PRINCIPAL
 ══════════════════════════════════════════════════ -->
 <main class="main">
- 
+
   <h1 class="page-title">Configuración</h1>
- 
+
   <!-- ─────────────────────────────────────────────
        SECCIÓN 1: MI CUENTA  (colapsable ▼)
   ───────────────────────────────────────────── -->
   <div class="seccion">
     <p class="seccion__titulo">1. Mi cuenta</p>
- 
+
     <details class="accordion" open>
       <summary>
         Mi cuenta
         <span class="flecha">▼</span>
       </summary>
- 
+
       <div class="accordion__body">
- 
+
         <!-- Fila: foto + nombre + botón Editar -->
         <!--
           IMAGEN: img/avatar-mama.png
@@ -169,7 +152,7 @@ $nino = [
         -->
         <div class="perfil-fila">
           <img class="avatar-lg"
-               src="img/avatar-mama.png"
+               src="<?= htmlspecialchars($usuario['foto']) ?>"
                alt="Foto de <?= htmlspecialchars($usuario['nombre']) ?>" />
           <div class="perfil-fila__datos">
             <div class="perfil-fila__nombre"><?= htmlspecialchars($usuario['nombre']) ?></div>
@@ -177,7 +160,7 @@ $nino = [
           </div>
           <a href="editar-cuenta.php" class="btn btn--outline-verde">✏ Editar</a>
         </div>
- 
+
         <!-- Fila: Cambiar contraseña -->
         <!--
           IMAGEN: img/icono-candado.png
@@ -194,7 +177,7 @@ $nino = [
             <a href="cambiar-contrasena.php" class="arrow-link">›</a>
           </div>
         </div>
- 
+
         <!-- Fila: Idioma -->
         <!--
           IMAGEN: img/icono-idioma.png
@@ -214,7 +197,7 @@ $nino = [
             </select>
           </div>
         </div>
- 
+
         <!-- Fila: Plan actual -->
         <!--
           IMAGEN: img/icono-corona.png
@@ -232,26 +215,26 @@ $nino = [
             <a href="gestionar-plan.php" class="btn btn--outline-verde">Gestionar plan</a>
           </div>
         </div>
- 
+
       </div><!-- /.accordion__body -->
     </details>
   </div><!-- /.seccion -->
- 
- 
+
+
   <!-- ─────────────────────────────────────────────
        SECCIÓN 2: CONFIGURACIÓN DEL NIÑO  (colapsable ▼)
   ───────────────────────────────────────────── -->
   <div class="seccion">
     <p class="seccion__titulo">2. Configuración del niño</p>
- 
+
     <details class="accordion" open>
       <summary>
         Configuración del niño
         <span class="flecha">▼</span>
       </summary>
- 
+
       <div class="accordion__body">
- 
+
         <!-- Perfil del niño -->
         <!--
           IMAGEN: img/avatar-nino.png
@@ -260,7 +243,7 @@ $nino = [
         -->
         <div class="perfil-fila">
           <img class="avatar-lg"
-               src="img/avatar-nino.png"
+               src="<?= htmlspecialchars($nino['foto']) ?>"
                alt="Avatar de <?= htmlspecialchars($nino['nombre']) ?>" />
           <div class="perfil-fila__datos">
             <div class="perfil-fila__nombre"><?= htmlspecialchars($nino['nombre']) ?></div>
@@ -268,7 +251,7 @@ $nino = [
           </div>
           <a href="editar-nino.php" class="btn btn--outline-verde">Editar</a>
         </div>
- 
+
         <!-- Fila: Sonido (3 toggles: Música, Efectos, Narración) -->
         <!--
           IMAGEN: img/icono-sonido.png
@@ -283,7 +266,7 @@ $nino = [
           </div>
           <div class="fila__derecha">
             <div class="toggles-grupo">
- 
+
               <!-- Toggle Música -->
               <div class="toggle-wrap">
                 <span class="toggle-label">Música</span>
@@ -296,7 +279,7 @@ $nino = [
                   <span class="toggle-slider"></span>
                 </label>
               </div>
- 
+
               <!-- Toggle Efectos -->
               <div class="toggle-wrap">
                 <span class="toggle-label">Efectos</span>
@@ -309,7 +292,7 @@ $nino = [
                   <span class="toggle-slider"></span>
                 </label>
               </div>
- 
+
               <!-- Toggle Narración -->
               <div class="toggle-wrap">
                 <span class="toggle-label">Narración</span>
@@ -322,11 +305,11 @@ $nino = [
                   <span class="toggle-slider"></span>
                 </label>
               </div>
- 
+
             </div>
           </div>
         </div>
- 
+
         <!-- Fila: Notificaciones -->
         <!--
           IMAGEN: img/icono-campana.png
@@ -351,26 +334,26 @@ $nino = [
             </label>
           </div>
         </div>
- 
+
       </div><!-- /.accordion__body -->
     </details>
   </div><!-- /.seccion -->
- 
- 
+
+
   <!-- ─────────────────────────────────────────────
        SECCIÓN 3: CUENTA  (colapsable ▼)
   ───────────────────────────────────────────── -->
   <div class="seccion">
     <p class="seccion__titulo">3. Cuenta</p>
- 
+
     <details class="accordion">
       <summary>
         Cuenta
         <span class="flecha">▼</span>
       </summary>
- 
+
       <div class="accordion__body">
- 
+
         <!-- Cerrar sesión -->
         <!--
           IMAGEN: img/icono-salir.png
@@ -382,19 +365,19 @@ $nino = [
             Cerrar sesión
           </button>
         </form>
- 
+
       </div>
     </details>
   </div><!-- /.seccion -->
- 
- 
+
+
   <p class="footer-version">Leo &amp; Friends v2.1.0</p>
- 
+
 </main><!-- /.main -->
- 
- 
+
+
 <!-- Script separado: maneja el guardado AJAX de los toggles -->
-<script src="configuracion.js"></script>
- 
+<script src="js/configuracion.js"></script>
+
 </body>
 </html>

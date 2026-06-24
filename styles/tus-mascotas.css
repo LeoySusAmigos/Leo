@@ -16,7 +16,7 @@ body{
     background-image: url('../images/mascotas-fondo.png');
     background-repeat: no-repeat;
     background-position: center -90px;
-    background-size: cover;
+    background-size: cover    ;
 }
 
 .btn-volver{
