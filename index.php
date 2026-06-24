@@ -22,15 +22,15 @@ include("php/conexion.php");
     <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
-<<<<<<< HEAD
    
     <?php include("navbar1.php"); ?>
 
-=======
-    <nav class="navbar navbar-expand-lg custom-navbar">
-        <div class="container">
- 
-            <!-- LOGO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>
+                Aprender a leer <br>
+                es una aventura
+            </h1>
  
             <p>
                 Leo y sus amigos guían a tu hijo paso a paso,
@@ -258,7 +258,6 @@ include("php/conexion.php");
         <h2>Lo que dicen otros padres</h2>
  
         <div class="testimonios-grid">
-<<<<<<< HEAD
 
     <?php
 
@@ -357,148 +356,6 @@ Papá/Mamá de
         </section>
 
 
-=======
- 
-            <!-- TESTIMONIO 1 -->
- 
-            <div class="testimonio">
- 
-                <div class="estrellas">
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                </div>
- 
-                <p>
- 
-                    "Mi hija empezó a leer sus primeras palabras en pocas semanas. ¡Le encanta!"
- 
-                </p>
- 
-                <div class="persona">
- 
-                    <img
- 
-                    src="images/mama1.jpg"
- 
-                    alt="Ana">
- 
-                    <div>
- 
-                        <h4>Ana</h4>
- 
-                        <span>Mamá de Sofía (7 años)</span>
- 
-                    </div>
- 
-                </div>
- 
-            </div>
- 
- 
-            <!-- TESTIMONIO 2 -->
- 
-            <div class="testimonio">
- 
-                <div class="estrellas">
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                </div>
- 
-                <p>
- 
-                    "Los reportes me dan tranquilidad porque puedo ver su avance día a día."
- 
-                </p>
- 
-                <div class="persona">
- 
-                    <img
- 
-                    src="images/papa1.jpg"
- 
-                    alt="Carlos">
- 
-                    <div>
- 
-                        <h4>Carlos</h4>
- 
-                        <span>Papá de Mateo (6 años)</span>
- 
-                    </div>
- 
-                </div>
- 
-            </div>
- 
- 
-            <!-- TESTIMONIO 3 -->
- 
-            <div class="testimonio">
- 
-                <div class="estrellas">
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                </div>
- 
-                <p>
- 
-                    "El método es claro y efectivo. Mi hijo está más motivado que nunca."
- 
-                </p>
- 
-                <div class="persona">
- 
-                    <img
- 
-                    src="images/mama2.jpg"
- 
-                    alt="Lucía">
- 
-                    <div>
- 
-                        <h4>Lucía</h4>
- 
-                        <span>Mamá de Tomás (8 años)</span>
- 
-                    </div>
- 
-                </div>
- 
-            </div>
- 
-        </div>
- 
-    </section>
- 
- 
->>>>>>> 048ffaf4dedcb2ff172269edc990bfcd0dd99336
 <!-- FOOTER CTA -->
  
     <section class="cta-section">
@@ -553,10 +410,6 @@ Papá/Mamá de
 
     </script>
 
-<<<<<<< HEAD
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-=======
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
->>>>>>> 048ffaf4dedcb2ff172269edc990bfcd0dd99336
 </body>
 </html>

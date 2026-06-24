@@ -260,7 +260,7 @@ Usar la plataforma 7 días o más
 
 <p>
 
-<?= $lecciones>=5 ? "✅" : "📖" ?>
+<?= $lecciones>=5 ? "✅" : "📚" ?>
 
 Completar al menos 5 lecciones
 
