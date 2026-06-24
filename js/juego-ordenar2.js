@@ -1,15 +1,15 @@
 const COLS    = 4;
 const ROWS    = 4;
 const API_URL = 'php/ordenar-puzzle.php';
-const TAB     = 0.30;   // tamaño orejita como fracción del lado de celda
+const TAB     = 0.30;
 
-let pieces    = [];   // { canvas, correctRow, correctCol, pad }
-let positions = [];
-let solving   = false;
-let dragSrc   = null;
-let touchSrc  = null;
+let pieces           = [];
+let positions        = [];
+let solving          = false;
+let dragSrc          = null;
+let touchSrc         = null;
+let urlPortadaActual = ''; 
 
-// ── Cargar libros ──────────────────────────────────────────────
 async function cargarLibros() {
   try {
     const res    = await fetch(API_URL);
@@ -25,9 +25,9 @@ async function cargarLibros() {
       card.className = 'libro-card';
 
       const img = document.createElement('img');
-      img.alt   = libro.titulo;
+      img.alt     = libro.titulo;
       img.onerror = () => { img.src = 'https://placehold.co/200x180?text=Sin+imagen'; };
-      img.src   = libro.portada_url;
+      img.src     = libro.portada_url;
 
       const tituloDiv = document.createElement('div');
       tituloDiv.className   = 'titulo';
@@ -44,8 +44,8 @@ async function cargarLibros() {
   }
 }
 
-// ── Iniciar juego ──────────────────────────────────────────────
 function iniciarJuego(urlPortada, titulo) {
+  urlPortadaActual = urlPortada; 
   const img = new Image();
   img.crossOrigin = 'anonymous';
   img.onload = () => {
@@ -62,8 +62,6 @@ function iniciarJuego(urlPortada, titulo) {
   img.src = urlPortada;
 }
 
-// ── Trazar forma jigsaw ────────────────────────────────────────
-// tabs: { top, right, bottom, left }  1=orejita afuera  -1=adentro  0=liso
 function trazarPieza(ctx, x0, y0, W, H, tabs) {
   const t = TAB;
   ctx.beginPath();
@@ -99,7 +97,7 @@ function trazarPieza(ctx, x0, y0, W, H, tabs) {
     ctx.lineTo(x0 + W, y0 + H);
   }
 
-  // INFERIOR  (de derecha a izquierda)
+  // INFERIOR (derecha a izquierda)
   if (tabs.bottom === 0) {
     ctx.lineTo(x0, y0 + H);
   } else {
@@ -114,7 +112,7 @@ function trazarPieza(ctx, x0, y0, W, H, tabs) {
     ctx.lineTo(x0, y0 + H);
   }
 
-  // IZQUIERDO  (de abajo a arriba)
+  // IZQUIERDO (abajo a arriba)
   if (tabs.left === 0) {
     ctx.lineTo(x0, y0);
   } else {
@@ -138,9 +136,8 @@ function cortarEnPiezas(img) {
   const BOARD_H = Math.round(BOARD_W * img.height / img.width);
   const cellW   = Math.floor(BOARD_W / COLS);
   const cellH   = Math.floor(BOARD_H / ROWS);
-  const pad     = Math.round(Math.max(cellW, cellH) * TAB) + 2; // padding para orejitas
+  const pad     = Math.round(Math.max(cellW, cellH) * TAB) + 2;
 
-  // Tabs internos (borde compartido entre dos piezas)
   const hTabs = Array.from({ length: ROWS - 1 }, () =>
     Array.from({ length: COLS }, () => (Math.random() < 0.5 ? 1 : -1)));
   const vTabs = Array.from({ length: ROWS }, () =>
@@ -159,7 +156,6 @@ function cortarEnPiezas(img) {
         right:  c === COLS - 1 ? 0 :  vTabs[r][c],
       };
 
-      // Canvas más grande que la celda (incluye área de orejitas vecinas)
       const pw = cellW + 2 * pad;
       const ph = cellH + 2 * pad;
 
@@ -168,12 +164,10 @@ function cortarEnPiezas(img) {
       canvas.height = ph;
       const ctx = canvas.getContext('2d');
 
-      // Forma jigsaw: la celda empieza en (pad, pad) dentro del canvas
       trazarPieza(ctx, pad, pad, cellW, cellH, tabs);
       ctx.save();
       ctx.clip();
 
-      // Dibujar porción de imagen (con overlap para las orejitas)
       ctx.drawImage(
         img,
         (c * cellW - pad) * scaleX,
@@ -184,7 +178,6 @@ function cortarEnPiezas(img) {
       );
       ctx.restore();
 
-      // Borde
       trazarPieza(ctx, pad, pad, cellW, cellH, tabs);
       ctx.strokeStyle = 'rgba(0,0,0,0.4)';
       ctx.lineWidth   = 1.5;
@@ -196,7 +189,6 @@ function cortarEnPiezas(img) {
   return result;
 }
 
-// ── Mezclar ────────────────────────────────────────────────────
 function mezclar() {
   do {
     for (let i = positions.length - 1; i > 0; i--) {
@@ -210,7 +202,6 @@ function mezclar() {
   document.getElementById('info').textContent = 'Arrastrá las piezas para armar la imagen. Si no podés, pedí ayuda 😊';
 }
 
-// ── Renderizar tablero ─────────────────────────────────────────
 function renderPuzzle() {
   const wrap = document.getElementById('stripsWrap');
   wrap.innerHTML = '';
@@ -219,14 +210,65 @@ function renderPuzzle() {
   const BOARD_W = cellW * COLS;
   const BOARD_H = cellH * ROWS;
 
-  // Contenedor con padding igual al pad de las orejitas para que no se salgan
+  const wrapParent = wrap.parentElement;
+  let flexRow = document.getElementById('puzzleFlexRow');
+  if (!flexRow) {
+    flexRow = document.createElement('div');
+    flexRow.id = 'puzzleFlexRow';
+    wrapParent.insertBefore(flexRow, wrap);
+    flexRow.appendChild(wrap);
+
+    // Imagen de referencia
+    const refBox = document.createElement('div');
+    refBox.id = 'refBox';
+    refBox.style.cssText = `
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-width: 300px;
+    `;
+    const refLabel = document.createElement('div');
+    refLabel.textContent = 'Imagen de apoyo';
+    refLabel.style.cssText = `
+      font-size: 12px;
+      font-weight: 700;
+      color: #2d4a8a;
+      text-align: center;
+    `;
+    const refImg = document.createElement('img');
+    refImg.id = 'refImg';
+    refImg.src = urlPortadaActual;
+    refImg.style.cssText = `
+      width: 300px;
+      height: auto;
+      border-radius: 10px;
+      border: 2px solid #c8d6f5;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      display: block;
+    `;
+    refBox.appendChild(refLabel);
+    refBox.appendChild(refImg);
+    flexRow.appendChild(refBox);
+  } else {
+    document.getElementById('refImg').src = urlPortadaActual;
+  }
+
+  flexRow.style.cssText = `
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
+    gap: 70px;
+    margin-bottom: 1rem;
+  `;
+
   wrap.style.cssText = `
     position: relative;
     width: ${BOARD_W + pad * 2}px;
     height: ${BOARD_H + pad * 2}px;
-    margin: 0 auto;
-    padding: ${pad}px;
-    box-sizing: content-box;
+    flex-shrink: 0;
   `;
 
   positions.forEach((pieceIdx, cellPos) => {
@@ -239,15 +281,12 @@ function renderPuzzle() {
     cell.draggable       = true;
     cell.dataset.cellPos = cellPos;
 
-    // Con el padding del contenedor, las orejitas quedan dentro del wrap
     cell.style.cssText = `
       position: absolute;
       left: ${col * cellW}px;
       top:  ${row * cellH}px;
       width: ${canvas.width}px;
       height: ${canvas.height}px;
-      margin-left: -${pad}px;
-      margin-top: -${pad}px;
       cursor: grab;
       z-index: 1;
     `;
@@ -259,7 +298,6 @@ function renderPuzzle() {
     c2.getContext('2d').drawImage(canvas, 0, 0);
     cell.appendChild(c2);
 
-    // Número pequeño
     const lbl = document.createElement('span');
     lbl.className   = 'lbl';
     lbl.textContent = cellPos + 1;
@@ -316,7 +354,6 @@ function renderPuzzle() {
   });
 }
 
-// ── Intercambiar piezas ────────────────────────────────────────
 function intercambiarPiezas(desde, hasta) {
   if (desde === null || desde === hasta) return;
   [positions[desde], positions[hasta]] = [positions[hasta], positions[desde]];
@@ -330,7 +367,6 @@ function intercambiarPiezas(desde, hasta) {
   }
 }
 
-// ── Check win ──────────────────────────────────────────────────
 function checkWin() {
   return positions.every((pieceIdx, cellPos) => {
     const { correctRow, correctCol } = pieces[pieceIdx];
@@ -338,7 +374,6 @@ function checkWin() {
   });
 }
 
-// ── Progreso ───────────────────────────────────────────────────
 function actualizarProgreso() {
   const total   = ROWS * COLS;
   const correct = positions.filter((pieceIdx, cellPos) => {
@@ -350,7 +385,6 @@ function actualizarProgreso() {
   document.getElementById('progLbl').textContent  = pct + '%';
 }
 
-// ── Botón Ayuda ────────────────────────────────────────────────
 document.getElementById('ayudaBtn').addEventListener('click', async () => {
   if (solving) return;
   solving = true;
@@ -378,6 +412,11 @@ document.getElementById('ayudaBtn').addEventListener('click', async () => {
 document.getElementById('mezclarBtn').addEventListener('click', () => { if (!solving) mezclar(); });
 document.getElementById('volverBtn').addEventListener('click', () => {
   if (solving) return;
+  const flexRow = document.getElementById('puzzleFlexRow');
+  if (flexRow) {
+    flexRow.parentElement.insertBefore(document.getElementById('stripsWrap'), flexRow);
+    flexRow.remove();
+  }
   document.getElementById('pantallaJuego').style.display  = 'none';
   document.getElementById('pantallaLibros').style.display = 'block';
 });
