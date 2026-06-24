@@ -144,22 +144,91 @@ $nino = [
 
       <div class="accordion__body">
 
-        <!-- Fila: foto + nombre + botón Editar -->
-        <!--
-          IMAGEN: img/avatar-mama.png
-          Foto de perfil del adulto (padre/tutor). Tamaño recomendado: 100×100 px,
-          recortada en círculo por CSS.
-        -->
-        <div class="perfil-fila">
-          <img class="avatar-lg"
-               src="<?= htmlspecialchars($usuario['foto']) ?>"
-               alt="Foto de <?= htmlspecialchars($usuario['nombre']) ?>" />
-          <div class="perfil-fila__datos">
-            <div class="perfil-fila__nombre"><?= htmlspecialchars($usuario['nombre']) ?></div>
-            <div class="perfil-fila__correo"><?= htmlspecialchars($usuario['correo']) ?></div>
+        <?php if (isset($_GET['status']) && $_GET['status'] === 'success'): ?>
+          <div style="background:#e8f5e9;color:#2e7d32;padding:10px 16px;border-radius:8px;margin:12px 16px;font-weight:700;font-size:.88rem;">
+            ✅ ¡Perfil actualizado con éxito!
           </div>
-          <a href="editar-cuenta.php" class="btn btn--outline-verde">✏ Editar</a>
-        </div>
+        <?php endif; ?>
+
+        <!-- FORMULARIO DE EDICIÓN ──────────────────────────────
+             Envía a php/actualizar-perfil.php con enctype para fotos
+        ──────────────────────────────────────────────────────── -->
+        <form method="POST" action="php/actualizar-perfil.php" enctype="multipart/form-data">
+
+          <!-- Fila: avatares -->
+          <div class="fila" style="gap:20px;flex-wrap:wrap;">
+
+            <!-- Avatar del niño -->
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+              <span style="font-size:.75rem;font-weight:700;color:#aaa;">👦 Avatar del Pequeño</span>
+              <img id="prevNino"
+                   src="<?= htmlspecialchars($usuario['foto']) ?>"
+                   style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid #ffca28;" />
+              <input type="file" name="foto_nino" accept="image/*"
+                     style="font-size:.75rem;max-width:140px;"
+                     onchange="previewFoto(this,'prevNino')">
+            </div>
+
+            <!-- Avatar del padre -->
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+              <span style="font-size:.75rem;font-weight:700;color:#aaa;">👨 Avatar del Adulto</span>
+              <img id="prevPadre"
+                   src="<?= htmlspecialchars($usuario['foto_padre'] ?? 'images/default-padre.png') ?>"
+                   style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid #42a5f5;" />
+              <input type="file" name="foto_padre" accept="image/*"
+                     style="font-size:.75rem;max-width:140px;"
+                     onchange="previewFoto(this,'prevPadre')">
+            </div>
+
+          </div>
+
+          <!-- Fila: nombre niño -->
+          <div class="fila">
+            <div class="fila__info">
+              <label class="fila__label" for="nombre_nino">Nombre del niño/a</label>
+            </div>
+            <div class="fila__derecha">
+              <input type="text" id="nombre_nino" name="nombre_nino"
+                     value="<?= htmlspecialchars($nino['nombre']) ?>"
+                     required
+                     style="border:1px solid #ddd;border-radius:8px;padding:6px 12px;font-family:inherit;font-size:.9rem;width:180px;">
+            </div>
+          </div>
+
+          <!-- Fila: nombre papá -->
+          <div class="fila">
+            <div class="fila__info">
+              <label class="fila__label" for="nombre_papa">Nombre del papá/mamá</label>
+            </div>
+            <div class="fila__derecha">
+              <input type="text" id="nombre_papa" name="nombre_papa"
+                     value="<?= htmlspecialchars($usuario['nombre']) ?>"
+                     required
+                     style="border:1px solid #ddd;border-radius:8px;padding:6px 12px;font-family:inherit;font-size:.9rem;width:180px;">
+            </div>
+          </div>
+
+          <!-- Fila: correo -->
+          <div class="fila">
+            <div class="fila__info">
+              <label class="fila__label" for="correo">Correo electrónico</label>
+            </div>
+            <div class="fila__derecha">
+              <input type="email" id="correo" name="correo"
+                     value="<?= htmlspecialchars($usuario['correo']) ?>"
+                     required
+                     style="border:1px solid #ddd;border-radius:8px;padding:6px 12px;font-family:inherit;font-size:.9rem;width:200px;">
+            </div>
+          </div>
+
+          <!-- Botón guardar -->
+          <div style="padding:14px 20px;text-align:right;border-top:1px solid #f0f0f0;">
+            <button type="submit" class="btn btn--outline-verde" style="background:#2d9e4e;color:#fff;border-color:#2d9e4e;">
+              💾 Guardar cambios
+            </button>
+          </div>
+
+        </form>
 
         <!-- Fila: Cambiar contraseña -->
         <!--
@@ -353,7 +422,6 @@ $nino = [
       </summary>
 
       <div class="accordion__body">
-
         <!-- Cerrar sesión -->
         <!--
           IMAGEN: img/icono-salir.png
@@ -378,6 +446,19 @@ $nino = [
 
 <!-- Script separado: maneja el guardado AJAX de los toggles -->
 <script src="js/configuracion.js"></script>
+
+<script>
+// Previsualiza la foto seleccionada antes de guardar
+function previewFoto(input, idImagen) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById(idImagen).src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
 
 </body>
 </html>
