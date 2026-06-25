@@ -49,6 +49,10 @@ body{
     margin-bottom:25px;
     text-shadow: 0 3px 8px rgba(0,0,0,.25);
 }
+
+.hero-content h1 span{
+    display:block;
+}
  
 .hero-content p{
     font-family:'Nunito', sans-serif;
@@ -305,8 +309,8 @@ body{
 }
  
 .audio-silaba{
-    width:200px;
-    height:80px;
+    width:180px;
+    height:75px;
     background:white;
     border-radius:18px;
     margin-right: 20px;
@@ -540,4 +544,283 @@ body{
     font-family:'Nunito',sans-serif;
     font-size:.9rem;
     opacity:.9;
+}
+
+/* REDES SOCIALES CTA */
+
+.cta-redes{
+
+    margin-top:25px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+.cta-redes span{
+
+    font-family:'Nunito',sans-serif;
+
+    font-weight:700;
+
+    color:white;
+
+}
+
+.cta-redes a{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.18);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:1.2rem;
+
+    transition:.3s ease;
+
+}
+
+.cta-redes a:hover{
+
+    background:white;
+
+    color:#2e7d32;
+
+    transform:translateY(-4px);
+
+}
+
+
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 992px){
+
+    .hero{
+        flex-direction:column;
+        justify-content:center;
+        text-align:center;
+        height:auto;
+        padding:80px 40px;
+    }
+
+    .hero-content{
+        width:100%;
+        align-items:center;
+    }
+
+    .hero-content h1{
+        font-size:3.8rem;
+        max-width:700px;
+    }
+
+    .hero-content p{
+        font-size:1.2rem;
+        max-width:600px;
+    }
+
+    .hero-characters{
+        position:relative;
+        right:auto;
+        bottom:auto;
+        margin-top:30px;
+        justify-content:center;
+    }
+
+    .hero-characters img{
+        width:170px;
+    }
+
+    .hero::after{
+        display:none;
+    }
+
+    .beneficios{
+        padding:70px 40px;
+    }
+
+    .beneficios-grid{
+        flex-wrap:wrap;
+    }
+
+    .beneficio{
+        min-width:250px;
+    }
+
+    .metodologia{
+        padding:70px 40px;
+    }
+
+    .metodologia-contenedor{
+        flex-direction:column;
+        gap:60px;
+    }
+
+    .testimonios{
+        padding:70px 40px;
+    }
+
+    .testimonios-grid{
+        flex-wrap:wrap;
+    }
+
+    .redes-sociales{
+        gap:14px;
+        margin-top:20px;
+        flex-wrap:wrap;
+    }
+
+    .redes-sociales a{
+        width:44px;
+        height:44px;
+        font-size:1.1rem;
+    }
+
+}
+
+
+@media (max-width: 768px){
+
+    .hero{
+        padding:60px 20px;
+    }
+
+    .hero-content h1{
+        font-size:3rem;
+        margin-bottom:20px;
+    }
+
+    .hero-content p{
+        font-size:1.1rem;
+        margin-bottom:25px;
+    }
+
+    .hero-btn{
+        padding:15px 35px;
+        font-size:1rem;
+    }
+
+    .hero-characters{
+        gap:10px;
+        flex-wrap:wrap;
+    }
+
+    .hero-characters img{
+        width:110px;
+    }
+
+    .beneficios{
+        padding:60px 20px;
+    }
+
+    .beneficios h2{
+        font-size:2.3rem;
+        margin-bottom:40px;
+    }
+
+    .beneficios-grid{
+        flex-direction:column;
+    }
+
+    .beneficio{
+        padding:20px;
+    }
+
+    .metodologia{
+        padding:60px 20px;
+    }
+
+    .metodologia h2{
+        font-size:2.4rem;
+        margin-bottom:50px;
+    }
+
+    .encabezado-etapa{
+        flex-direction:column;
+        text-align:center;
+        align-items:center;
+    }
+
+    .numero{
+        font-size:5rem;
+    }
+
+    .contenido-etapa h3{
+        font-size:1.8rem;
+    }
+
+    .contenido-etapa p{
+        font-size:1rem;
+    }
+
+    .audio-silaba{
+        width:170px;
+        height:70px;
+        margin-right:0;
+    }
+
+    .audio-silaba span{
+        font-size:2.5rem;
+    }
+
+    .imagen-oracion,
+    .imagen-finx{
+        width:180px;
+        margin-left:0;
+    }
+
+    .testimonios{
+        padding:60px 20px;
+    }
+
+    .testimonios h2{
+        font-size:2.5rem;
+        margin-bottom:40px;
+    }
+
+    .testimonios-grid{
+        flex-direction:column;
+    }
+
+    .cta-section{
+        padding:50px 20px;
+    }
+
+    .cta-section h2{
+        font-size:1.8rem;
+    }
+
+    .redes-sociales{
+        justify-content:center;
+        gap:12px;
+        margin-top:18px;
+    }
+
+    .redes-sociales a{
+        width:42px;
+        height:42px;
+        font-size:1rem;
+    }
+
 }

@@ -28,8 +28,8 @@ include("php/conexion.php");
     <section class="hero">
         <div class="hero-content">
             <h1>
-                Aprender a leer <br>
-                es una aventura
+                Aprender a leer
+                <span>es una aventura</span>
             </h1>
  
             <p>
@@ -71,7 +71,7 @@ include("php/conexion.php");
  
                 <p>
  
-                    Basado en la metodología de los 20 días,
+                    Basado en la metodología de los 20 días y el método silábico,
  
                     con progresión silábica estructurada.
  
@@ -391,6 +391,28 @@ Papá/Mamá de
                 Sin tarjeta de crédito • Cancela cuando quieras
  
             </small>
+
+            <div class="cta-redes">
+
+                <span>Síguenos en:</span>
+
+                <a href="#">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+
+                <a href="https://www.instagram.com/leoandfriendsabc?igsh=anY2enNiMzB0ZGM3">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+
+            </div>
  
         </div>
  

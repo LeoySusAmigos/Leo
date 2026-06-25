@@ -105,3 +105,33 @@
     padding:10px 20px;
     font-weight:700;
 }
+
+@media(max-width:992px){
+
+    .menu-center{
+
+        gap:15px;
+
+        margin-top:20px;
+
+    }
+
+    .nav-buttons{
+
+        flex-direction:column;
+
+        width:100%;
+
+        margin-top:20px;
+
+    }
+
+    .login-btn,
+    .register-btn{
+
+        width:100%;
+        text-align:center;
+
+    }
+
+}

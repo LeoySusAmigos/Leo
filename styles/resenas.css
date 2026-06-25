@@ -744,28 +744,114 @@ color:#222;
 
 }
 
-@media(max-width:1200px){
+/* =========================
+   TABLET
+========================= */
 
-.grid-resenas{
+@media(max-width:992px){
 
-grid-template-columns:repeat(2,1fr);
+    .contenido{
+
+        flex-direction:column;
+
+    }
+
+    .lado-izquierdo,
+    .lado-derecho{
+
+        width:100%;
+
+    }
+
+    .grid-resenas{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .contenedor-resenas{
+
+        padding:40px;
+
+    }
+
+    .encabezado h1{
+
+        font-size:2.3rem;
+
+    }
 
 }
 
-}
+/* =========================
+   MÓVIL
+========================= */
 
 @media(max-width:768px){
 
-.grid-resenas{
+    .contenedor-resenas{
 
-grid-template-columns:1fr;
+        padding:25px;
 
-}
+    }
 
-.contenido{
+    .grid-resenas{
 
-flex-direction:column;
+        grid-template-columns:1fr;
 
-}
+    }
+
+    .encabezado{
+
+        text-align:center;
+
+    }
+
+    .encabezado h1{
+
+        font-size:2rem;
+
+    }
+
+    .encabezado p{
+
+        font-size:1rem;
+
+    }
+
+    .banner{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        gap:20px;
+
+    }
+
+    .banner img{
+
+        width:90px;
+
+    }
+
+    .acciones-resena{
+
+    display:flex;
+
+    gap:10px;
+
+    }
+
+    .btn-editar,
+    .btn-eliminar{
+
+        flex:1;
+
+        text-align:center;
+
+        padding:12px 0;
+
+    }
 
 }
