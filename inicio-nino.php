@@ -305,7 +305,7 @@ rel="stylesheet">
 
 <body>
 
-    <?php include("navbar.php"); ?>
+    <?php include 'components/navbar.php'; ?>
 
     <section class="hero-dashboard">
 

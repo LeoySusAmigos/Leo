@@ -2,7 +2,7 @@
     <div class="nav-container">
 
         <div class="logo-container">
-            <a href="index.php"><img src="images/cartelito.png" alt="logo"></a>
+            <a href="inicio-nino.php"><img src="images/cartelito.png" alt="logo"></a>
         </div>
 
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
