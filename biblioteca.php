@@ -46,14 +46,12 @@ if (!$res_libros) {
 
     <div class="biblioteca-container">
 
-        <header class="biblio-header-modern">
-            <a href="index.php" class="btn-circular-back">
-                <i class="fa-solid fa-arrow-left"></i>
-            </a>
+        <header class="biblio-header-modern"> 
             <div class="header-center-title">
                 <h1>MINI BIBLIOTECA</h1>
                 <p>Aprender a leer es una aventura</p>
             </div>
+            
             <div class="filtrar">
                 <div class="filtro-dropdown">
                     <button class="btn-filtro-modern">
@@ -69,7 +67,7 @@ if (!$res_libros) {
                     <div class="opcion" data-nivel="5">Nivel 5</div>
                 </div>
             </div>
-        </div>
+
         </header>
 
         <div class="tabs-mascotas-container">
@@ -82,7 +80,7 @@ if (!$res_libros) {
             </a>    
 
             <a href="aventura2.php" class="tab-item">
-                <img src="images/capy3.png" alt="Capy" class="tab-mascota-img">
+                <img src="images/capy1.png" alt="Capy" class="tab-mascota-img">
                 <div class="tab-text text-capy">
                     <span class="tab-title text-secondary">Gramática y oraciones</span>
                     <span class="tab-subtitle">Capy</span>
@@ -199,11 +197,11 @@ if (!$res_libros) {
             </div>
 
         </main>
-
-        <div class="mascota">
-            <img src="images/FinxHi.png" alt="Finx" class="mascota-img">
-        </div>
         
+    </div>
+
+    <div class="mascota">
+        <img src="images/FinxHi.png" alt="Finx" class="mascota-img">
     </div>
 
     <script src="js/index.js"></script>

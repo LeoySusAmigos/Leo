@@ -2,9 +2,7 @@
     <div class="nav-container">
 
         <div class="logo-container">
-            <a class="logo-text leo" href="index.php">Leo</a>
-            <a class="logo-text and" href="index.php">&</a>
-            <a class="logo-text friends" href="index.php">Friends</a>
+            <a href="index.php"><img src="images/cartelito.png" alt="logo"></a>
         </div>
 
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">

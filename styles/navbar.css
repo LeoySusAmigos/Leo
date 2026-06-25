@@ -9,15 +9,14 @@ body {
     background-color: #f0f0f0;
 }
 
-/* --- BARRA GENERAL --- */
 .custom-navbar {
     background-color: #00942a; 
     padding: 10px 20px;
-    position: absolute; /* Cambiado para sacarlo del contenedor rebelde */
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100%;        /* Obliga a expandirse al 100% de la pantalla */
-    z-index: 1000;      /* Se superpone al fondo del mapa */
+    width: 100%;       
+    z-index: 1000;     
     font-family: 'Quicksand', sans-serif;
 }
    
@@ -31,28 +30,16 @@ body {
     width: 100%;
 }
 
-/* --- LOGO EN TEXTO --- */
 .logo-container {
     display: flex;
-    gap: 5px;
-    background-color: #ffffff;
-    padding: 6px 12px;
-    border-radius: 15px;
+    align-items: center;
+    padding: 0px 12px;
 }
 
-.logo-text {
-    text-decoration: none;
-    font-size: 24px;
-    font-weight: bold;
-    font-family: 'Quicksand', sans-serif;
-}
-/* Colores divertidos para las letras */
-.logo-text.leo { color: #00bf63; }
-.logo-text.and { color: #539aed; }
-.logo-text.friends { color: #ff8d08; }
+.logo-container img{
+    width: 120px;    
+} 
 
-
-/* --- MENÚ DE MASCOTAS (CENTRO) --- */
 .nav-menu {
     display: flex;
     list-style: none;
@@ -63,7 +50,7 @@ body {
 .nav-element {
     display: flex;
     align-items: center;
-    margin: 0 18px; /* Espacio entre cada sección */
+    margin: 0 18px;
 }
 
 .mascota-img {
@@ -79,7 +66,7 @@ body {
 }
 
 .menu-link {
-    color: #ffffff; /* Texto blanco idéntico a tu foto */
+    color: #ffffff;
     text-decoration: none;
     font-weight: 600;
     font-size: 16px;
@@ -92,7 +79,6 @@ body {
 }
 
 
-/* --- SECCIÓN USUARIO (DERECHA) --- */
 .usuario-container {
     display: flex;
     align-items: center;
@@ -133,13 +119,11 @@ body {
 }
 
 .user-points {
-    color: #ffca28; /* Color amarillo para la estrella y puntos */
+    color: #ffca28;
     font-weight: 600;
 }
 
 
-
-/* --- BOTONES LOGIN / REGISTRO --- */
 .btn-login, .btn-register {
     text-decoration: none;
     padding: 6px 12px;
@@ -155,14 +139,12 @@ body {
 }
 
 .btn-register {
-    background-color: #ff9900;
+    background-color: #00ff95;
     color: #333333;
 }
 
-
-/* --- BOTÓN HAMBURGUESA (MÓVIL) --- */
 .nav-toggle {
-    display: none; /* Oculto en PC */
+    display: none;
     background: none;
     border: none;
     color: #ffffff;
@@ -171,17 +153,15 @@ body {
 }
 
 
-/* --- RESPONSIVE PARA DISPOSITIVOS MÓVILES --- */
 @media screen and (max-width: 850px) {
     .nav-toggle {
-        display: block; /* Muestra el botón de tres líneas */
+        display: block; 
     }
 
     .mascotas-container {
-        display: none; /* Esconde las mascotas para que no se amontonen */
+        display: none;
     }
 
-    /* Clase que activará JavaScript en celular */
     .mascotas-container.active {
         display: block;
         position: absolute;
@@ -194,7 +174,7 @@ body {
     }
 
     .nav-menu {
-        flex-direction: column; /* Coloca las mascotas una debajo de otra */
+        flex-direction: column;
         align-items: center;
     }
 
