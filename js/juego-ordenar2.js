@@ -255,12 +255,13 @@ function renderPuzzle() {
     document.getElementById('refImg').src = urlPortadaActual;
   }
 
-  flexRow.style.cssText = `
+const esMobile = window.innerWidth <= 480;
+flexRow.style.cssText = `
     display: flex;
-    flex-direction: row;
-    align-items:center;
+    flex-direction: ${esMobile ? 'column' : 'row'};
+    align-items: center;
     justify-content: center;
-    gap: 70px;
+    gap: ${esMobile ? '20px' : '70px'};
     margin-bottom: 1rem;
   `;
 

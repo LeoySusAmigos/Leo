@@ -227,3 +227,119 @@ body {
 .btn-ayuda:hover:not(:disabled) { 
   background: #3a6fd8;
 }
+
+@media (max-width: 768px) {
+
+  #pantallaLibros {
+    padding: 1.5rem;
+  }
+
+  #pantallaLibros h1 {
+    font-size: 22px;
+  }
+
+  .libro-card {
+    max-width: 180px;
+    min-width: 110px;
+  }
+
+  .libro-card img {
+    min-height: 130px;
+  }
+
+  #pantallaJuego {
+    padding: 1rem;
+  }
+
+  #pantallaJuego h1 {
+    font-size: 20px;
+  }
+
+  .btn {
+    padding: 9px 13px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  #pantallaLibros {
+    padding: 1rem;
+  }
+
+  #pantallaLibros h1 {
+    font-size: 18px;
+  }
+
+  #pantallaLibros p {
+    font-size: 14px;
+  }
+
+  .grid-libros {
+    gap: 0.8rem;
+  }
+
+  .libro-card {
+    max-width: 140px;
+    min-width: 90px;
+  }
+
+  .libro-card img {
+    min-height: 100px;
+  }
+
+  .libro-card .titulo {
+    font-size: 11px;
+    padding: 0.4rem;
+  }
+
+  #pantallaJuego {
+    padding: 0.75rem;
+  }
+
+  #pantallaJuego h1 {
+    font-size: 17px;
+  }
+
+  .subtitulo {
+    font-size: 12px;
+  }
+
+  .win-msg {
+    font-size: 18px;
+    padding: 0.5rem;
+  }
+
+  .btn {
+    padding: 8px 11px;
+    font-size: 12px;
+  }
+
+  .btn-row {
+    gap: 6px;
+  }
+
+  .prog-lbl {
+    font-size: 11px;
+  }
+
+  #puzzleFlexRow {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  #stripsWrap {
+    order: 1;
+  }
+
+  #refBox {
+    order: 2;
+    min-width: unset !important;
+    width: 100%;
+  }
+
+  #refImg {
+    width: 100% !important;
+    max-width: 280px;
+  }
+}
