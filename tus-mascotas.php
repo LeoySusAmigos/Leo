@@ -29,7 +29,6 @@ if (!isset($_SESSION['userID'])) {
             <img src="images/flecha.png" alt="Volver">
         </a>
 
-<<<<<<< HEAD
     <img src="images/flecha.png" alt="Volver">
 
     </a>
@@ -63,11 +62,6 @@ if (!isset($_SESSION['userID'])) {
             <a href="aventura1.html" class="btn-aventura btn verde">
                 ⭐ Aventura 1
             </a>
-=======
-        <div class="titulo">
-            <img src="images/cartel-mascotas.png" alt="Cartel Mascotas">
-            <h1>TUS MASCOTAS</h1>
->>>>>>> fb570a80994abd00f13bf0cc901fa2d454302555
         </div>
 
         
