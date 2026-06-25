@@ -673,6 +673,22 @@ Cada lección te acerca más a convertirte en un gran lector.
 
 </section>
 
+<script>
+
+const navToggle =
+document.getElementById("navToggle");
+
+const mascotas =
+document.getElementById("mascotas");
+
+navToggle.addEventListener("click",()=>{
+
+    mascotas.classList.toggle("active");
+
+});
+
+</script>
+
 </body>
 
 </html>

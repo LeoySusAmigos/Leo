@@ -352,83 +352,93 @@ body{
 }
 
 
-@media(max-width:992px){
 
-.hero-dashboard{
-
-    flex-direction:column;
-
-    text-align:center;
-}
-
-.hero-mascota img{
-
-    width:200px;
-}
-
-.aventuras-grid{
-
-        grid-template-columns:
-        repeat(2,1fr);
-}
-
-.estadisticas-nino{
-
-    grid-template-columns:
-    repeat(2,1fr);
-}
-
-}
 
 @media(max-width:768px){
 
-.hero-dashboard{
+    .hero-dashboard{
 
-    padding:30px 20px;
-}
+        margin-top:110px;
 
-.hero-info h1{
+        flex-direction:column;
 
-    font-size:2rem;
-}
+        text-align:center;
 
-.hero-info p{
+        padding:30px 20px;
 
-    font-size:1rem;
-}
-
-.aventuras-grid{
-
-        grid-template-columns:1fr;
     }
 
-.estadisticas-nino{
+    .hero-info h1{
 
-    grid-template-columns:1fr;
+        font-size:2rem;
+
+    }
+
+    .hero-info p{
+
+        font-size:1rem;
+
+    }
+
+    .hero-mascota img{
+
+        width:170px;
+
+    }
+
+    .aventuras-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .estadisticas-nino{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .logro-reciente{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+    .btn-continuar{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
 }
 
-.logro-reciente{
 
-    flex-direction:column;
+@media(max-width:992px){
 
-    text-align:center;
-}
+    .hero-dashboard{
 
-.hero-mascota img{
+        flex-direction:column;
 
-    width:160px;
-}
+        text-align:center;
 
-.btn-continuar{
+    }
 
-    width:100%;
+    .aventuras-grid{
 
-    justify-content:center;
-}
+        grid-template-columns:
+        repeat(2,1fr);
 
-.usuario-info{
+    }
 
-    display:none;
-}
+    .estadisticas-nino{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
 
 }
