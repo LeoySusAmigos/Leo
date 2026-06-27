@@ -151,9 +151,12 @@ $nino = [
         <?php endif; ?>
 
         <!-- FORMULARIO DE EDICIÓN ──────────────────────────────
-             Envía a php/actualizar-perfil.php con enctype para fotos
+             JS lo intercepta con guardarPerfil() en configuracion.js
         ──────────────────────────────────────────────────────── -->
-        <form method="POST" action="php/actualizar-perfil.php" enctype="multipart/form-data">
+        <form id="formPerfil" method="POST" action="php/actualizar-perfil.php" enctype="multipart/form-data">
+
+          <!-- Mensaje de éxito/error (JS lo rellena aquí) -->
+          <div id="msgPerfil" style="padding:0 16px;"></div>
 
           <!-- Fila: avatares -->
           <div class="fila" style="gap:20px;flex-wrap:wrap;">
@@ -223,7 +226,7 @@ $nino = [
 
           <!-- Botón guardar -->
           <div style="padding:14px 20px;text-align:right;border-top:1px solid #f0f0f0;">
-            <button type="submit" class="btn btn--outline-verde" style="background:#2d9e4e;color:#fff;border-color:#2d9e4e;">
+            <button type="submit" id="btnGuardar" class="btn btn--outline-verde" style="background:#2d9e4e;color:#fff;border-color:#2d9e4e;">
               💾 Guardar cambios
             </button>
           </div>
@@ -422,6 +425,7 @@ $nino = [
       </summary>
 
       <div class="accordion__body">
+
         <!-- Cerrar sesión -->
         <!--
           IMAGEN: img/icono-salir.png
