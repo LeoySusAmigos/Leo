@@ -22,8 +22,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssss", $nombre_nino, $nombre_papa, $correo, $password);
  
     if ($stmt->execute()) {
-        header("Location: ../index.php");
+        session_start();
+
+        $_SESSION['userID'] = $stmt->insert_id; 
+        $_SESSION['nombre_papa'] = $nombre_papa;
+        
+        header("Location: ../cuestionario.php");
         exit();
+        
     } else {
         echo "Error: " . $stmt->error;
     }
