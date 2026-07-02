@@ -18,8 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $usuario['password'])) { 
             $_SESSION['userID']      = $usuario['userID']; 
             $_SESSION['nombre_nino'] = $usuario['nombre_nino'];
-            $_SESSION['nombre_padre'] = $usuario['nombre_padre']; // antes: nombre_papa (columna ya no existe)
-            $_SESSION['foto_nino']   = $usuario['foto_nino'];     // ← nuevo: foto de perfil del niño
+            $_SESSION['nombre_papa'] = $usuario['nombre_papa'];
+            $_SESSION['foto_nino']   = $usuario['foto_nino']; 
             $_SESSION['rol']         = $usuario['rol']; 
  
 // REDIRECCIONES (IMPORTANTE POR LA CARPETA /php) 
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($usuario['rol'] == 'admin') { 
                 header("Location: ../admin/dashboard.php"); 
             } else { 
-                header("Location: ../inicio-nino.php"); 
+                header("Location: ../index.php"); 
             } 
             
             exit(); 

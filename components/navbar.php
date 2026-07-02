@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <nav class="custom-navbar">
     <div class="nav-container">
 
@@ -35,8 +39,8 @@
                         <?php if (!empty($_SESSION['foto_nino'])): ?>
                             <!-- Si el usuario ya subió foto, la muestra -->
                             <img src="images/perfiles/<?= htmlspecialchars($_SESSION['foto_nino']) ?>"
-                                 alt="Foto de <?= htmlspecialchars($_SESSION['nombre_nino']) ?>"
-                                 style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+                                alt="Foto de <?= htmlspecialchars($_SESSION['nombre_nino']) ?>"
+                                style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
                         <?php else: ?>
                             <!-- Si no tiene foto, ícono genérico -->
                             <i class="fa-solid fa-user"></i>

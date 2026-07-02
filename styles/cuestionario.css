@@ -1,8 +1,10 @@
 body {
     font-family: 'Quicksand', sans-serif;
-    background: url('../images/fondo-minimalista.jpeg');
+    background-image: url(../images/fondoalegre-minimalista.png);
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;  
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,6 +93,8 @@ body {
 }
 
 .boton-opcion {
+    width: 95%;
+    height: 130px;
     background-color: #ffffff;
     border: 2px solid #a4cfa1;
     border-radius: 15px;

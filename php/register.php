@@ -24,8 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt->execute()) {
         session_start();
 
-        $_SESSION['userID'] = $stmt->insert_id; 
+        $_SESSION['userID'] = $stmt->insert_id;
+        $_SESSION['nombre_nino'] = $nombre_nino;
         $_SESSION['nombre_papa'] = $nombre_papa;
+        $_SESSION['foto_nino'] = null;
+        $_SESSION['rol'] = 'usuario';
         
         header("Location: ../cuestionario.php");
         exit();

@@ -102,6 +102,9 @@ function finalizarCuestionario() {
     .then(data => {
         if (data.success) {
             textoPregunta.textContent = "¡Preferencias guardadas con éxito!";
+            setTimeout(() => {
+                window.location.href = 'index.php'; 
+            }, 2000);
         } else {
             textoPregunta.textContent = "Hubo un error al guardar: " + data.message;
         }
