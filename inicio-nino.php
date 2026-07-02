@@ -82,50 +82,6 @@ if($resultado->num_rows==0){
 $progreso=$resultado->fetch_assoc();
 
 
-/* =========================
-   DESBLOQUEOS AUTOMÁTICOS
-========================= */
-
-/*if($progreso['porcentaje']>=100){
-
-    $sql="
-
-    UPDATE progreso
-
-    SET
-
-    leo_completado=1,
-
-    capy_desbloqueado=1
-
-    WHERE userID='$userID'
-
-    ";
-
-    $conn->query($sql);
-
-}
-
-if($progreso['capy_porcentaje']>=100){
-
-    $sql="
-
-    UPDATE progreso
-
-    SET
-
-    capy_completado=1,
-
-    finx_desbloqueado=1
-
-    WHERE userID='$userID'
-
-    ";
-
-    $conn->query($sql);
-
-}*/
-
 
 /* =========================
    RECARGAR PROGRESO
@@ -154,7 +110,7 @@ $puntos=$progreso['puntos'];
 
 $racha=$progreso['racha'];
 
-$nivel=$progreso['nivel'];
+$nivel=$progreso['nivel_actual'];
 
 $leccionActual=$progreso['leccion_actual'];
 
@@ -166,27 +122,6 @@ max(
 $progreso['porcentaje']
 )
 );
-
-$porcentajeCapy=
-min(
-100,
-max(
-0,
-$progreso['capy_porcentaje']
-)
-);
-
-$capyDesbloqueado=
-$progreso['capy_desbloqueado']==1;
-
-$finxDesbloqueado=
-$progreso['finx_desbloqueado']==1;
-
-$leoCompletado=
-$progreso['leo_completado']==1;
-
-$capyCompletado=
-$progreso['capy_completado']==1;
 
 
 /* =========================
@@ -285,7 +220,7 @@ if($logro->num_rows>0){
 name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Mi aventura | Leo & Friends</title>
+<title>Inicio-Niño | Leo & Friends</title>
 
 <link
 href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -319,7 +254,7 @@ rel="stylesheet">
 
 <h1>
 
-¡Bienvenido de nuevo,
+¡Bienvenido,
 
 <?= $usuario['nombre_nino'] ?>!
 
@@ -459,7 +394,7 @@ completado
 
 <?php } ?>
 
-<a href="aventura1.html">
+<a href="aventura-leo.php">
 
 Ir con Leo
 

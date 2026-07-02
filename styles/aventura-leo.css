@@ -1,0 +1,313 @@
+/*=========================
+FUENTE
+=========================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Fredoka',sans-serif;
+}
+
+body{
+
+    margin:0;
+
+    background:#d8f3d1;
+
+    overflow-x:hidden;
+
+    font-family:'Fredoka',sans-serif;
+
+}
+
+/*=========================
+FONDO
+=========================*/
+
+.aventura{
+
+    position:relative;
+
+    width:100%;
+
+    height:1024px;  
+
+    background:url("../images/aventuraLeo/fondo-mapa.png");
+
+    background-repeat:no-repeat;
+
+    background-position:center top;
+
+    background-size:100% 100%;
+
+    overflow:visible;
+
+}
+
+.mapa{
+
+    position:relative;
+
+    width:100%;
+
+    height:1600px;
+
+}
+
+.isla{
+
+    position:relative;
+
+    display:inline-block;
+
+    margin:20px;
+}
+
+/*.isla1{
+
+    top:1020px;
+    left:120px;
+
+}/*
+
+.isla2{
+
+    top:640px;
+    left:270px;
+
+}
+
+.isla3{
+
+    top:320px;
+    left:640px;
+
+}
+
+.isla4{
+
+    top:620px;
+    right:260px;
+
+}
+
+.isla5{
+
+    top:1040px;
+    right:120px;
+
+}*/
+
+.isla img{
+
+    width:220px;
+    display:block;
+    margin:auto;
+
+}
+
+.isla a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+.isla:hover{
+
+    transform:scale(1.08);
+
+}
+
+/*=========================
+LOGO
+=========================*/
+
+.logo{
+
+    position:absolute;
+
+    top:25px;
+    left:35px;
+
+    width:170px;
+
+    transition:.30s;
+
+    z-index:20;
+
+}
+
+.logo:hover{
+
+    transform:scale(1.05);
+
+}
+
+/*=========================
+PERFIL
+=========================*/
+
+.perfil{
+
+    position:absolute;
+
+    top:30px;
+    right:35px;
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    background:white;
+
+    padding:12px 18px;
+
+    border-radius:18px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+    z-index:20;
+
+}
+
+.avatar{
+
+    width:58px;
+    height:58px;
+
+    border-radius:50%;
+
+    background:#59c94c;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+
+    font-size:24px;
+
+}
+
+.perfil h3{
+
+    color:#2e2e2e;
+
+    font-size:22px;
+
+}
+
+.perfil p{
+
+    color:#ffb400;
+
+    font-size:18px;
+
+}
+
+/*=========================
+LEO
+=========================*/
+
+.leo{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    padding-top:120px;
+
+}
+
+.leo img{
+
+    width:340px;
+
+    animation:respirar 3s ease-in-out infinite;
+
+}
+
+/*=========================
+GLOBO
+=========================*/
+
+.globo{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-top:-10px;
+
+    position:relative;
+
+}
+
+.globo img{
+
+    width:500px;
+
+}
+
+.texto-globo{
+
+    position:absolute;
+
+    top:55px;
+
+    text-align:center;
+
+}
+
+.texto-globo h2{
+
+    color:#2b7a27;
+
+    font-size:36px;
+
+}
+
+.texto-globo p{
+
+    margin-top:12px;
+
+    color:#444;
+
+    font-size:22px;
+
+}
+
+/*=========================
+ANIMACIÓN LEO
+=========================*/
+
+@keyframes respirar{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-10px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
