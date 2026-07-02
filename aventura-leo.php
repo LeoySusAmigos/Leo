@@ -93,18 +93,9 @@ ORDER BY n.orden
 
 ";
 
-echo "<pre>";
-echo $sql;
-echo "</pre>";
-
 
 $niveles=$conn->query($sql);
 
-echo "<h1>Total niveles: ".$niveles->num_rows."</h1>";
-
-if(!$niveles){
-    die($conn->error);
-}
 
 ?>
 
@@ -155,39 +146,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     <?php include 'components/navbar.php'; ?>
 
 <div class="aventura">
-    <header class="header-aventura">
-
-    <a href="inicio-nino.php"></a>
-
-    <div class="perfil">
-
-    <div class="avatar">
-
-    <i class="fa-solid fa-user"></i>
-
-    </div>
-
-    <div class="datos">
-
-    <h3>
-
-    <?php echo $usuario['nombre_nino']; ?>
-
-    </h3>
-
-    <p>
-
-    ⭐
-
-    <?php echo $progreso['puntos']; ?>
-
-    </p>
-
-    </div>
-
-    </div>
-
-    </header>
 
     <div class="leo">
 

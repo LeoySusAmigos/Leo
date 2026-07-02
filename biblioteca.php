@@ -164,7 +164,7 @@ if (!$res_libros) {
                                 </div>
                             </div>
                         <?php else: ?>
-                            <a href="leer_cuento.php?id=<?php echo $libro['libro_id']; ?>" class="card-cuento-modern-link">
+                            <a href="leer-libro.php?id=<?php echo $libro['libro_id']; ?>" class="card-cuento-modern-link">
                                 <div class="card-cuento-modern <?php echo $ya_leido ? 'completed' : ''; ?>">
                                     <div class="card-left-thumb">
                                         <img src="images/cuentos/<?php echo $libro['portada']; ?>" alt="Portada">

@@ -121,16 +121,16 @@ h1 {
 }
  
 .gato {
-    width: 185px;
-    left: -124px;
+    width: 165px;
+    left: -107px;
     bottom: 12.5px;
     z-index: 5;
     rotate: 0.2deg;
 }
  
 .capibara {
-    width: 175px;
-    right: -122px;
+    width: 165px;
+    right: -113.5px;
     bottom: 5px;
     z-index: 5;
     rotate: -0.3deg;
