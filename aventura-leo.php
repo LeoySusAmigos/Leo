@@ -169,44 +169,40 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
         <div class="texto-globo">
 
-        <h2>
+            <h2>
 
-        ¡Hola,
+            ¡Hola,
 
-        <?php
+            <?php
 
-        echo $usuario['nombre_nino'];
+            echo $usuario['nombre_nino'];
 
-        ?>
+            ?>
 
-        !
+            !
 
-        </h2>
+            </h2>
 
-        <p>
+            <p>
 
-        ¿Qué nivel exploramos hoy?
+            ¿Qué nivel exploramos hoy?
 
-        </p>
+            </p>
 
         </div>
 
     </div>
 
     <div class="mapa">
-
-    <?php
-
-echo $niveles->num_rows;
-
-?>
         <?php
 
         while($nivel=$niveles->fetch_assoc()){
 
             $porcentaje=$nivel['porcentaje']??0;
 
-            $desbloqueado=$nivel['desbloqueado']??0;
+            $desbloqueado = isset($nivel['desbloqueado'])
+            ? (int)$nivel['desbloqueado']
+            : ($nivel['orden'] == 1 ? 1 : 0);
 
             $estrellas=0;
 
@@ -230,12 +226,16 @@ echo $niveles->num_rows;
 
         ?>
 
-        <div class="isla isla<?php echo $nivel['orden']; ?>" 
-     style="border:3px solid red;">
+        <<div class="isla isla<?php echo $nivel['orden']; ?>
+            <?php
 
-     <?php echo "Isla ".$nivel['orden']."<br>"; ?>
+            if(!$desbloqueado){
 
-            
+            echo " bloqueada";
+
+            }
+
+            ?>">
 
             <a
 
@@ -245,7 +245,7 @@ echo $niveles->num_rows;
 
             ?>
 
-            href="aprender-leo.php?nivel=<?php echo $nivel['nivelID']; ?>"
+            href="leccion-leo.php?nivel=<?php echo $nivel['nivelID']; ?>"
 
             <?php
 
@@ -259,40 +259,23 @@ echo $niveles->num_rows;
 
             <div class="circulo">
 
-                <?php
-
-                echo $nivel['vocal'];
-
-                ?>
+                <?php echo $nivel['vocal']; ?>
 
             </div>
 
             <div class="nombre">
-
-                <?php
-
-                echo $nivel['nombre'];
-
-                ?>
-
+                Nivel <?php echo $nivel['orden']; ?>
             </div>
 
             <div class="estrellas">
-
+                
                 <?php
-
                 for($i=1;$i<=3;$i++){
 
-                    if($i<=$estrellas){
-
-                        echo "⭐";
-
-                    }
-
-                    else{
-
-                        echo "☆";
-
+                    if($i <= $estrellas){
+                        echo '<span class="estrella activa">★</span>';
+                    }else{
+                        echo '<span class="estrella">★</span>';
                     }
 
                 }
@@ -300,23 +283,13 @@ echo $niveles->num_rows;
 
             </div>
 
-            <?php
-
-            if(!$desbloqueado){
-
-            ?>
+            <?php if(!$desbloqueado){ ?>
 
             <div class="candado">
-
-            🔒
-
+                <i class="fa-solid fa-lock"></i>
             </div>
 
-            <?php
-
-            }
-
-            ?>
+            <?php } ?>
 
             </a>
 
