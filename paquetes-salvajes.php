@@ -44,26 +44,26 @@ $suscripcionActual = $resSub->num_rows > 0 ? $resSub->fetch_assoc() : null;
 // paqueteID 2 = Plan Safari   (Leo + Capy + Finx)
 // paqueteID 3 = Plan Gratis   (Leo)
 $estilos = [
-    1 => [  // Plan Aventura
+    1 => [  // Plan Gratis (Leo)
+        'color'       => '#2d9e4e',
+        'color_btn'   => '#1a6e2e',
+        'color_light' => '#e8f7ec',
+        'mascotas'    => ['images/Leito.png'],
+        'ancho'       => ['90px'],
+    ],
+    2 => [  // Plan Aventura (Capy)
         'color'       => '#1e88e5',
         'color_btn'   => '#1565c0',
         'color_light' => '#e3f2fd',
         'mascotas'    => ['images/capy1.png'],
         'ancho'       => ['90px'],
     ],
-    2 => [  // Plan Safari
+    3 => [  // Plan Safari (Leo + Capy + Finx)
         'color'       => '#ff7a00',
         'color_btn'   => '#cc6200',
         'color_light' => '#fff3e8',
         'mascotas'    => ['images/Leito.png', 'images/capy1.png', 'images/FinxHi.png'],
         'ancho'       => ['60px', '70px', '60px'],
-    ],
-    3 => [  // Plan Gratis
-        'color'       => '#2d9e4e',
-        'color_btn'   => '#1a6e2e',
-        'color_light' => '#e8f7ec',
-        'mascotas'    => ['images/Leito.png'],
-        'ancho'       => ['90px'],
     ],
 ];
 ?>
