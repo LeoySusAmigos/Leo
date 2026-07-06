@@ -128,7 +128,7 @@ include("php/conexion.php");
     </section>
  
  
-<!-- METODOLOGÍA -->
+    <!-- METODOLOGÍA -->
  
     <section class="metodologia">
  
@@ -251,7 +251,7 @@ include("php/conexion.php");
     </section>
  
  
-<!-- TESTIMONIOS -->
+    <!-- TESTIMONIOS -->
  
     <section class="testimonios">
  
@@ -356,7 +356,7 @@ Papá/Mamá de
         </section>
 
 
-<!-- FOOTER CTA -->
+    <!-- FOOTER CTA -->
  
     <section class="cta-section">
  

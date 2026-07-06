@@ -243,7 +243,7 @@ $nino = [
             <div class="fila__sub"><?= htmlspecialchars($usuario['plan']) ?></div>
           </div>
           <div class="fila__derecha">
-            <a href="gestionar-plan.php" class="btn btn--outline-verde">Gestionar plan</a>
+            <a href="paquetes-salvajes.php" class="btn btn--outline-verde">Gestionar plan</a>
           </div>
         </div>
 
