@@ -78,8 +78,8 @@
         <div class="mascotas-container" id="mascotas">
             <ul class="nav-menu">
                 <li class="nav-element">
-                    <a href="aventura1.html"><img src="images/Leito.png" alt="Leo" class="mascota-img"></a>
-                    <a class="menu-link" href="aventura1.html">Sílabas con Leo</a>
+                    <a href="aventura-leo.php"><img src="images/Leito.png" alt="Leo" class="mascota-img"></a>
+                    <a class="menu-link" href="aventura-leo.php">Sílabas con Leo</a>
                 </li>
                 <li class="nav-element">
                     <a href="aventura2.php"><img src="images/capy1.png" alt="Capy" class="mascota-img"></a>
