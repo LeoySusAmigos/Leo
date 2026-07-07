@@ -45,6 +45,7 @@ $paginas_json = json_encode($paginas_raw, JSON_UNESCAPED_UNICODE | JSON_HEX_APOS
     <title><?php echo htmlspecialchars($libro['titulo']); ?></title>
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/leer-libro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <style>
         html, body {
@@ -55,14 +56,6 @@ $paginas_json = json_encode($paginas_raw, JSON_UNESCAPED_UNICODE | JSON_HEX_APOS
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
-
-        .custom-navbar  { padding: 5px 20px; }
-        .mascota-img    { width: 40px; height: 45px; }
-        .menu-link      { font-size: 13px; }
-        .logo-container img { width: 80px; }
-        .nav-element    { margin: 0 10px; }
-        .avatar-circle  { width: 30px; height: 30px; }
-        .user-info      { font-size: 12px; }
     </style>
 </head>
 <body>
@@ -89,11 +82,43 @@ $paginas_json = json_encode($paginas_raw, JSON_UNESCAPED_UNICODE | JSON_HEX_APOS
             });
 
             // Si ves esto chris es para redirigir a la biblioteca
-            alert(`¡Muy bien! Terminaste el cuento en ${mins}m ${segs}s`);
-            window.location.href = 'biblioteca.php';
+           document.getElementById('modal-time').textContent = `${mins}m ${segs}s`;
+           document.getElementById('modal-fin').classList.add('activo');
+
+           const juegos =[
+            'ordenar-puzzle.html',
+            'juego-cuento2.php?id=<?php echo $libro_id; ?>'
+        ];
+
+        const juegoAleatorio = juegos[Math.floor(Math.random() *  juegos.length)];
+
+        let cuenta = 3;
+        document.getElementById('cuenta-atras').textContent = cuenta;
+
+        const intervalo = setInterval(() => {
+            cuenta--;
+            const el = document.getElementById('cuenta-atras');
+            if(el) el.textContent = cuenta;
+             if (cuenta<=0) clearInterval(intervalo);
+        }, 1000);
+
+        setTimeout(() => {
+            window.location.href = juegoAleatorio;
+        }, 4000);
         }
     });
 </script>
+
+        <div id="modal-fin" class="modal-fin">
+            <div class="modal-fin-card">
+                <h2 class="modal-fin-title">¡Muy bien!</h2>
+                <p class="modal-fin-text">Terminaste el cuento en</p>
+                <p class="modal-fin-time" id="modal-time"></p>
+                <p class="modal-fin-text" style="margin-top:16px;">Preparando tu siguiente aventura en
+                <strong id="cuenta-atras">3</strong>
+                </p>
+            </div>
+        </div>
 
 </body>
 </html>
