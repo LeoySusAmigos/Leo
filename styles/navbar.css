@@ -4,11 +4,6 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Quicksand', sans-serif;
-    background-color: #f0f0f0;
-}
-
 .custom-navbar {
     background-color: #00942a; 
     padding: 10px 20px;

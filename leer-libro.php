@@ -27,13 +27,13 @@ $primera = true;
 while ($p = mysqli_fetch_assoc($res_paginas)) {
     $paginas_raw[] = [
         'numero' => $p['numero_pagina'],
-        'texto'  => $p['texto_pagina'],
+        // Modificamos esta línea para agregar nl2br():
+        'texto'  => nl2br($p['texto_pagina']), 
         // Solo la primera página lleva imagen
         'imagen' => $primera ? 'images/cuentos/' . $libro['portada'] : null,
     ];
     $primera = false;
 }
-
 
 $paginas_json = json_encode($paginas_raw, JSON_UNESCAPED_UNICODE | JSON_HEX_APOS | JSON_HEX_QUOT);
 ?>

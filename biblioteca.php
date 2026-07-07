@@ -25,6 +25,31 @@ $res_libros = mysqli_query($conn, $sql_libros);
 if (!$res_libros) {
     die("Error en la consulta: " . mysqli_error($conn));
 }
+
+$totalesPorNivel = [];
+$leidosPorNivel = [];
+
+$sql = "SELECT nivel_id, COUNT(*) AS total
+        FROM libros
+        GROUP BY nivel_id";
+
+$res = mysqli_query($conn, $sql);
+
+while ($fila = mysqli_fetch_assoc($res)) {
+    $totalesPorNivel[$fila['nivel_id']] = $fila['total'];
+}
+
+$sql = "SELECT l.nivel_id, COUNT(*) AS leidos
+        FROM progreso_libros p
+        INNER JOIN libros l ON l.libro_id = p.libro_id
+        WHERE p.userID = $userID
+        GROUP BY l.nivel_id";
+
+$res = mysqli_query($conn, $sql);
+
+while ($fila = mysqli_fetch_assoc($res)) {
+    $leidosPorNivel[$fila['nivel_id']] = $fila['leidos'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -110,8 +135,7 @@ if (!$res_libros) {
 
             <div class="estanteria-por-niveles">
                 <?php 
-                $nivel_actual = 0; 
-                $id_libro_anterior = 0; 
+                $nivel_actual = 0;  
 
                 if (mysqli_num_rows($res_libros) > 0) {
                     while ($libro = mysqli_fetch_assoc($res_libros)) {
@@ -125,7 +149,7 @@ if (!$res_libros) {
                             $nivel_actual = $libro['nivel_id'];
                            
                             $subtitulo = "4 líneas • Palabras simples";
-                            if ($nivel_actual == 2) { $subtitulo = "6 líneas • Una idea por oración"; }
+                            if ($nivel_actual == 2) { $subtitulo = "6 líneas • Rimas cortas y sencillas"; }
                             if ($nivel_actual == 3) { $subtitulo = "2 páginas • Comprensión fluida"; }
                             if ($nivel_actual == 4) { $subtitulo = "4 páginas • Vocabulario avanzado"; }
                             if ($nivel_actual == 5) { $subtitulo = "6 páginas • Textos narrativos completos • Desafío máximo"; }
@@ -143,9 +167,18 @@ if (!$res_libros) {
 
                         $ya_leido = in_array($libro['libro_id'], $libros_leidos);
 
-                        $esta_bloqueado = false;
-                        if ($id_libro_anterior != 0 && !in_array($id_libro_anterior, $libros_leidos)) {
-                            $esta_bloqueado = true;
+                        if ($libro['nivel_id'] == 1) {
+
+                            $esta_bloqueado = false;
+
+                        } else {
+
+                            $nivelAnterior = $libro['nivel_id'] - 1;
+
+                            $total = $totalesPorNivel[$nivelAnterior] ?? 0;
+                            $leidos = $leidosPorNivel[$nivelAnterior] ?? 0;
+
+                            $esta_bloqueado = ($leidos < $total);
                         }
                         ?>
 
@@ -157,7 +190,7 @@ if (!$res_libros) {
                                 <div class="card-center-data">
                                     <h4><?php echo htmlspecialchars($libro['titulo']); ?></h4>
                                     <span class="duration-text"><i class="fa-regular fa-clock"></i> <?php echo $libro['tiempo_estimado']; ?> min</span>
-                                    <p class="mission-alert-text">Completa el cuento anterior</p>
+                                    <p class="mission-alert-text">Completa los cuentos del nivel anterior</p>
                                 </div>
                                 <div class="card-right-status">
                                     <span class="status-lock-icon"><i class="fa-solid fa-lock text-muted"></i></span>
@@ -184,8 +217,6 @@ if (!$res_libros) {
                             </a>
                         <?php 
                         endif;
-
-                        $id_libro_anterior = $libro['libro_id'];
                     }
                     
                     echo '</div></div>';

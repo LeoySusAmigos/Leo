@@ -5,7 +5,12 @@
 }
 
 body {
-    background-color: #FAFAFA;
+    background-image: url('../images/fondoalegre-minimalista.png');
+    background-size: cover;
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     min-height: 100vh;
     font-family: 'Quicksand', 'Nunito', sans-serif;
     padding: 20px;
@@ -148,7 +153,6 @@ body {
     background-color: white;
     border-bottom: 5px solid #2F7A2F; 
     box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-    
 }
 
 .active{
