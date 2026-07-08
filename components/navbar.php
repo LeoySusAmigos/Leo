@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 
 <nav class="custom-navbar">
     <div class="nav-container">
