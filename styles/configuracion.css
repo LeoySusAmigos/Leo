@@ -31,97 +31,6 @@ body {
 }
  
 /* ═══════════════════════════════════════════
-   BARRA DE NAVEGACIÓN SUPERIOR
-═══════════════════════════════════════════ */
-.topbar {
-  background: var(--verde-oscuro);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  height: 56px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
- 
-/* Logo Leo & Friends */
-.topbar__logo img {
-  height: 38px;
-  /* ← PON AQUÍ: img/logo-leo-friends.png */
-}
-.topbar__logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-}
-.topbar__logo-text {
-  font-size: 1rem;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1.1;
-}
- 
-/* Navegación central */
-.topbar__nav {
-  display: flex;
-  gap: 6px;
-}
-.topbar__nav a {
-  color: rgba(255,255,255,.85);
-  text-decoration: none;
-  font-size: .82rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 6px 12px;
-  border-radius: 20px;
-  transition: background .2s;
-}
-.topbar__nav a:hover,
-.topbar__nav a.active {
-  background: rgba(255,255,255,.18);
-  color: #fff;
-}
-.topbar__nav a img {
-  height: 20px;
-  /* íconos de las secciones: img/icono-lectura.png, img/icono-gramatica.png, img/icono-biblioteca.png */
-}
- 
-/* Área del usuario (derecha) */
-.topbar__user {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #fff;
-  font-weight: 700;
-  font-size: .9rem;
-}
-
-.topbar__user img.avatar {
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(255,255,255,.5);
-  /* ← PON AQUÍ img/avatar-nino.png */
-}
-
-.topbar__stars {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  background: rgba(255,255,255,.15);
-  border-radius: 20px;
-  padding: 3px 10px;
-  font-size: .82rem;
-}
-
-.topbar__stars::before { content: '⭐'; font-size: .9rem; }
-.topbar__gear { font-size: 1.2rem; cursor: pointer; opacity: .8; }
- 
-/* ═══════════════════════════════════════════
    CONTENIDO PRINCIPAL
 ═══════════════════════════════════════════ */
 .main {
@@ -372,7 +281,7 @@ h1.page-title {
   font-size: .75rem;
   color: var(--gris-claro);
   margin-top: 30px;
-}
+} 
  
 /* ─────────────────────────────────────────
    992px — Tablets grandes / laptops pequeñas
@@ -598,4 +507,55 @@ h1.page-title {
   .seccion__titulo {
     font-size: .68rem;
   }
+}
+
+/* Fondo del body ligeramente más cálido para que combine
+   con el verde de la navbar */
+body {
+  background: #eef2ee;  /* antes: #f2f4f6 (gris frío) → ahora verdoso muy suave */
+}
+ 
+/* Título "Configuración" en verde oscuro en vez de negro puro */
+h1.page-title {
+  color: var(--verde-oscuro);
+}
+ 
+/* Títulos de sección ("1. MI CUENTA") en verde medio */
+.seccion__titulo {
+  color: var(--verde-medio);
+  opacity: .8;
+}
+ 
+/* Borde izquierdo verde en los acordeones abiertos
+   — da sensación de que pertenecen a la paleta */
+.accordion[open] {
+  border-left: 3px solid var(--verde-medio);
+}
+ 
+/* Íconos de las filas en verde oscuro en vez de heredar gris */
+.fila__icono i {
+  color: var(--verde-oscuro);
+  font-size: 1rem;
+}
+ 
+/* Flecha del acordeón en verde medio */
+.accordion > summary .flecha {
+  color: var(--verde-medio);
+}
+ 
+/* Avatar del niño (perfil-fila) con borde verde real de la paleta */
+.perfil-fila img.avatar-lg {
+  border-color: var(--verde-medio);  /* antes: --verde-claro (muy pálido) */
+}
+ 
+/* Footer version en verde medio suave */
+.footer-version {
+  color: var(--verde-medio);
+  opacity: .6;
+}
+ 
+/* Botón cerrar sesión — el hover en rojo pálido ya está bien,
+   solo damos al ícono un color más consistente */
+.btn--rojo i {
+  color: var(--rojo-salir);
 }

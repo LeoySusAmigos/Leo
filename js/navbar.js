@@ -21,5 +21,29 @@ document.addEventListener("DOMContentLoaded", () => {
             mascotasContainer.classList.remove("active");
         }
     });
+<<<<<<< HEAD
+});
+
+(function() {
+
+    const imgElement = document.querySelector(".topbar__user .avatar");
+
+    
+
+    if (imgElement) {
+
+            const currentSrc = imgElement.getAttribute('src');
+
+        if (currentSrc) {
+
+            imgElement.src = currentSrc + "?t=" + new Date().getTime();
+
+        }
+
+    }
+
+})();
+=======
 
 });
+>>>>>>> 11c1e30eaa54335693346f2bf330774fc6d6b640

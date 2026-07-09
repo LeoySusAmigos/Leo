@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+=======
+>>>>>>> 11c1e30eaa54335693346f2bf330774fc6d6b640
 
 <nav class="custom-navbar">
     <div class="nav-container">
