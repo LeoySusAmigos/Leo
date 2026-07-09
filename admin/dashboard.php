@@ -98,7 +98,9 @@ if (!isset($_SESSION['userID']) || $_SESSION['rol'] != 'admin') {
             </div> 
 
         </div> 
-
+        <a href="../biblioteca.php" class="btn btn-primary w-100 fw-bold mt-3 py-2">
+            <i class="fa-solid fa-book me-1"></i> Ir a la biblioteca
+        </a>
     </div> 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script> 

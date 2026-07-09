@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mapa de Aventura</title>
+    <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/aventura2.css">
 </head>
 <body>
 
-    <?php include 'navbar.php'; ?>
+    <?php include 'components/navbar.php'; ?>
 
     <div class="mapa-contenedor">
         <img src="images/fondo.png" alt="Mapa de Capibaras" class="mapa-fondo">

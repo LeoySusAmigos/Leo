@@ -1,67 +1,89 @@
 <?php
 session_start();
 
-// Validamos que la sesión del niño esté activa
 if (!isset($_SESSION['userID'])) {
     header('Content-Type: application/json');
-    echo json_encode(array("error" => "Usuario no autenticado"));
+    echo json_encode(["error" => "Usuario no autenticado"]);
     exit();
 }
 
-include 'conexion.php'; 
-$userID = $_SESSION['userID']; //
+include 'conexion.php';
 
-// ==========================================
-// PASO 1: OBTENER LOS CUENTOS QUE EL NIÑO YA LEYÓ
-// ==========================================
-$libros_leidos = array();
-$sql_progreso = "SELECT libro_id FROM progreso_libros WHERE userID = $userID";
-$res_progreso = $conn->query($sql_progreso);
+$userID = $_SESSION['userID'];
 
-if ($res_progreso) {
-    while ($progreso = $res_progreso->fetch_assoc()) {
-        $libros_leidos[] = $progreso['libro_id']; // Guarda una lista simple de IDs leídos
+// OBTENER TODOS LOS LIBROS LEÍDOS
+
+$libros_leidos = [];
+
+$sql = "SELECT libro_id FROM progreso_libros WHERE userID = $userID";
+$resultado = $conn->query($sql);
+
+if ($resultado) {
+    while ($fila = $resultado->fetch_assoc()) {
+        $libros_leidos[] = $fila['libro_id'];
     }
 }
 
-// ==========================================
-// PASO 2: TRAER TODOS LOS LIBROS ORDENADOS POR NIVEL
-// ==========================================
-// Cambié "cuentos" por "libros" para que use tu nueva estructura
-$sql_libros = "SELECT * FROM libros ORDER BY nivel_id ASC, libro_id ASC";
-$res_libros = $conn->query($sql_libros);
+// OBTENER TODOS LOS LIBROS
 
-$cuentos = array();
-$id_libro_anterior = 0; // Nos ayuda a verificar si el cuento anterior fue completado
+$sql = "SELECT * FROM libros ORDER BY nivel_id ASC, libro_id ASC";
+$resultado = $conn->query($sql);
 
-if ($res_libros) {
-    while ($fila = $res_libros->fetch_assoc()) {
-        $libro_id = $fila['libro_id'];
-        
-        // REGLA 1: ¿Ya está leído por este niño?
-        $ya_leido = in_array($libro_id, $libros_leidos);
-        
-        // REGLA 2: ¿Está bloqueado? 
-        // Si no es el primer libro de todos ($id_libro_anterior != 0) 
-        // y el libro anterior NO está en la lista de leídos, entonces se bloquea.
-        $esta_bloqueado = false;
-        if ($id_libro_anterior != 0 && !in_array($id_libro_anterior, $libros_leidos)) {
-            $esta_bloqueado = true;
+$libros = [];
+$totalesPorNivel = [];
+$leidosPorNivel = [];
+
+// Guarda todos los libros y cuenta cuántos hay por nivel
+while ($fila = $resultado->fetch_assoc()) {
+
+    $nivel = $fila['nivel_id'];
+
+    $libros[] = $fila;
+
+    if (!isset($totalesPorNivel[$nivel])) {
+        $totalesPorNivel[$nivel] = 0;
+    }
+
+    $totalesPorNivel[$nivel]++;
+
+    if (in_array($fila['libro_id'], $libros_leidos)) {
+
+        if (!isset($leidosPorNivel[$nivel])) {
+            $leidosPorNivel[$nivel] = 0;
         }
-        
-        // Inyectamos estas dos nuevas variables directo en la información del libro
-        $fila['leido'] = $ya_leido; 
-        $fila['bloqueado'] = $esta_bloqueado;
-        
-        // Guardamos el libro modificado en nuestro arreglo principal
-        $cuentos[] = $fila;
-        
-        // El libro actual se convierte en el "anterior" para la siguiente vuelta del ciclo
-        $id_libro_anterior = $libro_id;
+
+        $leidosPorNivel[$nivel]++;
     }
 }
 
-// Transformamos todo el resultado a JSON para que index.js lo reciba idéntico a antes
+$cuentos = [];
+
+foreach ($libros as $fila) {
+
+    $nivel = $fila['nivel_id'];
+
+    // ¿Ya fue leído?
+    $fila['leido'] = in_array($fila['libro_id'], $libros_leidos);
+
+    // Nivel 1 siempre desbloqueado
+    if ($nivel == 1) {
+
+        $fila['bloqueado'] = false;
+
+    } else {
+
+        $nivelAnterior = $nivel - 1;
+
+        $totalAnterior = $totalesPorNivel[$nivelAnterior] ?? 0;
+        $leidosAnterior = $leidosPorNivel[$nivelAnterior] ?? 0;
+
+        // Solo se desbloquea si TODOS los libros del nivel anterior fueron leídos
+        $fila['bloqueado'] = ($leidosAnterior < $totalAnterior);
+    }
+
+    $cuentos[] = $fila;
+}
+
 header('Content-Type: application/json');
 echo json_encode($cuentos);
 ?>

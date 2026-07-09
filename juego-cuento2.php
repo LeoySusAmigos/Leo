@@ -40,7 +40,7 @@ include("php/oraciones.php");
 
     <script>
         let oracionCorrecta = <?php echo json_encode($oracion); ?>;
-        let pista = <?php echo json_encode($fila['Pista']); ?>;
+        let pista = <?php echo json_encode($fila['pista1']); ?>;
         let pista2 = <?php echo json_encode($fila['pista2']); ?>;
     </script>
 

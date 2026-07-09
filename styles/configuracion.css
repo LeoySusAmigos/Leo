@@ -99,6 +99,7 @@ body {
   font-weight: 700;
   font-size: .9rem;
 }
+
 .topbar__user img.avatar {
   width: 34px; height: 34px;
   border-radius: 50%;
@@ -106,6 +107,7 @@ body {
   border: 2px solid rgba(255,255,255,.5);
   /* ← PON AQUÍ img/avatar-nino.png */
 }
+
 .topbar__stars {
   display: flex;
   align-items: center;
@@ -115,6 +117,7 @@ body {
   padding: 3px 10px;
   font-size: .82rem;
 }
+
 .topbar__stars::before { content: '⭐'; font-size: .9rem; }
 .topbar__gear { font-size: 1.2rem; cursor: pointer; opacity: .8; }
  
@@ -371,10 +374,228 @@ h1.page-title {
   margin-top: 30px;
 }
  
-/* ═══════════════════════════════════════════
-   RESPONSIVE BÁSICO
-═══════════════════════════════════════════ */
-@media (max-width: 480px) {
-  h1.page-title { font-size: 1.4rem; }
-  .topbar__nav a span { display: none; }
+/* ─────────────────────────────────────────
+   992px — Tablets grandes / laptops pequeñas
+   La página ya se ve bien aquí, solo
+   ajustamos el max-width del contenido.
+───────────────────────────────────────── */
+@media (max-width: 992px) {
+ 
+  .main {
+    max-width: 100%;
+    padding: 24px 32px 60px;
+  }
+ 
+  /* Los inputs del formulario se estiran un poco más */
+  .fila__derecha input[type="text"],
+  .fila__derecha input[type="email"] {
+    width: 200px;
+  }
+}
+ 
+ 
+/* ─────────────────────────────────────────
+   720px — Tablets verticales
+   El navbar empieza a ser apretado:
+   ocultamos los textos de las secciones
+   y dejamos solo las imágenes de mascotas.
+───────────────────────────────────────── */
+@media (max-width: 720px) {
+ 
+  /* Navbar: ocultar textos, dejar solo íconos */
+  .topbar__nav a span {
+    display: none;
+  }
+ 
+  .topbar__nav a img {
+    height: 26px; /* un poco más grandes sin el texto */
+  }
+ 
+  /* Ocultar el nombre del logo para ganar espacio */
+  .topbar__logo-text {
+    display: none;
+  }
+ 
+  /* Contenido más ancho en tablet */
+  .main {
+    max-width: 100%;
+    padding: 20px 24px 60px;
+  }
+ 
+  h1.page-title {
+    font-size: 1.5rem;
+  }
+ 
+  /* Los inputs del formulario ocupan todo el ancho disponible */
+  .fila__derecha input[type="text"],
+  .fila__derecha input[type="email"] {
+    width: 160px;
+  }
+}
+ 
+ 
+/* ─────────────────────────────────────────
+   425px — Móviles (el más importante)
+   Todo se apila verticalmente.
+   Los inputs y filas ocupan el ancho completo.
+───────────────────────────────────────── */
+@media (max-width: 425px) {
+ 
+  /* ── Navbar ── */
+  .topbar {
+    padding: 0 12px;
+    height: 52px;
+  }
+ 
+  /* Ocultamos la nav central completa en móvil
+     (las secciones se acceden desde dentro de la app) */
+  .topbar__nav {
+    display: none;
+  }
+ 
+  .topbar__logo img {
+    height: 30px;
+  }
+ 
+  .topbar__logo-text {
+    display: none;
+  }
+ 
+  .topbar__user {
+    gap: 6px;
+    font-size: .8rem;
+  }
+ 
+  .topbar__stars {
+    padding: 2px 8px;
+    font-size: .75rem;
+  }
+ 
+  .topbar__user img.avatar {
+    width: 28px;
+    height: 28px;
+  }
+ 
+  /* ── Contenido principal ── */
+  .main {
+    padding: 16px 12px 60px;
+  }
+ 
+  h1.page-title {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+ 
+  /* ── Acordeón ── */
+  .accordion > summary {
+    padding: 14px 16px;
+    font-size: .95rem;
+  }
+ 
+  /* ── Filas ── */
+  .fila {
+    padding: 12px 14px;
+    gap: 10px;
+    flex-wrap: wrap;  /* si el contenido es muy ancho, se baja a la siguiente línea */
+  }
+ 
+  .fila__icono {
+    width: 30px;
+    height: 30px;
+    font-size: .9rem;
+  }
+ 
+  .fila__label {
+    font-size: .88rem;
+  }
+ 
+  .fila__sub {
+    font-size: .75rem;
+  }
+ 
+  /* ── Perfil fila (foto + nombre + botón Editar) ── */
+  .perfil-fila {
+    padding: 14px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+ 
+  .perfil-fila img.avatar-lg {
+    width: 46px;
+    height: 46px;
+  }
+ 
+  .perfil-fila__nombre {
+    font-size: .95rem;
+  }
+ 
+  /* ── Formulario: inputs a ancho completo ── */
+  .fila__derecha input[type="text"],
+  .fila__derecha input[type="email"] {
+    width: 100%;
+    font-size: .85rem;
+  }
+ 
+  /* Las filas del formulario se apilan en columna en móvil */
+  .fila:has(input[type="text"]),
+  .fila:has(input[type="email"]) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+ 
+  .fila:has(input[type="text"]) .fila__derecha,
+  .fila:has(input[type="email"]) .fila__derecha {
+    width: 100%;
+  }
+ 
+  /* ── Avatares del formulario en columna ── */
+  .fila[style*="flex-wrap"] {
+    justify-content: center;
+    gap: 16px;
+  }
+ 
+  /* ── Toggles de sonido ── */
+  .toggles-grupo {
+    gap: 8px;
+  }
+ 
+  .toggle-label {
+    font-size: .65rem;
+  }
+ 
+  .toggle {
+    width: 40px;
+    height: 22px;
+  }
+ 
+  .toggle-slider::before {
+    width: 16px;
+    height: 16px;
+  }
+ 
+  .toggle input:checked + .toggle-slider::before {
+    transform: translateX(18px);
+  }
+ 
+  /* ── Botón guardar ── */
+  #btnGuardar {
+    width: 100%;
+    justify-content: center;
+    font-size: .9rem;
+  }
+ 
+  /* ── Botón cerrar sesión ── */
+  .btn--rojo {
+    font-size: .9rem;
+    padding: 12px 14px;
+  }
+ 
+  /* ── Secciones ── */
+  .seccion {
+    margin-bottom: 16px;
+  }
+ 
+  .seccion__titulo {
+    font-size: .68rem;
+  }
 }

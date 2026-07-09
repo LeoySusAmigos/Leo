@@ -1,0 +1,295 @@
+/*=========================
+FUENTE
+=========================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Fredoka',sans-serif;
+}
+
+body{
+
+    margin:0;
+
+    background:#d8f3d1;
+
+    overflow-x:hidden;
+
+    font-family:'Fredoka',sans-serif;
+
+}
+
+/*=========================
+FONDO
+=========================*/
+
+.aventura{
+    position:relative;
+    width:100%;
+    height:100vh;
+    min-height:900px;
+
+    background:url("../images/aventuraLeo/fondo-mapa.png") center top no-repeat;
+    background-size:cover;
+
+    overflow:hidden;
+}
+
+.mapa{
+    position:relative;
+    width:100%;
+    height:100vh;
+}
+
+.isla{
+    position:absolute;
+    width:180px;
+    text-align:center;
+    transition:.25s;
+    z-index:10;
+}
+
+.isla img{
+    width:190px;
+}
+
+
+.isla:hover{
+
+    transform:scale(1.05);
+
+}
+
+.isla1{
+    top: 223px;
+    left: 450px;
+}
+
+.isla2{
+    top: 230px;
+    left: 910px;
+}
+
+.isla3{
+    top: 410px;
+    left: 675px;
+}
+
+.isla4{
+    top: 590px;
+    left: 395px;
+}
+
+.isla5{
+    top: 575px;
+    left: 978px;
+}
+
+
+.isla a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+
+.circulo{
+
+    position:absolute;
+
+    top:22px;
+
+    left:52%;
+
+    transform:translateX(-50%);
+
+    font-size:64px;
+
+    color:white;
+
+    font-weight:bold;
+
+    text-shadow:0 3px 8px rgba(0,0,0,.5);
+
+}
+
+.nombre{
+    position: relative;
+    margin-top:-50px;
+    font-size:25px;
+    font-weight:bold;
+    color:white;
+    text-shadow:
+        2px 2px 4px rgba(0,0,0,.7);
+}
+
+.estrellas{
+    margin-top:-4px;
+    display:flex;
+    justify-content:center;
+    gap:3px;
+}
+
+.estrella{
+    font-size:35px;
+    color:#E8E8E8;
+    -webkit-text-stroke:1.8px #333;
+    text-shadow:
+        0 2px 3px rgba(0,0,0,.35);
+}
+
+.estrella.activa{
+    color:#FFD83D;
+    -webkit-text-stroke:1.4px #7B4A00;
+    text-shadow:
+        0 2px 4px rgba(0,0,0,.35);
+}
+
+.candado{
+
+    position:absolute;
+
+    right:18px;
+
+    top:80px;
+
+    width:40px;
+
+    height:40px;
+
+    background:#ffb84d;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:20px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.25);
+
+}
+
+.bloqueada img{
+
+    filter:grayscale(100%) brightness(.75);
+
+}
+
+.bloqueada{
+
+    opacity:.9;
+
+}
+
+/*=========================
+LEO
+=========================*/
+
+.leo{
+    position:absolute;
+    left:25px;
+    bottom:25px;
+    width:230px;
+    z-index:20;
+    bottom: -8px;
+}
+
+.leo img{
+    width:210px;
+    margin-bottom:-12px;
+}
+
+/*=========================
+GLOBO
+=========================*/
+
+.globo{
+
+    position:absolute;
+    left:150px;
+    bottom:55px;
+    width:310px;
+    height:120px;
+    padding:20px 25px;
+    z-index:25;
+
+}
+
+.globo img{
+
+    width:100%;
+    display:block;
+
+}
+
+.texto-globo{
+
+    position:absolute;
+
+    top:45px;
+
+    left:30px;
+
+    width:240px;
+
+    text-align:center;
+
+}
+
+.globo h2{
+
+    margin:0;
+
+    color:#228B22;
+
+    font-size:25px;
+
+}
+
+.globo p{
+
+    margin-top:8px;
+
+    font-size:15px;
+
+    color:#1a1919;
+
+}
+
+/*=========================
+ANIMACIÓN LEO
+=========================*/
+
+@keyframes respirar{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-10px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}

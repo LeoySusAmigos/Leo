@@ -25,6 +25,31 @@ $res_libros = mysqli_query($conn, $sql_libros);
 if (!$res_libros) {
     die("Error en la consulta: " . mysqli_error($conn));
 }
+
+$totalesPorNivel = [];
+$leidosPorNivel = [];
+
+$sql = "SELECT nivel_id, COUNT(*) AS total
+        FROM libros
+        GROUP BY nivel_id";
+
+$res = mysqli_query($conn, $sql);
+
+while ($fila = mysqli_fetch_assoc($res)) {
+    $totalesPorNivel[$fila['nivel_id']] = $fila['total'];
+}
+
+$sql = "SELECT l.nivel_id, COUNT(*) AS leidos
+        FROM progreso_libros p
+        INNER JOIN libros l ON l.libro_id = p.libro_id
+        WHERE p.userID = $userID
+        GROUP BY l.nivel_id";
+
+$res = mysqli_query($conn, $sql);
+
+while ($fila = mysqli_fetch_assoc($res)) {
+    $leidosPorNivel[$fila['nivel_id']] = $fila['leidos'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +59,7 @@ if (!$res_libros) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini Biblioteca</title>
+    <link rel="shortcut icon" href="images/favicon/favicon-32x32.png" type="image/x-icon">
     <link rel="stylesheet" href="styles/biblioteca.css">
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -46,14 +72,12 @@ if (!$res_libros) {
 
     <div class="biblioteca-container">
 
-        <header class="biblio-header-modern">
-            <a href="index.php" class="btn-circular-back">
-                <i class="fa-solid fa-arrow-left"></i>
-            </a>
+        <header class="biblio-header-modern"> 
             <div class="header-center-title">
                 <h1>MINI BIBLIOTECA</h1>
                 <p>Aprender a leer es una aventura</p>
             </div>
+            
             <div class="filtrar">
                 <div class="filtro-dropdown">
                     <button class="btn-filtro-modern">
@@ -69,7 +93,7 @@ if (!$res_libros) {
                     <div class="opcion" data-nivel="5">Nivel 5</div>
                 </div>
             </div>
-        </div>
+
         </header>
 
         <div class="tabs-mascotas-container">
@@ -82,7 +106,7 @@ if (!$res_libros) {
             </a>    
 
             <a href="aventura2.php" class="tab-item">
-                <img src="images/capy3.png" alt="Capy" class="tab-mascota-img">
+                <img src="images/capy1.png" alt="Capy" class="tab-mascota-img">
                 <div class="tab-text text-capy">
                     <span class="tab-title text-secondary">Gramática y oraciones</span>
                     <span class="tab-subtitle">Capy</span>
@@ -112,8 +136,7 @@ if (!$res_libros) {
 
             <div class="estanteria-por-niveles">
                 <?php 
-                $nivel_actual = 0; 
-                $id_libro_anterior = 0; 
+                $nivel_actual = 0;  
 
                 if (mysqli_num_rows($res_libros) > 0) {
                     while ($libro = mysqli_fetch_assoc($res_libros)) {
@@ -127,7 +150,7 @@ if (!$res_libros) {
                             $nivel_actual = $libro['nivel_id'];
                            
                             $subtitulo = "4 líneas • Palabras simples";
-                            if ($nivel_actual == 2) { $subtitulo = "6 líneas • Una idea por oración"; }
+                            if ($nivel_actual == 2) { $subtitulo = "6 líneas • Rimas cortas y sencillas"; }
                             if ($nivel_actual == 3) { $subtitulo = "2 páginas • Comprensión fluida"; }
                             if ($nivel_actual == 4) { $subtitulo = "4 páginas • Vocabulario avanzado"; }
                             if ($nivel_actual == 5) { $subtitulo = "6 páginas • Textos narrativos completos • Desafío máximo"; }
@@ -145,9 +168,18 @@ if (!$res_libros) {
 
                         $ya_leido = in_array($libro['libro_id'], $libros_leidos);
 
-                        $esta_bloqueado = false;
-                        if ($id_libro_anterior != 0 && !in_array($id_libro_anterior, $libros_leidos)) {
-                            $esta_bloqueado = true;
+                        if ($libro['nivel_id'] == 1) {
+
+                            $esta_bloqueado = false;
+
+                        } else {
+
+                            $nivelAnterior = $libro['nivel_id'] - 1;
+
+                            $total = $totalesPorNivel[$nivelAnterior] ?? 0;
+                            $leidos = $leidosPorNivel[$nivelAnterior] ?? 0;
+
+                            $esta_bloqueado = ($leidos < $total);
                         }
                         ?>
 
@@ -159,14 +191,14 @@ if (!$res_libros) {
                                 <div class="card-center-data">
                                     <h4><?php echo htmlspecialchars($libro['titulo']); ?></h4>
                                     <span class="duration-text"><i class="fa-regular fa-clock"></i> <?php echo $libro['tiempo_estimado']; ?> min</span>
-                                    <p class="mission-alert-text">Completa el cuento anterior</p>
+                                    <p class="mission-alert-text">Completa los cuentos del nivel anterior</p>
                                 </div>
                                 <div class="card-right-status">
                                     <span class="status-lock-icon"><i class="fa-solid fa-lock text-muted"></i></span>
                                 </div>
                             </div>
                         <?php else: ?>
-                            <a href="leer_cuento.php?id=<?php echo $libro['libro_id']; ?>" class="card-cuento-modern-link">
+                            <a href="leer-libro.php?id=<?php echo $libro['libro_id']; ?>" class="card-cuento-modern-link">
                                 <div class="card-cuento-modern <?php echo $ya_leido ? 'completed' : ''; ?>">
                                     <div class="card-left-thumb">
                                         <img src="images/cuentos/<?php echo $libro['portada']; ?>" alt="Portada">
@@ -186,8 +218,6 @@ if (!$res_libros) {
                             </a>
                         <?php 
                         endif;
-
-                        $id_libro_anterior = $libro['libro_id'];
                     }
                     
                     echo '</div></div>';
@@ -199,11 +229,11 @@ if (!$res_libros) {
             </div>
 
         </main>
-
-        <div class="mascota">
-            <img src="images/FinxHi.png" alt="Finx" class="mascota-img">
-        </div>
         
+    </div>
+
+    <div class="mascota">
+        <img src="images/FinxHi.png" alt="Finx" class="mascota-img">
     </div>
 
     <script src="js/index.js"></script>

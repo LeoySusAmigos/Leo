@@ -6,147 +6,6 @@
 body{
     overflow-x:hidden;
 }
- 
-/* NAVBAR */
- 
-.custom-navbar{
-    background:#fff;
-    padding:8px 0;
-    box-shadow: 0 3px 15px rgba(0,0,0,.06);
-    position:relative;
-    z-index:1000;
-}
- 
-.navbar .container{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
- 
-/* LOGO */
- 
-.logo{
-    display:flex;
-    align-items:center;
-    gap:5px;
-    text-decoration:none;
-    font-size:2rem;
-    font-weight:900;
-}
- 
-.leo{
-    color:#2ca02c;
-    font-family:'Fredoka', sans-serif;
-}
- 
-.ampersand{
-    color:#1e88e5;
-    font-family:'Fredoka', sans-serif;
-}
- 
-.friends{
-    color:#ff7a00;
-    font-family:'Fredoka', sans-serif;
-}
- 
-/* MENÚ */
- 
-.menu-center{
-    display:flex;
-    align-items:center;
-    gap:40px;
-}
- 
-.menu-center .nav-link{
-    color:#333;
-    font-weight:700;
-    font-size:1.10rem;
-    transition:.3s;
-}
- 
-.menu-center .nav-link:hover{
-    color:#2ca02c;
-}
- 
-/* BOTONES */
- 
-.nav-buttons{
-    display:flex;
-    align-items:center;
-    gap:18px;
-}
- 
-.login-btn{
-    background:#ffffff;
-    border:2px solid #4caf50;
-    color:#2e7d32;
-    padding:10px 25px;
-    border-radius:14px;
-    font-weight:700;
-    transition:.3s ease;
-}
- 
-.login-btn:hover{
-    background:#e8f5e9;
-    color:#2e7d32;
-}
- 
-.register-btn{
-    background:#4caf50;
-    color:white;
-    padding:10px 25px;
-    border-radius:14px;
-    font-weight:700;
-    transition:.3s ease;
-}
- 
-.register-btn:hover{
-    background:#388e3c;
-    color:white;
-}
- 
- 
-/* PERFIL */
- 
-.profile-btn{
-    border:2px solid #43a047;
-    border-radius:12px;
-    padding:10px 20px;
-    font-weight:700;
-}
-
-.settings-link{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    color:#1a6e2e;               
-    font-size:1.15rem;
-    text-decoration:none;
-    transition:.35s ease;
-    flex-shrink:0;
-    background:#e9f5ec;       
-}
- 
-.settings-link:hover{
-    background:linear-gradient(135deg, #d9efe0 0%, #ffe8d1 55%, #dbe9fb 100%);
-    color:#ff7a00;                 /* naranja de la paleta */
-    transform:rotate(35deg) scale(1.05);
-    box-shadow:0 4px 14px rgba(0,0,0,.10);
-}
- 
-/* FOTO DE PERFIL DEL NIÑO dentro del botón profile-btn,
-   por si foto_nino no es NULL en la base de datos */
-.profile-avatar-img{
-    width:26px;
-    height:26px;
-    border-radius:50%;
-    object-fit:cover;
-    margin-right:6px;
-}
- 
 /* HERO */
  
 .hero{
@@ -189,6 +48,10 @@ body{
     max-width:600px;
     margin-bottom:25px;
     text-shadow: 0 3px 8px rgba(0,0,0,.25);
+}
+
+.hero-content h1 span{
+    display:block;
 }
  
 .hero-content p{
@@ -446,8 +309,8 @@ body{
 }
  
 .audio-silaba{
-    width:200px;
-    height:80px;
+    width:180px;
+    height:75px;
     background:white;
     border-radius:18px;
     margin-right: 20px;
@@ -606,7 +469,7 @@ body{
 /* ============= CTA ================ */
  
 .cta-section{
-    background:linear-gradient(135deg,#354237 0%,#66db6a 55%,#3e533f 100%);
+    background:linear-gradient(135deg,#3e6e46 0%,#66c969 55%,#3f6d42 100%);
     padding:45px 30px;
     text-align:center;
     color:white;
@@ -681,4 +544,283 @@ body{
     font-family:'Nunito',sans-serif;
     font-size:.9rem;
     opacity:.9;
+}
+
+/* REDES SOCIALES CTA */
+
+.cta-redes{
+
+    margin-top:25px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+.cta-redes span{
+
+    font-family:'Nunito',sans-serif;
+
+    font-weight:700;
+
+    color:white;
+
+}
+
+.cta-redes a{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.18);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:1.2rem;
+
+    transition:.3s ease;
+
+}
+
+.cta-redes a:hover{
+
+    background:white;
+
+    color:#2e7d32;
+
+    transform:translateY(-4px);
+
+}
+
+
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 992px){
+
+    .hero{
+        flex-direction:column;
+        justify-content:center;
+        text-align:center;
+        height:auto;
+        padding:80px 40px;
+    }
+
+    .hero-content{
+        width:100%;
+        align-items:center;
+    }
+
+    .hero-content h1{
+        font-size:3.8rem;
+        max-width:700px;
+    }
+
+    .hero-content p{
+        font-size:1.2rem;
+        max-width:600px;
+    }
+
+    .hero-characters{
+        position:relative;
+        right:auto;
+        bottom:auto;
+        margin-top:30px;
+        justify-content:center;
+    }
+
+    .hero-characters img{
+        width:170px;
+    }
+
+    .hero::after{
+        display:none;
+    }
+
+    .beneficios{
+        padding:70px 40px;
+    }
+
+    .beneficios-grid{
+        flex-wrap:wrap;
+    }
+
+    .beneficio{
+        min-width:250px;
+    }
+
+    .metodologia{
+        padding:70px 40px;
+    }
+
+    .metodologia-contenedor{
+        flex-direction:column;
+        gap:60px;
+    }
+
+    .testimonios{
+        padding:70px 40px;
+    }
+
+    .testimonios-grid{
+        flex-wrap:wrap;
+    }
+
+    .redes-sociales{
+        gap:14px;
+        margin-top:20px;
+        flex-wrap:wrap;
+    }
+
+    .redes-sociales a{
+        width:44px;
+        height:44px;
+        font-size:1.1rem;
+    }
+
+}
+
+
+@media (max-width: 768px){
+
+    .hero{
+        padding:60px 20px;
+    }
+
+    .hero-content h1{
+        font-size:3rem;
+        margin-bottom:20px;
+    }
+
+    .hero-content p{
+        font-size:1.1rem;
+        margin-bottom:25px;
+    }
+
+    .hero-btn{
+        padding:15px 35px;
+        font-size:1rem;
+    }
+
+    .hero-characters{
+        gap:10px;
+        flex-wrap:wrap;
+    }
+
+    .hero-characters img{
+        width:110px;
+    }
+
+    .beneficios{
+        padding:60px 20px;
+    }
+
+    .beneficios h2{
+        font-size:2.3rem;
+        margin-bottom:40px;
+    }
+
+    .beneficios-grid{
+        flex-direction:column;
+    }
+
+    .beneficio{
+        padding:20px;
+    }
+
+    .metodologia{
+        padding:60px 20px;
+    }
+
+    .metodologia h2{
+        font-size:2.4rem;
+        margin-bottom:50px;
+    }
+
+    .encabezado-etapa{
+        flex-direction:column;
+        text-align:center;
+        align-items:center;
+    }
+
+    .numero{
+        font-size:5rem;
+    }
+
+    .contenido-etapa h3{
+        font-size:1.8rem;
+    }
+
+    .contenido-etapa p{
+        font-size:1rem;
+    }
+
+    .audio-silaba{
+        width:170px;
+        height:70px;
+        margin-right:0;
+    }
+
+    .audio-silaba span{
+        font-size:2.5rem;
+    }
+
+    .imagen-oracion,
+    .imagen-finx{
+        width:180px;
+        margin-left:0;
+    }
+
+    .testimonios{
+        padding:60px 20px;
+    }
+
+    .testimonios h2{
+        font-size:2.5rem;
+        margin-bottom:40px;
+    }
+
+    .testimonios-grid{
+        flex-direction:column;
+    }
+
+    .cta-section{
+        padding:50px 20px;
+    }
+
+    .cta-section h2{
+        font-size:1.8rem;
+    }
+
+    .redes-sociales{
+        justify-content:center;
+        gap:12px;
+        margin-top:18px;
+    }
+
+    .redes-sociales a{
+        width:42px;
+        height:42px;
+        font-size:1rem;
+    }
+
 }

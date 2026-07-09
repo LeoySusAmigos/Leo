@@ -1,58 +1,40 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Quicksand', sans-serif;
-    background-color: #f0f0f0;
-}
-
-/* --- BARRA GENERAL --- */
 .custom-navbar {
-    background-color: #00942a; 
+    background-color: #00942a;
     padding: 10px 20px;
-    position: absolute; /* Cambiado para sacarlo del contenedor rebelde */
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;        /* Obliga a expandirse al 100% de la pantalla */
-    z-index: 1000;      /* Se superpone al fondo del mapa */
+    width: 100%;
+    z-index: 1000;
     font-family: 'Quicksand', sans-serif;
 }
-   
+
 
 .nav-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     max-width: 1300px;
     margin: 0 auto;
     width: 100%;
 }
 
-/* --- LOGO EN TEXTO --- */
 .logo-container {
     display: flex;
-    gap: 5px;
-    background-color: #ffffff;
-    padding: 6px 12px;
-    border-radius: 15px;
+    align-items: center;
+    padding: 0px 12px;
 }
 
-.logo-text {
-    text-decoration: none;
-    font-size: 24px;
-    font-weight: bold;
-    font-family: 'Quicksand', sans-serif;
+.logo-container img {
+    width: 120px;
 }
-/* Colores divertidos para las letras */
-.logo-text.leo { color: #00bf63; }
-.logo-text.and { color: #539aed; }
-.logo-text.friends { color: #ff8d08; }
 
-
-/* --- MENÚ DE MASCOTAS (CENTRO) --- */
 .nav-menu {
     display: flex;
     list-style: none;
@@ -63,7 +45,7 @@ body {
 .nav-element {
     display: flex;
     align-items: center;
-    margin: 0 18px; /* Espacio entre cada sección */
+    margin: 0 18px;
 }
 
 .mascota-img {
@@ -79,7 +61,7 @@ body {
 }
 
 .menu-link {
-    color: #ffffff; /* Texto blanco idéntico a tu foto */
+    color: #ffffff;
     text-decoration: none;
     font-weight: 600;
     font-size: 16px;
@@ -92,7 +74,6 @@ body {
 }
 
 
-/* --- SECCIÓN USUARIO (DERECHA) --- */
 .usuario-container {
     display: flex;
     align-items: center;
@@ -105,8 +86,8 @@ body {
 }
 
 .avatar-circle {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     background-color: #ffffff;
     display: flex;
@@ -130,17 +111,18 @@ body {
 .user-name {
     font-weight: 600;
     display: block;
+    font-size: 14px;
 }
 
 .user-points {
-    color: #ffca28; /* Color amarillo para la estrella y puntos */
+    color: #ffca28;
     font-weight: 600;
+    font-size: 13px;
 }
 
 
-
-/* --- BOTONES LOGIN / REGISTRO --- */
-.btn-login, .btn-register {
+.btn-login,
+.btn-register {
     text-decoration: none;
     padding: 6px 12px;
     border-radius: 15px;
@@ -155,33 +137,75 @@ body {
 }
 
 .btn-register {
-    background-color: #ff9900;
+    background-color: #00ff95;
     color: #333333;
 }
 
-
-/* --- BOTÓN HAMBURGUESA (MÓVIL) --- */
 .nav-toggle {
-    display: none; /* Oculto en PC */
+    display: none;
     background: none;
     border: none;
     color: #ffffff;
-    font-size: 24px;
+    font-size: 28px;
     cursor: pointer;
 }
 
+/* ── Agregar al final de styles/navbar.css ── */
 
-/* --- RESPONSIVE PARA DISPOSITIVOS MÓVILES --- */
+/* Tuerquita de configuración */
+.navbar-gear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.85);
+    /* blanco suave, combina con el navbar verde */
+    font-size: 15px;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.12);
+    /* círculo muy sutil en reposo */
+    transition: color .35s ease, background .35s ease, transform .35s ease, box-shadow .35s ease;
+    flex-shrink: 0;
+}
+
+.navbar-gear:hover {
+    /* degradado suave con los 3 colores de la paleta */
+    background: linear-gradient(135deg,
+            rgba(217, 239, 224, 0.30) 0%,
+            /* verde pálido */
+            rgba(255, 122, 0, 0.25) 55%,
+            /* naranja */
+            rgba(219, 233, 251, 0.25) 100%
+            /* azul pálido */
+        );
+    color: #ff7a00;
+    /* naranja vivo al pasar el mouse */
+    transform: rotate(35deg) scale(1.08);
+    box-shadow: 0 0 10px rgba(255, 122, 0, 0.30);
+}
+
+/* Hace que el profile-box sea clicable sin romper el estilo */
+a.profile-box {
+    cursor: pointer;
+}
+
+a.profile-box:hover .user-name {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+
 @media screen and (max-width: 850px) {
     .nav-toggle {
-        display: block; /* Muestra el botón de tres líneas */
+        display: block;
     }
 
     .mascotas-container {
-        display: none; /* Esconde las mascotas para que no se amontonen */
+        display: none;
     }
 
-    /* Clase que activará JavaScript en celular */
     .mascotas-container.active {
         display: block;
         position: absolute;
@@ -190,15 +214,120 @@ body {
         width: 100%;
         background-color: #0f6828;
         padding: 15px 0;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     .nav-menu {
-        flex-direction: column; /* Coloca las mascotas una debajo de otra */
+        flex-direction: column;
         align-items: center;
     }
 
     .nav-element {
         margin: 12px 0;
     }
+}
+
+@media (max-width: 480px) {
+
+    .custom-navbar {
+        padding: 8px 12px;
+    }
+
+    .nav-container {
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo-container {
+        padding: 0;
+    }
+
+    .logo-container img {
+        width: 95px;
+    }
+
+    .nav-toggle {
+        display: block;
+        font-size: 28px;
+        margin-left: 10px;
+    }
+
+    .mascotas-container {
+        display: none;
+    }
+
+    .mascotas-container.active {
+        display: block;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #0f6828;
+        padding: 15px 0;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, .18);
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .nav-element {
+        margin: 0;
+        padding: 12px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, .15);
+    }
+
+    .nav-element:last-child {
+        border-bottom: none;
+    }
+
+    .mascota-img {
+        width: 42px;
+        height: 42px;
+        margin-right: 12px;
+    }
+
+    .menu-link {
+        font-size: 15px;
+    }
+
+    .usuario-container {
+        gap: 10px;
+    }
+
+    .profile-box {
+        margin-right: 0;
+    }
+
+    .avatar-circle {
+        width: 34px;
+        height: 34px;
+        margin-right: 8px;
+    }
+
+    .avatar-circle i {
+        font-size: 15px;
+    }
+
+    .user-info {
+        font-size: 13px;
+    }
+
+    .user-name {
+        font-size: 13px;
+    }
+
+    .user-points {
+        font-size: 13px;
+    }
+
+    .navbar-gear {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+    }
+
 }

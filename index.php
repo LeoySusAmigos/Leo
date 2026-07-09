@@ -1,7 +1,11 @@
 <?php
+
 session_start();
+
+include("php/conexion.php");
+
 ?>
- 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,175 +18,18 @@ session_start();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/navbar1.css">
     <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg custom-navbar">
- 
-        <div class="container">
- 
-            <!-- LOGO -->
- 
-            <a class="navbar-brand logo" href="index.php">
- 
-                <span class="leo">Leo</span>
- 
-                <span class="ampersand">&</span>
- 
-                <span class="friends">Friends</span>
- 
-            </a>
- 
-            <!-- BOTÓN RESPONSIVE -->
- 
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
- 
-                <span class="navbar-toggler-icon"></span>
- 
-            </button>
- 
-            <div class="collapse navbar-collapse" id="navbarNav">
- 
-                <!-- MENÚ CENTRADO -->
- 
-                <ul class="navbar-nav mx-auto menu-center">
- 
-                    <li class="nav-item">
- 
-                        <a class="nav-link" href="#">
-                            Cómo funciona
-                        </a>
- 
-                    </li>
- 
-                    <li class="nav-item">
- 
-                        <a class="nav-link" href="sobre-nosotros.php">
-                            Sobre Nosotros
-                        </a>
- 
-                    </li>
- 
-                    <li class="nav-item">
- 
-                        <a class="nav-link" href="#">
-                            Paquetes Salvajes
-                        </a>
- 
-                    </li>
- 
-                </ul>
- 
-                <!-- DERECHA -->
- 
-                <div class="nav-buttons">
- 
-                    <?php if (isset($_SESSION['userID'])): ?>
- 
-                        <div class="dropdown">
- 
-                            <a
-                            class="btn profile-btn dropdown-toggle"
- 
-                            href="#"
- 
-                            data-bs-toggle="dropdown">
- 
-                                <?php if (!empty($_SESSION['foto_nino'])): ?>
-                                    <!-- Foto real del niño guardada en la BD (columna foto_nino) -->
-                                    <img
-                                        src="<?php echo htmlspecialchars($_SESSION['foto_nino']); ?>"
-                                        alt="Foto de <?php echo htmlspecialchars($_SESSION['nombre_nino']); ?>"
-                                        class="profile-avatar-img">
-                                <?php else: ?>
-                                    <!-- Si aún no tiene foto subida (NULL en la BD), usamos el ícono genérico -->
-                                    <i class="fa-solid fa-circle-user"></i>
-                                <?php endif; ?>
- 
-                                <?php echo htmlspecialchars($_SESSION['nombre_nino']); ?>
- 
-                            </a>
- 
-                            <ul class="dropdown-menu dropdown-menu-end">
- 
-                                <li>
- 
-                                    <a class="dropdown-item"
- 
-                                    href="profile.php">
- 
-                                        Perfil
- 
-                                    </a>
- 
-                                </li>
- 
-                                <li>
- 
-                                    <hr class="dropdown-divider">
- 
-                                </li>
- 
-                                <li>
- 
-                                    <a
- 
-                                    class="dropdown-item text-danger"
- 
-                                    href="php/logout.php">
- 
-                                        Cerrar sesión
- 
-                                    </a>
- 
-                                </li>
- 
-                            </ul>
- 
-                        </div>
- 
-                        <!-- TUERQUITA DE CONFIGURACIÓN: a la derecha del dropdown -->
-                        <a class="settings-link" href="configuracion.php" title="Configuración">
-                            <i class="fa-solid fa-gear"></i>
-                        </a>
- 
-                    <?php else: ?>
- 
-                        <a class="btn login-btn"
- 
-                        href="login.html">
- 
-                            Iniciar sesión
- 
-                        </a>
- 
-                        <a class="btn register-btn"
- 
-                        href="register.html">
- 
-                            Registrarse gratis
- 
-                        </a>
- 
-                    <?php endif; ?>
- 
-                </div>
- 
-            </div>
- 
-        </div>
- 
-    </nav>
- 
+   
+    <?php include("navbar1.php"); ?>
+
     <section class="hero">
         <div class="hero-content">
             <h1>
-                Aprender a leer <br>
-                es una aventura
+                Aprender a leer
+                <span>es una aventura</span>
             </h1>
  
             <p>
@@ -196,9 +43,9 @@ session_start();
         </div>
  
         <div class="hero-characters">
+            <img src="images/capy1.png" alt="Capy">
             <img src="images/leito.png" alt="Leo">
             <img src="images/finx.png" alt="Finx">
-            <img src="images/capy1.png" alt="Capy">
         </div>
     </section>
  
@@ -224,7 +71,7 @@ session_start();
  
                 <p>
  
-                    Basado en la metodología de los 20 días,
+                    Basado en la metodología de los 20 días y el método silábico,
  
                     con progresión silábica estructurada.
  
@@ -281,7 +128,7 @@ session_start();
     </section>
  
  
-<!-- METODOLOGÍA -->
+    <!-- METODOLOGÍA -->
  
     <section class="metodologia">
  
@@ -404,154 +251,112 @@ session_start();
     </section>
  
  
-<!-- TESTIMONIOS -->
+    <!-- TESTIMONIOS -->
  
     <section class="testimonios">
  
         <h2>Lo que dicen otros padres</h2>
  
         <div class="testimonios-grid">
- 
-            <!-- TESTIMONIO 1 -->
- 
-            <div class="testimonio">
- 
-                <div class="estrellas">
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                </div>
- 
-                <p>
- 
-                    "Mi hija empezó a leer sus primeras palabras en pocas semanas. ¡Le encanta!"
- 
-                </p>
- 
-                <div class="persona">
- 
-                    <img
- 
-                    src="images/mama1.jpg"
- 
-                    alt="Ana">
- 
-                    <div>
- 
-                        <h4>Ana</h4>
- 
-                        <span>Mamá de Sofía (7 años)</span>
- 
-                    </div>
- 
-                </div>
- 
-            </div>
- 
- 
-            <!-- TESTIMONIO 2 -->
- 
-            <div class="testimonio">
- 
-                <div class="estrellas">
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                </div>
- 
-                <p>
- 
-                    "Los reportes me dan tranquilidad porque puedo ver su avance día a día."
- 
-                </p>
- 
-                <div class="persona">
- 
-                    <img
- 
-                    src="images/papa1.jpg"
- 
-                    alt="Carlos">
- 
-                    <div>
- 
-                        <h4>Carlos</h4>
- 
-                        <span>Papá de Mateo (6 años)</span>
- 
-                    </div>
- 
-                </div>
- 
-            </div>
- 
- 
-            <!-- TESTIMONIO 3 -->
- 
-            <div class="testimonio">
- 
-                <div class="estrellas">
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                    <i class="fa-solid fa-star"></i>
- 
-                </div>
- 
-                <p>
- 
-                    "El método es claro y efectivo. Mi hijo está más motivado que nunca."
- 
-                </p>
- 
-                <div class="persona">
- 
-                    <img
- 
-                    src="images/mama2.jpg"
- 
-                    alt="Lucía">
- 
-                    <div>
- 
-                        <h4>Lucía</h4>
- 
-                        <span>Mamá de Tomás (8 años)</span>
- 
-                    </div>
- 
-                </div>
- 
-            </div>
- 
-        </div>
- 
-    </section>
- 
- 
-<!-- FOOTER CTA -->
+
+    <?php
+
+$resenas=$conn->query("
+
+SELECT
+
+r.*,
+
+u.nombre_papa,
+u.nombre_nino,
+u.foto_padre
+
+FROM resenas r
+
+JOIN usuarios u
+
+ON r.userID=u.userID
+
+ORDER BY calificacion DESC, fecha DESC
+
+LIMIT 3
+
+");
+
+while($fila=$resenas->fetch_assoc()){
+
+?>
+
+<div class="testimonio">
+
+<div class="estrellas">
+
+<?php
+
+for($i=1;$i<=5;$i++){
+
+if($i<=$fila['calificacion']){
+
+echo '<i class="fa-solid fa-star"></i>';
+
+}
+
+}
+
+?>
+
+</div>
+
+<p>
+
+"<?php echo $fila['comentario']; ?>"
+
+</p>
+
+<div class="persona">
+
+<img
+
+src="images/fotopadre/<?php echo $fila['foto_padre']; ?>"
+
+alt="Foto">
+
+<div>
+
+<h4>
+
+<?php echo $fila['nombre_papa']; ?>
+
+</h4>
+
+<span>
+
+Papá/Mamá de
+
+<?php echo $fila['nombre_nino']; ?>
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<?php
+
+}
+
+?>
+
+</div>
+
+    </div>
+
+        </section>
+
+
+    <!-- FOOTER CTA -->
  
     <section class="cta-section">
  
@@ -586,6 +391,28 @@ session_start();
                 Sin tarjeta de crédito • Cancela cuando quieras
  
             </small>
+
+            <div class="cta-redes">
+
+                <span>Síguenos en:</span>
+
+                <a href="#">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+
+                <a href="https://www.instagram.com/leoandfriendsabc?igsh=anY2enNiMzB0ZGM3">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+
+            </div>
  
         </div>
  
@@ -605,6 +432,6 @@ session_start();
 
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

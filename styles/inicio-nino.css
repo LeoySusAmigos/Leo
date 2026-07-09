@@ -1,0 +1,444 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Fredoka',sans-serif;
+    background:#f7f9fc;
+    color:#333;
+}
+
+/* ================= HERO ================= */
+
+.hero-dashboard{
+
+    max-width:1300px;
+   
+    margin:35px auto 50px auto;
+
+    background:linear-gradient(
+    135deg,
+    #95e295,
+    #73b46d
+    );
+
+    border-radius:30px;
+
+    padding:40px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:40px;
+
+    color:white;
+}
+
+.hero-mascota img{
+
+    width:250px;
+
+    object-fit:contain;
+}
+
+.hero-info{
+
+    flex:1;
+}
+
+.hero-info h1{
+
+    font-size:3rem;
+
+    margin-bottom:15px;
+}
+
+.hero-info p{
+
+    font-size:1.2rem;
+
+    margin-bottom:20px;
+}
+
+.barra-progreso{
+
+    width:100%;
+
+    height:20px;
+
+    background:rgba(255,255,255,.25);
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+    margin-bottom:10px;
+}
+
+.barra-interna{
+
+    height:100%;
+
+    background:white;
+
+    border-radius:50px;
+}
+
+.btn-continuar{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:20px;
+
+    background:white;
+
+    color:#43a047;
+
+    text-decoration:none;
+
+    padding:14px 30px;
+
+    border-radius:14px;
+
+    font-weight:700;
+}
+
+/* ================= AVENTURAS ================= */
+
+.aventuras{
+
+    max-width:1300px;
+
+    margin:auto;
+
+    padding:20px;
+}
+
+.aventuras h2{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+    font-size:2.5rem;
+}
+
+.aventuras-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:25px;
+}
+
+.aventura{
+
+    background:white;
+
+    border-radius:28px;
+
+    padding:25px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    text-align:center;
+
+    overflow:hidden;
+}
+
+.aventura:hover{
+
+    transform:translateY(-8px);
+}
+
+.aventura:hover{
+
+    transform:translateY(-6px);
+}
+
+.aventura img{
+
+    width:170px;
+
+    height:170px;
+
+    object-fit:contain;
+
+    margin-bottom:10px;
+}
+
+.aventura h3{
+
+    font-size:2rem;
+
+    margin-bottom:10px;
+}
+
+.aventura p{
+
+    margin-bottom:15px;
+}
+
+.aventura a{
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    text-decoration:none;
+
+    background:#4caf50;
+
+    color:white;
+
+    padding:12px 25px;
+
+    border-radius:12px;
+
+    font-weight:700;
+}
+
+.mini-barra{
+
+    height:12px;
+
+    background:#eee;
+
+    border-radius:50px;
+
+    overflow:hidden;
+}
+
+.mini-barra div{
+
+    height:100%;
+
+    background:#4caf50;
+}
+
+.bloqueado{
+
+    background:#f2f2f2;
+
+    color:#777;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    font-weight:700;
+}
+
+.leo-card{
+
+    border-top:8px solid #4CAF50;
+}
+
+.capy-card{
+
+    border-top:8px solid #FF8A00;
+}
+
+.finx-card{
+
+    border-top:8px solid #2D8CFF;
+}
+
+/* ================= ESTADISTICAS ================= */
+
+.estadisticas-nino{
+
+    max-width:1300px;
+
+    margin:50px auto;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:25px;
+
+    padding:0 20px;
+}
+
+.card-estadistica{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+}
+
+.card-estadistica:hover{
+
+    transform:translateY(-5px);
+}
+
+.card-estadistica h3{
+
+    margin-top:10px;
+
+    font-size:2.5rem;
+}
+
+/* ================= LOGRO ================= */
+
+.logro-reciente{
+
+    max-width:1300px;
+
+    margin:auto;
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:30px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:25px;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,.08);
+}
+
+.logro-icono{
+
+    font-size:4rem;
+}
+
+/* ================= FOOTER ================= */
+
+.dashboard-footer{
+
+    margin-top:60px;
+
+    padding:60px 20px;
+
+    text-align:center;
+}
+
+.dashboard-footer h2{
+
+    font-size:2.5rem;
+
+    margin-bottom:15px;
+}
+
+
+
+
+@media(max-width:768px){
+
+    .hero-dashboard{
+
+        margin-top:110px;
+
+        flex-direction:column;
+
+        text-align:center;
+
+        padding:30px 20px;
+
+    }
+
+    .hero-info h1{
+
+        font-size:2rem;
+
+    }
+
+    .hero-info p{
+
+        font-size:1rem;
+
+    }
+
+    .hero-mascota img{
+
+        width:170px;
+
+    }
+
+    .aventuras-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .estadisticas-nino{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .logro-reciente{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+    .btn-continuar{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+}
+
+
+@media(max-width:992px){
+
+    .hero-dashboard{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+    .aventuras-grid{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+    .estadisticas-nino{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+}
