@@ -2,6 +2,10 @@ class LibroInteractivo {
   constructor(containerId, paginas, opciones = {}) {
     this.container     = document.getElementById(containerId);
     this.rawPaginas    = paginas;
+
+    console.log(this.rawPaginas);
+    console.log(this.rawPaginas[this.rawPaginas.length - 1].texto);
+
     this.opciones      = Object.assign({ onTerminar: null, palabrasPorPagina: 60 }, opciones);
     this.paginas       = [];
     this.paginaActual  = 0;
@@ -111,9 +115,7 @@ class LibroInteractivo {
       <div class="lb-oraciones">
         <div class="lb-oracion-row">
           <p class="lb-oracion">${textoLimpio}</p>
-          <button class="lb-audio" onclick="LibroInteractivo._leer('${textoLimpio.replace(/'/g,"\\'")}')">
-            &#128266;
-          </button>
+          <button class="lb-audio">&#128266;</button>
         </div>
       </div>`;
 
@@ -129,6 +131,7 @@ class LibroInteractivo {
     html += '</div>';
     return html;
   }
+  
 
   _mostrarPagina(idx, animar = true) {
     if (idx < 0 || idx >= this.total) return;
@@ -142,6 +145,15 @@ class LibroInteractivo {
 
     if (!animar) {
       this.elCurrent.innerHTML = this._contenidoPagina(siguiente);
+      const boton = this.elCurrent.querySelector('.lb-audio');
+
+  if (boton) {
+      const texto = this.paginas[siguiente].texto;
+
+      boton.addEventListener('click', () => {
+          LibroInteractivo._leer(texto);
+      });
+  }
       this.paginaActual = siguiente;
       this._actualizarUI();
       this._bindListo();

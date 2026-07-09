@@ -5,7 +5,12 @@
 }
 
 body {
-    background-color: #FAFAFA;
+    background-image: url('../images/fondoalegre-minimalista.png');
+    background-size: cover;
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     min-height: 100vh;
     font-family: 'Quicksand', 'Nunito', sans-serif;
     padding: 20px;
@@ -16,7 +21,7 @@ body {
 .biblioteca-container {
     width: 100%;
     max-width: 1100px;
-    margin: 90px auto 40px auto; 
+    margin: 90px auto 40px auto;
     padding: 0 15px;
 }
 
@@ -33,7 +38,7 @@ body {
     font-family: 'Fredoka', sans-serif;
     font-size: 42px;
     font-weight: 700;
-    color: #2F7A2F; 
+    color: #2F7A2F;
     letter-spacing: 0.5px;
     text-align: center;
 }
@@ -46,7 +51,7 @@ body {
 }
 
 .filtrar {
-    position: absolute; 
+    position: absolute;
     right: 15px;
 }
 
@@ -72,14 +77,14 @@ body {
 
 .menu-filtro {
     position: absolute;
-    top: 115%; 
-    right: 0;   
+    top: 115%;
+    right: 0;
     background-color: white;
     border: 2px solid #E5E5E5;
     border-radius: 16px;
     width: 150px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    z-index: 100; 
+    z-index: 100;
     overflow: hidden;
     padding: 5px 0;
 }
@@ -128,7 +133,7 @@ body {
 .tab-text {
     display: flex;
     flex-direction: column;
-    
+
 }
 
 .tab-title {
@@ -145,14 +150,13 @@ body {
 }
 
 .tab-item.active {
-    background-color: white;
-    border-bottom: 5px solid #2F7A2F; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-    
+    background-color: rgb(248, 255, 246);
+    border-bottom: 5px solid #2F7A2F;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
-.active{
-    transform: scale(1, 1.10); 
+.active {
+    transform: scale(1, 1.10);
     z-index: 10;
     margin-bottom: 3px;
 }
@@ -162,7 +166,7 @@ body {
     border: 2px solid #E5E5E5;
     border-radius: 0px 0px 20px 20px;
     padding: 30px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.02);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02);
 }
 
 .info-banner-niveles {
@@ -233,7 +237,7 @@ body {
     color: #2F7A2F;
     cursor: pointer;
     font-size: 18px;
-    transition: transform 0.2s ease; 
+    transition: transform 0.2s ease;
 }
 
 .nivel-row-cards-flex {
@@ -316,7 +320,7 @@ body {
 }
 
 .status-check-circle.completed {
-    background-color: #58CC02; 
+    background-color: #58CC02;
     color: white;
     font-size: 12px;
 }
@@ -357,20 +361,27 @@ body {
 }
 
 .mascota img {
-    width: 180px;       
+    width: 180px;
     height: auto;
     object-fit: contain;
     filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
 }
 
 @media (max-width: 768px) {
+
     .biblioteca-container {
-        margin: 60px auto 30px auto; 
+        margin: 80px auto 30px auto;
     }
 
-    .tabs-mascotas-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
+    .nivel-row-cards-flex {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .card-cuento-modern-link {
+        display: block;
+        width: 100%;
     }
 
     .card-cuento-modern {
@@ -379,11 +390,178 @@ body {
 }
 
 @media (max-width: 480px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .biblioteca-container {
+        margin: 85px auto 25px auto;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .biblio-header-modern {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .header-center-title h1 {
+        font-size: 30px;
+        line-height: 1.1;
+    }
+
+    .header-center-title p {
+        font-size: 15px;
+    }
+
+    .filtrar {
+        position: static;
+    }
+
     .tabs-mascotas-container {
-        grid-template-columns: 1fr;
+        display: flex;
+        align-items: center;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 14px;
+        padding-bottom: 10px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .tabs-mascotas-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab-item {
+        flex-shrink: 0;
+        background-color: white;
+        border: 2px solid #E5E5E5;
+        width: 75px;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .tab-mascota-img {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 6px;
+        transition: .2s;
+    }
+
+    .tab-title {
+        display: none;
+    }
+
+    .tab-subtitle {
+        font-size: 14px;
+        font-weight: 700;
+        color: #555;
+    }
+
+    .tab-item.active {
+        transform: none;
+        background: none;
+        border: none;
+        box-shadow: none;
+    }
+
+    .tab-item.active .tab-mascota-img {
+        transform: scale(1.12);
+    }
+
+    .tab-item.active .tab-subtitle {
+        color: #2F7A2F;
+    }
+
+    .tab-item.active::after {
+        content: "";
+        width: 42px;
+        height: 4px;
+        margin-top: 6px;
+        background: #2F7A2F;
+        border-radius: 10px;
+    }
+
+    .btn-filtro-modern {
+        padding: 8px 18px;
+        font-size: 14px;
+        border-radius: 25px;
+    }
+
+    .content-wrapper-modern {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .info-banner-niveles {
+        padding: 14px;
+        gap: 12px;
+    }
+
+    .banner-info-text strong {
+        font-size: 14px;
+    }
+
+    .banner-info-text p {
+        font-size: 13px;
+    }
+
+    .banner-icon-circle {
+        width: 36px;
+        height: 36px;
+    }
+
+    .nivel-row-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nivel-meta-info {
+        display: none;
+    }
+
+    .toggle-row-icon {
+        margin-left: 0;
+    }
+
+    .nivel-row-cards-flex {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
     }
 
     .card-cuento-modern {
         width: 100%;
+        padding: 14px;
     }
+
+    .card-left-thumb {
+        width: 70px;
+        height: 70px;
+    }
+
+    .card-center-data h4 {
+        font-size: 16px;
+    }
+
+    .duration-text {
+        font-size: 13px;
+    }
+
+    .mascota {
+        display: none;
+    }
+
 }

@@ -5,7 +5,7 @@
 }
 
 body{
-    font-family: 'Baloo 2', cursive;
+    font-family: 'Quicksand', sans-serif;
     background:#efefef;
     color:#222;
 }
@@ -64,7 +64,7 @@ body{
 .hero h1{
     font-size:3.2rem;
     line-height:1.2;
-    color:#17166b;
+    color:#1f1500;
     max-width:900px;
     margin:auto;
 }
@@ -88,7 +88,7 @@ body{
 }
 
 .mision{
-    background:#e7d7c9;
+    background:#ffc955;
 }
 
 .vision{

@@ -132,6 +132,7 @@
     color: #333;
     line-height: 1.6;
     flex: 1;
+    white-space: pre-line !important; /* Esto es para que respete los saltos de línea */
 }
 
 .lb-audio {

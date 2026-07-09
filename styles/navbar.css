@@ -1,29 +1,24 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Quicksand', sans-serif;
-    background-color: #f0f0f0;
-}
-
 .custom-navbar {
-    background-color: #00942a; 
+    background-color: #00942a;
     padding: 10px 20px;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;       
-    z-index: 1000;     
+    width: 100%;
+    z-index: 1000;
     font-family: 'Quicksand', sans-serif;
 }
-   
+
 
 .nav-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     max-width: 1300px;
     margin: 0 auto;
@@ -36,9 +31,9 @@ body {
     padding: 0px 12px;
 }
 
-.logo-container img{
-    width: 120px;    
-} 
+.logo-container img {
+    width: 120px;
+}
 
 .nav-menu {
     display: flex;
@@ -91,8 +86,8 @@ body {
 }
 
 .avatar-circle {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     background-color: #ffffff;
     display: flex;
@@ -116,15 +111,18 @@ body {
 .user-name {
     font-weight: 600;
     display: block;
+    font-size: 14px;
 }
 
 .user-points {
     color: #ffca28;
     font-weight: 600;
+    font-size: 13px;
 }
 
 
-.btn-login, .btn-register {
+.btn-login,
+.btn-register {
     text-decoration: none;
     padding: 6px 12px;
     border-radius: 15px;
@@ -148,7 +146,7 @@ body {
     background: none;
     border: none;
     color: #ffffff;
-    font-size: 24px;
+    font-size: 28px;
     cursor: pointer;
 }
 
@@ -159,13 +157,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
-    color: rgba(255, 255, 255, 0.85);  /* blanco suave, combina con el navbar verde */
-    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    /* blanco suave, combina con el navbar verde */
+    font-size: 15px;
     text-decoration: none;
-    background: rgba(255, 255, 255, 0.12);  /* círculo muy sutil en reposo */
+    background: rgba(255, 255, 255, 0.12);
+    /* círculo muy sutil en reposo */
     transition: color .35s ease, background .35s ease, transform .35s ease, box-shadow .35s ease;
     flex-shrink: 0;
 }
@@ -173,11 +173,15 @@ body {
 .navbar-gear:hover {
     /* degradado suave con los 3 colores de la paleta */
     background: linear-gradient(135deg,
-        rgba(217, 239, 224, 0.30) 0%,    /* verde pálido */
-        rgba(255, 122,   0, 0.25) 55%,   /* naranja */
-        rgba(219, 233, 251, 0.25) 100%   /* azul pálido */
-    );
-    color: #ff7a00;                       /* naranja vivo al pasar el mouse */
+            rgba(217, 239, 224, 0.30) 0%,
+            /* verde pálido */
+            rgba(255, 122, 0, 0.25) 55%,
+            /* naranja */
+            rgba(219, 233, 251, 0.25) 100%
+            /* azul pálido */
+        );
+    color: #ff7a00;
+    /* naranja vivo al pasar el mouse */
     transform: rotate(35deg) scale(1.08);
     box-shadow: 0 0 10px rgba(255, 122, 0, 0.30);
 }
@@ -222,8 +226,12 @@ a.profile-box:hover .user-name {
         width: 100%;
         background-color: #0f6828;
         padding: 15px 0;
+<<<<<<< HEAD
         box-shadow: 0 4px 10px rgba(0,0,0,.3);
         z-index: 999;
+=======
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+>>>>>>> 11c1e30eaa54335693346f2bf330774fc6d6b640
     }
 
     .nav-menu {
@@ -377,4 +385,109 @@ a.profile-box:hover .user-name {
     .menu-link {
         font-size: 13px;
     }
+}
+
+@media (max-width: 480px) {
+
+    .custom-navbar {
+        padding: 8px 12px;
+    }
+
+    .nav-container {
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo-container {
+        padding: 0;
+    }
+
+    .logo-container img {
+        width: 95px;
+    }
+
+    .nav-toggle {
+        display: block;
+        font-size: 28px;
+        margin-left: 10px;
+    }
+
+    .mascotas-container {
+        display: none;
+    }
+
+    .mascotas-container.active {
+        display: block;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #0f6828;
+        padding: 15px 0;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, .18);
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .nav-element {
+        margin: 0;
+        padding: 12px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, .15);
+    }
+
+    .nav-element:last-child {
+        border-bottom: none;
+    }
+
+    .mascota-img {
+        width: 42px;
+        height: 42px;
+        margin-right: 12px;
+    }
+
+    .menu-link {
+        font-size: 15px;
+    }
+
+    .usuario-container {
+        gap: 10px;
+    }
+
+    .profile-box {
+        margin-right: 0;
+    }
+
+    .avatar-circle {
+        width: 34px;
+        height: 34px;
+        margin-right: 8px;
+    }
+
+    .avatar-circle i {
+        font-size: 15px;
+    }
+
+    .user-info {
+        font-size: 13px;
+    }
+
+    .user-name {
+        font-size: 13px;
+    }
+
+    .user-points {
+        font-size: 13px;
+    }
+
+    .navbar-gear {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+    }
+
 }

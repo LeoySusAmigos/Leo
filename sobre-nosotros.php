@@ -6,27 +6,17 @@
     <title>Sobre Nosotros</title>
 
     <link rel="stylesheet" href="styles/sobre-nosotros.css">
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&family=Fredoka:wght@600;900&family=Nunito:wght@700;900&family=Quicksand:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/navbar1.css">
 </head>
 
 <body>
 
-    <header class="navbar">
-        <div class="logo">
-            <a href="index.php">
-                <img src="images/Leo-1.png" alt="Logo">
-            </a>
-        </div>
-
-        <nav>
-            <ul>
-                <li><a href="index.php">Inicio</a></li>
-                <li><a href="sobre-nosotros.php" class="active">Sobre Nosotros</a></li>
-                <li><a href="juegos.php">Juegos</a></li>
-            </ul>
-        </nav>
-    </header>
+    <?php include("navbar1.php"); ?>
 
     <!-- TITULO -->
     <section class="hero">

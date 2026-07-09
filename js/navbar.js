@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
-    
 
-    // 2. CONTROL DEL MENÚ RESPONSIVO (HAMBURGUESA)
     const navToggle = document.getElementById("navToggle");
     const mascotasContainer = document.getElementById("mascotas");
 
@@ -13,15 +10,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 3. CERRAR MENÚS AL HACER CLIC EN CUALQUIER OTRA PARTE DE LA PANTALLA
+    if (mascotasContainer) {
+        mascotasContainer.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
+    }
+
     document.addEventListener("click", () => {
-        if (dropdownMenu && dropdownMenu.classList.contains("show")) {
-            dropdownMenu.classList.remove("show");
-        }
         if (mascotasContainer && mascotasContainer.classList.contains("active")) {
             mascotasContainer.classList.remove("active");
         }
     });
+<<<<<<< HEAD
 });
 
 (function() {
@@ -43,3 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 })();
+=======
+
+});
+>>>>>>> 11c1e30eaa54335693346f2bf330774fc6d6b640

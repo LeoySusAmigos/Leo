@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
+=======
+>>>>>>> 11c1e30eaa54335693346f2bf330774fc6d6b640
 
 <nav class="custom-navbar">
     <div class="nav-container">
@@ -19,7 +22,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <ul class="nav-menu">
                 <li class="nav-element">
                     <a href="aventura1.html"><img src="images/Leito.png" alt="Leo" class="mascota-img"></a>
-                    <a class="menu-link" href="aventura1.html">Sílabas con Leo</a>
+                    <a class="menu-link" href="aventura-leo.php">Sílabas con Leo</a>
                 </li>
                 <li class="nav-element">
                     <a href="aventura2.php"><img src="images/capy1.png" alt="Capy" class="mascota-img"></a>
