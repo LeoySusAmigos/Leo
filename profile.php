@@ -10,14 +10,18 @@ if (!isset($_SESSION['userID'])) {
 // Siempre leemos de la BD para mostrar lo más reciente
 $id  = $_SESSION['userID'];
 $sql = "SELECT nombre_nino, nombre_papa, correo, foto_nino, foto_padre FROM usuarios WHERE userID = ?";
-$stmt = $conn->prepare($sql);
+$stmt = $conn->prepare($sql);  {}
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $usuario = $stmt->get_result()->fetch_assoc();
 
 // Si la columna está vacía/NULL usamos un avatar genérico
-$avatar_nino  = !empty($usuario['foto_nino'])  ? $usuario['foto_nino']  : "images/default-nino.png";
-$avatar_padre = !empty($usuario['foto_padre']) ? $usuario['foto_padre'] : "images/default-padre.png";
+$avatar_nino  = !empty($usuario['foto_nino'])
+                ? "images/perfiles/" . $usuario['foto_nino']
+                : "images/default-nino.png";
+$avatar_padre = !empty($usuario['foto_padre'])
+                ? "images/perfiles/" . $usuario['foto_padre']
+                : "images/default-padre.png";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -28,58 +32,130 @@ $avatar_padre = !empty($usuario['foto_padre']) ? $usuario['foto_padre'] : "image
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
+        /* ── Base ── */
         body {
-            background-color: #f4f7f6;
+            background-color: #eef2ee;  /* verde muy suave, igual que configuracion */
             font-family: 'Quicksand', 'Nunito', sans-serif;
         }
+
+        /* ── Tarjeta principal ── */
         .profile-card {
             border: none;
             border-radius: 16px;
+            border-top: 4px solid #2d9e4e;
         }
+
+        /* ── Encabezado ── */
+        .profile-card h3 {
+            color: #1a6e2e;
+        }
+
+        .profile-card .text-muted.small {
+            color: #2d9e4e !important;
+            opacity: .75;
+        }
+
+        /* ── Ícono del encabezado ── */
+        .bg-warning.bg-opacity-10 {
+            background-color: rgba(45, 158, 78, 0.12) !important;
+        }
+
+        .text-warning {
+            color: #2d9e4e !important;
+        }
+
+        /* ── Avatares ── */
         .avatar-frame {
             width: 120px;
             height: 120px;
             object-fit: cover;
             border-radius: 50%;
-            border: 4px solid #ffca28;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 4px solid #2d9e4e;
+            box-shadow: 0 4px 12px rgba(45,158,78,.2);
         }
+
         .avatar-frame.papa {
-            border-color: #42a5f5;
+            border-color: #1e88e5;
         }
+
         .avatar-label {
             font-size: .8rem;
-            color: #888;
+            color: #2d9e4e;
+            font-weight: 700;
             margin-top: 8px;
         }
+
+        /* ── Fondos de las cards de avatar ── */
+        .bg-light {
+            background-color: #e8f7ec !important;
+        }
+
+        /* ── Filas de datos ── */
         .dato-fila {
             display: flex;
             align-items: center;
             gap: 12px;
             padding: 14px 0;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid #e8f7ec;
         }
         .dato-fila:last-child { border-bottom: none; }
+
         .dato-fila .icono {
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: #f4f7f6;
+            background: #e8f7ec;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
+
+        /* Íconos en verde oscuro */
+        .dato-fila .icono i {
+            color: #1a6e2e;
+        }
+
         .dato-fila .etiqueta {
             font-size: .78rem;
-            color: #aaa;
+            color: #2d9e4e;
             font-weight: 600;
             margin-bottom: 2px;
         }
+
         .dato-fila .valor {
             font-size: .97rem;
             font-weight: 700;
-            color: #222;
+            color: #1a202c;
+        }
+
+        /* ── Botones ── */
+        /* "Volver" ya tiene border de Bootstrap, solo ajustamos hover */
+        .btn-light:hover {
+            background: #e8f7ec;
+            border-color: #2d9e4e;
+            color: #1a6e2e;
+        }
+
+        /* "Editar en Configuración" ya es amarillo de Bootstrap,
+           lo cambiamos a verde de la paleta */
+        .btn-warning {
+            background-color: #2d9e4e !important;
+            border-color: #1a6e2e !important;
+            color: #fff !important;
+            box-shadow: 0 4px 0 #1a6e2e;
+        }
+
+        .btn-warning:hover {
+            background-color: #1a6e2e !important;
+            transform: translateY(-2px);
+        }
+
+        /* ── Alerta de éxito ── */
+        .alert-success {
+            background-color: #e8f7ec;
+            color: #1a6e2e;
+            border: none;
         }
     </style>
 </head>

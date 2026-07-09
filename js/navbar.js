@@ -23,3 +23,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+(function() {
+
+    const imgElement = document.querySelector(".topbar__user .avatar");
+
+    
+
+    if (imgElement) {
+
+            const currentSrc = imgElement.getAttribute('src');
+
+        if (currentSrc) {
+
+            imgElement.src = currentSrc + "?t=" + new Date().getTime();
+
+        }
+
+    }
+
+})();
