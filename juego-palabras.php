@@ -34,9 +34,5 @@
     <?php include 'components/navbar.php'; ?>
 
 
-    <div class="juego-contenedor">
-        
-        </div>
-
 </body>
 </html>

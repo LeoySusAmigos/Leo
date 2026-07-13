@@ -2,6 +2,10 @@ class LibroInteractivo {
   constructor(containerId, paginas, opciones = {}) {
     this.container     = document.getElementById(containerId);
     this.rawPaginas    = paginas;
+
+    console.log(this.rawPaginas);
+    console.log(this.rawPaginas[this.rawPaginas.length - 1].texto);
+
     this.opciones      = Object.assign({ onTerminar: null, palabrasPorPagina: 60 }, opciones);
     this.paginas       = [];
     this.paginaActual  = 0;
@@ -9,6 +13,7 @@ class LibroInteractivo {
     this.timerInterval = null;
     this.arrastrando   = false;
     this.dragStartX    = 0;
+    this.animando      = false;
 
     this._dividirPaginas();
     this._render();
@@ -107,73 +112,80 @@ class LibroInteractivo {
     }
 
     const textoLimpio = p.texto.trim();
+        const textoEscapado = textoLimpio.replace(/'/g, "\\'").replace(/"/g, '&quot;');
     html += `
       <div class="lb-oraciones">
         <div class="lb-oracion-row">
           <p class="lb-oracion">${textoLimpio}</p>
-          <button class="lb-audio" onclick="LibroInteractivo._leer('${textoLimpio.replace(/'/g,"\\'")}')">
+          <button class="lb-audio" onclick="LibroInteractivo._leer('${textoEscapado}')">
             &#128266;
           </button>
         </div>
       </div>`;
-
+ 
     html += `<div class="lb-page-num">${idx + 1} / ${this.total}</div>`;
-
+ 
     if (esUltima) {
       html += `
         <div class="lb-listo-wrap">
           <button class="lb-btn-listo" id="lb-listo">&#10003; ¡Listo!</button>
         </div>`;
     }
-
+ 
     html += '</div>';
     return html;
   }
 
   _mostrarPagina(idx, animar = true) {
     if (idx < 0 || idx >= this.total) return;
+    if (this.animando) return;
 
     const siguiente = idx;
     const anterior  = this.paginaActual;
     const avanzando = siguiente >= anterior;
 
-    this.elNext.innerHTML    = this._contenidoPagina(siguiente);
-    this.elCurrent.innerHTML = this._contenidoPagina(anterior);
+    this.elNext.innerHTML = this._contenidoPagina(siguiente);
+    this.elNext.style.zIndex = '1';
 
     if (!animar) {
-      this.elCurrent.innerHTML = this._contenidoPagina(siguiente);
-      this.paginaActual = siguiente;
-      this._actualizarUI();
-      this._bindListo();
-      return;
+        this.elCurrent.innerHTML = this._contenidoPagina(siguiente);
+        this.paginaActual = siguiente;
+        this._actualizarUI();
+        this._bindListo();
+        return;
     }
 
-    this.elFlip.innerHTML           = this._contenidoPagina(anterior);
-    this.elFlip.style.transform     = 'rotateY(0deg)';
-    this.elFlip.style.opacity       = '1';
-    this.elFlip.style.zIndex        = '10';
+    this.animando = true;
 
-    const origen  = avanzando ? '0deg'    : '-180deg';
-    const destino = avanzando ? '-180deg' : '0deg';
+    this.elFlip.innerHTML        = this._contenidoPagina(anterior);
+    this.elFlip.style.transition = 'none';
+    this.elFlip.style.opacity    = '1';
+    this.elFlip.style.zIndex     = '10';
+    this.elFlip.style.transform  = avanzando ? 'rotateY(0deg)' : 'rotateY(-180deg)';
+    this.elFlip.style.boxShadow  = avanzando
+        ? '4px 0 24px rgba(0,0,0,0.18)'
+        : '-4px 0 24px rgba(0,0,0,0.18)';
 
-    this.elFlip.style.transform = `rotateY(${origen})`;
+    this.elFlip.getBoundingClientRect();
 
-    requestAnimationFrame(() => {
-      this.elFlip.style.transition = 'transform 0.55s cubic-bezier(0.645, 0.045, 0.355, 1.000)';
-      this.elFlip.style.transform  = `rotateY(${destino})`;
-    });
+    this.elFlip.style.transition = 'transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.75s ease';
+    this.elFlip.style.transform  = avanzando ? 'rotateY(-180deg)' : 'rotateY(0deg)';
+    this.elFlip.style.boxShadow  = '0 0 0 rgba(0,0,0,0)';
 
     setTimeout(() => {
-      this.elFlip.style.transition = '';
-      this.elFlip.style.opacity    = '0';
-      this.elFlip.style.zIndex     = '-1';
-      this.elCurrent.innerHTML = this._contenidoPagina(siguiente);
-      this.paginaActual = siguiente;
-      this._actualizarUI();
-      this._bindListo();
-    }, 560);
-  }
+        this.elFlip.style.transition = '';
+        this.elFlip.style.opacity    = '0';
+        this.elFlip.style.zIndex     = '-1';
+        this.elFlip.style.boxShadow  = '';
 
+        this.elCurrent.innerHTML = this.elNext.innerHTML;
+
+        this.paginaActual = siguiente;
+        this.animando = false;
+        this._actualizarUI();
+        this._bindListo();
+    }, 750);
+}
   _irA(idx) {
     if (idx < 0 || idx >= this.total) return;
     this._mostrarPagina(idx, true);

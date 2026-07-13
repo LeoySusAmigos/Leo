@@ -1,21 +1,21 @@
 <?php
 session_start();
-
+ 
 // ── 1. PROTECCIÓN ───────────────────────────────────────
 if (!isset($_SESSION['userID'])) {
     header('Location: login.php');
     exit;
 }
-
+ 
 // ── 2. CONEXIÓN A LA BASE DE DATOS ─────────────────────
 $host    = 'localhost';
 $db      = 'leo_and_friends';
 $dbUser  = 'root';
 $dbPass  = '';
 $charset = 'utf8mb4';
-
+ 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-
+ 
 try {
     $pdo = new PDO($dsn, $dbUser, $dbPass, [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -26,7 +26,7 @@ try {
     die('<p style="font-family:sans-serif;color:red;padding:20px;">
          Error de conexión a la base de datos. Intenta más tarde.</p>');
 }
-
+ 
 // ── 3. OBTENER DATOS DEL USUARIO ───────────────────────
 $stmt = $pdo->prepare('SELECT userID, nombre_nino, nombre_papa, correo, rol,
                                fecha_registro, foto_nino, foto_padre
@@ -35,38 +35,59 @@ $stmt = $pdo->prepare('SELECT userID, nombre_nino, nombre_papa, correo, rol,
                         LIMIT 1');
 $stmt->execute([$_SESSION['userID']]);
 $fila = $stmt->fetch();
-
+ 
 if (!$fila) {
     session_destroy();
     header('Location: login.php');
     exit;
 }
-
+ 
 // ── 4. PROGRESO (estrellas) ─────────────────────────────
 $stmtProg = $pdo->prepare('SELECT COUNT(*) AS estrellas FROM progreso WHERE userID = ?');
 $stmtProg->execute([$fila['userID']]);
 $progreso  = $stmtProg->fetch();
 $estrellas = $progreso['estrellas'] ?? 0;
-
+ 
+// ── 5. PAQUETE ACTIVO DEL USUARIO ──────────────────────
+$stmtPaq = $pdo->prepare('SELECT p.nombre, p.precio
+                           FROM suscripciones s
+                           JOIN paquetes p ON s.paqueteID = p.paqueteID
+                           WHERE s.userID = ? AND s.estado = "activa"
+                           LIMIT 1');
+$stmtPaq->execute([$fila['userID']]);
+$paqueteActivo = $stmtPaq->fetch();
+ 
+// Si tiene paquete activo lo mostramos, si no tiene ninguno mostramos "Sin plan activo"
+if ($paqueteActivo) {
+    $planTexto = $paqueteActivo['nombre'] . ' — $' . number_format($paqueteActivo['precio'], 2) . '/mes';
+} else {
+    $planTexto = 'Sin plan activo';
+}
+ 
 // ── 5. VARIABLES PARA LA VISTA ──────────────────────────
 $usuario = [
     'id'     => $fila['userID'],
     'nombre' => $fila['nombre_papa'],
     'correo' => $fila['correo'],
     'rol'    => $fila['rol'],
-    'foto'   => $fila['foto_padre'] ?: 'images/default-padre.png',
-    'plan'   => 'Plan Safari — $12.99/mes',
+    'foto'   => !empty($fila['foto_padre'])
+                ? 'images/perfiles/' . $fila['foto_padre']
+                : 'images/default-padre.png',
+    'plan'   => $planTexto,
 ];
-
+ 
 $nino = [
-    'nombre'         => $fila['nombre_nino'],
-    'foto'           => $fila['foto_nino'] ?: 'images/default-nino.png',
-    'estrellas'      => $estrellas,
-    'musica'         => true,
-    'efectos'        => true,
-    'narracion'      => true,
+    'nombre'    => $fila['nombre_nino'],
+    'foto'      => !empty($fila['foto_nino'])
+                   ? 'images/perfiles/' . $fila['foto_nino']
+                   : 'images/default-nino.png',
+    'estrellas' => $estrellas,
+    'musica'    => true,
+    'efectos'   => true,
+    'narracion' => true,
 ];
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -75,38 +96,12 @@ $nino = [
   <title>Configuración</title>
   <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&family=Fredoka:wght@600;900&family=Nunito:wght@700;900&family=Quicksand:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="styles/navbar.css" />
   <link rel="stylesheet" href="styles/configuracion.css" />
 </head>
 <body>
 
-<nav class="topbar">
-  <a href="index.php" class="topbar__logo">
-    <img src="images/cartelito.png" alt="Leo & Friends" />
-    <span class="topbar__logo-text">Leo &amp;<br>Friends</span>
-  </a>
-
-  <div class="topbar__nav">
-    <a href="lectura.php">
-      <img src="images/Leito.png" alt="" />
-      <span>Lectura con Leo</span>
-    </a>
-    <a href="gramatica.php">
-      <img src="images/capy1.png" alt="" />
-      <span>Gramática con Capy</span>
-    </a>
-    <a href="biblioteca.php">
-      <img src="images/finxito3.png" alt="" />
-      <span>Biblioteca con Finx</span>
-    </a>
-  </div>
-
-  <div class="topbar__user">
-    <span><?= htmlspecialchars($nino['nombre']) ?></span>
-    <div class="topbar__stars"><?= (int)$nino['estrellas'] ?></div>
-    <img class="avatar" src="<?= htmlspecialchars($nino['foto']) ?>" alt="Avatar niño" />
-    <span class="topbar__gear">⚙</span>
-  </div>
-</nav>
+<?php include 'components/navbar.php'; ?>
 
 
 <main class="main">
@@ -144,28 +139,54 @@ $nino = [
           <!-- Avatares -->
           <div class="fila" style="gap:20px;flex-wrap:wrap;">
 
-            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
               <span style="font-size:.75rem;font-weight:700;color:#aaa;">
                 <i class="fa-solid fa-child"></i> Avatar del Pequeño
               </span>
-              <img id="prevNino"
-                   src="<?= htmlspecialchars($nino['foto']) ?>"
-                   style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid #ffca28;" />
-              <input type="file" name="foto_nino" accept="image/*"
-                     style="font-size:.75rem;max-width:140px;"
-                     onchange="previewFoto(this,'prevNino')">
+              <div style="position:relative;width:72px;height:72px;">
+                <img id="prevNino"
+                    src="<?= htmlspecialchars($nino['foto']) ?>"
+                    style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid #ffca28;" />
+                <!-- Botón cámara encima de la foto -->
+                <label for="foto_nino" style="
+                  position:absolute;bottom:0;right:0;
+                  width:24px;height:24px;border-radius:50%;
+                  background:#ffca28;color:#fff;
+                  display:flex;align-items:center;justify-content:center;
+                  cursor:pointer;font-size:.7rem;
+                  box-shadow:0 2px 6px rgba(0,0,0,.25);
+                  border:2px solid #fff;">
+                  <i class="fa-solid fa-camera"></i>
+                </label>
+                <input type="file" id="foto_nino" name="foto_nino" accept="image/*"
+                      style="display:none;"
+                      onchange="previewFoto(this,'prevNino')">
+              </div>
             </div>
 
-            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
               <span style="font-size:.75rem;font-weight:700;color:#aaa;">
                 <i class="fa-solid fa-user-tie"></i> Avatar del Adulto
               </span>
-              <img id="prevPadre"
-                   src="<?= htmlspecialchars($usuario['foto']) ?>"
-                   style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid #42a5f5;" />
-              <input type="file" name="foto_padre" accept="image/*"
-                     style="font-size:.75rem;max-width:140px;"
-                     onchange="previewFoto(this,'prevPadre')">
+              <div style="position:relative;width:72px;height:72px;">
+                <img id="prevPadre"
+                    src="<?= htmlspecialchars($usuario['foto']) ?>"
+                    style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid #42a5f5;" />
+                <!-- Botón cámara encima de la foto -->
+                <label for="foto_padre" style="
+                  position:absolute;bottom:0;right:0;
+                  width:24px;height:24px;border-radius:50%;
+                  background:#42a5f5;color:#fff;
+                  display:flex;align-items:center;justify-content:center;
+                  cursor:pointer;font-size:.7rem;
+                  box-shadow:0 2px 6px rgba(0,0,0,.25);
+                  border:2px solid #fff;">
+                  <i class="fa-solid fa-camera"></i>
+                </label>
+                <input type="file" id="foto_padre" name="foto_padre" accept="image/*"
+                      style="display:none;"
+                      onchange="previewFoto(this,'prevPadre')">
+              </div>
             </div>
 
           </div>
@@ -229,7 +250,7 @@ $nino = [
             <div class="fila__label">Cambiar contraseña</div>
           </div>
           <div class="fila__derecha">
-            <a href="cambiar-contraseña.php" class="arrow-link">
+            <a href="recuperar-contrasena.php" class="arrow-link">
               <i class="fa-solid fa-chevron-right"></i>
             </a>
           </div>
@@ -352,9 +373,46 @@ $nino = [
 
   <p class="footer-version">Leo &amp; Friends v2.1.0</p>
 
+  <!-- Botón flotante de regreso a inicio -->
+  <a href="inicio-nino.php" id="btnVolver" title="Volver al inicio"
+    style="
+      position:fixed;
+      bottom:28px;
+      left:28px;
+      width:52px;height:52px;
+      border-radius:50%;
+      background:linear-gradient(135deg, #1a6e2e, #2d9e4e);
+      color:#fff;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.3rem;
+      text-decoration:none;
+      box-shadow:0 4px 16px rgba(0,0,0,.25);
+      transition:transform .25s ease, box-shadow .25s ease;
+      z-index:999;">
+    <i class="fa-solid fa-house"></i>
+  </a>
+
+  <style>
+    #btnVolver:hover {
+        transform: scale(1.12) translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0,0,0,.3);
+    }
+
+    @media (max-width: 425px) {
+        #btnVolver {
+            width: 44px;
+            height: 44px;
+            font-size: 1.1rem;
+            bottom: 16px;
+            left: 16px;
+        }
+    }
+  </style>
+
 </main>
 
 <script src="js/configuracion.js"></script>
+<script src="js/navbar.js"></script>
 
 <script>
 function previewFoto(input, idImagen) {

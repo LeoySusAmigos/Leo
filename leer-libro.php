@@ -69,7 +69,7 @@ $paginas_json = json_encode($paginas_raw, JSON_UNESCAPED_UNICODE | JSON_HEX_APOS
     const paginas = <?php echo $paginas_json; ?>;
 
     const libro = new LibroInteractivo('libro-app', paginas, {
-        palabrasPorPagina: 60,
+        palabrasPorPagina: 85,
         titulo: <?php echo json_encode($libro['titulo']); ?>,
         onTerminar: function({ mins, segs }) {
             fetch('php/guardar-progreso.php', {
@@ -85,13 +85,6 @@ $paginas_json = json_encode($paginas_raw, JSON_UNESCAPED_UNICODE | JSON_HEX_APOS
            document.getElementById('modal-time').textContent = `${mins}m ${segs}s`;
            document.getElementById('modal-fin').classList.add('activo');
 
-           const juegos =[
-            'ordenar-puzzle.html',
-            'juego-cuento2.php?id=<?php echo $libro_id; ?>'
-        ];
-
-        const juegoAleatorio = juegos[Math.floor(Math.random() *  juegos.length)];
-
         let cuenta = 3;
         document.getElementById('cuenta-atras').textContent = cuenta;
 
@@ -103,7 +96,7 @@ $paginas_json = json_encode($paginas_raw, JSON_UNESCAPED_UNICODE | JSON_HEX_APOS
         }, 1000);
 
         setTimeout(() => {
-            window.location.href = juegoAleatorio;
+            window.location.href = 'ordenar-puzzle.html';
         }, 4000);
         }
     });

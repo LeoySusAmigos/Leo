@@ -1,24 +1,24 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 .custom-navbar {
-    background-color: #00942a; 
+    background-color: #00942a;
     padding: 10px 20px;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;       
-    z-index: 1000;     
+    width: 100%;
+    z-index: 1000;
     font-family: 'Quicksand', sans-serif;
 }
-   
+
 
 .nav-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     max-width: 1300px;
     margin: 0 auto;
@@ -31,9 +31,9 @@
     padding: 0px 12px;
 }
 
-.logo-container img{
-    width: 120px;    
-} 
+.logo-container img {
+    width: 120px;
+}
 
 .nav-menu {
     display: flex;
@@ -86,8 +86,8 @@
 }
 
 .avatar-circle {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     background-color: #ffffff;
     display: flex;
@@ -111,15 +111,18 @@
 .user-name {
     font-weight: 600;
     display: block;
+    font-size: 14px;
 }
 
 .user-points {
     color: #ffca28;
     font-weight: 600;
+    font-size: 13px;
 }
 
 
-.btn-login, .btn-register {
+.btn-login,
+.btn-register {
     text-decoration: none;
     padding: 6px 12px;
     border-radius: 15px;
@@ -143,7 +146,7 @@
     background: none;
     border: none;
     color: #ffffff;
-    font-size: 24px;
+    font-size: 28px;
     cursor: pointer;
 }
 
@@ -154,13 +157,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
-    color: rgba(255, 255, 255, 0.85);  /* blanco suave, combina con el navbar verde */
-    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    /* blanco suave, combina con el navbar verde */
+    font-size: 15px;
     text-decoration: none;
-    background: rgba(255, 255, 255, 0.12);  /* círculo muy sutil en reposo */
+    background: rgba(255, 255, 255, 0.12);
+    /* círculo muy sutil en reposo */
     transition: color .35s ease, background .35s ease, transform .35s ease, box-shadow .35s ease;
     flex-shrink: 0;
 }
@@ -168,11 +173,15 @@
 .navbar-gear:hover {
     /* degradado suave con los 3 colores de la paleta */
     background: linear-gradient(135deg,
-        rgba(217, 239, 224, 0.30) 0%,    /* verde pálido */
-        rgba(255, 122,   0, 0.25) 55%,   /* naranja */
-        rgba(219, 233, 251, 0.25) 100%   /* azul pálido */
-    );
-    color: #ff7a00;                       /* naranja vivo al pasar el mouse */
+            rgba(217, 239, 224, 0.30) 0%,
+            /* verde pálido */
+            rgba(255, 122, 0, 0.25) 55%,
+            /* naranja */
+            rgba(219, 233, 251, 0.25) 100%
+            /* azul pálido */
+        );
+    color: #ff7a00;
+    /* naranja vivo al pasar el mouse */
     transform: rotate(35deg) scale(1.08);
     box-shadow: 0 0 10px rgba(255, 122, 0, 0.30);
 }
@@ -188,9 +197,21 @@ a.profile-box:hover .user-name {
 }
 
 
+/* ════════════════════════════════════════════════════════
+   RESPONSIVE — agregar al final de tu navbar.css
+   (reemplaza el @media 850px que ya tenías)
+════════════════════════════════════════════════════════ */
+
+
+/* ─────────────────────────────────────────
+   850px — Tablets
+   Oculta el menú de mascotas y muestra
+   el botón hamburguesa
+───────────────────────────────────────── */
 @media screen and (max-width: 850px) {
+
     .nav-toggle {
-        display: block; 
+        display: block;
     }
 
     .mascotas-container {
@@ -200,12 +221,17 @@ a.profile-box:hover .user-name {
     .mascotas-container.active {
         display: block;
         position: absolute;
-        top: 58px;
+        top: 78px;           /* altura de la navbar */
         left: 0;
         width: 100%;
         background-color: #0f6828;
         padding: 15px 0;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+<<<<<<< HEAD
+        box-shadow: 0 4px 10px rgba(0,0,0,.3);
+        z-index: 999;
+=======
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+>>>>>>> 11c1e30eaa54335693346f2bf330774fc6d6b640
     }
 
     .nav-menu {
@@ -214,6 +240,254 @@ a.profile-box:hover .user-name {
     }
 
     .nav-element {
-        margin: 12px 0;
+        margin: 10px 0;
     }
+
+    /* El logo no necesita reducirse todavía */
+    .logo-container img {
+        width: 100px;
+    }
+
+    /* El área del usuario se compacta un poco */
+    .usuario-container {
+        gap: 6px;
+    }
+}
+
+
+/* ─────────────────────────────────────────
+   600px — Móviles medianos
+   Reducimos tamaños y ajustamos espaciado
+───────────────────────────────────────── */
+@media screen and (max-width: 600px) {
+
+    .custom-navbar {
+        padding: 8px 12px;
+    }
+
+    .nav-container {
+        justify-content: space-between;
+    }
+
+    .logo-container img {
+        width: 80px;
+    }
+
+    /* Nombre del usuario más corto */
+    .user-name {
+        font-size: 13px;
+        max-width: 80px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;  /* "Danielito..." si es muy largo */
+    }
+
+    .user-points {
+        font-size: 12px;
+    }
+
+    /* Avatar más pequeño */
+    .avatar-circle {
+        width: 32px;
+        height: 32px;
+    }
+
+    .avatar-circle i {
+        font-size: 14px;
+    }
+
+    /* Tuerquita */
+    .navbar-gear {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+
+    /* Menú desplegable más compacto */
+    .mascotas-container.active {
+        top: 68px;
+        padding: 10px 0;
+    }
+
+    .mascota-img {
+        width: 50px;
+        height: 55px;
+    }
+
+    .menu-link {
+        font-size: 14px;
+    }
+}
+
+
+/* ─────────────────────────────────────────
+   425px — Móviles pequeños
+   El mínimo viable: logo, hamburguesa,
+   nombre y tuerquita
+───────────────────────────────────────── */
+@media screen and (max-width: 425px) {
+
+    .custom-navbar {
+        padding: 6px 10px;
+    }
+
+    .logo-container img {
+        width: 65px;
+    }
+
+    .user-name {
+        font-size: 12px;
+        max-width: 65px;
+    }
+
+    .user-points {
+        font-size: 11px;
+    }
+
+    .avatar-circle {
+        width: 28px;
+        height: 28px;
+        margin-right: 6px;
+    }
+
+    .avatar-circle i {
+        font-size: 12px;
+    }
+
+    .profile-box {
+        margin-right: 8px;
+    }
+
+    .navbar-gear {
+        width: 28px;
+        height: 28px;
+        font-size: .9rem;
+    }
+
+    /* Menú desplegable */
+    .mascotas-container.active {
+        top: 62px;
+    }
+
+    .nav-element {
+        margin: 8px 0;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .mascota-img {
+        width: 45px;
+        height: 50px;
+        margin-right: 0;
+        margin-bottom: 4px;
+    }
+
+    .menu-link {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .custom-navbar {
+        padding: 8px 12px;
+    }
+
+    .nav-container {
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo-container {
+        padding: 0;
+    }
+
+    .logo-container img {
+        width: 95px;
+    }
+
+    .nav-toggle {
+        display: block;
+        font-size: 28px;
+        margin-left: 10px;
+    }
+
+    .mascotas-container {
+        display: none;
+    }
+
+    .mascotas-container.active {
+        display: block;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #0f6828;
+        padding: 15px 0;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, .18);
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .nav-element {
+        margin: 0;
+        padding: 12px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, .15);
+    }
+
+    .nav-element:last-child {
+        border-bottom: none;
+    }
+
+    .mascota-img {
+        width: 42px;
+        height: 42px;
+        margin-right: 12px;
+    }
+
+    .menu-link {
+        font-size: 15px;
+    }
+
+    .usuario-container {
+        gap: 10px;
+    }
+
+    .profile-box {
+        margin-right: 0;
+    }
+
+    .avatar-circle {
+        width: 34px;
+        height: 34px;
+        margin-right: 8px;
+    }
+
+    .avatar-circle i {
+        font-size: 15px;
+    }
+
+    .user-info {
+        font-size: 13px;
+    }
+
+    .user-name {
+        font-size: 13px;
+    }
+
+    .user-points {
+        font-size: 13px;
+    }
+
+    .navbar-gear {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+    }
+
 }
