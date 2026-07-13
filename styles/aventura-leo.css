@@ -11,7 +11,7 @@ FUENTE
     font-family:'Fredoka',sans-serif;
 }
 
-body{
+/*body{
 
     margin:0;
 
@@ -27,7 +27,7 @@ body{
 FONDO
 =========================*/
 
-.aventura{
+/*.aventura{
     position:relative;
     width:100%;
     height:100vh;
@@ -197,7 +197,7 @@ FONDO
 LEO
 =========================*/
 
-.leo{
+/*.leo{
     position:absolute;
     left:25px;
     bottom:25px;
@@ -215,7 +215,7 @@ LEO
 GLOBO
 =========================*/
 
-.globo{
+/*.globo{
 
     position:absolute;
     left:150px;
@@ -272,7 +272,7 @@ GLOBO
 ANIMACIÓN LEO
 =========================*/
 
-@keyframes respirar{
+/*@keyframes respirar{
 
     0%{
 
@@ -291,5 +291,126 @@ ANIMACIÓN LEO
         transform:translateY(0);
 
     }
+
+}/*
+
+
+
+/*=========================================
+=        CONTENEDOR GENERAL
+=========================================*/
+
+.aventura-container{
+
+    width:95%;
+    max-width:1350px;
+    margin:40px auto;
+
+}
+
+/*=========================================
+=             HEADER
+=========================================*/
+
+.aventura-header{
+
+    text-align:center;
+    margin-bottom:30px;
+
+}
+
+.aventura-header h1{
+
+    font-family:'Fredoka',sans-serif;
+    font-size:48px;
+    color:#2E8B57;
+    margin-bottom:8px;
+
+}
+
+.aventura-header p{
+
+    font-size:20px;
+    color:#666;
+
+}
+
+/*=========================================
+=             BANNER
+=========================================*/
+
+.info-banner-niveles{
+
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    background:#FDF7EC;
+
+    border-radius:22px;
+
+    padding:22px 28px;
+
+    margin-bottom:35px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.banner-icon-circle{
+
+    width:70px;
+    height:70px;
+
+    border-radius:50%;
+
+    background:#FFE3A8;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+
+}
+
+.banner-icon-circle i{
+
+    font-size:28px;
+    color:#E88700;
+
+}
+
+.banner-info-text strong{
+
+    display:block;
+
+    font-size:23px;
+
+    color:#2F7D32;
+
+    margin-bottom:5px;
+
+}
+
+.banner-info-text p{
+
+    color:#666;
+
+    line-height:1.5;
+
+    margin:0;
+
+}
+
+/*=========================================
+=         CONTENEDOR NIVELES
+=========================================*/
+
+.niveles-container{
+
+    display:flex;
+    flex-direction:column;
+    gap:28px;
 
 }
