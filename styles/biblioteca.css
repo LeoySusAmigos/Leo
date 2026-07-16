@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
@@ -13,7 +12,6 @@ body {
     background-attachment: fixed;
     min-height: 100vh;
     font-family: 'Quicksand', 'Nunito', sans-serif;
-    padding: 20px;
     color: #3C3C3C;
     position: relative;
 }
@@ -21,7 +19,7 @@ body {
 .biblioteca-container {
     width: 100%;
     max-width: 1100px;
-    margin: 90px auto 40px auto;
+    margin: 30px auto 40px auto;
     padding: 0 15px;
 }
 
@@ -151,7 +149,6 @@ body {
 
 .tab-item.active {
     background-color: rgb(248, 255, 246);
-    border-bottom: 5px solid #2F7A2F;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
@@ -391,13 +388,9 @@ body {
 
 @media (max-width: 480px) {
 
-    body {
-        padding: 12px;
-    }
-
     .biblioteca-container {
         margin: 85px auto 25px auto;
-        padding: 0;
+        padding: 10px 5px;
         display: flex;
         align-items: center;
         flex-direction: column;
@@ -422,41 +415,38 @@ body {
     }
 
     .tabs-mascotas-container {
-        display: flex;
-        align-items: center;
-        overflow-x: auto;
-        overflow-y: hidden;
-        gap: 14px;
-        padding-bottom: 10px;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-
-    .tabs-mascotas-container::-webkit-scrollbar {
-        display: none;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+        width: 100%;
+        margin: 10px 0 0;
     }
 
     .tab-item {
-        flex-shrink: 0;
-        background-color: white;
-        border: 2px solid #E5E5E5;
-        width: 75px;
-        padding: 0;
+        position: relative;
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
-        background: none;
-        border: none;
-        border-radius: 0;
-        box-shadow: none;
+        align-items: center;
+        text-align: center;
+        background: #fff;
+        border: 2px solid #E8E8E8;
+        border-radius: 18px 18px 0 0;
+        padding: 12px 8px;
+        min-height: 110px;
+        text-decoration: none;
+        transition: .25s;
     }
 
     .tab-mascota-img {
-        width: 48px;
-        height: 48px;
-        margin-bottom: 6px;
-        transition: .2s;
+        width: 52px;
+        height: 52px;
+    }
+
+    .tab-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .tab-title {
@@ -464,104 +454,30 @@ body {
     }
 
     .tab-subtitle {
+        margin-top: 4px;
         font-size: 14px;
-        font-weight: 700;
-        color: #555;
+        font-weight: 600;
+        color: #2F7A2F;
     }
 
     .tab-item.active {
-        transform: none;
-        background: none;
-        border: none;
-        box-shadow: none;
-    }
-
-    .tab-item.active .tab-mascota-img {
-        transform: scale(1.12);
+        background: #F5FBF5;
     }
 
     .tab-item.active .tab-subtitle {
         color: #2F7A2F;
+        font-weight: 700;
     }
 
     .tab-item.active::after {
         content: "";
-        width: 42px;
-        height: 4px;
-        margin-top: 6px;
-        background: #2F7A2F;
-        border-radius: 10px;
-    }
-
-    .btn-filtro-modern {
-        padding: 8px 18px;
-        font-size: 14px;
-        border-radius: 25px;
-    }
-
-    .content-wrapper-modern {
-        padding: 20px;
-        border-radius: 20px;
-    }
-
-    .info-banner-niveles {
-        padding: 14px;
-        gap: 12px;
-    }
-
-    .banner-info-text strong {
-        font-size: 14px;
-    }
-
-    .banner-info-text p {
-        font-size: 13px;
-    }
-
-    .banner-icon-circle {
-        width: 36px;
-        height: 36px;
-    }
-
-    .nivel-row-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .nivel-meta-info {
-        display: none;
-    }
-
-    .toggle-row-icon {
-        margin-left: 0;
-    }
-
-    .nivel-row-cards-flex {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .card-cuento-modern {
+        position: absolute;
+        left: 0;
+        bottom: 0;
         width: 100%;
-        padding: 14px;
-    }
-
-    .card-left-thumb {
-        width: 70px;
-        height: 70px;
-    }
-
-    .card-center-data h4 {
-        font-size: 16px;
-    }
-
-    .duration-text {
-        font-size: 13px;
-    }
-
-    .mascota {
-        display: none;
+        height: 5px;
+        background: #2F7A2F;
+        border-radius: 0 0 16px 16px;
     }
 
 }
