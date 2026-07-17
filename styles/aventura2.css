@@ -89,9 +89,8 @@ html, body {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
 }
 
-/* Animación Interactiva */
 .boton-nivel:hover {
-  transform: scale(1.12) translateY(-3px);
+  transform: translate(-50%, -50%) scale(1.12) translateY(-3px);
   background-color: #ff6b6b; 
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
@@ -120,4 +119,51 @@ html, body {
 .nivel-5 {
   bottom: 65%;
   left: 60%;
+}
+
+@media (max-width: 767px) {
+  .boton-nivel {
+    width: 60px;
+    height: 48px;
+    border-width: 2px;
+    border-radius: 14px;
+  }
+
+  .etiqueta-nivel {
+    font-size: 9px;
+  }
+
+  .numero-nivel {
+    font-size: 16px;
+  }
+
+  .estrellas {
+    font-size: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .nivel-1 {
+    bottom: 10%;
+    left: 80%;
+  }
+
+  .nivel-2 {
+    bottom: 28%;
+    left: 68%;
+  }
+
+  .nivel-3 {
+    bottom: 44%;
+    left: 52%;
+  }
+
+  .nivel-4 {
+    bottom: 60%;
+    left: 45%;
+  }
+
+  .nivel-5 {
+    bottom: 75%;
+    left: 55%;
+  }
 }
