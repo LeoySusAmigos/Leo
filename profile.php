@@ -157,6 +157,11 @@ $avatar_padre = !empty($usuario['foto_padre'])
             color: #1a6e2e;
             border: none;
         }
+
+        .rounded-circle {
+            border-radius: 50% !important;
+            width: 70px;
+        }
     </style>
 </head>
 <body>
@@ -230,7 +235,7 @@ $avatar_padre = !empty($usuario['foto_padre'])
 
         <!-- BOTONES -->
         <div class="d-flex gap-2 justify-content-between pt-3 mt-3 border-top">
-            <a href="index.php" class="btn btn-light px-4 fw-semibold border">
+            <a onclick="window.history.back()" class="btn btn-light px-4 fw-semibold border">
                 <i class="fa-solid fa-house me-1"></i> Volver
             </a>
             <a href="configuracion.php" class="btn btn-warning px-4 fw-bold text-dark shadow-sm">

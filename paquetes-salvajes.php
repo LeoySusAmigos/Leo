@@ -134,20 +134,21 @@ $estilos = [
         /* ── Grid de tarjetas ── */
         .tarjetas {
             display: flex;
-            gap: 32px;
+            gap: 24px;
             justify-content: center;
             flex-wrap: wrap;
             width: 100%;
-            max-width: 880px;
+            max-width: 1200px;  /* antes: 880px — no alcanzaba para 3 tarjetas */
         }
 
         /* ── Tarjeta individual ── */
         .tarjeta {
             background: #fff;
             border-radius: 24px;
-            padding: 36px 32px 32px;
-            width: 100%;
-            max-width: 380px;
+            padding: 36px 28px 32px;
+            width: calc(33.333% - 16px);  /* 3 en fila con el gap */
+            min-width: 260px;              /* mínimo antes de que se apilen */
+            max-width: 340px;
             box-shadow: 0 12px 40px rgba(0,0,0,.18);
             display: flex;
             flex-direction: column;
@@ -339,7 +340,20 @@ $estilos = [
         }
 
         /* ── Responsive ── */
-        @media (max-width: 720px) {
+        @media (max-width: 900px) {
+            /* En tablet se apilan de 2 en 2 */
+            .tarjeta {
+                width: calc(50% - 12px);
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            /* En móvil una sola columna */
+            .tarjeta {
+                width: 100%;
+                max-width: 100%;
+            }
             .encabezado h1 { font-size: 2.2rem; }
             .tarjetas { gap: 20px; }
         }
@@ -357,7 +371,7 @@ $estilos = [
 
     <!-- ── Encabezado ── -->
     <div class="encabezado">
-        <h1>🌿 Paquetes Salvajes</h1>
+        <h1>Paquetes Salvajes</h1>
         <p>Elige quién acompañará a tu pequeño en su aventura por la selva de la lectura.</p>
     </div>
 
@@ -381,7 +395,7 @@ $estilos = [
         <div class="tarjeta <?= $paquete['popular'] ? 'popular' : '' ?>">
 
             <?php if ($paquete['popular']): ?>
-                <div class="badge-popular">⭐ Más completo</div>
+                <div class="badge-popular">Más completo</div>
             <?php endif; ?>
 
             <!-- Mascotas flotando (una o varias según el plan) -->
@@ -442,8 +456,8 @@ $estilos = [
     <div class="msg-exito" id="msgExito"></div>
 
     <!-- Volver a configuración -->
-    <a href="configuracion.php" class="btn-volver">
-        <i class="fa-solid fa-arrow-left"></i> Volver a Configuración
+    <a onclick="window.history.back()" class="btn-volver">
+        <i class="fa-solid fa-arrow-left"></i> Volver
     </a>
 
     <script>
@@ -451,7 +465,7 @@ $estilos = [
 
         // Deshabilitar todos los botones mientras se procesa
         document.querySelectorAll('.btn-seleccionar').forEach(b => b.disabled = true);
-        btn.innerHTML = '⏳ Guardando...';
+        btn.innerHTML = 'Guardando...';
 
         fetch('php/seleccionar-paquete.php', {
             method: 'POST',
@@ -472,7 +486,7 @@ $estilos = [
                 // Mostrar mensaje
                 const msg = document.getElementById('msgExito');
                 msg.style.display = 'block';
-                msg.innerHTML = '✅ ¡Paquete actualizado a <strong>' + data.nombre + '</strong>!';
+                msg.innerHTML = '¡Paquete actualizado a <strong>' + data.nombre + '</strong>!';
 
                 // Scroll suave al mensaje
                 msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
