@@ -224,11 +224,12 @@ href="styles/aventura-leo.css">
 
 <?php include 'components/navbar.php'; ?>
 
+
 <div class="aventura-container">
 
-    <!--==========================
-            HEADER
-    ===========================-->
+    <div class="leito">
+        <img src="images/aventuraLeo/leo-senalando.png" alt="Leo" class="leo-bg">
+    </div>
 
     <header class="aventura-header">
 
@@ -242,90 +243,36 @@ href="styles/aventura-leo.css">
 
     </header>
 
-
-    <!--==========================
-        TABS DE LAS MASCOTAS
-    ===========================-->
-
     <div class="tabs-mascotas-container">
+            <a href="aventura-leo.php" class="tab-item active-leo">
+                <img src="images/Leito.png" alt="Leo" class="tab-mascota-img">
+                <div class="tab-text text-leo">
+                    <span class="tab-title text-secondary">Comprensión y vocabulario</span>
+                    <span class="tab-subtitle">Leo</span>
+                </div>
+            </a>    
 
-        <div class="tab-item active">
-
-            <img
-            src="images/Leito.png"
-            class="tab-mascota-img">
-
-            <div class="tab-text text-leo">
-
-                <span class="tab-title">
-                    Comprensión y vocabulario
-                </span>
-
-                <span class="tab-subtitle">
-                    Leo
-                </span>
-
+            <a href="aventura2.php" class="tab-item">
+                <img src="images/capy1.png" alt="Capy" class="tab-mascota-img">
+                <div class="tab-text text-capy">
+                    <span class="tab-title text-secondary">Gramática y oraciones</span>
+                    <span class="tab-subtitle">Capy</span>
+                </div>
+            </a>
+            
+            <div class="tab-item active">
+                <img src="images/FinxHi.png" alt="Finx" class="tab-mascota-img">
+                <div class="tab-text text-finx">
+                    <span class="tab-title text-success">Cuentos</span>
+                    <span class="tab-subtitle">Finx</span>
+                </div>
             </div>
-
         </div>
 
-
-        <a href="aventura-capy.php" class="tab-item">
-
-            <img
-            src="images/capy1.png"
-            class="tab-mascota-img">
-
-            <div class="tab-text text-capy">
-
-                <span class="tab-title">
-                    Gramática y oraciones
-                </span>
-
-                <span class="tab-subtitle">
-                    Capy
-                </span>
-
-            </div>
-
-        </a>
-
-
-        <a href="biblioteca.php" class="tab-item">
-
-            <img
-            src="images/FinxHi.png"
-            class="tab-mascota-img">
-
-            <div class="tab-text text-finx">
-
-                <span class="tab-title">
-                    Cuentos
-                </span>
-
-                <span class="tab-subtitle">
-                    Finx
-                </span>
-
-            </div>
-
-        </a>
-
-    </div>
-
-
-
-    <!--==========================
-        CONTENIDO
-    ===========================-->
 
     <main class="content-wrapper-modern">
 
 
-
-        <!--==========================
-                BANNER
-        ===========================-->
 
         <div class="info-banner-niveles">
 
@@ -355,228 +302,273 @@ href="styles/aventura-leo.css">
 
 
 
-        <!--==========================
-             NIVELES
-        ===========================-->
 
         <div class="niveles-container">
-            <?php
 
-                while($nivel = $niveles->fetch_assoc()){
+            <?php while($nivel = $niveles->fetch_assoc()):
 
-                    $nivelID = $nivel['nivelID'];
+                $nivelID = $nivel['nivelID'];
+                $desbloqueado = (int)$nivel['desbloqueado'];
 
-                    $desbloqueado = (int)$nivel['desbloqueado'];
+                $totalPalabrasNivel = 0;
+                $palabrasAprendidasNivel = 0;
 
-            ?>
+                if(isset($leccionesPorNivel[$nivelID])){
 
-            <div class="nivel-row-container <?php echo !$desbloqueado ? 'locked-level' : ''; ?>">
+                    foreach($leccionesPorNivel[$nivelID] as $lec){
 
-                <!--=========================
-                        ENCABEZADO NIVEL
-                =========================-->
+                        if(isset($palabrasPorLeccion[$lec['leccionID']])){
 
-                <div class="nivel-row-header">
+                            foreach($palabrasPorLeccion[$lec['leccionID']] as $p){
 
-                    <div class="nivel-badge-pill">
+                                $totalPalabrasNivel++;
 
-                        Nivel <?php echo $nivel['orden']; ?>
-
-                    </div>
-
-                    <span class="nivel-meta-info">
-
-                        Vocal <?php echo strtoupper($nivel['vocal']); ?>
-
-                    </span>
-
-                    <?php if(!$desbloqueado){ ?>
-
-                        <div class="nivel-lock">
-
-                            <i class="fa-solid fa-lock"></i>
-
-                        </div>
-
-                    <?php } ?>
-
-                </div>
-
-
-
-                <!--=========================
-                        LECCIONES
-                =========================-->
-
-                <div class="nivel-row-cards-flex">
-
-                    <?php
-
-                    if(isset($leccionesPorNivel[$nivelID])){
-
-                        foreach($leccionesPorNivel[$nivelID] as $leccion){
-
-                            $palabras = $palabrasPorLeccion[$leccion['leccionID']] ?? [];
-
-                            $completadas = 0;
-
-                    ?>
-
-                    <div class="card-leccion-modern <?php echo !$desbloqueado ? 'locked' : ''; ?>">
-
-                        <?php if($desbloqueado){ ?>
-
-                        <a href="leccion-leo.php?leccion=<?php echo $leccion['leccionID']; ?>">
-
-                        <?php } ?>
-
-                            <div class="card-left-icon">
-
-                                <i class="fa-solid fa-book-open"></i>
-
-                            </div>
-
-                            <div class="card-center-data">
-
-                                <h4>
-
-                                    Lección <?php echo $leccion['numero']; ?>
-
-                                </h4>
-
-                                <span class="lesson-name">
-
-                                    <?php echo htmlspecialchars($leccion['nombre']); ?>
-
-                                </span>
-
-                                <div class="lesson-words">
-                                    <?php
-
-                                    foreach($palabras as $palabra){
-
-                                        $aprendida = isset($palabrasCompletadas[$palabra['palabraID']]);
-
-                                        if($aprendida){
-                                            $completadas++;
-                                        }
-
-                                    ?>
-
-                                        <div class="word-pill <?php echo $aprendida ? 'completed' : ''; ?>">
-
-                                            <span class="word-check">
-
-                                                <?php if($aprendida){ ?>
-
-                                                    <i class="fa-solid fa-check"></i>
-
-                                                <?php }else{ ?>
-
-                                                    <span class="empty-circle"></span>
-
-                                                <?php } ?>
-
-                                            </span>
-
-                                            <span class="word-text">
-
-                                                <?php echo htmlspecialchars($palabra['palabra']); ?>
-
-                                            </span>
-
-                                        </div>
-
-                                    <?php
-
-                                    }
-
-                                    ?>
-
-                                </div>
-
-                                <div class="lesson-progress">
-
-                                    <?php
-
-                                    echo $completadas;
-
-                                    ?>
-
-                                    /
-
-                                    <?php
-
-                                    echo count($palabras);
-
-                                    ?>
-
-                                    palabras aprendidas
-
-                                </div>
-
-                            </div>
-
-
-
-                                <div class="card-right-status">
-
-                                    <?php
-
-                                    if($completadas == count($palabras) && count($palabras)>0){
-
-                                    ?>
-
-                                        <span class="status-check-circle completed">
-
-                                            <i class="fa-solid fa-check"></i>
-
-                                        </span>
-
-                                    <?php
-
-                                    }else{
-
-                                    ?>
-
-                                        <span class="status-check-circle empty"></span>
-
-                                    <?php
-
-                                    }
-
-                                    ?>
-
-                                </div>
-
-                                <?php if($desbloqueado){ ?>
-
-                                </a>
-
-                                <?php } ?>
-
-                    </div>
-
-                    <?php
+                                if(isset($palabrasCompletadas[$p['palabraID']])){
+                                    $palabrasAprendidasNivel++;
+                                }
 
                             }
 
                         }
 
+                    }
+
+                }
+
+            ?>
+
+            <div class="nivel-row-container <?php echo !$desbloqueado ? 'locked-level' : ''; ?>">
+
+                <!-- Encabezado del nivel -->
+
+                <div class="nivel-row-header">
+
+                    <div class="header-left">
+
+                        <span class="nivel-badge-pill">
+                            Nivel <?php echo $nivel['orden']; ?>
+                        </span>
+
+                        <div class="nivel-info">
+
+                            <span class="vocal-title">
+                                Vocal <?php echo strtoupper($nivel['vocal']); ?>
+                            </span>
+
+                            <span class="separador">•</span>
+
+                            <span class="nivel-progreso">
+
+                                <?php echo $palabrasAprendidasNivel; ?>
+
+                                /
+
+                                <?php echo $totalPalabrasNivel; ?>
+
+                                palabras aprendidas
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="header-right">
+
+                        <?php if(!$desbloqueado){ ?>
+
+                            <i class="fa-solid fa-lock nivel-lock"></i>
+
+                        <?php } ?>
+
+                        <i class="fa-solid fa-chevron-down toggle-nivel"></i>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Contenido desplegable -->
+
+                <div class="nivel-content">
+
+                    <?php
+
+                    if(isset($leccionesPorNivel[$nivelID])):
+
+                    foreach($leccionesPorNivel[$nivelID] as $leccion):
+
+
+                        $palabras = $palabrasPorLeccion[$leccion['leccionID']] ?? [];
+
+                        $aprendidas = 0;
+
+                        foreach($palabras as $p){
+
+                            if(isset($palabrasCompletadas[$p['palabraID']])){
+                                $aprendidas++;
+                            }
+
+                        }
+
+                        $totalPalabras = count($palabras);
+
+                        if($aprendidas == 0){
+
+                            $textoBoton = "Comenzar aventura";
+                            $iconoBoton = "fa-play";
+                            $claseBoton = "btn-comenzar";
+
+                        }
+                        elseif($aprendidas < $totalPalabras){
+
+                            $textoBoton = "Continuar aventura";
+                            $iconoBoton = "fa-forward";
+                            $claseBoton = "btn-continuar";
+
+                        }
+                        else{
+
+                            $textoBoton = "Explorar de nuevo";
+                            $iconoBoton = "fa-compass";
+                            $claseBoton = "btn-explorar";
+
+                        }
+
                     ?>
+
+                    
+
+                    <div class="leccion-card">
+
+                        <div class="leccion-header">
+
+                            <?php if($desbloqueado){ ?>
+
+                            <a href="leccion-leo.php?leccion=<?php echo $leccion['leccionID']; ?>" class="leccion-link">
+
+                            <?php } ?>
+
+                                <div class="leccion-left">
+
+                                    <div class="icono-leccion">
+
+                                        <i class="fa-solid fa-book-open"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <h4>
+
+                                            Lección <?php echo $leccion['numero']; ?>
+
+                                        </h4>
+
+                                        <span>
+
+                                            <?php echo htmlspecialchars($leccion['nombre']); ?>
+
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            <?php if($desbloqueado){ ?>
+
+                            </a>
+
+                            <?php } ?>
+
+                        </div>
+
+
+
+                        <div class="palabras-grid">
+
+                        <?php foreach($palabras as $palabra):
+
+                            $completada = isset($palabrasCompletadas[$palabra['palabraID']]);
+
+                        ?>
+
+                        <div class="palabra-item <?php echo $completada ? 'completada' : ''; ?>">
+
+                            <div class="palabra-check">
+
+                                <?php if($completada){ ?>
+
+                                    <i class="fa-solid fa-check"></i>
+
+                                <?php }else{ ?>
+
+                                    <span class="circulo-vacio"></span>
+
+                                <?php } ?>
+
+                            </div>
+
+                            <span class="palabra-texto">
+                                <?php echo htmlspecialchars($palabra['palabra']); ?>
+                            </span>
+
+                        </div>
+
+            <?php endforeach; ?>
+
+                        </div>
+
+                        <div class="leccion-footer">
+
+                            <span>
+
+                                <?php echo $aprendidas; ?>
+
+                                /
+
+                                <?php echo count($palabras); ?>
+
+                                palabras aprendidas
+
+                            </span>
+
+                             <?php if($desbloqueado){ ?>
+
+                                <a
+                                    href="leccion-leo.php?leccion=<?php echo $leccion['leccionID']; ?>"
+                                    class="btn-aventura <?php echo $claseBoton; ?>">
+
+                                    <i class="fa-solid <?php echo $iconoBoton; ?>"></i>
+
+                                    <?php echo $textoBoton; ?>
+
+                                </a>
+
+                            <?php } ?>
+
+                        </div>
+
+                    </div>
+
+                    <?php endforeach; endif; ?>
 
                 </div>
 
             </div>
 
-            <?php
-
-            }
-
-            ?>
+            <?php endwhile; ?>
 
         </div>
 
     </main>
 
+    <img src="" alt="">
+
 </div>
+
+<script src="js/aventura-leo.js"></script>
+
+</body>
+</html>

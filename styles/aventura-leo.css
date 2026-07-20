@@ -1,370 +1,510 @@
-/*=========================
-FUENTE
-=========================*/
-
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Fredoka',sans-serif;
 }
 
-/*body{
-
-    margin:0;
-
-    background:#d8f3d1;
-
-    overflow-x:hidden;
+body{
 
     font-family:'Fredoka',sans-serif;
 
-}
+    background:
+    url("../images/aventuraLeo/leo-fondo.png")
+    center bottom
+    no-repeat;
 
-/*=========================
-FONDO
-=========================*/
-
-/*.aventura{
-    position:relative;
-    width:100%;
-    height:100vh;
-    min-height:900px;
-
-    background:url("../images/aventuraLeo/fondo-mapa.png") center top no-repeat;
     background-size:cover;
 
-    overflow:hidden;
+    background-attachment:fixed;
+
+    min-height:100vh;
+
+    color:#333;
+
 }
 
-.mapa{
-    position:relative;
-    width:100%;
-    height:100vh;
-}
+.leito{
 
-.isla{
     position:absolute;
-    width:180px;
-    text-align:center;
-    transition:.25s;
+
+    left:0;
+
+    top:0;
+
+    z-index:1;
+
+    pointer-events:none;
+}
+
+.leo-bg{
+
+    position:absolute;
+
+    left:70px;
+
+    top:-55px;
+
+    width:220px;
+}
+
+.aventura-header,
+.tabs-mascotas-container,
+.content-wrapper-modern{
+
+    position:relative;
+
     z-index:10;
 }
 
-.isla img{
-    width:190px;
-}
-
-
-.isla:hover{
-
-    transform:scale(1.05);
-
-}
-
-.isla1{
-    top: 223px;
-    left: 450px;
-}
-
-.isla2{
-    top: 230px;
-    left: 910px;
-}
-
-.isla3{
-    top: 410px;
-    left: 675px;
-}
-
-.isla4{
-    top: 590px;
-    left: 395px;
-}
-
-.isla5{
-    top: 575px;
-    left: 978px;
-}
-
-
-.isla a{
-
-    text-decoration:none;
-
-    color:inherit;
-
-}
-
-
-.circulo{
-
-    position:absolute;
-
-    top:22px;
-
-    left:52%;
-
-    transform:translateX(-50%);
-
-    font-size:64px;
-
-    color:white;
-
-    font-weight:bold;
-
-    text-shadow:0 3px 8px rgba(0,0,0,.5);
-
-}
-
-.nombre{
-    position: relative;
-    margin-top:-50px;
-    font-size:25px;
-    font-weight:bold;
-    color:white;
-    text-shadow:
-        2px 2px 4px rgba(0,0,0,.7);
-}
-
-.estrellas{
-    margin-top:-4px;
-    display:flex;
-    justify-content:center;
-    gap:3px;
-}
-
-.estrella{
-    font-size:35px;
-    color:#E8E8E8;
-    -webkit-text-stroke:1.8px #333;
-    text-shadow:
-        0 2px 3px rgba(0,0,0,.35);
-}
-
-.estrella.activa{
-    color:#FFD83D;
-    -webkit-text-stroke:1.4px #7B4A00;
-    text-shadow:
-        0 2px 4px rgba(0,0,0,.35);
-}
-
-.candado{
-
-    position:absolute;
-
-    right:18px;
-
-    top:80px;
-
-    width:40px;
-
-    height:40px;
-
-    background:#ffb84d;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    color:white;
-
-    font-size:20px;
-
-    box-shadow:0 4px 10px rgba(0,0,0,.25);
-
-}
-
-.bloqueada img{
-
-    filter:grayscale(100%) brightness(.75);
-
-}
-
-.bloqueada{
-
-    opacity:.9;
-
-}
-
-/*=========================
-LEO
-=========================*/
-
-/*.leo{
-    position:absolute;
-    left:25px;
-    bottom:25px;
-    width:230px;
-    z-index:20;
-    bottom: -8px;
-}
-
-.leo img{
-    width:210px;
-    margin-bottom:-12px;
-}
-
-/*=========================
-GLOBO
-=========================*/
-
-/*.globo{
-
-    position:absolute;
-    left:150px;
-    bottom:55px;
-    width:310px;
-    height:120px;
-    padding:20px 25px;
-    z-index:25;
-
-}
-
-.globo img{
-
-    width:100%;
-    display:block;
-
-}
-
-.texto-globo{
-
-    position:absolute;
-
-    top:45px;
-
-    left:30px;
-
-    width:240px;
-
-    text-align:center;
-
-}
-
-.globo h2{
-
-    margin:0;
-
-    color:#228B22;
-
-    font-size:25px;
-
-}
-
-.globo p{
-
-    margin-top:8px;
-
-    font-size:15px;
-
-    color:#1a1919;
-
-}
-
-/*=========================
-ANIMACIÓN LEO
-=========================*/
-
-/*@keyframes respirar{
-
-    0%{
-
-        transform:translateY(0);
-
-    }
-
-    50%{
-
-        transform:translateY(-10px);
-
-    }
-
-    100%{
-
-        transform:translateY(0);
-
-    }
-
-}/*
-
-
-
-/*=========================================
-=        CONTENEDOR GENERAL
-=========================================*/
-
 .aventura-container{
 
-    width:95%;
+    position:relative;
+
+    width:92%;
     max-width:1350px;
+
     margin:40px auto;
 
+    z-index:5;
 }
 
+
 /*=========================================
-=             HEADER
+=              HEADER
 =========================================*/
 
 .aventura-header{
 
     text-align:center;
-    margin-bottom:30px;
+    margin-top:150px;
+    margin-bottom:35px;
 
 }
 
 .aventura-header h1{
 
-    font-family:'Fredoka',sans-serif;
-    font-size:48px;
-    color:#2E8B57;
-    margin-bottom:8px;
+    color:#2F7D32;
+
+    font-size:52px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
 
 }
 
 .aventura-header p{
 
+    margin-top:6px;
+
     font-size:20px;
+
     color:#666;
 
 }
 
+.tabs-mascotas-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.tab-item {
+    background-color: white;
+    border: 2px solid #E5E5E5;
+    border-radius: 20px 20px 0px 0px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.tab-mascota-img {
+    width: 45px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.tab-text {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.tab-title {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    display: block;
+    color: #3C3C3C;
+}
+
+.tab-subtitle {
+    font-size: 13px;
+    color: #8A8A8A;
+}
+
+.tab-item.active-leo {
+    background-color: rgb(248, 255, 246);
+    border-bottom: 5px solid #2F7A2F;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.active {
+    transform: scale(1, 1.10);
+    z-index: 10;
+    margin-bottom: 3px;
+}
+
+
 /*=========================================
-=             BANNER
+=       CONTENEDOR PRINCIPAL
+=========================================*/
+
+.content-wrapper-modern{
+
+    background:#fff;
+
+    border-radius: 0px 0px 20px 20px;
+
+    border:1px solid #E8E8E8;
+
+    overflow:hidden;
+
+    box-shadow:
+
+    0 8px 30px rgba(0,0,0,.08);
+
+    padding:28px;
+
+}
+
+
+/*=========================================
+=              BANNER
 =========================================*/
 
 .info-banner-niveles{
 
     display:flex;
-    align-items:center;
-    gap:20px;
 
-    background:#FDF7EC;
+    align-items:center;
+
+    gap:18px;
+
+    background:#FAFCF8;
+
+    border:1px solid #E8ECE8;
 
     border-radius:22px;
 
-    padding:22px 28px;
+    padding:22px;
 
     margin-bottom:35px;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
 
 }
 
 .banner-icon-circle{
 
-    width:70px;
-    height:70px;
+    width:60px;
+
+    height:60px;
 
     border-radius:50%;
 
-    background:#FFE3A8;
+    background:#2F7D32;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-shrink:0;
+
+}
+
+.banner-icon-circle i{
+
+    color:white;
+
+    font-size:22px;
+
+}
+
+.banner-info-text strong{
+
+    display:block;
+
+    color:#2F7D32;
+
+    font-size:22px;
+
+    margin-bottom:4px;
+
+}
+
+.banner-info-text p{
+
+    color:#6D6D6D;
+
+    font-size:16px;
+
+    line-height:1.5;
+
+}
+
+
+/*=========================================
+=            CONTENEDOR NIVELES
+=========================================*/
+
+.niveles-container{
+
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+
+}
+
+/*=========================================
+=          CADA NIVEL
+=========================================*/
+
+.nivel-row-container{
+
+    background:#fff;
+
+    border:1px solid #E7E7E7;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    transition:.30s;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.05);
+
+}
+
+.nivel-row-container:hover{
+
+    box-shadow:0 12px 25px rgba(0,0,0,.08);
+
+}
+
+/*=========================================
+=          CABECERA
+=========================================*/
+
+.nivel-row-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:22px 28px;
+
+    cursor:pointer;
+
+    user-select:none;
+
+}
+
+.nivel-badge-pill{
+
+    background:#2F8B44;
+
+    color:white;
+
+    padding:8px 18px;
+
+    border-radius:999px;
+
+    font-weight:600;
+
+    font-size:15px;
+
+}
+
+
+.nivel-info{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    font-size:17px;
+
+    font-weight:450;
+
+    color:#333;
+
+    flex:1;
+
+}
+
+.vocal-title{
+
+    font-size:18px;
+
+    font-weight:500;
+
+    color:#4e4e4e;
+
+}
+
+.separador{
+
+    color:#2e2e2e;
+    font-size:20px;
+    font-weight:700;
+
+}
+
+.nivel-progreso{
+
+    font-size:18px;
+
+    color:#4e4e4e;
+
+    font-weight:500;
+
+}
+
+.header-right .toggle-nivel{
+
+    font-size:18px;
+
+    color:#2F8B44;
+
+    transition:.35s;
+
+}
+
+.nivel-row-container.open .toggle-nivel{
+
+    transform:rotate(180deg);
+
+}
+
+.locked-level .toggle-nivel{
+
+    color:#BDBDBD;
+
+    cursor:default;
+
+}
+
+.locked-level .nivel-lock{
+
+    color:#9A9A9A;
+
+}
+
+
+/*=========================================
+=      CONTENIDO DEL NIVEL
+=========================================*/
+
+.nivel-content{
+
+    display:none;
+
+    grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+
+    gap:20px;
+
+    padding:25px;
+
+}
+
+.nivel-row-container.open .nivel-content{
+
+    display:grid;
+
+}
+
+.nivel-row-header h3{
+
+    font-size:20px;
+
+    padding-left:2px;
+
+    margin-top:15px;
+
+    font-weight:700;
+
+}
+
+.nivel-row-header p{
+
+    font-size:18px;
+
+    padding-left:2px;
+
+    color:#2c2c2c;
+
+    margin-top:10px;
+
+}
+
+.palabra-item.completada .palabra-texto{
+
+    color:#2E7D32;
+    font-weight:600;
+
+}
+
+.palabra-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px 14px;
+
+    background:#FAFAFA;
+
+    border:1px solid #E7E7E7;
+
+    border-radius:12px;
+
+    transition:.25s;
+
+}
+
+.palabra-item:hover{
+
+    background:#F3FBF1;
+
+    border-color:#6EBE45;
+
+}
+
+.palabra-texto{
+
+    font-size:17px;
+    font-weight:600;
+    color:#4A4A4A;
+
+}
+
+
+.palabra-check{
+
+    width:24px;
+    height:24px;
 
     display:flex;
     align-items:center;
@@ -374,43 +514,478 @@ ANIMACIÓN LEO
 
 }
 
-.banner-icon-circle i{
+.palabra-check i{
 
-    font-size:28px;
-    color:#E88700;
+    color:#2F8B44;
+
+    font-size:15px;
 
 }
 
-.banner-info-text strong{
+.circulo-vacio{
 
+    width:16px;
+    height:16px;
+
+    border-radius:50%;
+
+    border:2px solid #BDBDBD;
+
+}
+
+
+/*=========================================
+=          TARJETAS
+=========================================*/
+
+.leccion-card{
+
+    background:#FFFFFF;
+
+    border:1px solid #E5E5E5;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.05);
+
+    transition:.25s;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+}
+
+.leccion-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 10px 28px rgba(0,0,0,.08);
+
+}
+
+
+.leccion-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:18px;
+
+}
+
+.leccion-header span{
+
+    font-size:30px;
+    color:#666;
+    font-weight:600;
+    margin-top:3px;
     display:block;
 
-    font-size:23px;
+}
 
-    color:#2F7D32;
+.leccion-link{
 
-    margin-bottom:5px;
+    text-decoration:none;
+
+    color:inherit;
+
+    display:flex;
+
+    align-items:center;
+
+    width:100%;
 
 }
 
-.banner-info-text p{
+.leccion-left{
 
-    color:#666;
+    display:flex;
 
-    line-height:1.5;
+    align-items:center;
+
+    gap:14px;
+
+    flex:1;
+
+}
+
+.icono-leccion{
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:15px;
+
+    background:#fcefe3;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-shrink:0;
+
+}
+
+.icono-leccion i{
+
+    color:#FD8918;
+
+    font-size:22px;
+
+}
+
+.card-center-data{
+
+    flex:1;
+
+}
+
+.leccion-left h4{
 
     margin:0;
 
+    font-size:18px;
+
+    color:#FD8918;
+
+    font-weight:600;
+
 }
 
-/*=========================================
-=         CONTENEDOR NIVELES
-=========================================*/
+.leccion-left span{
 
-.niveles-container{
+    color:#777;
+
+    font-size:16px;
+
+}
+
+.lesson-name{
+
+    color:#777;
+
+    font-size:15px;
+
+}
+
+.leccion-footer{
+
+    margin-top:20px;
+
+    padding-top:16px;
 
     display:flex;
-    flex-direction:column;
-    gap:28px;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.leccion-footer span{
+
+    font-size:15px;
+
+    color:#757575;
+
+    font-weight:600;
+
+}
+
+
+.palabras-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:10px;
+
+    margin-top:20px;
+
+}
+
+.word-pill{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:#FAFAFA;
+
+    border:1px solid #E5E5E5;
+
+    border-radius:12px;
+
+    padding:10px 12px;
+
+    transition:.25s;
+
+}
+
+.word-pill.completed{
+
+    background:#EDF9E8;
+
+    border-color:#6EBE45;
+
+}
+
+
+.word-check{
+
+    width:22px;
+
+    height:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.word-check i{
+
+    width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    background:#6EBE45;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:10px;
+
+}
+
+.empty-circle{
+
+    width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    border:2px solid #CFCFCF;
+
+}
+
+
+.word-text{
+
+    font-size:15px;
+
+    color:#555;
+
+}
+
+.header-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.header-right{
+
+    margin-left:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.toggle-nivel{
+
+    font-size:24px;
+
+    color:#2F8B44;
+
+    cursor:pointer;
+
+    transition:.35s ease;
+
+}
+
+.nivel-lock{
+
+    font-size:18px;
+
+    color:#9FA6B2;
+
+}
+
+
+.lesson-progress{
+
+    margin-top:20px;
+
+    border-top:1px solid #ECECEC;
+
+    padding-top:15px;
+
+    text-align:right;
+
+    color:#666;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+
+.locked-level{
+
+    opacity:.75;
+
+}
+
+.locked-level .nivel-row-header{
+
+    background:#F7F7F7;
+
+}
+
+.locked-level .nivel-badge-pill{
+
+    background:#9E9E9E;
+
+}
+
+.nivel-lock{
+
+    color:#9E9E9E;
+
+    font-size:18px;
+
+}
+
+.leccion-actions{
+
+    margin-top:22px;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+.btn-aventura{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    padding:10px 20px;
+
+    background:#FD8918;
+
+    color:#FFF !important;
+
+    text-decoration:none;
+
+    border-radius:20px;
+
+    font-family:'Fredoka',sans-serif;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+    box-shadow:0 6px 14px rgba(253,137,24,.25);
+
+}
+
+.btn-aventura:hover{
+
+    background:#EA7A0B;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 20px rgba(253,137,24,.35);
+
+}
+
+.btn-comenzar{
+
+    background:#FD8918;
+
+}
+
+.btn-comenzar:hover{
+
+    background:#EA7A0B;
+
+    transform:translateY(-2px);
+
+}
+
+.btn-continuar{
+
+    background:#208CD3;
+
+}
+
+.btn-continuar:hover{
+
+    background:#197AB8;
+
+    transform:translateY(-2px);
+
+}
+
+.btn-explorar{
+
+    background:#6EBE45;
+
+}
+
+.btn-explorar:hover{
+
+    background:#5AA83A;
+
+    transform:translateY(-2px);
+
+}
+
+.btn-aventura i{
+
+    font-size:18px;
 
 }

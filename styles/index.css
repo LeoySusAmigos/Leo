@@ -615,7 +615,7 @@ body{
 
 /* ================= TABLET ================= */
 
-@media (max-width: 992px){
+@media (max-width: 1020px){
 
     .hero{
         flex-direction:column;
