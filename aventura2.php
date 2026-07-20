@@ -1,9 +1,64 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['userID'])) {
+    header("Location: register.html");
+    exit();
+}
+
+include 'php/conexion.php';
+$userID = $_SESSION['userID'];
+
+$libros_leidos = array();
+$sql_progreso = "SELECT libro_id FROM progreso_libros WHERE userID = $userID";
+$res_progreso = mysqli_query($conn, $sql_progreso);
+
+if ($res_progreso) {
+    while ($progreso = mysqli_fetch_assoc($res_progreso)) {
+        $libros_leidos[] = $progreso['libro_id'];
+    }
+}
+
+$sql_libros = "SELECT * FROM libros ORDER BY nivel_id ASC, libro_id ASC";
+$res_libros = mysqli_query($conn, $sql_libros);
+
+if (!$res_libros) {
+    die("Error en la consulta: " . mysqli_error($conn));
+}
+
+$totalesPorNivel = [];
+$leidosPorNivel = [];
+
+$sql = "SELECT nivel_id, COUNT(*) AS total
+        FROM libros
+        GROUP BY nivel_id";
+
+$res = mysqli_query($conn, $sql);
+
+while ($fila = mysqli_fetch_assoc($res)) {
+    $totalesPorNivel[$fila['nivel_id']] = $fila['total'];
+}
+
+$sql = "SELECT l.nivel_id, COUNT(*) AS leidos
+        FROM progreso_libros p
+        INNER JOIN libros l ON l.libro_id = p.libro_id
+        WHERE p.userID = $userID
+        GROUP BY l.nivel_id";
+
+$res = mysqli_query($conn, $sql);
+
+while ($fila = mysqli_fetch_assoc($res)) {
+    $leidosPorNivel[$fila['nivel_id']] = $fila['leidos'];
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa de Aventura</title>
+    <title>Gramática con Capy</title>
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/aventura2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">

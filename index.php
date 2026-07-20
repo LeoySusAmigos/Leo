@@ -36,16 +36,22 @@ include("php/conexion.php");
                 Leo y sus amigos guían a tu hijo paso a paso,
                 con juegos, cuentos y métodos que funcionan.
             </p>
- 
-            <a href="register.html" class="hero-btn">
-                Comenzar gratis
-            </a>
+
+            <div class="hero-buttons">
+                <a href="inicio-nino.php" class="hero-btn">
+                    Comenzar
+                </a>
+                <a href="progreso.php" class="progress-btn">
+                    Ver progreso
+                </a>
+            </div>
+            
         </div>
  
         <div class="hero-characters">
             <img src="images/capy1.png" alt="Capy">
-            <img src="images/leito.png" alt="Leo">
-            <img src="images/finx.png" alt="Finx">
+            <img src="images/Leito.png" alt="Leo">
+            <img src="images/Finx.png" alt="Finx">
         </div>
     </section>
  
