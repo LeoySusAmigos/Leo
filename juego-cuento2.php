@@ -29,11 +29,11 @@ include("php/oraciones.php");
     <div class="bottom-panel">
 
         <button onclick="location.reload()">
-            <img src="images/juego-cuento/retry button.png">
+            <img src="images/juego-cuento/retryButton.png">
         </button>
 
         <button id="botonPista" onclick="mostrarPista()">
-            <img src="images/juego-cuento/track button.png">
+            <img src="images/juego-cuento/ideaButton.png">
         </button>
 
     </div>

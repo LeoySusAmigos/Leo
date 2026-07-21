@@ -65,7 +65,7 @@ function verificar() {
 
             document.getElementById("mensaje").innerHTML = `
                 <div class="victoria">
-                    <h2>🎉 ¡Ganaste! 🎉</h2>
+                    <h2> ¡Ganaste! </h2>
                     <p>Ordenaste la oración correctamente</p>
                 </div>
             `;
@@ -84,7 +84,7 @@ function mostrarPista() {
 
         document.getElementById("mensaje").innerHTML = `
             <div class="victoria">
-                <h2>💡 Pista</h2>
+                <h2> Pista</h2>
                 <p>${pistaRandom}</p>
                 <small>Pistas restantes: ${pistasRestantes}</small>
             </div>
@@ -98,7 +98,7 @@ function mostrarPista() {
 
         document.getElementById("mensaje").innerHTML = `
             <div class="victoria">
-                <h2>❌ Sin pistas</h2>
+                <h2> Sin pistas</h2>
                 <p>Ya usaste todas las pistas</p>
             </div>
         `;

@@ -20,6 +20,17 @@ async function cargarLibros() {
     if (libros.error) { grid.innerHTML = `<div class="loading">Error: ${libros.error}</div>`; return; }
     if (!libros.length) { grid.innerHTML = '<div class="loading">No hay libros disponibles.</div>'; return; }
 
+    const params = new URLSearchParams(window.location.search);
+    const libroIdUrl = params.get('libro');
+
+    if (libroIdUrl){
+      const libroSeleccionado = libros.find(l => String(l.libro_id) === libroIdUrl);
+      if (libroSeleccionado) {
+        iniciarJuego(libroSeleccionado.portada_url, libroSeleccionado.titulo);
+        return;
+      }
+    }
+
     libros.forEach(libro => {
       const card = document.createElement('div');
       card.className = 'libro-card';
@@ -56,7 +67,7 @@ function iniciarJuego(urlPortada, titulo) {
     document.getElementById('pantallaLibros').style.display = 'none';
     document.getElementById('pantallaJuego').style.display  = 'block';
     document.getElementById('winMsg').style.display         = 'none';
-    document.getElementById('info').textContent = 'Arrastrá las piezas para armar la imagen. Si no podés, pedí ayuda 😊';
+    document.getElementById('info').textContent = 'Arrastrá las piezas para armar la imagen. Si no podés, pedí ayuda';
   };
   img.onerror = () => alert('No se pudo cargar la imagen: ' + urlPortada);
   img.src = urlPortada;
@@ -199,7 +210,7 @@ function mezclar() {
   renderPuzzle();
   actualizarProgreso();
   document.getElementById('winMsg').style.display = 'none';
-  document.getElementById('info').textContent = 'Arrastrá las piezas para armar la imagen. Si no podés, pedí ayuda 😊';
+  document.getElementById('info').textContent = 'Arrastrá las piezas para armar la imagen. Si no podés, pedí ayuda';
 }
 
 function renderPuzzle() {
@@ -364,7 +375,7 @@ function intercambiarPiezas(desde, hasta) {
     document.getElementById('winMsg').style.display = 'block';
     document.getElementById('info').textContent = '';
   } else {
-    document.getElementById('info').textContent = '¡Bien! Seguí intentando 💪';
+    document.getElementById('info').textContent = '¡Bien! Seguí intentando';
   }
 }
 
@@ -390,7 +401,7 @@ document.getElementById('ayudaBtn').addEventListener('click', async () => {
   if (solving) return;
   solving = true;
   ['ayudaBtn', 'mezclarBtn', 'volverBtn'].forEach(id => document.getElementById(id).disabled = true);
-  document.getElementById('info').textContent = 'Ordenando poquito a poco... 🤖';
+  document.getElementById('info').textContent = 'Ordenando poquito a poco...';
 
   const total = ROWS * COLS;
   for (let i = 0; i < total; i++) {

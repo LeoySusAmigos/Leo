@@ -1,5 +1,5 @@
 body{
-    background:url('../images/fondoalegre-minimalista.png');
+    background:url('../images/juegoCuento2.png');
     background-size: cover;
     background-position: center;
     min-height: 100vh;
@@ -7,6 +7,10 @@ body{
     margin: 0;
     color: white;
     text-align: center;
+}
+
+h1{
+    color: #74a9e6 ;
 }
 
 .container{
@@ -20,73 +24,100 @@ body{
 
 .letra{
     min-width: 100px;
-
     padding: 15px 20px;
-
-    background: #444;
-
+    background: #3b6ea5;
     display: flex;
     justify-content: center;
     align-items: center;
-
     font-size: 30px;
-
     border-radius: 10px;
-
     cursor: grab;
-
     transition: 0.3s;
 }
 
 .letra:hover{
-    background: gold;
+    background: #d8eaff;
     color: black;
-
     transform: scale(1.05);
-}
-
-.bottom-panel{
-    margin-top: 40px;
-
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.bottom-panel button{
-    background: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-}
-
-.bottom-panel img{
-    width: 80px;
 }
 
 .dragging{
     opacity: 0.5;
 }
 
+.victoria{
+    background: 
+        linear-gradient(90deg, #f0f7ff, #d6e9ff) padding-box,
+        linear-gradient(90deg, #b4d7ff, #9cbfe7) border-box;
+    border:5px solid transparent;
+    border-radius: 20px;
+    padding: 65px 50px;
+    margin-top: 40px; 
+    box-shadow: 0 8px 25px rgba(139, 242, 250, 0.5);
+    display: inline-block;
+    animation: aparecer 0.4s ease forwards;
+}
+
 .victoria h2{
-    color: gold;
+    color: #74a9e6;
     font-size: 40px;
+    margin: 0 0 15px 0;
 }
 
 .victoria p{
+    color: #555;
     font-size: 20px;
+    margin: 0;
+}
+
+.victoria small{
+    color: #999;
+    font-size: 16px;
+    display: block;
+    margin-top: 15px;
+}
+
+.bottom-panel{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.bottom-panel button{
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.2s;
+}
+
+.bottom-panel button:focus{
+    outline: none;
+}
+
+.bottom-panel button:hover{
+    transform: scale(1.1);
+}
+
+.bottom-panel img{
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    display: block;
 }
 
 @keyframes aparecer{
-
     from{
         opacity: 0;
-        transform: translate(-50%, -60%);
+        transform: translateY(-20px);
     }
-
     to{
         opacity: 1;
-        transform: translate(-50%, -50%);
+        transform: translateY(0);
     }
 }
 

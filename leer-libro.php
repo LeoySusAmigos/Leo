@@ -96,7 +96,7 @@ $paginas_json = json_encode($paginas_raw, JSON_UNESCAPED_UNICODE | JSON_HEX_APOS
         }, 1000);
 
         setTimeout(() => {
-            window.location.href = 'ordenar-puzzle.html';
+            window.location.href = 'ordenar-puzzle.html?libro=<?php echo $libro_id; ?>';
         }, 4000);
         }
     });

@@ -6,11 +6,14 @@
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: #f0f4ff;
   min-height: 100vh;
+  background: url('../images/juego-cuento/fondo-puzzle2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
-/* PANTALLA 1: Elegir libro para ordenarlo */
 #pantallaLibros {
   padding: 2rem;
   max-width: 900px;
@@ -67,8 +70,6 @@ body {
   border-color: #5b8dee;
 }
 
-
-
 .libro-card .titulo {
   padding: 0.6rem;
   font-size: 13px;
@@ -84,29 +85,29 @@ body {
   font-size: 15px;
 }
 
-/* ── PANTALLA 2: Juego de ordenar ── */
 #pantallaJuego {
   display: none;
   padding: 1.5rem;
   max-width: 700px;
-  margin: 0 auto;
+  margin: 2rem auto;
 }
 
 #pantallaJuego h1 {
   font-size: 24px;
-  color: #2d4a8a;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
   margin-bottom: 0.2rem;
   text-align: center;
 }
 
 .subtitulo {
   text-align: center;
-  color: #666;
+  color: #f5f5f5;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
   font-size: 14px;
   margin-bottom: 0.5rem;
 }
 
-/* La barrita del progeso */
 .prog-row {
   display: flex;
   align-items: center;
@@ -125,14 +126,15 @@ body {
 
 .prog-fill {
   height: 100%;
-  background: #5b8dee;
+  background: linear-gradient(90deg, #f5a623, #ffcf6b);
   border-radius: 99px;
   transition: width 0.3s;
 }
 
 .prog-lbl {
   font-size: 13px;
-  color: #555;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
   min-width: 38px;
   text-align: right;
 }
@@ -143,7 +145,6 @@ body {
   overflow: visible; 
   filter: drop-shadow(0 4px 16px rgba(0,0,0,0.13));
 }
-
 
 .puzzle-cell {
   position: absolute;
@@ -164,7 +165,6 @@ body {
   filter: brightness(0.85) sepia(0.4);
 }
 
-/* La onda de Victoria */
 .win-msg {
   display: none;
   text-align: center;
@@ -180,12 +180,16 @@ body {
 .info {
   text-align: center;
   font-size: 14px;
-  color: #666;
+  font-weight: bold;
+  color: #1f386d;
+  background: rgba(255, 255, 255, 0.75);
+  display:table;
+  padding: 6px 16px;
+  border-radius: 99px;
   min-height: 20px;
-  margin-bottom: 0.75rem;
+  margin: 0 auto 0.75rem auto;
 }
 
-/* Botones */
 .btn-row {
   display: flex;
   gap: 8px;
@@ -209,20 +213,20 @@ body {
 }
 
 .btn-volver {
-  background: #f5f5f5;
+  background: #F6F4F1;
   color: #444;
 }
-.btn-volver:hover:not(:disabled) { background: #e0e0e0; }
+.btn-volver:hover:not(:disabled) { background:#F6F4F1; }
 
 .btn-mezclar {
-  background: #e8edff;
+  background:#F6F4F1;
   color: #2d4a8a;
 }
 .btn-mezclar:hover:not(:disabled) { background: #c8d6f5; }
 
 .btn-ayuda {
-  background: #5b8dee;
-  color: #fff;
+  background: #143985;
+  color:#F6F4F1;
 }
 .btn-ayuda:hover:not(:disabled) { 
   background: #3a6fd8;
