@@ -97,7 +97,7 @@ while ($fila = mysqli_fetch_assoc($res)) {
         </header>
 
         <div class="tabs-mascotas-container">
-            <a href="aventura1.html" class="tab-item">
+            <a href="aventura-leo.php" class="tab-item">
                 <img src="images/Leito.png" alt="Leo" class="tab-mascota-img">
                 <div class="tab-text text-leo">
                     <span class="tab-title text-secondary">Comprensión y vocabulario</span>

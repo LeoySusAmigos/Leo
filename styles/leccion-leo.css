@@ -1,0 +1,838 @@
+/*=========================================
+=              VARIABLES
+=========================================*/
+
+:root{
+
+    --verde:#6ebe45;
+    --verdeOscuro:#2f8b44;
+    --verdeClaro:#edf9e8;
+
+    --naranja:#fd8918;
+    --naranjaHover:#ea790b;
+
+    --azul:#208cd3;
+
+    --grisTexto:#555;
+    --grisClaro:#f6f7f8;
+
+    --borde:#e7e7e7;
+
+    --radio:28px;
+
+    --sombra:0 14px 35px rgba(0,0,0,.08);
+
+}
+
+
+/*=========================================
+=              BODY
+=========================================*/
+
+body{
+
+    margin:0;
+
+    font-family:'Fredoka',sans-serif;
+
+    background:
+
+    linear-gradient(rgba(255,255,255,.72),
+    rgba(255,255,255,.72)),
+
+    url("../images/fondos/fondo-jungla.webp");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-attachment:fixed;
+
+}
+
+
+/*=========================================
+=          CONTENEDOR GENERAL
+=========================================*/
+
+.lesson-wrapper{
+
+    width:min(1200px,94%);
+
+    margin:45px auto 70px;
+
+}
+
+
+/*=========================================
+=             HEADER
+=========================================*/
+
+.lesson-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:30px;
+
+    margin-bottom:28px;
+
+}
+
+
+.lesson-info h1{
+
+    margin:8px 0 4px;
+
+    color:var(--verdeOscuro);
+
+    font-size:42px;
+
+    font-weight:700;
+
+}
+
+
+.lesson-info p{
+
+    margin:0;
+
+    color:#777;
+
+    font-size:18px;
+
+}
+
+
+.lesson-level{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    background:#edf9e8;
+
+    color:var(--verdeOscuro);
+
+    padding:8px 18px;
+
+    border-radius:999px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+
+.lesson-counter{
+
+    background:white;
+
+    padding:18px 28px;
+
+    border-radius:18px;
+
+    box-shadow:var(--sombra);
+
+    color:#666;
+
+    font-size:20px;
+
+    font-weight:600;
+
+}
+
+
+.lesson-counter span{
+
+    color:var(--naranja);
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+
+/*=========================================
+=         BARRA DE PROGRESO
+=========================================*/
+
+.lesson-progress{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:35px 0;
+
+}
+
+
+.progress-step{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:10px;
+
+    min-width:130px;
+
+}
+
+
+.progress-step span{
+
+    color:#888;
+
+    font-size:15px;
+
+}
+
+
+.circle{
+
+    width:58px;
+
+    height:58px;
+
+    border-radius:50%;
+
+    border:3px solid #d8d8d8;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:white;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    transition:.30s;
+
+}
+
+
+.progress-step.active .circle{
+
+    background:var(--verde);
+
+    color:white;
+
+    border-color:var(--verde);
+
+}
+
+
+.progress-step.active span{
+
+    color:var(--verdeOscuro);
+
+    font-weight:600;
+
+}
+
+
+.progress-line{
+
+    width:95px;
+
+    height:5px;
+
+    border-radius:999px;
+
+    background:#e5e5e5;
+
+    margin:0 8px;
+
+}
+
+
+/*=========================================
+=          TARJETA PRINCIPAL
+=========================================*/
+
+.lesson-card{
+
+    background:white;
+
+    border-radius:32px;
+
+    box-shadow:var(--sombra);
+
+    padding:45px;
+
+    display:grid;
+
+    grid-template-columns:420px 1fr;
+
+    gap:50px;
+
+    align-items:center;
+
+}
+
+
+/*=========================================
+=          COLUMNA IZQUIERDA
+=========================================*/
+
+.lesson-left{
+
+    text-align:center;
+
+}
+
+
+.titulo-silaba{
+
+    display:inline-block;
+
+    padding:8px 22px;
+
+    background:#edf9e8;
+
+    color:var(--verdeOscuro);
+
+    border-radius:999px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+
+#silabaTexto{
+
+    margin:25px 0;
+
+    font-size:95px;
+
+    color:var(--naranja);
+
+    letter-spacing:4px;
+
+}
+
+
+.imagen-palabra{
+
+    width:300px;
+
+    height:300px;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+.imagen-palabra img{
+
+    max-width:100%;
+
+    max-height:100%;
+
+    object-fit:contain;
+
+}
+
+
+/*=========================================
+=          COLUMNA DERECHA
+=========================================*/
+
+.lesson-right{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:520px;
+
+}
+
+
+/*=========================================
+=           RESPONSIVE
+=========================================*/
+
+@media(max-width:950px){
+
+.lesson-card{
+
+    grid-template-columns:1fr;
+
+    text-align:center;
+
+}
+
+.lesson-right{
+
+    min-height:auto;
+
+}
+
+.lesson-header{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+.lesson-progress{
+
+    transform:scale(.92);
+
+}
+
+}
+
+@media(max-width:650px){
+
+.lesson-wrapper{
+
+    width:95%;
+
+}
+
+.lesson-card{
+
+    padding:25px;
+
+}
+
+#silabaTexto{
+
+    font-size:70px;
+
+}
+
+.imagen-palabra{
+
+    width:220px;
+
+    height:220px;
+
+}
+
+.lesson-progress{
+
+    overflow-x:auto;
+
+    justify-content:flex-start;
+
+    padding-bottom:12px;
+
+}
+
+}
+
+/*=========================================
+=           FASE DE LA LECCIÓN
+=========================================*/
+
+.lesson-phase{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:28px;
+
+}
+
+
+/*=========================================
+=             LEO
+=========================================*/
+
+.leo-container{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:22px;
+
+    width:100%;
+
+}
+
+
+.leo-personaje{
+
+    width:170px;
+
+    user-select:none;
+
+    pointer-events:none;
+
+    animation:leoFloat 3s ease-in-out infinite;
+
+}
+
+
+@keyframes leoFloat{
+
+    0%{
+
+        transform:translateY(0px);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0px);
+
+    }
+
+}
+
+
+/*=========================================
+=          BURBUJA DE DIÁLOGO
+=========================================*/
+
+.leo-dialogo{
+
+    position:relative;
+
+    flex:1;
+
+    background:white;
+
+    border:3px solid #E8F3E3;
+
+    border-radius:28px;
+
+    padding:22px 26px;
+
+    color:#555;
+
+    font-size:20px;
+
+    line-height:1.6;
+
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
+
+}
+
+
+/* Colita de la burbuja */
+
+.leo-dialogo::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-18px;
+
+    bottom:30px;
+
+    width:0;
+
+    height:0;
+
+    border-top:16px solid transparent;
+
+    border-bottom:16px solid transparent;
+
+    border-right:18px solid #E8F3E3;
+
+}
+
+
+.leo-dialogo::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:-13px;
+
+    bottom:31px;
+
+    width:0;
+
+    height:0;
+
+    border-top:14px solid transparent;
+
+    border-bottom:14px solid transparent;
+
+    border-right:16px solid white;
+
+}
+
+
+/*=========================================
+=          BOTÓN ESCUCHAR
+=========================================*/
+
+.btn-audio{
+
+    width:100%;
+
+    max-width:340px;
+
+    border:none;
+
+    outline:none;
+
+    cursor:pointer;
+
+    background:#208CD3;
+
+    color:white;
+
+    font-family:'Fredoka',sans-serif;
+
+    font-size:22px;
+
+    font-weight:600;
+
+    padding:18px 30px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:14px;
+
+    transition:.25s;
+
+    box-shadow:0 10px 22px rgba(32,140,211,.28);
+
+}
+
+
+.btn-audio:hover{
+
+    transform:translateY(-3px);
+
+    background:#1578B8;
+
+}
+
+
+.btn-audio:active{
+
+    transform:scale(.97);
+
+}
+
+
+.btn-audio i{
+
+    font-size:24px;
+
+}
+
+
+/*=========================================
+=         BOTÓN CONTINUAR
+=========================================*/
+
+.btn-continuar{
+
+    width:100%;
+
+    max-width:340px;
+
+    border:none;
+
+    outline:none;
+
+    cursor:pointer;
+
+    background:#fd8918;
+
+    color:white;
+
+    font-family:'Fredoka',sans-serif;
+
+    font-size:22px;
+
+    font-weight:600;
+
+    padding:18px 30px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:14px;
+
+    transition:.25s;
+
+    box-shadow:0 10px 24px rgba(253,137,24,.30);
+
+}
+
+
+.btn-continuar:hover{
+
+    transform:translateY(-3px);
+
+    background:#ec7907;
+
+}
+
+
+.btn-continuar:active{
+
+    transform:scale(.97);
+
+}
+
+
+.btn-continuar i{
+
+    transition:.25s;
+
+}
+
+
+.btn-continuar:hover i{
+
+    transform:translateX(5px);
+
+}
+
+
+/*=========================================
+=       BOTÓN DESHABILITADO
+=========================================*/
+
+.btn-continuar:disabled{
+
+    cursor:not-allowed;
+
+    background:#CFCFCF;
+
+    box-shadow:none;
+
+    transform:none;
+
+}
+
+
+.btn-audio:disabled{
+
+    cursor:not-allowed;
+
+    opacity:.6;
+
+}
+
+
+/*=========================================
+=          RESPONSIVE
+=========================================*/
+
+@media(max-width:900px){
+
+.leo-container{
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+
+.leo-dialogo{
+
+    width:100%;
+
+}
+
+
+.leo-dialogo::before,
+
+.leo-dialogo::after{
+
+    display:none;
+
+}
+
+
+.leo-personaje{
+
+    width:145px;
+
+}
+
+}
+
+
+@media(max-width:600px){
+
+.leo-dialogo{
+
+    font-size:18px;
+
+    padding:18px;
+
+}
+
+
+.btn-audio,
+
+.btn-continuar{
+
+    font-size:19px;
+
+    padding:16px;
+
+}
+
+}
