@@ -6,9 +6,10 @@ const TAB     = 0.30;
 let pieces           = [];
 let positions        = [];
 let solving          = false;
+let resuelto         = false;
 let dragSrc          = null;
 let touchSrc         = null;
-let urlPortadaActual = ''; 
+let urlPortadaActual = '';
 
 async function cargarLibros() {
   try {
@@ -37,7 +38,7 @@ async function cargarLibros() {
 
       const img = document.createElement('img');
       img.alt     = libro.titulo;
-      img.onerror = () => { img.src = 'https://placehold.co/200x180?text=Sin+imagen'; };
+      img.onerror = () => { img.src = 'https://placehold.co/200x 80?text=Sin+imagen'; };
       img.src     = libro.portada_url;
 
       const tituloDiv = document.createElement('div');
@@ -56,7 +57,7 @@ async function cargarLibros() {
 }
 
 function iniciarJuego(urlPortada, titulo) {
-  urlPortadaActual = urlPortada; 
+  urlPortadaActual = urlPortada;
   const img = new Image();
   img.crossOrigin = 'anonymous';
   img.onload = () => {
@@ -78,7 +79,6 @@ function trazarPieza(ctx, x0, y0, W, H, tabs) {
   ctx.beginPath();
   ctx.moveTo(x0, y0);
 
-  // SUPERIOR
   if (tabs.top === 0) {
     ctx.lineTo(x0 + W, y0);
   } else {
@@ -93,7 +93,6 @@ function trazarPieza(ctx, x0, y0, W, H, tabs) {
     ctx.lineTo(x0 + W, y0);
   }
 
-  // DERECHO
   if (tabs.right === 0) {
     ctx.lineTo(x0 + W, y0 + H);
   } else {
@@ -108,7 +107,6 @@ function trazarPieza(ctx, x0, y0, W, H, tabs) {
     ctx.lineTo(x0 + W, y0 + H);
   }
 
-  // INFERIOR (derecha a izquierda)
   if (tabs.bottom === 0) {
     ctx.lineTo(x0, y0 + H);
   } else {
@@ -123,7 +121,6 @@ function trazarPieza(ctx, x0, y0, W, H, tabs) {
     ctx.lineTo(x0, y0 + H);
   }
 
-  // IZQUIERDO (abajo a arriba)
   if (tabs.left === 0) {
     ctx.lineTo(x0, y0);
   } else {
@@ -141,7 +138,6 @@ function trazarPieza(ctx, x0, y0, W, H, tabs) {
   ctx.closePath();
 }
 
-// ── Cortar imagen ──────────────────────────────────────────────
 function cortarEnPiezas(img) {
   const BOARD_W = 400;
   const BOARD_H = Math.round(BOARD_W * img.height / img.width);
@@ -201,6 +197,10 @@ function cortarEnPiezas(img) {
 }
 
 function mezclar() {
+  resuelto = false;
+  const imgFinal = document.querySelector('.imagen-final');
+  if (imgFinal) imgFinal.remove();
+
   do {
     for (let i = positions.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -229,7 +229,6 @@ function renderPuzzle() {
     wrapParent.insertBefore(flexRow, wrap);
     flexRow.appendChild(wrap);
 
-    // Imagen de referencia
     const refBox = document.createElement('div');
     refBox.id = 'refBox';
     refBox.style.cssText = `
@@ -266,8 +265,8 @@ function renderPuzzle() {
     document.getElementById('refImg').src = urlPortadaActual;
   }
 
-const esMobile = window.innerWidth <= 480;
-flexRow.style.cssText = `
+  const esMobile = window.innerWidth <= 480;
+  flexRow.style.cssText = `
     display: flex;
     flex-direction: ${esMobile ? 'column' : 'row'};
     align-items: center;
@@ -310,51 +309,52 @@ flexRow.style.cssText = `
     c2.getContext('2d').drawImage(canvas, 0, 0);
     cell.appendChild(c2);
 
-    const lbl = document.createElement('span');
-    lbl.className   = 'lbl';
-    lbl.textContent = cellPos + 1;
-    lbl.style.cssText = `
+    const highlight = document.createElement('div');
+    highlight.className = 'drop-highlight';
+    highlight.style.cssText = `
       position: absolute;
-      top: ${pad + 2}px;
-      left: ${pad + 4}px;
-      font-size: 11px;
-      font-weight: bold;
-      color: #fff;
-      text-shadow: 0 0 3px #000;
+      top: ${pad}px;
+      left: ${pad}px;
+      width: ${cellW}px;
+      height: ${cellH}px;
+      border: 2px solid #4a90d9;
+      border-radius: 4px;
       pointer-events: none;
-      user-select: none;
+      opacity: 0;
+      z-index: 10;
     `;
-    cell.appendChild(lbl);
+    cell.appendChild(highlight);
 
-    // Drag & Drop
     cell.addEventListener('dragstart', e => {
+      if (resuelto) { e.preventDefault(); return; }
       dragSrc = cellPos;
+      document.querySelectorAll('.drop-highlight').forEach(h => h.style.opacity = '0');
       setTimeout(() => e.target.style.opacity = '0.5', 0);
       e.dataTransfer.effectAllowed = 'move';
     });
     cell.addEventListener('dragend', e => {
       e.target.style.opacity = '1';
-      document.querySelectorAll('.puzzle-cell').forEach(s => s.style.outline = '');
+      document.querySelectorAll('.drop-highlight').forEach(h => h.style.opacity = '0');
     });
     cell.addEventListener('dragover', e => {
+      if (resuelto) return;
       e.preventDefault();
-      document.querySelectorAll('.puzzle-cell').forEach(s => s.style.outline = '');
-      e.currentTarget.style.outline = '2px solid #4a90d9';
-      e.currentTarget.style.zIndex  = '10';
+      document.querySelectorAll('.drop-highlight').forEach(h => h.style.opacity = '0');
+      e.currentTarget.querySelector('.drop-highlight').style.opacity = '1';
     });
     cell.addEventListener('dragleave', e => {
-      e.currentTarget.style.outline = '';
-      e.currentTarget.style.zIndex  = '1';
+      e.currentTarget.querySelector('.drop-highlight').style.opacity = '0';
     });
     cell.addEventListener('drop', e => {
+      if (resuelto) return;
       e.preventDefault();
-      e.currentTarget.style.outline = '';
+      e.currentTarget.querySelector('.drop-highlight').style.opacity = '0';
       intercambiarPiezas(dragSrc, parseInt(e.currentTarget.dataset.cellPos));
     });
 
-    // Touch
-    cell.addEventListener('touchstart', () => { touchSrc = cellPos; }, { passive: true });
+    cell.addEventListener('touchstart', () => { if (!resuelto) touchSrc = cellPos; }, { passive: true });
     cell.addEventListener('touchend', e => {
+      if (resuelto) return;
       const t  = e.changedTouches[0];
       const el = document.elementFromPoint(t.clientX, t.clientY);
       const sd = el && el.closest('.puzzle-cell');
@@ -362,18 +362,22 @@ flexRow.style.cssText = `
       touchSrc = null;
     });
 
+    if (resuelto) {
+      cell.draggable    = false;
+      cell.style.cursor = 'default';
+    }
+
     wrap.appendChild(cell);
   });
 }
 
 function intercambiarPiezas(desde, hasta) {
-  if (desde === null || desde === hasta) return;
+  if (resuelto || desde === null || desde === hasta) return;
   [positions[desde], positions[hasta]] = [positions[hasta], positions[desde]];
   renderPuzzle();
   actualizarProgreso();
   if (checkWin()) {
-    document.getElementById('winMsg').style.display = 'block';
-    document.getElementById('info').textContent = '';
+    mostrarSolucionado();
   } else {
     document.getElementById('info').textContent = '¡Bien! Seguí intentando';
   }
@@ -397,8 +401,50 @@ function actualizarProgreso() {
   document.getElementById('progLbl').textContent  = pct + '%';
 }
 
+function mostrarSolucionado() {
+  resuelto = true;
+  document.getElementById('winMsg').style.display = 'block';
+  document.getElementById('info').textContent = '';
+
+  document.querySelectorAll('.puzzle-cell').forEach(cell => {
+    cell.draggable = false;
+    cell.style.cursor = 'default';
+    const h = cell.querySelector('.drop-highlight');
+    if (h) h.style.opacity = '0';
+  });
+
+  const wrap = document.getElementById('stripsWrap');
+  const { cellW, cellH, pad } = pieces[0];
+  const BOARD_W = cellW * COLS;
+  const BOARD_H = cellH * ROWS;
+
+  const imgFinal = document.createElement('img');
+  imgFinal.className = 'imagen-final';
+  imgFinal.src = urlPortadaActual;
+  imgFinal.style.cssText = `
+    position: absolute;
+    top: ${pad}px;
+    left: ${pad}px;
+    width: ${BOARD_W}px;
+    height: ${BOARD_H}px;
+    object-fit: cover;
+    border-radius: 6px;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index: 20;
+    pointer-events: none;
+  `;
+  wrap.appendChild(imgFinal);
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      imgFinal.style.opacity = '1';
+    });
+  });
+}
+
 document.getElementById('ayudaBtn').addEventListener('click', async () => {
-  if (solving) return;
+  if (solving || resuelto) return;
   solving = true;
   ['ayudaBtn', 'mezclarBtn', 'volverBtn'].forEach(id => document.getElementById(id).disabled = true);
   document.getElementById('info').textContent = 'Ordenando poquito a poco...';
@@ -416,21 +462,15 @@ document.getElementById('ayudaBtn').addEventListener('click', async () => {
 
   solving = false;
   ['ayudaBtn', 'mezclarBtn', 'volverBtn'].forEach(id => document.getElementById(id).disabled = false);
-  document.getElementById('winMsg').style.display = 'block';
-  document.getElementById('info').textContent     = '';
   actualizarProgreso();
+  mostrarSolucionado();
 });
 
 document.getElementById('mezclarBtn').addEventListener('click', () => { if (!solving) mezclar(); });
+
 document.getElementById('volverBtn').addEventListener('click', () => {
   if (solving) return;
-  const flexRow = document.getElementById('puzzleFlexRow');
-  if (flexRow) {
-    flexRow.parentElement.insertBefore(document.getElementById('stripsWrap'), flexRow);
-    flexRow.remove();
-  }
-  document.getElementById('pantallaJuego').style.display  = 'none';
-  document.getElementById('pantallaLibros').style.display = 'block';
+  window.location.href = 'biblioteca.php';
 });
 
 cargarLibros();
