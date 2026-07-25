@@ -188,7 +188,7 @@ content="width=device-width, initial-scale=1.0">
 
 <title>
 
-Aventura con Leo
+Aventura Leo
 
 </title>
 
@@ -260,13 +260,15 @@ href="styles/aventura-leo.css">
                 </div>
             </a>
             
-            <div class="tab-item active">
+           <a href="biblioteca.php" class="tab-item">
                 <img src="images/FinxHi.png" alt="Finx" class="tab-mascota-img">
                 <div class="tab-text text-finx">
                     <span class="tab-title text-success">Cuentos</span>
                     <span class="tab-subtitle">Finx</span>
                 </div>
-            </div>
+           </a>
+
+            
         </div>
 
 
@@ -388,8 +390,6 @@ href="styles/aventura-leo.css">
                 </div>
 
 
-
-                <!-- Contenido desplegable -->
 
                 <div class="nivel-content">
 
@@ -563,8 +563,6 @@ href="styles/aventura-leo.css">
         </div>
 
     </main>
-
-    <img src="" alt="">
 
 </div>
 
