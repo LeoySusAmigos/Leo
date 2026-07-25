@@ -139,7 +139,7 @@
 
                         href="register.html">
 
-                            Registrarse gratis
+                            Registrarse
 
                         </a>
 

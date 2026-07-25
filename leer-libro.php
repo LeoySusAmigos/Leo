@@ -72,7 +72,7 @@ $paginas_json = json_encode($paginas_raw, JSON_UNESCAPED_UNICODE | JSON_HEX_APOS
         palabrasPorPagina: 85,
         titulo: <?php echo json_encode($libro['titulo']); ?>,
         onTerminar: function({ mins, segs }) {
-            fetch('php/guardar-progreso.php', {
+            fetch('php/guardar-progreso-libro.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

@@ -1,30 +1,35 @@
 <?php
 session_start();
 
-// 1. Validar que el usuario tenga la sesión activa
 if (!isset($_SESSION['userID'])) {
-    die("Error: Usuario no autenticado");
+    http_response_code(401);
+    exit();
 }
 
-// 2. Incluir la conexión a la base de datos
-include 'conexion.php'; 
+include 'conexion.php';
 
-$userID = $_SESSION['userID'];
+$data     = json_decode(file_get_contents('php://input'), true);
+$libro_id = intval($data['libro_id'] ?? 0);
+$segundos = intval($data['tiempo_segundos'] ?? 0);
+$userID   = intval($_SESSION['userID']);
 
-// 3. Recibir el ID del libro que se acaba de leer (enviado desde la pantalla del cuento)
-if (isset($_GET['id'])) {
-    $libroId = intval($_GET['id']); // Convertimos a número por seguridad básica
-    
-    $sql = "INSERT IGNORE INTO progreso_libros (userID, libro_id) VALUES ($userID, $libroId)";
-    mysqli_query($conn, $sql);
-    
-    // 4. Redirigir al niño de vuelta a la biblioteca de Finx
-    header("Location: ../biblioteca.php");
+if ($libro_id <= 0) {
+    http_response_code(400);
     exit();
+}
 
+$stmt = mysqli_prepare($conn, 
+    "INSERT INTO progreso_libros (userID, libro_id, tiempo_segundos, fecha_leido)
+     VALUES (?, ?, ?, NOW())
+     ON DUPLICATE KEY UPDATE
+        tiempo_segundos = VALUES(tiempo_segundos),
+        fecha_leido     = VALUES(fecha_leido)"
+);
+mysqli_stmt_bind_param($stmt, "iii", $userID, $libro_id, $segundos);
+
+if (mysqli_stmt_execute($stmt)) {
+    echo json_encode(['ok' => true]);
 } else {
-    // Si entran al archivo sin mandar un ID de libro, los regresamos
-    header("Location: ../biblioteca.php");
-    exit();
+    http_response_code(500);
+    echo json_encode(['ok' => false, 'error' => mysqli_error($conn)]);
 }
-?>

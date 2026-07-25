@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($usuario['rol'] == 'admin') { 
                 header("Location: ../admin/dashboard.php"); 
             } else { 
-                header("Location: ../inicio-nino.php"); 
+                header("Location: ../index.php"); 
             } 
             
             exit(); 

@@ -18,8 +18,8 @@ body {
 
 .biblioteca-container {
     width: 100%;
-    max-width: 1100px;
-    margin: 30px auto 40px auto;
+    max-width: 1300px;
+    margin: 100px auto 40px auto;
     padding: 0 15px;
 }
 
@@ -34,7 +34,7 @@ body {
 
 .header-center-title h1 {
     font-family: 'Fredoka', sans-serif;
-    font-size: 42px;
+    font-size: 52px;
     font-weight: 700;
     color: #2F7A2F;
     letter-spacing: 0.5px;
@@ -42,7 +42,7 @@ body {
 }
 
 .header-center-title p {
-    font-size: 16px;
+    font-size: 20px;
     color: #8A8A8A;
     font-weight: 500;
     margin-top: -2px;
@@ -55,7 +55,7 @@ body {
 
 .btn-filtro-modern {
     background-color: white;
-    color: #2F7A2F;
+    color: #fd8918;
     border: 2px solid #E5E5E5;
     padding: 8px 20px;
     border-radius: 20px;
@@ -66,7 +66,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 2px 0 #E5E5E5;
+    box-shadow: 0 2px 0 #fff4ea;
 }
 
 .btn-filtro-modern:hover {
@@ -100,7 +100,22 @@ body {
 
 .opcion:hover {
     background-color: #F7F7F7;
-    color: #2F7A2F;
+    color: #fd8918;
+}
+
+.mascota {
+    position:absolute;
+    left:12vh;
+    top:16vh;
+    z-index:-1;
+    pointer-events:none;
+}
+
+.mascota img {
+    width: 210px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
 }
 
 .tabs-mascotas-container {
@@ -149,6 +164,7 @@ body {
 
 .tab-item.active {
     background-color: rgb(248, 255, 246);
+    border-bottom: 5px solid #2F7A2F;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
@@ -179,7 +195,7 @@ body {
 .banner-icon-circle {
     width: 38px;
     height: 38px;
-    background-color: #2F7A2F;
+    background-color: #ffbb00;
     border-radius: 50%;
     color: white;
     display: flex;
@@ -190,8 +206,9 @@ body {
 }
 
 .banner-info-text strong {
-    font-size: 15px;
-    color: #3C3C3C;
+    font-size: 22px;
+    color: #ff9900;
+    font-weight: bolder;
 }
 
 .banner-info-text p {
@@ -206,15 +223,30 @@ body {
     gap: 35px;
 }
 
+.nivel-row-container{
+    background:#fff;
+    border:1px solid #E7E7E7;
+    border-radius:24px;
+    overflow:hidden;
+    transition:.30s;
+    box-shadow:0 8px 18px rgba(0,0,0,.05);
+}
+
+.nivel-row-container:hover{
+    box-shadow:0 12px 25px rgba(0,0,0,.08);
+}
+
 .nivel-row-header {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 18px;
+    padding:22px 28px;
+    cursor:pointer;
+    user-select:none;
 }
 
 .nivel-badge-pill {
-    background-color: #2F7A2F;
+    background-color: #fd8918;
     color: white;
     font-family: 'Fredoka', sans-serif;
     font-weight: 600;
@@ -231,7 +263,7 @@ body {
 
 .toggle-row-icon {
     margin-left: auto;
-    color: #2F7A2F;
+    color: #fd8918;
     cursor: pointer;
     font-size: 18px;
     transition: transform 0.2s ease;
@@ -239,8 +271,11 @@ body {
 
 .nivel-row-cards-flex {
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
+    padding: 16px;
 }
 
 .card-cuento-modern-link {
@@ -252,8 +287,8 @@ body {
     background-color: white;
     border: 2px solid #E5E5E5;
     border-radius: 20px;
-    width: 310px;
-    padding: 14px;
+    width: 375px;
+    padding: 20px;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -317,7 +352,7 @@ body {
 }
 
 .status-check-circle.completed {
-    background-color: #58CC02;
+    background-color: #2fa84f;
     color: white;
     font-size: 12px;
 }
@@ -349,25 +384,10 @@ body {
     color: #B8B8B8;
 }
 
-.mascota {
-    position: absolute;
-    left: 20px;
-    bottom: 10px;
-    z-index: 999;
-    pointer-events: none;
-}
-
-.mascota img {
-    width: 180px;
-    height: auto;
-    object-fit: contain;
-    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
-}
-
 @media (max-width: 768px) {
 
     .biblioteca-container {
-        margin: 80px auto 30px auto;
+        margin: 20px auto 30px auto;
     }
 
     .nivel-row-cards-flex {
@@ -384,12 +404,31 @@ body {
     .card-cuento-modern {
         width: 100%;
     }
+
+    .nivel-meta-info {
+        display: none;
+    }
+
+    .mascota {
+        position: absolute;
+        left: -25px;
+        bottom: -35px;
+        z-index: 999;
+        pointer-events: none;
+    }
+
+    .mascota img {
+        width: 180px;
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
+    }
 }
 
 @media (max-width: 480px) {
 
     .biblioteca-container {
-        margin: 85px auto 25px auto;
+        margin: 25px auto 25px auto;
         padding: 10px 5px;
         display: flex;
         align-items: center;
@@ -417,7 +456,7 @@ body {
     .tabs-mascotas-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 5px;
+        gap: 10px;
         width: 100%;
         margin: 10px 0 0;
     }
@@ -430,12 +469,14 @@ body {
         align-items: center;
         text-align: center;
         background: #fff;
-        border: 2px solid #E8E8E8;
-        border-radius: 18px 18px 0 0;
-        padding: 12px 8px;
+        border: 2px solid #E5E5E5;
+        border-radius: 20px 20px 0px 0px;
+        padding: 12px 20px;
         min-height: 110px;
         text-decoration: none;
-        transition: .25s;
+        gap: 15px;
+        cursor: pointer;
+        transition: all 0.2s ease;
     }
 
     .tab-mascota-img {
@@ -461,7 +502,9 @@ body {
     }
 
     .tab-item.active {
-        background: #F5FBF5;
+        background-color: #F8FFF6;
+        border-bottom: 5px solid #2F7A2F;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
     }
 
     .tab-item.active .tab-subtitle {
@@ -476,8 +519,25 @@ body {
         bottom: 0;
         width: 100%;
         height: 5px;
-        background: #2F7A2F;
         border-radius: 0 0 16px 16px;
     }
 
+    .nivel-meta-info {
+        display: none;
+    }
+
+    .mascota {
+        position: absolute;
+        left: -5px;
+        bottom: -35px;
+        z-index: 999;
+        pointer-events: none;
+    }
+
+    .mascota img {
+        width: 115px;
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
+    }
 }

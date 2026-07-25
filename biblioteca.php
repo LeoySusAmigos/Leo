@@ -96,8 +96,12 @@ while ($fila = mysqli_fetch_assoc($res)) {
 
         </header>
 
+        <div class="mascota">
+            <img src="images/FinxHi.png" alt="Finx" class="mascota-img">
+        </div>
+
         <div class="tabs-mascotas-container">
-            <a href="aventura1.html" class="tab-item">
+            <a href="aventura-leo.php" class="tab-item">
                 <img src="images/Leito.png" alt="Leo" class="tab-mascota-img">
                 <div class="tab-text text-leo">
                     <span class="tab-title text-secondary">Comprensión y vocabulario</span>
@@ -230,10 +234,6 @@ while ($fila = mysqli_fetch_assoc($res)) {
 
         </main>
         
-    </div>
-
-    <div class="mascota">
-        <img src="images/FinxHi.png" alt="Finx" class="mascota-img">
     </div>
 
     <script src="js/index.js"></script>
