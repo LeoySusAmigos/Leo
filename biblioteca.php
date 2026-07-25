@@ -72,12 +72,17 @@ while ($fila = mysqli_fetch_assoc($res)) {
 
     <div class="biblioteca-container">
 
+        <div class="mascota">
+            <img src="images/FinxHi.png" alt="Finx" class="mascota-img">
+        </div>
+
         <header class="biblio-header-modern"> 
+            
             <div class="header-center-title">
                 <h1>MINI BIBLIOTECA</h1>
                 <p>Aprender a leer es una aventura</p>
             </div>
-            
+
             <div class="filtrar">
                 <div class="filtro-dropdown">
                     <button class="btn-filtro-modern">
@@ -95,10 +100,6 @@ while ($fila = mysqli_fetch_assoc($res)) {
             </div>
 
         </header>
-
-        <div class="mascota">
-            <img src="images/FinxHi.png" alt="Finx" class="mascota-img">
-        </div>
 
         <div class="tabs-mascotas-container">
             <a href="aventura-leo.php" class="tab-item">
