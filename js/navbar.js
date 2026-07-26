@@ -1,41 +1,49 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', function () {
+    let navToggle = document.getElementById('navToggle');
+    let sidebar = document.getElementById('mascotas');
+    let overlay = document.getElementById('navOverlay');
+    let sidebarClose = document.getElementById('sidebarClose');
 
-    const navToggle = document.getElementById("navToggle");
-    const mascotasContainer = document.getElementById("mascotas");
+    if (!navToggle || !sidebar || !overlay) return;
 
-    if (navToggle && mascotasContainer) {
-        navToggle.addEventListener("click", (event) => {
-            event.stopPropagation();
-            mascotasContainer.classList.toggle("active");
-        });
+    function openSidebar() {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+        navToggle.classList.add('is-active');
+        navToggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
     }
 
-    if (mascotasContainer) {
-        mascotasContainer.addEventListener("click", (event) => {
-            event.stopPropagation();
-        });
+    function closeSidebar() {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        navToggle.classList.remove('is-active');
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
     }
 
-    document.addEventListener("click", () => {
-        if (mascotasContainer && mascotasContainer.classList.contains("active")) {
-            mascotasContainer.classList.remove("active");
+    function toggleSidebar() {
+        if (sidebar.classList.contains('active')) {
+            closeSidebar();
+        } else {
+            openSidebar();
         }
+    }
+
+    navToggle.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    if (sidebarClose) {
+        sidebarClose.addEventListener('click', closeSidebar);
+    }
+
+    // Cerrar con la tecla Escape
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeSidebar();
+    });
+
+    // Si la pantalla vuelve a tamaño de escritorio, resetea el estado
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 850) closeSidebar();
     });
 });
-
-(function() {   
-
-    const imgElement = document.querySelector(".topbar__user .avatar");
-    if (imgElement) {
-
-            const currentSrc = imgElement.getAttribute('src');
-
-        if (currentSrc) {
-
-            imgElement.src = currentSrc + "?t=" + new Date().getTime();
-
-        }
-
-    }
-
-})();

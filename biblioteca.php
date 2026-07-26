@@ -68,7 +68,7 @@ while ($fila = mysqli_fetch_assoc($res)) {
 
 <body>
 
-    <?php include 'components/navbar.php'; ?>
+    <?php include 'navbar.php'; ?>
 
     <div class="biblioteca-container">
 
@@ -238,7 +238,7 @@ while ($fila = mysqli_fetch_assoc($res)) {
     </div>
 
     <script src="js/index.js"></script>
-    <script src="js/navbar.js"></script>
+
 </body>
 
 </html>
