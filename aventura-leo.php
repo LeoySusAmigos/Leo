@@ -192,6 +192,7 @@ Aventura Leo
 
 </title>
 
+<link rel="shortcut icon" href="images/favicon/favicon-32x32.png" type="image/x-icon">
 
 <link
 rel="preconnect"
