@@ -7,15 +7,24 @@ if (session_status() === PHP_SESSION_NONE) {
 <nav class="custom-navbar">
     <div class="nav-container">
 
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+            <span class="bar"></span>
+        </button>
+
         <div class="logo-container">
             <a href="inicio-nino.php"><img src="images/cartelito.png" alt="logo"></a>
         </div>
 
-        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
-            <i class="fa-solid fa-bars"></i>
-        </button>
+        <div class="nav-overlay" id="navOverlay"></div>
 
         <div class="mascotas-container" id="mascotas">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Menú</span>
+                <button class="sidebar-close" id="sidebarClose" aria-label="Cerrar menú">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
             <ul class="nav-menu">
                 <li class="nav-element">
                     <a href="aventura1.html"><img src="images/Leito.png" alt="Leo" class="mascota-img"></a>
@@ -30,6 +39,11 @@ if (session_status() === PHP_SESSION_NONE) {
                     <a class="menu-link" href="biblioteca.php">Lectura con Finx</a>
                 </li>
             </ul>
+
+            <a href="inicio-nino.php" class="sidebar-home">
+                <i class="fa-solid fa-house"></i>
+                Volver al inicio
+            </a>
         </div>
 
         <div class="usuario-container">
@@ -70,3 +84,5 @@ if (session_status() === PHP_SESSION_NONE) {
 
     </div>
 </nav>
+
+<script src="js/navbar.js"></script>
