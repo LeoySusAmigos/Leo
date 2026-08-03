@@ -1,5 +1,5 @@
-body{
-    background:url('../images/juegoCuento2.png');
+body {
+    background: url('../images/juegoCuento2.png');
     background-size: cover;
     background-position: center;
     min-height: 100vh;
@@ -9,120 +9,234 @@ body{
     text-align: center;
 }
 
-h1{
-    color: #74a9e6 ;
-}
-
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
+h1 {
+    color: #74a9e6;
+    font-size: 2.2rem;
     margin-top: 40px;
+    margin-bottom: 6px;
 }
 
-.letra{
-    min-width: 100px;
-    padding: 15px 20px;
-    background: #3b6ea5;
+.subtitulo {
+    color: #74a9e6;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 24px;
+    opacity: 0.85;
+}
+
+/* ── Frase ── */
+.frase-container {
+    background: #eaf4ff;
+    border: 2px solid #b8d9f5;
+    color: #2c5f8a;
+    border-radius: 14px;
+    padding: 18px 28px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    max-width: 620px;
+    margin: 0 auto 20px;
+    box-shadow: inset 0 2px 6px rgba(116,169,230,0.15), 0 3px 10px rgba(0,0,0,0.07);
+    line-height: 2;
+}
+
+.palabra-frase {
+    display: inline-block;
+}
+
+.espacio-frase {
+    display: inline-block;
+    min-width: 110px;
+    border-bottom: 3px solid #74a9e6;
+    text-align: center;
+    padding: 2px 8px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    font-weight: 700;
+    color: #3b6ea5;
+}
+
+.espacio-frase.drag-over {
+    background: #d6e9ff;
+    border-color: #3b6ea5;
+}
+
+.espacio-frase.correcto {
+    background: #d4f8d4;
+    border-color: #27ae60;
+    color: #27ae60;
+}
+
+.espacio-frase.incorrecto {
+    background: #ffd6d6;
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+.zona-drop {
+    min-width: 130px;
+    min-height: 52px;
+    border: 2.5px dashed #a8cef0;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+    padding: 10px 22px;
+    font-size: 1.1rem;
+    color: #7ab3de;
+    background: rgba(234, 244, 255, 0.5);
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.zona-drop.drag-over {
+    background: rgba(116, 169, 230, 0.2);
+    border-color: #3b6ea5;
+}
+
+.zona-drop.correcto {
+    background: rgba(39, 174, 96, 0.12);
+    border-color: #27ae60;
+    color: #27ae60;
+    font-weight: 700;
+}
+
+.zona-drop.incorrecto {
+    background: rgba(231, 76, 60, 0.12);
+    border-color: #e74c3c;
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+.drop-hint {
+    font-size: 0.95rem;
+    opacity: 0.65;
+}
+
+/* ── Opciones arrastrables ── */
+.opciones-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
-    border-radius: 10px;
-    cursor: grab;
-    transition: 0.3s;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
 }
 
-.letra:hover{
-    background: #d8eaff;
-    color: black;
+.opcion {
+    min-width: 100px;
+    padding: 12px 18px;
+    background: #3b6ea5;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    cursor: grab;
+    transition: transform 0.2s, background 0.2s;
+    user-select: none;
+}
+
+.opcion:hover {
+    background: #5a8fc7;
     transform: scale(1.05);
 }
 
-.dragging{
-    opacity: 0.5;
+.opcion.dragging {
+    opacity: 0.45;
 }
 
-.victoria{
-    background: 
+.opcion.bloqueado {
+    background: #b0b8c4;
+    color: #e8ecf0;
+    opacity: 0.6;
+    filter: grayscale(60%);
+    pointer-events: none;
+    cursor: default;
+}
+
+.victoria {
+    background:
         linear-gradient(90deg, #f0f7ff, #d6e9ff) padding-box,
         linear-gradient(90deg, #b4d7ff, #9cbfe7) border-box;
-    border:5px solid transparent;
-    border-radius: 20px;
-    padding: 65px 50px;
-    margin-top: 40px; 
-    box-shadow: 0 8px 25px rgba(139, 242, 250, 0.5);
+    border: 2px solid #b8d9f5;
+    border-radius: 18px;
+    padding: 30px 44px;
+    margin-top: 16px;
+    box-shadow: 0 6px 20px rgba(116, 169, 230, 0.2);
     display: inline-block;
     animation: aparecer 0.4s ease forwards;
 }
 
-.victoria h2{
-    color: #74a9e6;
-    font-size: 40px;
-    margin: 0 0 15px 0;
+.victoria h2 {
+    color: #3b6ea5;
+    font-size: 1.8rem;
+    margin: 0 0 10px 0;
 }
 
-.victoria p{
-    color: #555;
-    font-size: 20px;
+.victoria p {
+    color: #4a6f8a;
+    font-size: 1.05rem;
     margin: 0;
 }
 
-.victoria small{
-    color: #999;
-    font-size: 16px;
+.victoria small {
+    color: #8aafc9;
+    font-size: 0.88rem;
     display: block;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
-.bottom-panel{
-    margin-top: 40px;
+.incorrecto-msg {
+    border-color: #f5c6c6;
+    background: #fff5f5;
+}
+
+.incorrecto-msg h2 {
+    color: #c0392b;
+}
+
+.incorrecto-msg p {
+    color: #7a3a3a;
+}
+
+.bottom-panel {
+    margin-top: 28px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
+    padding-bottom: 40px;
 }
 
-.bottom-panel button{
+.bottom-panel button {
     background: transparent;
     border: none;
     outline: none;
     padding: 0;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
     transition: transform 0.2s;
 }
 
-.bottom-panel button:focus{
-    outline: none;
-}
-
-.bottom-panel button:hover{
+.bottom-panel button:hover {
     transform: scale(1.1);
 }
 
-.bottom-panel img{
+.bottom-panel img {
     width: 90px;
     height: 90px;
     object-fit: contain;
     display: block;
 }
 
-@keyframes aparecer{
-    from{
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to{
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.bloqueado{
+.bloqueado {
     opacity: 0.5;
     pointer-events: none;
     filter: grayscale(100%);
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
 }

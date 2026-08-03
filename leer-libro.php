@@ -27,7 +27,6 @@ $primera = true;
 while ($p = mysqli_fetch_assoc($res_paginas)) {
     $paginas_raw[] = [
         'numero' => $p['numero_pagina'],
-        // Modificamos esta línea para agregar nl2br():
         'texto'  => nl2br($p['texto_pagina']), 
         // Solo la primera página lleva imagen
         'imagen' => $primera ? 'images/cuentos/' . $libro['portada'] : null,
