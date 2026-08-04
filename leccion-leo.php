@@ -188,12 +188,17 @@ href="styles/navbar.css">
 <main class="lesson-wrapper">
 
     <div class="lesson-header">
+        <a href="aventura-leo.php" id="btnVolverNiveles" class="btn-home">
+
+            <i class="fa-solid fa-house"></i>
+
+        </a>
 
         <div class="lesson-info">
 
             <span class="lesson-level">
 
-                🌿 Nivel <?php echo $leccion['orden']; ?>
+                Nivel <?php echo $leccion['orden']; ?>
 
                 •
 
@@ -301,6 +306,121 @@ href="styles/navbar.css">
 
 
     <div class="lesson-card">
+        <div id="faseContainer">
+
+            <div class="lesson-phase" id="fase1">
+
+                <div class="leo-container">
+                    <img src="images/aventuraLeo/leo-tronco.png" class="leo-personaje" alt="Leo">
+
+                    <div class="leo-dialogo" id="dialogoFase1">
+
+                        ¡Hola!
+
+                        Escucha atentamente cómo suena esta sílaba.
+
+                        Después la reconoceremos juntos.
+
+                    </div>
+
+                </div>
+                <div class="lesson-buttons">
+                    <button
+                        id="btnEscuchar"
+                        class="btn-audio"
+                        data-audio="audios/LEO/<?php echo htmlspecialchars($palabras[0]['audio']); ?>">
+
+                        <i class="fa-solid fa-volume-high"></i>
+
+                        Escuchar
+
+                    </button>
+
+                
+
+
+                    <button id="btnContinuar" class="btn-continuar" disabled>
+
+                        Continuar
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+                </div>
+
+                
+
+            </div>
+
+            <div class="lesson-phase" id="fase2" style="display:none;">
+
+                <div class="leo-container">
+                    <img src="images/aventuraLeo/leo-tronco.png" class="leo-personaje" alt="Leo">
+                    <div class="leo-dialogo" id="dialogoFase2">
+                        ¿Cuál de estas es la sílaba correcta?
+                    </div>
+
+                </div>
+
+                <div class="opciones-silabas" id="opcionesSilabas">
+
+                </div>
+
+            </div>
+
+            <div class="lesson-phase" id="fase3" style="display:none;">
+
+                <div class="leo-container">
+
+                    <img
+                    src="images/aventuraLeo/leo-tronco.png"
+                    class="leo-personaje"
+                    alt="Leo">
+
+                    <div
+                    class="leo-dialogo"
+                    id="dialogoFase3">
+
+                        ¡Muy bien!
+
+                        Ahora encontremos la palabra completa.
+
+                    </div>
+
+                </div>
+
+                <div class="opciones-palabras" id="opcionesPalabras"></div>
+
+                <div id="resultadoFinal" class="resultado-final" style="display:none;">
+
+                    <div class="mensaje-final">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        ¡Excelente!
+
+                        Ganaste +5 puntos ⭐
+
+                    </div>
+
+                    <div id="contenedorSiguiente" style="display:none;">
+
+                        <button id="btnSiguientePalabra" class="btn-siguiente">
+
+                            Siguiente palabra
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+            
+
+
+        </div>
 
         <div class="lesson-left">
 
@@ -324,68 +444,60 @@ href="styles/navbar.css">
 
         </div>
 
-
-    
-
     </div>
 
-    <div id="faseContainer">
+    <div id="modalSalir" class="modal-salir">
 
-        <div
-        class="lesson-phase"
-        id="fase1">
+    <div class="modal-card">
 
-            <div class="leo-container">
+        <h2>
 
-                <img
+            ¿Volver a los niveles?
 
-                src="images/aventuraLeo/leo-tronco.png"
+        </h2>
 
-                class="leo-personaje"
+        <p>
 
-                alt="Leo">
+            Tu progreso ya guardado no se perderá.
 
-                <div class="leo-dialogo">
+            Podrás continuar esta aventura cuando quieras.
 
-                    ¡Hola!
+        </p>
 
-                    Escucha atentamente cómo suena esta sílaba.
+        <div class="modal-botones">
 
-                    Después la reconoceremos juntos.
+            <button id="cancelarSalir" class="btn-modal-secundario">
 
-                </div>
-
-            </div>
-
-
-            <<button
-                id="btnEscuchar"
-                class="btn-audio"
-                data-audio="audios/LEO/<?php echo htmlspecialchars($palabras[0]['audio']); ?>">
-
-                <i class="fa-solid fa-volume-high"></i>
-
-                Escuchar
+                Seguir aprendiendo
 
             </button>
 
-            
+            <button id="confirmarSalir" class="btn-modal-principal">
 
-
-            <button
-            id="btnContinuar"
-            class="btn-continuar">
-
-                Continuar
-
-                <i class="fa-solid fa-arrow-right"></i>
+                Volver a los niveles
 
             </button>
 
         </div>
 
     </div>
+
+</div>
+
+    
 </main>
+
+
+<script>
+
+const nivelID = <?php echo $leccion['nivelID']; ?>;
+const leccionID = <?php echo $leccion['leccionID']; ?>;
+const palabras = <?php echo json_encode($palabras, JSON_UNESCAPED_UNICODE); ?>;
+let indiceActual = 0;
+
+</script>
+
+<script src="js/LeoFunciones.js"></script>
 
 <script src="js/leccion-leo.js"></script>
 

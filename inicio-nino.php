@@ -186,7 +186,7 @@ if ($logro->num_rows > 0) {
                     <span><?= $porcentajeLeo ?>% completado</span>
                 <?php endif; ?>
 
-                <a href="aventura-leo.php">Ir con Leo</a>
+                <a href="aventura-leo.php" onclick="sessionStorage.setItem('desdeMenuLeo','true')">Ir con Leo</a>
             </div>
         </div>
 

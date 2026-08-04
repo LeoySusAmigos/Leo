@@ -31,3 +31,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    /*
+    ¿Viene desde el menú?
+    */
+
+    if(sessionStorage.getItem("desdeMenuLeo")==="true"){
+
+        sessionStorage.removeItem("desdeMenuLeo");
+
+        setTimeout(()=>{
+
+            reproducirLeo("bienvenida");
+
+        },700);
+
+    }
+
+});
