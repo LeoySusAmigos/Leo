@@ -16,6 +16,7 @@ include("php/oraciones.php");
     <link rel="stylesheet" href="styles/juego-cuento2.css">
 
     <title>Juego de Letras</title>
+    <link rel="shortcut icon" href="images/favicon/favicon-32x32.png" type="image/x-icon">
 </head>
 
 <body>

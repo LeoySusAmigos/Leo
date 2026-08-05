@@ -155,11 +155,17 @@ $sql = "
 
 SELECT
 
-palabraID
+    palabraID
 
-FROM leo_palabras_completadas
+FROM leo_progreso
 
-WHERE userID='$userID'
+WHERE
+
+    userID='$userID'
+
+AND
+
+    porcentaje = 100
 
 ";
 
@@ -192,6 +198,7 @@ Aventura Leo
 
 </title>
 
+<link rel="shortcut icon" href="images/favicon/favicon-32x32.png" type="image/x-icon">
 
 <link
 rel="preconnect"
@@ -565,6 +572,8 @@ href="styles/aventura-leo.css">
     </main>
 
 </div>
+
+<script src="js/LeoFunciones.js"></script>
 
 <script src="js/aventura-leo.js"></script>
 
