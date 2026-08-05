@@ -41,12 +41,17 @@ $progreso = $resultado->fetch_assoc();
    VARIABLES GENERALES
 ========================= */
 
-$puntos       = $progreso['puntos'];
-$racha        = $progreso['racha'];
-$nivel        = $progreso['nivel_actual'];
+$puntos        = $progreso['puntos'];
+$racha         = $progreso['racha'];
+$nivel         = $progreso['nivel_actual'];
 $leccionActual = $progreso['leccion_actual'];
 
-$porcentajeLeo = min(100, max(0, $progreso['porcentaje']));
+// Porcentaje de Leo (lectura)
+$porcentajeLeo = min(100, max(0, $progreso['porcentaje'] ?? 0));
+
+// Porcentaje de Capy (gramática)
+// OJO: ajusta 'porcentaje_capy' al nombre real de tu columna en la tabla progreso
+$porcentajeCapy = min(100, max(0, $progreso['porcentaje_capy'] ?? 0));
 
 
 /* =========================
@@ -54,6 +59,17 @@ $porcentajeLeo = min(100, max(0, $progreso['porcentaje']));
 ========================= */
 
 $moduloActual = $progreso['modulo_actual'] ?? 'leo';
+
+
+/* =========================
+   DESBLOQUEOS DE AVENTURAS
+========================= */
+
+// Capy se desbloquea al completar Leo al 100%
+$capyDesbloqueado = $porcentajeLeo >= 100;
+
+// Finx se desbloquea al completar Capy al 100% (y Capy debe estar desbloqueado)
+$finxDesbloqueado = $capyDesbloqueado && $porcentajeCapy >= 100;
 
 
 /* =========================
@@ -173,7 +189,7 @@ if ($logro->num_rows > 0) {
 
         <!-- Leo -->
         <div class="aventura leo">
-            <img src="images/leito.png">
+            <img src="images/Leito.png">
             <div>
                 <h3>Leo</h3>
                 <p>Lectura · Nivel <?= $nivel ?></p>
@@ -186,7 +202,7 @@ if ($logro->num_rows > 0) {
                     <span><?= $porcentajeLeo ?>% completado</span>
                 <?php endif; ?>
 
-                <a href="aventura-leo.php">Ir con Leo</a>
+                <a href="aventura-leo.php" onclick="sessionStorage.setItem('desdeMenuLeo','true')">Ir con Leo</a>
             </div>
         </div>
 
@@ -210,7 +226,7 @@ if ($logro->num_rows > 0) {
 
         <!-- Finx -->
         <div class="aventura finx">
-            <img src="images/finx.png">
+            <img src="images/Finx.png">
             <div>
                 <h3>Finx</h3>
                 <p>Biblioteca</p>

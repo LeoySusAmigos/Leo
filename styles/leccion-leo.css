@@ -37,10 +37,10 @@ body{
 
     background:
 
-    linear-gradient(rgba(255,255,255,.72),
-    rgba(255,255,255,.72)),
+    linear-gradient(rgba(252, 251, 251, 0.514),
+    rgba(255, 255, 255, 0.336)),
 
-    url("../images/fondos/fondo-jungla.webp");
+    url("../images/aventuraLeo/fondo-leccion.png");
 
     background-size:cover;
 
@@ -100,7 +100,9 @@ body{
 
     margin:0;
 
-    color:#777;
+    color:#363636;
+
+    font-weight:500;
 
     font-size:18px;
 
@@ -123,9 +125,9 @@ body{
 
     border-radius:999px;
 
-    font-size:15px;
+    font-size:20px;
 
-    font-weight:600;
+    font-weight:650;
 
 }
 
@@ -151,7 +153,7 @@ body{
 
 .lesson-counter span{
 
-    color:var(--naranja);
+    color:var(--azul);
 
     font-size:28px;
 
@@ -194,18 +196,20 @@ body{
 
 .progress-step span{
 
-    color:#888;
+    font-weight: 600;
 
-    font-size:15px;
+    color:#302f2f;
+
+    font-size:20px;
 
 }
 
 
 .circle{
 
-    width:58px;
+    width:60px;
 
-    height:58px;
+    height:60px;
 
     border-radius:50%;
 
@@ -275,15 +279,17 @@ body{
 
     box-shadow:var(--sombra);
 
-    padding:45px;
+    padding: 40px;
 
     display:grid;
 
-    grid-template-columns:420px 1fr;
+    grid-template-columns:1fr 470px;
 
-    gap:50px;
+    gap:20px;
 
-    align-items:center;
+    align-items:stretch;
+
+    margin-bottom: 40px
 
 }
 
@@ -293,8 +299,12 @@ body{
 =========================================*/
 
 .lesson-left{
-
-    text-align:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    justify-content:center;
+    gap:22px;
 
 }
 
@@ -303,7 +313,7 @@ body{
 
     display:inline-block;
 
-    padding:8px 22px;
+    padding:8px 23px;
 
     background:#edf9e8;
 
@@ -311,20 +321,20 @@ body{
 
     border-radius:999px;
 
-    font-size:15px;
+    font-size:25px;
 
-    font-weight:600;
+    font-weight:700;
 
 }
 
 
 #silabaTexto{
 
-    margin:25px 0;
+    margin:15px 0;
 
     font-size:95px;
 
-    color:var(--naranja);
+    color:var(--azul);
 
     letter-spacing:4px;
 
@@ -333,9 +343,9 @@ body{
 
 .imagen-palabra{
 
-    width:300px;
+    width:400px;
 
-    height:300px;
+    height:400px;
 
     margin:auto;
 
@@ -349,8 +359,9 @@ body{
 
 
 .imagen-palabra img{
+    border-radius: 35px;
 
-    max-width:100%;
+    max-width:92%;
 
     max-height:100%;
 
@@ -372,6 +383,80 @@ body{
     align-items:center;
 
     min-height:520px;
+
+}
+
+.opciones-palabras{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:22px;
+
+    margin-top:35px;
+
+}
+
+.card-palabra{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:20px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+    border:4px solid transparent;
+
+}
+
+.card-palabra:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.card-palabra img{
+
+    width:100%;
+
+    height:170px;
+
+    object-fit:contain;
+
+}
+
+.card-palabra h3{
+
+    margin-top:18px;
+
+    text-align:center;
+
+    color:#444;
+
+    font-size:25px;
+
+}
+
+.card-palabra.correcta{
+
+    border-color:#6EBE45;
+
+    background:#EDF9E8;
+
+}
+
+.card-palabra.incorrecta{
+
+    border-color:#FF5B5B;
+
+    background:#FFECEC;
 
 }
 
@@ -459,16 +544,19 @@ body{
 .lesson-phase{
 
     width:100%;
+    height:100%;
 
     display:flex;
 
     flex-direction:column;
 
-    align-items:center;
+    align-items:flex-start;
 
     justify-content:center;
 
-    gap:28px;
+    gap:35px;
+
+    padding:20px 0;
 
 }
 
@@ -486,6 +574,10 @@ body{
     gap:22px;
 
     width:100%;
+
+    margin-top:70px;
+
+    margin-bottom:50px;
 
 }
 
@@ -602,16 +694,165 @@ body{
 
 }
 
+.leo-word{
+
+    color:#222;
+
+    transition:color .35s ease;
+
+}
+
+.leo-word.activa{
+
+    color:#fd8918;
+
+    font-weight:700;
+
+}
+
+.leo-word.leida{
+
+    color:#222;
+
+}
+
+.leo-dialogo.finalizado .leo-word{
+
+    color:#fd8918;
+
+    font-weight:700;
+
+}
+
+.leo-word.nueva{
+
+    opacity:0;
+
+    transform:translateY(6px);
+
+    animation:aparecerPalabra .25s forwards;
+
+}
+
+@keyframes aparecerPalabra{
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.leo-thinking{
+
+    display:flex;
+
+    gap:8px;
+
+    align-items:center;
+
+}
+
+.leo-thinking span{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#6ebe45;
+
+    animation:thinking 1s infinite;
+
+}
+
+.leo-thinking span:nth-child(2){
+
+    animation-delay:.2s;
+
+}
+
+.leo-thinking span:nth-child(3){
+
+    animation-delay:.4s;
+
+}
+
+@keyframes thinking{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+        opacity:.5;
+
+    }
+
+    50%{
+
+        transform:translateY(-6px);
+
+        opacity:1;
+
+    }
+
+}
+
+.leo-hablando{
+
+    color:#fd8918;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.leo-final{
+
+    color:#fd8918;
+
+    font-weight:700;
+
+}
+
+.leo-escribiendo{
+
+    color:#fd8918;
+
+    font-size:28px;
+
+    animation:parpadeo 1s infinite;
+
+}
+
 
 /*=========================================
 =          BOTÓN ESCUCHAR
 =========================================*/
 
+.lesson-buttons{
+
+    display:flex;
+
+    justify-content:flex-start;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-top:20px;
+
+    margin-left: 90px;
+
+}
+
 .btn-audio{
-
-    width:100%;
-
-    max-width:340px;
+    width: 190px;
 
     border:none;
 
@@ -632,14 +873,6 @@ body{
     padding:18px 30px;
 
     border-radius:18px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:14px;
 
     transition:.25s;
 
@@ -676,10 +909,7 @@ body{
 =========================================*/
 
 .btn-continuar{
-
-    width:100%;
-
-    max-width:340px;
+    width: 190px;
 
     border:none;
 
@@ -700,14 +930,6 @@ body{
     padding:18px 30px;
 
     border-radius:18px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:14px;
 
     transition:.25s;
 
@@ -771,6 +993,376 @@ body{
 
 }
 
+.progress-step.completed .circle{
+
+    background:#118C2F;
+    color:white;
+
+}
+
+.progress-step.completed .circle::before{
+
+    content:"✓";
+    font-size:20px;
+
+}
+
+.progress-step.completed{
+
+    color:#118C2F;
+
+}
+
+.opciones-silabas{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:18px;
+
+    margin-top:35px;
+
+}
+
+.btn-silaba{
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#F4F8FF;
+
+    padding:20px;
+
+    font-size:35px;
+
+    font-family:'Fredoka',sans-serif;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-weight:600;
+
+}
+
+.btn-silaba:hover{
+
+    transform:translateY(-3px);
+
+    background:#D8EAFF;
+
+}
+
+.btn-silaba.correcta{
+
+    background:#6EBE45;
+
+    color:white;
+
+}
+
+.btn-silaba.incorrecta{
+
+    background:#FF6B6B;
+
+    color:white;
+
+}
+
+/*=========================================
+=      RESULTADO FINAL
+=========================================*/
+
+.resultado-final{
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+
+    margin-top:35px;
+
+}
+
+.mensaje-final{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    background:#F1FFF0;
+
+    color:#1E8C3A;
+
+    padding:18px 28px;
+
+    border-radius:18px;
+
+    font-size:22px;
+    font-weight:700;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.mensaje-final i{
+
+    color:#FFD23C;
+    font-size:28px;
+
+}
+
+/*=========================================
+=      BOTÓN SIGUIENTE PALABRA
+=========================================*/
+
+#contenedorSiguiente{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-top:35px;
+
+}
+
+.btn-siguiente{
+
+    width:250px;
+
+    height:64px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#6ebe45;
+
+    color:white;
+
+    font-family:'Fredoka',sans-serif;
+
+    font-size:22px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:0 10px 22px rgba(110,190,69,.35);
+
+}
+
+.btn-siguiente:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.btn-siguiente i{
+
+    margin-left:10px;
+
+}
+
+/*=========================================
+=         BOTÓN VOLVER MAPA
+=========================================*/
+
+.btn-home{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:18px;
+
+    background:#6ebe45;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:white;
+
+    font-size:26px;
+
+    text-decoration:none;
+
+    box-shadow:0 10px 22px rgba(110,190,69,.30);
+
+    transition:.25s;
+
+}
+
+.btn-home:hover{
+
+    transform:translateY(-3px) scale(1.05);
+
+    background:#5ca73a;
+
+}
+
+.lesson-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+/*=========================================
+=             MODAL SALIR
+=========================================*/
+
+.modal-salir{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.modal-card{
+
+    width:500px;
+
+    background:white;
+
+    border-radius:30px;
+
+    padding:40px;
+
+    text-align:center;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.20);
+
+    animation:popup .35s ease;
+
+}
+
+.modal-icono{
+
+    font-size:70px;
+
+    margin-bottom:15px;
+
+}
+
+.modal-card h2{
+
+    color:#208CD3;
+
+    font-size:34px;
+
+    margin-bottom:18px;
+
+}
+
+.modal-card p{
+
+    color:#666;
+
+    line-height:1.7;
+
+    font-size:19px;
+
+    margin-bottom:35px;
+
+}
+
+.modal-botones{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:18px;
+
+}
+
+.btn-modal-secundario{
+
+    background:#EAEAEA;
+
+    border:none;
+
+    padding:16px 25px;
+
+    border-radius:16px;
+
+    cursor:pointer;
+
+    font-family:'Fredoka';
+
+    font-size:18px;
+
+}
+
+.btn-modal-principal{
+
+    background:#fd8918;
+
+    color:white;
+
+    border:none;
+
+    padding:16px 28px;
+
+    border-radius:16px;
+
+    cursor:pointer;
+
+    font-family:'Fredoka';
+
+    font-size:18px;
+
+}
+
+.btn-modal-principal:hover{
+
+    background:#ec7907;
+
+}
+
+@keyframes popup{
+
+    from{
+
+        transform:scale(.85);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
 
 /*=========================================
 =          RESPONSIVE
