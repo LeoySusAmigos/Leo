@@ -34,7 +34,7 @@
 
                     <li class="nav-item">
 
-                        <a class="nav-link" href="tus-mascotas.php">
+                        <a class="nav-link" href="como-funciona.php">
                             Cómo funciona
                         </a>
 

@@ -5,6 +5,7 @@ const TAB     = 0.30;
 
 let pieces           = [];
 let positions        = [];
+let ayudasRestantes  = 2;
 let solving          = false;
 let resuelto         = false;
 let dragSrc          = null;
@@ -197,7 +198,13 @@ function cortarEnPiezas(img) {
 }
 
 function mezclar() {
-  resuelto = false;
+  resuelto        = false;
+  ayudasRestantes = 2;
+
+  const ayudaBtn = document.getElementById('ayudaBtn');
+  ayudaBtn.disabled    = false;
+  ayudaBtn.textContent = '¡Ayudame!';
+
   const imgFinal = document.querySelector('.imagen-final');
   if (imgFinal) imgFinal.remove();
 
@@ -242,7 +249,7 @@ function renderPuzzle() {
     const refLabel = document.createElement('div');
     refLabel.textContent = 'Imagen de apoyo';
     refLabel.style.cssText = `
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       color: #2d4a8a;
       text-align: center;
@@ -286,11 +293,13 @@ function renderPuzzle() {
     const { canvas } = pieces[pieceIdx];
     const row = Math.floor(cellPos / COLS);
     const col = cellPos % COLS;
+    const esCorrecta = pieceIdx === cellPos;
 
     const cell = document.createElement('div');
-    cell.className       = 'puzzle-cell';
-    cell.draggable       = true;
-    cell.dataset.cellPos = cellPos;
+    cell.className        = 'puzzle-cell';
+    cell.draggable         = !esCorrecta;
+    cell.dataset.cellPos   = cellPos;
+    cell.dataset.correcta  = esCorrecta ? '1' : '0';
 
     cell.style.cssText = `
       position: absolute;
@@ -298,7 +307,7 @@ function renderPuzzle() {
       top:  ${row * cellH}px;
       width: ${canvas.width}px;
       height: ${canvas.height}px;
-      cursor: grab;
+      cursor: ${esCorrecta ? 'default' : 'grab'};
       z-index: 1;
     `;
 
@@ -326,8 +335,12 @@ function renderPuzzle() {
     cell.appendChild(highlight);
 
     cell.addEventListener('dragstart', e => {
-      if (resuelto) { e.preventDefault(); return; }
+      if (resuelto || cell.dataset.correcta === '1') { e.preventDefault(); return; }
+
+      document.querySelectorAll('.pista-animada').forEach(c => c.classList.remove('pista-animada'));
+      cell.style.filter = '';
       dragSrc = cellPos;
+      cell.style.outline = '';
       document.querySelectorAll('.drop-highlight').forEach(h => h.style.opacity = '0');
       setTimeout(() => e.target.style.opacity = '0.5', 0);
       e.dataTransfer.effectAllowed = 'move';
@@ -337,7 +350,7 @@ function renderPuzzle() {
       document.querySelectorAll('.drop-highlight').forEach(h => h.style.opacity = '0');
     });
     cell.addEventListener('dragover', e => {
-      if (resuelto) return;
+      if (resuelto || cell.dataset.correcta === '1') return;
       e.preventDefault();
       document.querySelectorAll('.drop-highlight').forEach(h => h.style.opacity = '0');
       e.currentTarget.querySelector('.drop-highlight').style.opacity = '1';
@@ -346,18 +359,22 @@ function renderPuzzle() {
       e.currentTarget.querySelector('.drop-highlight').style.opacity = '0';
     });
     cell.addEventListener('drop', e => {
-      if (resuelto) return;
+      if (resuelto || cell.dataset.correcta === '1') return;
       e.preventDefault();
       e.currentTarget.querySelector('.drop-highlight').style.opacity = '0';
+      cell.style.outline = '';
       intercambiarPiezas(dragSrc, parseInt(e.currentTarget.dataset.cellPos));
     });
 
-    cell.addEventListener('touchstart', () => { if (!resuelto) touchSrc = cellPos; }, { passive: true });
+    cell.addEventListener('touchstart', () => {
+      if (!resuelto && cell.dataset.correcta !== '1') touchSrc = cellPos;
+    }, { passive: true });
     cell.addEventListener('touchend', e => {
       if (resuelto) return;
       const t  = e.changedTouches[0];
       const el = document.elementFromPoint(t.clientX, t.clientY);
       const sd = el && el.closest('.puzzle-cell');
+      if (sd && sd.dataset.correcta === '1') { touchSrc = null; return; }
       if (sd && touchSrc !== null) intercambiarPiezas(touchSrc, parseInt(sd.dataset.cellPos));
       touchSrc = null;
     });
@@ -373,6 +390,7 @@ function renderPuzzle() {
 
 function intercambiarPiezas(desde, hasta) {
   if (resuelto || desde === null || desde === hasta) return;
+  if (positions[desde] === desde || positions[hasta] === hasta) return;
   [positions[desde], positions[hasta]] = [positions[hasta], positions[desde]];
   renderPuzzle();
   actualizarProgreso();
@@ -408,7 +426,8 @@ function mostrarSolucionado() {
 
   document.querySelectorAll('.puzzle-cell').forEach(cell => {
     cell.draggable = false;
-    cell.style.cursor = 'default';
+    cell.style.cursor  = 'default';
+    cell.style.outline = '';
     const h = cell.querySelector('.drop-highlight');
     if (h) h.style.opacity = '0';
   });
@@ -443,27 +462,60 @@ function mostrarSolucionado() {
   });
 }
 
-document.getElementById('ayudaBtn').addEventListener('click', async () => {
-  if (solving || resuelto) return;
-  solving = true;
-  ['ayudaBtn', 'mezclarBtn', 'volverBtn'].forEach(id => document.getElementById(id).disabled = true);
-  document.getElementById('info').textContent = 'Ordenando poquito a poco...';
+document.getElementById('ayudaBtn').addEventListener('click', () => {
+  if (solving || resuelto || ayudasRestantes <= 0) return;
 
-  const total = ROWS * COLS;
-  for (let i = 0; i < total; i++) {
+  const incorrectas = [];
+
+  for (let i = 0; i < positions.length; i++) {
     if (positions[i] !== i) {
-      const correctPos = positions.indexOf(i);
-      [positions[i], positions[correctPos]] = [positions[correctPos], positions[i]];
-      renderPuzzle();
-      actualizarProgreso();
-      await new Promise(r => setTimeout(r, 120));
+      incorrectas.push(i);
     }
   }
 
-  solving = false;
-  ['ayudaBtn', 'mezclarBtn', 'volverBtn'].forEach(id => document.getElementById(id).disabled = false);
-  actualizarProgreso();
-  mostrarSolucionado();
+  if (!incorrectas.length) return;
+
+  const origen = incorrectas[
+    Math.floor(Math.random() * incorrectas.length)
+  ];
+
+  ayudasRestantes--;
+
+  document.getElementById('ayudaBtn').textContent =
+    `Pista (${ayudasRestantes})`;
+
+  if (ayudasRestantes === 0) {
+    document.getElementById('ayudaBtn').disabled = true;
+  }
+
+  const cell = document.querySelector(`.puzzle-cell[data-cell-pos="${origen}"]`);
+  if (!cell) return;
+
+  const { cellW, cellH } = pieces[0];
+  const origRow = Math.floor(origen / COLS);
+  const origCol = origen % COLS;
+  const destinoCellPos = positions[origen];
+  const destRow = Math.floor(destinoCellPos / COLS);
+  const destCol = destinoCellPos % COLS;
+
+  const dx = (destCol - origCol) * cellW;
+  const dy = (destRow - origRow) * cellH;
+
+  document.querySelectorAll('.puzzle-cell').forEach(c => {
+    c.style.zIndex  = '1';
+    c.classList.remove('pista-animada');
+    c.classList.remove('pista-destino');
+  });
+
+  cell.style.zIndex  = '15';
+  cell.style.setProperty('--hint-dx', dx + 'px');
+  cell.style.setProperty('--hint-dy', dy + 'px');
+  cell.classList.add('pista-animada');
+
+  const destinoCell = document.querySelector(`.puzzle-cell[data-cell-pos="${destinoCellPos}"]`);
+  if (destinoCell) destinoCell.classList.add('pista-destino');
+
+  document.getElementById('info').textContent = '¡Esa pieza va en otro lugar! Fijate a dónde se movió';
 });
 
 document.getElementById('mezclarBtn').addEventListener('click', () => { if (!solving) mezclar(); });
