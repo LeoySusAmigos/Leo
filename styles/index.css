@@ -79,7 +79,7 @@ body{
     font-family:'Nunito', sans-serif;
     font-size:1.20rem;
     font-weight:750;
-    padding:18px 55px;
+    padding:20px 55px;
     border-radius:18px;
     transition:.3s ease;
     box-shadow: 0 6px 18px rgba(88,200,76,.35);
@@ -499,45 +499,89 @@ body{
  
 .cta-section{
     background:linear-gradient(135deg,#3e6e46 0%,#66c969 55%,#3f6d42 100%);
-    padding:45px 30px;
-    text-align:center;
+    padding:70px 60px;
     color:white;
     margin-top:80px;
     overflow:hidden;
     position:relative;
+    background-image: url('../images/fondo-footer.png');
+    background-size: cover;
+    background-position: center;
 }
  
- 
-/* CONTENEDOR */
+/* CONTENEDOR GENERAL: 3 columnas en fila */
  
 .cta-content{
-    max-width:900px;
+    max-width:1200px;
     margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
  
+/* DIVISOR VERTICAL ENTRE COLUMNAS */
  
-/* TÍTULO */
+.cta-divider{
+    width:1px;
+    align-self:stretch;
+    background:rgba(255,255,255,.25);
+    margin:0 40px;
+}
+ 
+/* COLUMNAS BASE */
+ 
+.cta-col{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+ 
+/* COLUMNA 1: mensaje (mas ancha, alineada a la izquierda) */
+ 
+.cta-col-mensaje{
+    flex:1.5;
+    align-items:flex-start;
+    text-align:left;
+}
+ 
+/* COLUMNA 2: redes */
+ 
+.cta-col-redes{
+    flex:1;
+}
+ 
+/* COLUMNA 3: frase */
+ 
+.cta-col-frase{
+    flex:1;
+}
+ 
+/* TITULO */
  
 .cta-section h2{
     font-family:'Fredoka',sans-serif;
-    font-size:2.2rem;
+    font-size:2.1rem;
     font-weight:700;
-    margin-bottom:18px;
+    margin-bottom:14px;
+    line-height:1.2;
 }
- 
  
 /* TEXTO */
  
 .cta-section p{
     font-family:'Nunito',sans-serif;
-    font-size:1.05rem;
-    line-height:1.7;
-    margin-bottom:28px;
+    font-size:1rem;
+    line-height:1.6;
     opacity:.95;
 }
  
+.cta-col-mensaje p{
+    margin-bottom:28px;
+}
  
-/* BOTÓN */
+/* BOTON */
  
 .cta-btn{
     display:inline-flex;
@@ -555,92 +599,79 @@ body{
     box-shadow: 0 5px 15px rgba(0,0,0,.15);
 }
  
- 
-/* HOVER */
- 
 .cta-btn:hover{
     transform:translateY(-3px);
     background:#f4f4f4;
     color:#2e7d32;
 }
  
- 
 /* TEXTO PEQUEÑO */
  
 .cta-section small{
     display:block;
-    margin-top:18px;
+    margin-top:16px;
     font-family:'Nunito',sans-serif;
-    font-size:.9rem;
+    font-size:.85rem;
     opacity:.9;
 }
-
-/* REDES SOCIALES CTA */
-
-.cta-redes{
-
-    margin-top:25px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:15px;
-
-    flex-wrap:wrap;
-
-}
-
-.cta-redes span{
-
-    font-family:'Nunito',sans-serif;
-
-    font-weight:700;
-
-    color:white;
-
-}
-
-.cta-redes a{
-
-    width:45px;
-
-    height:45px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.18);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    text-decoration:none;
-
-    color:white;
-
+ 
+/* COLUMNA REDES */
+ 
+.cta-col-redes > span{
+    font-family:'Fredoka',sans-serif;
+    font-weight:600;
     font-size:1.2rem;
-
+    color:white;
+    margin-bottom:22px;
+}
+ 
+.cta-redes{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+ 
+.cta-redes a{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:rgba(255,255,255,.18);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-decoration:none;
+    color:white;
+    font-size:1.25rem;
     transition:.3s ease;
-
 }
-
+ 
 .cta-redes a:hover{
-
     background:white;
-
     color:#2e7d32;
-
     transform:translateY(-4px);
-
 }
-
-
-
+ 
+/* COLUMNA FRASE */
+ 
+.cta-imagen{
+    width:100%;
+    max-width:250px;
+    margin-bottom:18px;
+}
+ 
+.cta-frase{
+    font-family:'Fredoka',sans-serif;
+    font-size:1.4rem;
+    font-weight:600;
+    line-height:1.4;
+    max-width:260px;
+}
+ 
+.cta-frase i{
+    color:#8effa6;
+}
 
 /* ================= TABLET ================= */
 
@@ -714,16 +745,21 @@ body{
         flex-wrap:wrap;
     }
 
-    .redes-sociales{
-        gap:14px;
-        margin-top:20px;
-        flex-wrap:wrap;
+        .cta-content{
+        flex-direction:column;
+        gap:35px;
     }
-
-    .redes-sociales a{
-        width:44px;
-        height:44px;
-        font-size:1.1rem;
+ 
+    .cta-col-mensaje{
+        align-items:center;
+        text-align:center;
+    }
+ 
+    .cta-divider{
+        width:60%;
+        height:1px;
+        align-self:center;
+        margin:0;
     }
 
 }
@@ -745,10 +781,6 @@ body{
         margin-bottom:25px;
     }
 
-    .hero-btn{
-        padding:15px 35px;
-        font-size:1rem;
-    }
 
     .hero-characters{
         gap:10px;
@@ -835,21 +867,9 @@ body{
     .cta-section{
         padding:50px 20px;
     }
-
+ 
     .cta-section h2{
         font-size:1.8rem;
-    }
-
-    .redes-sociales{
-        justify-content:center;
-        gap:12px;
-        margin-top:18px;
-    }
-
-    .redes-sociales a{
-        width:42px;
-        height:42px;
-        font-size:1rem;
     }
 
 }

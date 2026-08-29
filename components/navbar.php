@@ -2,6 +2,31 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+require_once 'php/conexion.php';
+
+$puntos = 0;
+
+if (isset($_SESSION['userID'])) {
+    $userID = $_SESSION['userID'];
+
+    $stmt = $conn->prepare("
+        SELECT COALESCE(SUM(puntos), 0) AS puntos
+        FROM progreso
+        WHERE userID = ?
+    ");
+
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+
+    $resultado = $stmt->get_result();
+
+    if ($fila = $resultado->fetch_assoc()) {
+        $puntos = $fila['puntos'];
+    }
+
+    $stmt->close();
+}
 ?>
 
 <nav class="custom-navbar">
@@ -35,7 +60,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     <a class="menu-link" href="aventura2.php">Gramática con Capy</a>
                 </li>
                 <li class="nav-element">
-                    <a href="biblioteca.php"><img src="images/FinxHi.png" alt="Finx" class="mascota-img"></a>
+                    <a href="biblioteca.php"><img src="images/finxito3.png" alt="Finx" class="mascota-img"></a>
                     <a class="menu-link" href="biblioteca.php">Lectura con Finx</a>
                 </li>
             </ul>
@@ -66,7 +91,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <span class="user-name"><?= htmlspecialchars($_SESSION['nombre_nino']) ?></span>
                         <span class="user-points">
                             <i class="fa-solid fa-star star-icon"></i>
-                            <?= isset($_SESSION['puntos']) ? $_SESSION['puntos'] : '0' ?>
+                            <?= $puntos ?>
                         </span>
                     </div>
                 </a>

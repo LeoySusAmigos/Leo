@@ -229,7 +229,7 @@ href="styles/aventura-leo.css">
 
 <body>
 
-<?php include 'components/navbar.php'; ?>
+<?php include 'navbar.php'; ?>
 
 
 <div class="aventura-container">
@@ -268,9 +268,9 @@ href="styles/aventura-leo.css">
             </a>
             
            <a href="biblioteca.php" class="tab-item">
-                <img src="images/FinxHi.png" alt="Finx" class="tab-mascota-img">
+                <img src="images/finxito3.png" alt="Finx" class="tab-mascota-img">
                 <div class="tab-text text-finx">
-                    <span class="tab-title text-success">Cuentos</span>
+                    <span class="tab-title text-success">Cuentos y comprensión</span>
                     <span class="tab-subtitle">Finx</span>
                 </div>
            </a>
@@ -574,7 +574,6 @@ href="styles/aventura-leo.css">
 </div>
 
 <script src="js/LeoFunciones.js"></script>
-
 <script src="js/aventura-leo.js"></script>
 
 </body>

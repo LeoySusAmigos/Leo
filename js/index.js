@@ -46,21 +46,39 @@ opciones.forEach(opcion => {
     });
 });
 
-const flechasNiveles = document.querySelectorAll(".toggle-row-icon");
+const encabezadosNiveles = document.querySelectorAll(".nivel-row-header");
 
-flechasNiveles.forEach(flecha => {
-    flecha.addEventListener("click", () => {
-        const contenedorNivel = flecha.closest(".nivel-row-container");
+encabezadosNiveles.forEach(encabezado => {
+
+    encabezado.addEventListener("click", () => {
+
+        const contenedorNivel = encabezado.closest(".nivel-row-container");
         const cajaCuentos = contenedorNivel.querySelector(".nivel-row-cards-flex");
+        const flecha = encabezado.querySelector(".toggle-row-icon");
 
         if (cajaCuentos) {
+
             if (cajaCuentos.style.display === "none") {
+
+                // Abrir nivel
                 cajaCuentos.style.display = "flex";
-                flecha.style.transform = "rotate(0deg)";
+
+                if (flecha) {
+                    flecha.style.transform = "rotate(0deg)";
+                }
+
             } else {
+
+                // Cerrar nivel
                 cajaCuentos.style.display = "none";
-                flecha.style.transform = "rotate(180deg)";
+
+                if (flecha) {
+                    flecha.style.transform = "rotate(-180deg)";
+                }
+
             }
         }
+
     });
+
 });

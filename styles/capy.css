@@ -1,0 +1,815 @@
+/* ==========================================
+   CONFIGURACIÓN GENERAL
+========================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* ==========================================
+   CUERPO
+========================================== */
+
+body {
+
+  background-image: url('../images/fondoalegre-minimalista.png');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  min-height: 100vh;
+
+  font-family: 'Quicksand', sans-serif;
+
+  color: #3C3C3C;
+}
+
+
+/* ==========================================
+   CONTENEDOR PRINCIPAL
+========================================== */
+
+.capy-container {
+
+  position: relative;
+
+  width: 92%;
+  max-width: 1350px;
+
+  margin: 65px auto 50px auto;
+
+  z-index: 5;
+}
+
+
+/* ==========================================
+   ENCABEZADO
+========================================== */
+
+.capy-header {
+
+  text-align: center;
+
+  margin-bottom: 45px;
+}
+
+
+.capy-title h1 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 52px;
+  font-weight: 700;
+  color: #2F7A2F;
+  letter-spacing: .5px;
+}
+
+
+.capy-title p {
+
+  margin-top: 5px;
+
+  font-size: 20px;
+
+  color: #666;
+
+  font-weight: 500;
+}
+
+
+/* ==========================================
+   PESTAÑAS DE PERSONAJES
+========================================== */
+
+.tabs-mascotas-container {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 10px;
+}
+
+
+.tab-item {
+
+  background-color: white;
+
+  border: 2px solid #E5E5E5;
+
+  border-radius: 20px 20px 0 0;
+
+  padding: 12px 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  transition: .2s ease;
+
+  color: inherit;
+}
+
+
+.tab-item:hover {
+
+  background-color: #F8FDFF;
+}
+
+
+.tab-mascota-img {
+
+  width: 45px;
+  height: 40px;
+
+  object-fit: contain;
+}
+
+
+.tab-text {
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+.tab-title {
+
+  font-family: 'Fredoka', sans-serif;
+
+  font-weight: 700;
+
+  font-size: 16px;
+
+  color: #3C3C3C;
+}
+
+
+.tab-subtitle {
+
+  font-size: 13px;
+
+  color: #8A8A8A;
+}
+
+
+/* ==========================================
+   CAPY ACTIVO
+========================================== */
+
+.tab-item.active {
+
+  background-color: #E8F8FC;
+
+  border-bottom: 5px solid #69C9E8;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .04);
+}
+
+
+.tab-item.active .tab-subtitle {
+
+  color: #3BA8D1;
+
+  font-weight: 700;
+}
+
+
+
+/* ==========================================
+   CONTENIDO
+========================================== */
+
+.capy-content {
+
+  background-color: white;
+
+  border: 2px solid #E5E5E5;
+
+  border-radius: 0 0 20px 20px;
+
+  padding: 30px;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .02);
+}
+
+
+/* ==========================================
+   BANNER
+========================================== */
+
+.capy-banner {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  border: 2px solid #D8F2F9;
+
+  background-color: #F8FDFF;
+
+  border-radius: 20px;
+
+  padding: 15px 20px;
+
+  margin-bottom: 35px;
+}
+
+
+.capy-banner-icon {
+
+  width: 45px;
+  height: 45px;
+
+  background-color: #69C9E8;
+
+  border-radius: 50%;
+
+  color: white;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 19px;
+
+  flex-shrink: 0;
+}
+
+
+.capy-banner-text strong {
+
+  font-family: 'Fredoka', sans-serif;
+
+  font-size: 22px;
+
+  color: #3BA8D1;
+
+  font-weight: 700;
+}
+
+
+.capy-banner-text p {
+
+  margin-top: 3px;
+
+  font-size: 14px;
+
+  color: #777;
+}
+
+
+/* ==========================================
+   NIVELES
+========================================== */
+
+.capy-level {
+
+  background: #FFFFFF;
+
+  border: 1px solid #DDEFF4;
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  margin-bottom: 30px;
+
+  box-shadow: 0 8px 18px rgba(59, 168, 209, .07);
+
+  transition: .3s;
+}
+
+
+.capy-level:hover {
+
+  box-shadow: 0 12px 25px rgba(59, 168, 209, .12);
+}
+
+
+/* ==========================================
+   CABECERA DEL NIVEL
+========================================== */
+
+.level-header {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 22px 28px;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  background-color: #FCFEFF;
+}
+
+
+.level-number {
+
+  background-color: #69C9E8;
+
+  color: white;
+
+  font-family: 'Fredoka', sans-serif;
+
+  font-weight: 600;
+
+  font-size: 14px;
+
+  padding: 6px 16px;
+
+  border-radius: 12px;
+
+  white-space: nowrap;
+}
+
+
+.level-information {
+
+  flex-grow: 1;
+}
+
+
+.level-information h2 {
+
+  font-family: 'Fredoka', sans-serif;
+
+  font-size: 21px;
+
+  color: #3C3C3C;
+
+  margin-bottom: 2px;
+}
+
+
+.level-information p {
+
+  font-size: 13px;
+
+  color: #888;
+}
+
+
+.level-arrow {
+
+  color: #3BA8D1;
+
+  font-size: 18px;
+
+  transition: transform .2s ease;
+}
+
+
+/* ==========================================
+   CONTENEDOR DE LECCIONES
+========================================== */
+
+.lessons-container {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 18px;
+
+  padding: 16px 20px 25px;
+}
+
+
+/* ==========================================
+   TARJETA DE LECCIÓN
+========================================== */
+
+.lesson-card {
+
+  width: 360px;
+
+  min-height: 105px;
+
+  background-color: white;
+
+  border: 2px solid #E5E5E5;
+
+  border-radius: 20px;
+
+  padding: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  text-decoration: none;
+
+  color: inherit;
+
+  box-shadow: 0 3px 0 #E5E5E5;
+
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease,
+    border-color .15s ease;
+}
+
+
+.lesson-card:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 5px 0 #D5EAF0;
+
+  border-color: #8ED8ED;
+
+  background-color: #FCFEFF;
+}
+
+
+/* ==========================================
+   ICONO DE LECCIÓN
+========================================== */
+
+.lesson-icon {
+
+  width: 52px;
+  height: 52px;
+
+  border-radius: 16px;
+
+  background-color: #E8F8FC;
+
+  color: #3BA8D1;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 20px;
+
+  flex-shrink: 0;
+}
+
+
+/* ==========================================
+   INFORMACIÓN DE LECCIÓN
+========================================== */
+
+.lesson-info {
+
+  flex-grow: 1;
+}
+
+
+.lesson-info h3 {
+
+  font-family: 'Fredoka', sans-serif;
+
+  font-size: 16px;
+
+  color: #3C3C3C;
+
+  margin-bottom: 5px;
+
+  line-height: 1.2;
+}
+
+
+.lesson-info span {
+
+  font-size: 12px;
+
+  color: #999;
+}
+
+
+/* ==========================================
+   ESTADO DE LECCIÓN
+========================================== */
+
+.lesson-status {
+
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  flex-shrink: 0;
+}
+
+
+.lesson-status span {
+
+  width: 23px;
+  height: 23px;
+
+  border: 2px solid #D7EAF0;
+
+  border-radius: 50%;
+
+  background-color: #FFFFFF;
+}
+
+
+/* ==========================================
+   LECCIÓN FINAL
+========================================== */
+
+.final-lesson {
+
+  border-color: #8ED8ED;
+
+  background-color: #F8FDFF;
+}
+
+
+.final-lesson .lesson-icon {
+
+  background-color: #DDF5FC;
+
+  color: #3BA8D1;
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 768px) {
+
+
+  body {
+
+    background-image: url('../images/fondoAnimado-tablet.png');
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+  }
+
+
+  .capy-container {
+
+    margin: 50px auto 30px auto;
+  }
+
+
+  .capy-title h1 {
+
+    font-size: 45px;
+  }
+
+
+  .capy-title p {
+
+    font-size: 18px;
+  }
+
+
+  .lessons-container {
+
+    flex-direction: column;
+  }
+
+
+  .lesson-card {
+
+    width: 100%;
+  }
+
+}
+
+
+/* ==========================================
+   CELULAR
+========================================== */
+
+@media (max-width: 480px) {
+
+
+  body {
+
+    background-image: url('../images/fondoAnimado-cel.png');
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+  }
+
+
+  .capy-container {
+
+    width: 94%;
+
+    margin: 45px auto 25px auto;
+  }
+
+
+  .capy-header {
+
+    margin-bottom: 30px;
+  }
+
+
+  .capy-title h1 {
+
+    font-size: 35px;
+
+    line-height: 1.1;
+  }
+
+
+  .capy-title p {
+
+    font-size: 15px;
+  }
+
+
+  /* Pestañas */
+
+  .tabs-mascotas-container {
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 8px;
+  }
+
+
+  .tab-item {
+
+    min-height: 110px;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 12px 10px;
+
+    gap: 10px;
+  }
+
+
+  .tab-mascota-img {
+
+    width: 52px;
+
+    height: 52px;
+  }
+
+
+  .tab-title {
+
+    display: none;
+  }
+
+
+  .tab-subtitle {
+
+    font-size: 14px;
+  }
+
+
+  /* Contenido */
+
+  .capy-content {
+
+    padding: 18px;
+  }
+
+
+  /* Banner */
+
+  .capy-banner {
+
+    align-items: flex-start;
+
+    padding: 14px;
+  }
+
+
+  .capy-banner-text strong {
+
+    font-size: 18px;
+  }
+
+
+  .capy-banner-text p {
+
+    font-size: 12px;
+  }
+
+
+  /* Niveles */
+
+  .level-header {
+
+    padding: 18px;
+
+    gap: 10px;
+  }
+
+
+  .level-information p {
+
+    display: none;
+  }
+
+
+  .level-information h2 {
+
+    font-size: 17px;
+  }
+
+
+  .level-number {
+
+    font-size: 12px;
+
+    padding: 5px 10px;
+  }
+
+
+  /* Lecciones */
+
+  .lessons-container {
+
+    padding: 10px 12px 18px;
+
+    gap: 12px;
+  }
+
+
+  .lesson-card {
+
+    min-height: 90px;
+
+    padding: 14px;
+
+    border-radius: 17px;
+  }
+
+
+  .lesson-icon {
+
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 13px;
+
+    font-size: 17px;
+  }
+
+
+  .lesson-info h3 {
+
+    font-size: 14px;
+  }
+
+
+  .lesson-info span {
+
+    font-size: 11px;
+  }
+
+}
