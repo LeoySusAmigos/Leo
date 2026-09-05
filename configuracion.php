@@ -121,7 +121,7 @@ $nino = [
 
         <?php if (isset($_GET['status']) && $_GET['status'] === 'success'): ?>
           <div style="background:#e8f5e9;color:#2e7d32;padding:10px 16px;border-radius:8px;margin:12px 16px;font-weight:700;font-size:.88rem;">
-            ✅ ¡Perfil actualizado con éxito!
+            <i class="fa-regular fa-circle-check" style="color: rgb(33, 168, 30);"></i> ¡Perfil actualizado con éxito!
           </div>
         <?php endif; ?>
 
@@ -370,13 +370,17 @@ $nino = [
   <div class="seccion">
     <p class="seccion__titulo">3. Cuenta</p>
 
-    <details class="accordion">
+    <details class="accordion" open>
       <summary>
         Cuenta
         <span class="flecha">▼</span>
       </summary>
 
       <div class="accordion__body">
+        <button type="submit" class="btn--verde" onclick="window.location.href='index.php'">
+            <i class="fa-solid fa-house" style="color: #1a6e2e;"></i>
+            Volver a Página Principal
+          </button>
         <form method="POST" action="php/logout.php">
           <button type="submit" class="btn--rojo">
             <i class="fa-solid fa-right-from-bracket"></i>

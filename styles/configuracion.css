@@ -204,6 +204,21 @@ h1.page-title {
   width: 100%;
 }
 .btn--rojo:hover { background: #fff0f0; }
+
+.btn--verde {
+  color: var(--verde-oscuro);
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  width: 100%;
+}
+.btn--verde:hover { background: #e6ffec; }
  
 /* ── Select de idioma ─────────────────────── */
 .select-idioma {

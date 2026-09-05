@@ -1,49 +1,26 @@
 
 document.addEventListener("DOMContentLoaded", () => {
+    const btnEscuchar =
+    document.getElementById("btnEscuchar");
+    const btnContinuar =
+    document.getElementById("btnContinuar");
 
-    const btnEscuchar = document.getElementById("btnEscuchar");
-    const btnContinuar = document.getElementById("btnContinuar");
-
-    btnEscuchar.disabled = true;
-
-    setTimeout(() => {
-
-        const audioLeo =
-        hablarLeoFijo("fase1","dialogoFase1");
-
-        audioLeo.onended=()=>{
-
-            btnEscuchar.disabled=false;
-
-        }; 
-
-    },500);
-
+    iniciarLeccion();
 
     if(btnEscuchar){
-
         btnEscuchar.addEventListener("click", () => {
-
-            const rutaAudio = btnEscuchar.dataset.audio;
-
-            const audio = new Audio(rutaAudio);
-
+            const rutaAudio =
+            btnEscuchar.dataset.audio;
+            const audio =
+            new Audio(rutaAudio);
             btnEscuchar.disabled = true;
-
             audio.play();
-
             audio.onended = () => {
-
                 btnContinuar.disabled = false;
-
                 btnEscuchar.disabled = false;
-
             };
-
         });
-
     }
-
 });
 
 const mensajesLeo = {
@@ -138,6 +115,174 @@ const mensajesLeo = {
 };
 
 
+function iniciarLeccion(){
+
+    let indicePendiente = -1;
+    let fasePendiente = 1;
+
+
+    for(let i = 0; i < palabras.length; i++){
+        const progreso =
+        progresosGuardados.find(
+            progreso =>
+            Number(progreso.palabraID) ===
+            Number(palabras[i].palabraID)
+        );
+
+        if(!progreso){
+            indicePendiente = i;
+            fasePendiente = 1;
+            break;
+        }
+
+        if(Number(progreso.fase) < 3){
+            console.log(
+                "Palabra pendiente:",
+                palabras[i].palabraID,
+                "Fase guardada:",
+                progreso.fase
+            );
+            indicePendiente = i;
+            fasePendiente = Number(progreso.fase);
+            break;
+        }
+    }
+
+    if(indicePendiente === -1){
+        console.log("Todas las palabras de la lección están completas.");
+        return;
+    }
+
+    indiceActual = indicePendiente;
+
+    cargarNuevaPalabra();
+
+    if(fasePendiente === 2){
+        mostrarFase2();
+        return;
+    }
+
+    mostrarFase1();
+}
+
+
+function mostrarFase1(){
+
+    document.getElementById("fase1").style.display="flex";
+
+    document.getElementById("fase2").style.display="none";
+
+    document.getElementById("fase3").style.display="none";
+
+
+    document.querySelectorAll(".progress-step")
+    .forEach(step=>{
+
+        step.classList.remove("active");
+        step.classList.remove("completed");
+
+    });
+
+
+    document.getElementById("step1")
+    .classList.add("active");
+
+
+    btnContinuar.disabled=true;
+
+
+    setTimeout(()=>{
+
+        const audioLeo =
+        hablarLeoFijo(
+            "fase1",
+            "dialogoFase1"
+        );
+
+        audioLeo.onended=()=>{
+
+            btnEscuchar.disabled=false;
+
+        };
+
+    },500);
+
+}
+
+function mostrarFase2(){
+
+    document.getElementById("fase1").style.display="none";
+
+    document.getElementById("fase2").style.display="block";
+
+    document.getElementById("fase3").style.display="none";
+
+
+    document.querySelectorAll(".progress-step")
+    .forEach(step=>{
+
+        step.classList.remove("active");
+        step.classList.remove("completed");
+
+    });
+
+
+    document.getElementById("step1")
+    .classList.add("completed");
+
+    document.getElementById("step2")
+    .classList.add("active");
+
+
+    cargarFase2();
+
+
+    hablarLeoFijo(
+        "fase2",
+        "dialogoFase2"
+    );
+
+}
+
+function mostrarFase3(){
+
+    document.getElementById("fase1").style.display="none";
+
+    document.getElementById("fase2").style.display="none";
+
+    document.getElementById("fase3").style.display="block";
+
+
+    document.querySelectorAll(".progress-step")
+    .forEach(step=>{
+
+        step.classList.remove("active");
+        step.classList.remove("completed");
+
+    });
+
+
+    document.getElementById("step1")
+    .classList.add("completed");
+
+    document.getElementById("step2")
+    .classList.add("completed");
+
+    document.getElementById("step3")
+    .classList.add("active");
+
+
+    cargarFase3();
+
+
+    hablarLeoFijo(
+        "fase3",
+        "dialogoFase3"
+    );
+
+}
+
+
 function obtenerNumeroAleatorio(max){
 
     return Math.floor(Math.random()*max);
@@ -172,52 +317,52 @@ function hablarLeo(tipo,idBurbuja){
 }
 
 
-
-async function guardarProgreso(){
-
+async function guardarProgreso(fase){
     const respuesta = await fetch("php/guardarProgreso-leo.php",{
-
         method:"POST",
-
         headers:{
             "Content-Type":"application/json"
         },
 
         body:JSON.stringify({
-
             nivelID:nivelID,
-
             leccionID:leccionID,
-
-            palabraID:palabras[indiceActual].palabraID
-
+            palabraID:palabras[indiceActual].palabraID,
+            fase:fase
         })
-
     });
 
     return await respuesta.json();
-
 }
 
 const fase1 = document.getElementById("fase1");
 const fase2 = document.getElementById("fase2");
 const fase3 = document.getElementById("fase3");
 
-btnContinuar.addEventListener("click", () => {
+btnContinuar.addEventListener("click", async () => {
 
+    btnContinuar.disabled = true;
+    await guardarProgreso(1);
     fase1.style.display = "none";
-
     fase2.style.display = "block";
+
 
     document.getElementById("step1").classList.remove("active");
     document.getElementById("step1").classList.add("completed");
     document.getElementById("step2").classList.add("active");
+
+
     cargarFase2();
 
+    guardarProgreso(2).catch(error => {
+        console.log(
+            "No fue posible guardar la Fase 2.",
+            error
+        );
+    });
+
     setTimeout(()=>{
-
         reproducirLeo(mensajesLeo.fase2.audio);
-
     },150);
 
 });
@@ -392,7 +537,7 @@ function validarPalabra(card, opcion){
 
         audioLeo.onended = ()=>{
 
-            guardarProgreso().then(()=>{
+            guardarProgreso(3).then(()=>{
 
                 document.getElementById("opcionesPalabras").style.display="none";
 

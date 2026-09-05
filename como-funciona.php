@@ -34,7 +34,7 @@ include("php/conexion.php");
       <span class="carrusel-etiqueta">COMO FUNCIONA</span>
       <h2 id="carruselTitulo">Conoce cómo funciona Leo &amp; Friends</h2>
       <p id="carruselTexto">Descubre, paso a paso, como nuestra plataforma acompana el aprendizaje de los ninos de forma interactiva, divertida y efectiva.</p>
-      <a href="register.html" class="carrusel-boton">Comienza hoy gratis</a>
+      <a href="inicio-nino.php" class="carrusel-boton">Comienza hoy gratis</a>
 
       <div class="carrusel-flechas">
         <button id="carruselAnterior" type="button">&#8592;</button>

@@ -126,13 +126,19 @@ AND
 
     leccionID='$leccionID'
 
-LIMIT 1
+ORDER BY palabraID ASC
 
 ";
 
-$progreso = $conn->query($sql)->fetch_assoc();
+$resultadoProgreso = $conn->query($sql);
 
+$progresos = [];
 
+while($fila = $resultadoProgreso->fetch_assoc()){
+
+    $progresos[] = $fila;
+
+}
 ?>
 
 
@@ -489,11 +495,12 @@ href="styles/navbar.css">
 
 
 <script>
+    const nivelID = <?php echo $leccion['nivelID']; ?>;
+    const leccionID = <?php echo $leccion['leccionID']; ?>;
+    const palabras = <?php echo json_encode($palabras, JSON_UNESCAPED_UNICODE); ?>;
+    const progresosGuardados = <?php echo json_encode($progresos, JSON_UNESCAPED_UNICODE); ?>;
 
-const nivelID = <?php echo $leccion['nivelID']; ?>;
-const leccionID = <?php echo $leccion['leccionID']; ?>;
-const palabras = <?php echo json_encode($palabras, JSON_UNESCAPED_UNICODE); ?>;
-let indiceActual = 0;
+    let indiceActual = 0;
 
 </script>
 

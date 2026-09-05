@@ -49,8 +49,8 @@
 }
 
 .mascota-img {
-    width: 65px;
-    height: 70px;
+    width: 70px;
+    height: 65px;
     object-fit: contain;
     margin-right: 8px;
     transition: transform 0.3s ease;
