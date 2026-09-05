@@ -65,7 +65,7 @@ include("php/conexion.php");
         data-paso="0"
         data-titulo="Conoce cómo funciona Leo &amp; Friends"
         data-texto="Descubre, paso a paso, como nuestra plataforma acompaña el aprendizaje de los niños de forma interactiva, divertida y efectiva."
-        data-video="videos/paso-01-inicio.mp4"
+        data-video="videos/homepage-video.mp4"
         data-mascota="images/leo-carrusel.png"
         data-mascota-alt="Leo el camaleon">
         <span class="carrusel-paso-circulo"><i class="fa-solid fa-house carrusel-paso-icono"></i><span class="carrusel-paso-numero">01</span></span>
@@ -77,7 +77,7 @@ include("php/conexion.php");
         data-paso="1"
         data-titulo="Niveles de Leo"
         data-texto="Comienza desde lo más sencillo y avanza hacia nuevos retos. Con Leo, los niños fortalecen sus habilidades de lectura y aprenden las vocales mientras progresan a través de diferentes niveles."
-        data-video=""
+        data-video="videos/Aventura Leo - video.mp4"
         data-mascota="images/leo-carrusel1.png"
         data-mascota-alt="Leo">
         <span class="carrusel-paso-circulo"><i class="fa-solid fa-magnifying-glass carrusel-paso-icono"></i><span class="carrusel-paso-numero">02</span></span>

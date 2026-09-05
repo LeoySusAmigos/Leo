@@ -52,6 +52,7 @@ body {
   width: 215px;
   height: auto;
   z-index: 2;
+  pointer-events: none;
 }
 
 .carrusel-etiqueta {
