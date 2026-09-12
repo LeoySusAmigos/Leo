@@ -316,49 +316,6 @@ $nino = [
           </div>
         </div>
 
-        <!-- Sonido -->
-        <div class="fila">
-          <div class="fila__icono"><i class="fa-solid fa-volume-high"></i></div>
-          <div class="fila__info">
-            <div class="fila__label">Sonido</div>
-          </div>
-          <div class="fila__derecha">
-            <div class="toggles-grupo">
-
-              <div class="toggle-wrap">
-                <span class="toggle-label">Música</span>
-                <label class="toggle">
-                  <input type="checkbox" name="musica" value="1"
-                         <?= $nino['musica'] ? 'checked' : '' ?>
-                         onchange="guardarAjuste('musica', this.checked)" />
-                  <span class="toggle-slider"></span>
-                </label>
-              </div>
-
-              <div class="toggle-wrap">
-                <span class="toggle-label">Efectos</span>
-                <label class="toggle">
-                  <input type="checkbox" name="efectos" value="1"
-                         <?= $nino['efectos'] ? 'checked' : '' ?>
-                         onchange="guardarAjuste('efectos', this.checked)" />
-                  <span class="toggle-slider"></span>
-                </label>
-              </div>
-
-              <div class="toggle-wrap">
-                <span class="toggle-label">Narración</span>
-                <label class="toggle">
-                  <input type="checkbox" name="narracion" value="1"
-                         <?= $nino['narracion'] ? 'checked' : '' ?>
-                         onchange="guardarAjuste('narracion', this.checked)" />
-                  <span class="toggle-slider"></span>
-                </label>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
       </div>
     </details>
   </div>

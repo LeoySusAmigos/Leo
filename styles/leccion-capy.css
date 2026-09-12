@@ -1,0 +1,957 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: #f8fcfe;
+    color: #263238;
+}
+
+button,
+a {
+    font-family: inherit;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.capy-leccion-page {
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 30px 25px 60px;
+}
+
+
+/* =========================================================
+   ENCABEZADO
+========================================================= */
+
+.leccion-header {
+    background: #fff;
+    border: 1px solid #d8edf5;
+    border-radius: 24px;
+    padding: 25px 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 0 rgba(91,187,222,.08);
+}
+
+.btn-volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #42acd3;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 22px;
+    transition: .2s;
+}
+
+.btn-volver:hover {
+    color: #238db8;
+    transform: translateX(-3px);
+}
+
+.leccion-header-content {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.capy-avatar-circle {
+    width: 75px;
+    height: 75px;
+    border-radius: 22px;
+    background: #e2f6fc;
+    color: #3daed6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 31px;
+}
+
+.leccion-header-info {
+    flex: 1;
+}
+
+.nivel-label {
+    display: inline-block;
+    background: #5bc2e6;
+    color: white;
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.leccion-header-info h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #202c33;
+    margin-bottom: 5px;
+}
+
+.leccion-header-info p {
+    color: #81919a;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   PROGRESO
+========================================================= */
+
+.leccion-progress {
+    margin-top: 25px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    color: #7a8d96;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.progress-info strong {
+    color: #3daed6;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 9px;
+    background: #e7f4f8;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #5bc2e6;
+    border-radius: 20px;
+    transition: width .4s ease;
+}
+
+
+/* =========================================================
+   TARJETA
+========================================================= */
+
+.actividad-card {
+    display: none;
+    background: #fff;
+    border: 1px solid #d9edf4;
+    border-radius: 25px;
+    padding: 35px;
+    min-height: 500px;
+    box-shadow: 0 5px 0 rgba(91,187,222,.08);
+}
+
+.actividad-card.actividad-activa {
+    display: block;
+    animation: aparecer .3s ease;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.actividad-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.actividad-numero {
+    background: #e5f7fc;
+    color: #39a9d1;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.actividad-puntos {
+    color: #91a2aa;
+    font-size: 12px;
+}
+
+.actividad-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 20px;
+    background: #e5f7fc;
+    color: #42afd6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+    margin-bottom: 20px;
+}
+
+.actividad-card h2 {
+    font-size: 25px;
+    color: #202c33;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   INSTRUCCIÓN
+========================================================= */
+
+.actividad-instruccion {
+    display: flex;
+    gap: 10px;
+    background: #f1fafd;
+    border: 1px solid #e0f2f7;
+    border-radius: 15px;
+    padding: 14px 17px;
+    margin-bottom: 25px;
+    color: #607984;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.actividad-instruccion i {
+    color: #45afd4;
+}
+
+
+/* =========================================================
+   CONTENIDO
+========================================================= */
+
+.actividad-contenido {
+    margin: 25px 0;
+}
+
+.actividad-contenido > p {
+    color: #536a73;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.contenido-palabras {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.palabra-item {
+    min-width: 120px;
+    padding: 15px 22px;
+    background: #f1fafd;
+    border: 2px solid #d8edf5;
+    border-radius: 16px;
+    color: #3b9fc5;
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+}
+
+
+/* =========================================================
+   IMAGEN
+========================================================= */
+
+.actividad-imagen {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+}
+
+.actividad-imagen img {
+    max-width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+    border-radius: 18px;
+}
+
+
+/* =========================================================
+   OPCIONES
+========================================================= */
+
+.opciones-container {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.opcion-capy {
+    position: relative;
+    min-height: 70px;
+    padding: 16px 20px;
+    border: 2px solid #d8edf5;
+    border-radius: 17px;
+    background: #fff;
+    color: #344b54;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: .2s;
+}
+
+.opcion-capy:hover {
+    border-color: #69c6e5;
+    background: #f3fbfd;
+    transform: translateY(-3px);
+}
+
+.opcion-capy img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.opcion-capy.correcta {
+    border-color: #5dbb8a;
+    background: #edf9f2;
+    color: #34835d;
+}
+
+.opcion-capy.incorrecta {
+    border-color: #e29a9a;
+    background: #fff2f2;
+    color: #bd5d5d;
+}
+
+.opcion-capy.opcion-bloqueada {
+    pointer-events: none;
+}
+
+.opcion-audio {
+    color: #46afd4;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   ORDENAR ORACIONES
+========================================================= */
+
+.ordenar-juego {
+    margin: 30px 0;
+}
+
+.oracion-resultado {
+    min-height: 125px;
+    padding: 20px;
+    border: 3px dashed #a9dce9;
+    background: #f4fcfe;
+    border-radius: 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.resultado-icon {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    background: #dff4fa;
+    color: #43afd3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zona-oracion {
+    flex: 1;
+    min-height: 80px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.zona-oracion:empty::before {
+    content: attr(data-placeholder);
+    color: #9aadb5;
+    font-size: 14px;
+    padding-top: 12px;
+}
+
+.palabras-orden {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px;
+    background: #fafdfd;
+    border-radius: 20px;
+}
+
+.palabra-orden,
+.palabra-colocada {
+    border: 2px solid #b9dfe9;
+    background: #fff;
+    color: #348fab;
+    border-radius: 15px;
+    padding: 13px 19px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.palabra-orden:hover {
+    transform: translateY(-4px);
+    background: #eaf8fc;
+    border-color: #58b8d8;
+}
+
+.palabra-orden.usada {
+    opacity: .3;
+    pointer-events: none;
+}
+
+.palabra-colocada {
+    background: #eaf8fc;
+}
+
+.juego-completado .palabra-colocada {
+    background: #edf9f2;
+    border-color: #5dbb8a;
+    color: #34835d;
+}
+
+.btn-reiniciar-juego {
+    margin-top: 18px;
+    border: none;
+    background: #edf7fa;
+    color: #5b8b9b;
+    padding: 10px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CONECTAR
+========================================================= */
+
+.conectar-juego {
+    margin: 30px 0;
+}
+
+.conectar-instruccion {
+    background: #f4fbfd;
+    border: 1px solid #d6edf4;
+    padding: 15px;
+    border-radius: 15px;
+    color: #607984;
+    margin-bottom: 25px;
+    display: flex;
+    gap: 10px;
+}
+
+.conectar-instruccion i {
+    color: #43afd3;
+}
+
+.conectar-columnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.conectar-columna {
+    background: #fbfdfe;
+    border: 1px solid #dceef3;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.conectar-columna h3 {
+    text-align: center;
+    color: #4a879a;
+    font-size: 15px;
+    margin-bottom: 18px;
+}
+
+.conectar-columna h3 i {
+    margin-right: 7px;
+}
+
+.conectar-palabras,
+.conectar-imagenes {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.elemento-conectar {
+    width: 100%;
+    min-height: 75px;
+    border: 2px solid #d6eaf0;
+    border-radius: 17px;
+    background: white;
+    cursor: pointer;
+    transition: .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.palabra-conectar {
+    color: #398fab;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.imagen-conectar img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+.elemento-conectar:hover {
+    transform: translateY(-3px);
+    border-color: #65c1dd;
+    background: #f1fbfd;
+}
+
+.elemento-conectar.seleccionado {
+    border-color: #42afd6;
+    background: #e7f8fc;
+    box-shadow: 0 0 0 4px rgba(66,175,214,.12);
+}
+
+.elemento-conectar.conectado {
+    border-color: #5dbb8a;
+    background: #edf9f2;
+    color: #34835d;
+    pointer-events: none;
+}
+
+.elemento-conectar.incorrecto {
+    border-color: #e29a9a;
+    background: #fff2f2;
+}
+
+.conexiones-realizadas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.conexion-realizada {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #edf9f2;
+    color: #5dbb8a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   CLASIFICACIÓN
+========================================================= */
+
+.clasificacion-juego {
+    margin: 30px 0;
+}
+
+.clasificacion-palabras {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    min-height: 105px;
+    padding: 20px;
+    margin-bottom: 28px;
+    background: #f7fcfe;
+    border: 2px dashed #cfe9f1;
+    border-radius: 20px;
+}
+
+.palabra-arrastrable {
+    border: 2px solid #d8edf5;
+    background: #fff;
+    color: #344b54;
+    border-radius: 15px;
+    padding: 13px 19px;
+    min-width: 110px;
+    min-height: 52px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: grab;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: .2s;
+    user-select: none;
+}
+
+.palabra-arrastrable:hover {
+    transform: translateY(-3px);
+    background: #f3fbfd;
+}
+
+.palabra-arrastrable.correcta {
+    border-color: #5dbb8a;
+    background: #edf9f2;
+    color: #34835d;
+    cursor: default;
+}
+
+.palabra-arrastrable.incorrecta {
+    border-color: #e29a9a;
+    background: #fff2f2;
+    color: #bd5d5d;
+}
+
+.palabra-arrastrable img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.grupos-destino {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 18px;
+}
+
+.grupo-destino {
+    min-height: 190px;
+    padding: 18px;
+    border: 3px dashed;
+    border-radius: 22px;
+    transition: .25s;
+}
+
+.grupo-destino-header {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 15px;
+}
+
+.grupo-destino-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grupo-destino-header strong {
+    display: block;
+}
+
+.grupo-destino-header span {
+    font-size: 11px;
+    opacity: .7;
+}
+
+.grupo-palabras {
+    min-height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 8px;
+}
+
+.grupo-palabras .palabra-arrastrable {
+    min-width: auto;
+    min-height: 42px;
+    padding: 9px 13px;
+    font-size: 13px;
+}
+
+.grupo-destino.arrastre-activo {
+    transform: translateY(-3px);
+}
+
+.grupo-persona {
+    border-color: #cbb5e8;
+    background: #faf7fd;
+    color: #76539f;
+}
+
+.grupo-persona .grupo-destino-icon {
+    background: #f0e7fa;
+}
+
+.grupo-animal {
+    border-color: #acd9bc;
+    background: #f7fcf8;
+    color: #4d8c67;
+}
+
+.grupo-animal .grupo-destino-icon {
+    background: #e5f4ea;
+}
+
+.grupo-lugar {
+    border-color: #efd28b;
+    background: #fffdf6;
+    color: #9a7830;
+}
+
+.grupo-lugar .grupo-destino-icon {
+    background: #fff3d2;
+}
+
+.grupo-objeto {
+    border-color: #a8dbea;
+    background: #f5fbfd;
+    color: #438eac;
+}
+
+.grupo-objeto .grupo-destino-icon {
+    background: #e1f4fa;
+}
+
+
+/* =========================================================
+   CAPY
+========================================================= */
+
+.actividad-explicacion {
+    display: flex;
+    gap: 13px;
+    background: #eefaff;
+    border: 1px solid #d6eef6;
+    border-radius: 18px;
+    padding: 17px;
+    margin-top: 25px;
+}
+
+.capy-mini {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    background: #dff5fb;
+    color: #42afd4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actividad-explicacion strong {
+    color: #329cc4;
+    font-size: 13px;
+}
+
+.actividad-explicacion p {
+    color: #607984;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FEEDBACK
+========================================================= */
+
+.actividad-feedback {
+    min-height: 10px;
+    margin-top: 15px;
+}
+
+.feedback-correcto,
+.feedback-incorrecto {
+    padding: 13px 16px;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.feedback-correcto {
+    background: #edf9f2;
+    border: 1px solid #c8ead7;
+    color: #34835d;
+}
+
+.feedback-incorrecto {
+    background: #fff2f2;
+    border: 1px solid #f0d0d0;
+    color: #bd5d5d;
+}
+
+
+/* =========================================================
+   BOTONES
+========================================================= */
+
+.actividad-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 35px;
+    padding-top: 25px;
+    border-top: 1px solid #edf4f6;
+}
+
+.btn-actividad {
+    border: none;
+    border-radius: 14px;
+    padding: 13px 22px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.btn-siguiente,
+.btn-finalizar {
+    background: #54b9df;
+    color: white;
+    margin-left: auto;
+}
+
+.btn-siguiente:hover,
+.btn-finalizar:hover {
+    background: #38a7d0;
+    transform: translateY(-2px);
+}
+
+.btn-anterior {
+    background: #edf7fa;
+    color: #5e8998;
+}
+
+.btn-finalizar.completado {
+    opacity: .85;
+    cursor: default;
+}
+
+.actividad-card[hidden] {
+    display: none !important;
+}
+
+.actividad-card.activa {
+    display: block;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:800px) {
+
+    .capy-leccion-page {
+        padding: 20px 15px 45px;
+    }
+
+    .leccion-header {
+        padding: 22px;
+    }
+
+    .actividad-card {
+        padding: 25px 20px;
+    }
+
+    .opciones-container {
+        grid-template-columns: 1fr;
+    }
+
+    .grupos-destino {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .conectar-columnas {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media(max-width:500px) {
+
+    .leccion-header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .leccion-header-info h1 {
+        font-size: 21px;
+    }
+
+    .actividad-card h2 {
+        font-size: 21px;
+    }
+
+    .grupos-destino {
+        grid-template-columns: 1fr;
+    }
+
+    .actividad-actions {
+        flex-direction: column-reverse;
+    }
+
+    .btn-actividad {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn-siguiente,
+    .btn-finalizar {
+        margin-left: 0;
+    }
+
+    .palabra-orden,
+    .palabra-colocada {
+        font-size: 14px;
+        padding: 11px 14px;
+    }
+
+}
+
+/* COLORES SEMÁNTICOS PARA CONSTRUCCIÓN DE ORACIONES */
+.palabra-orden.rol-sujeto, .palabra-colocada.rol-sujeto { background:#f3edfb; border-color:#cbb5e8; color:#76539f; }
+.palabra-orden.rol-verbo, .palabra-colocada.rol-verbo { background:#eaf7fc; border-color:#a8dbea; color:#438eac; }
+.palabra-orden.rol-adjetivo, .palabra-colocada.rol-adjetivo { background:#edf8f1; border-color:#acd9bc; color:#4d8c67; }
+.palabra-orden.rol-articulo, .palabra-colocada.rol-articulo { background:#fff0f6; border-color:#e8b8cf; color:#a75d7c; }
+.palabra-orden.rol-informacion, .palabra-colocada.rol-informacion { background:#fff8e8; border-color:#efd28b; color:#9a7830; }
+.palabra-orden.rol-complemento, .palabra-colocada.rol-complemento { background:#eef5ff; border-color:#b7cbe8; color:#55739b; }
+
+.articulo-arrastrable.correcto,.opcion-capy.correcto,.palabra-arrastrable.correcto{border-color:#48b878!important;background:#e6faee!important}
+.articulo-arrastrable.incorrecto,.opcion-capy.incorrecto{animation:capy-shake .25s;border-color:#e56b6b!important}
+.elemento-conectar.seleccionado{outline:3px solid #5bc2e6;transform:scale(1.03)}
+.elemento-conectar.conectado{border-color:#48b878!important;background:#e6faee!important}
+.palabra-orden.usada{opacity:.35;pointer-events:none}
+.palabra-colocada{margin:4px;cursor:pointer}
+.actividad-feedback[hidden]{display:none}
+@keyframes capy-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
