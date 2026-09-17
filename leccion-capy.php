@@ -1,55 +1,143 @@
 <?php
+
 session_start();
 
-require_once "php/conexion.php";
-
 if (!isset($_SESSION['userID'])) {
-    header("Location: login.php");
+    header("Location: login.html");
     exit();
 }
 
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    header("Location: aventura2.php");
-    exit();
-}
+include 'php/conexion.php';
 
-$leccion_id = intval($_GET['id']);
 $userID = intval($_SESSION['userID']);
 
-/* =========================================================
-   LECCIÓN
-========================================================= */
 
-$sqlLeccion = "SELECT id, nivel, numero_leccion, titulo, descripcion, objetivo
-               FROM capy_lecciones
-               WHERE id = ? AND activa = 1
-               LIMIT 1";
+$leccionID = isset($_GET['id'])
+    ? intval($_GET['id'])
+    : 0;
 
-$stmtLeccion = $conn->prepare($sqlLeccion);
+if ($leccionID <= 0) {
+    header("Location: aventura2.php");
+    exit();
+}
+
+
+$sqlLeccion = "
+    SELECT
+        id,
+        nivel,
+        numero_leccion,
+        titulo,
+        descripcion,
+        objetivo
+    FROM capy_lecciones
+    WHERE id = ?
+      AND activa = 1
+    LIMIT 1
+";
+
+$stmtLeccion =
+    $conn->prepare($sqlLeccion);
 
 if (!$stmtLeccion) {
-    header("Location: aventura2.php");
-    exit();
+    die(
+        "No se pudo cargar la lección."
+    );
 }
 
-$stmtLeccion->bind_param("i", $leccion_id);
+$stmtLeccion->bind_param(
+    'i',
+    $leccionID
+);
+
 $stmtLeccion->execute();
 
-$resultLeccion = $stmtLeccion->get_result();
+$resultadoLeccion =
+    $stmtLeccion->get_result();
 
-if ($resultLeccion->num_rows === 0) {
-    $stmtLeccion->close();
-    header("Location: aventura2.php");
-    exit();
-}
-
-$leccion = $resultLeccion->fetch_assoc();
+$leccion =
+    $resultadoLeccion->fetch_assoc();
 
 $stmtLeccion->close();
 
-/* =========================================================
-   PROGRESO GUARDADO
-========================================================= */
+
+if (!$leccion) {
+    header("Location: aventura2.php");
+    exit();
+}
+
+$nivelLeccion = intval($leccion['nivel']);
+
+
+$desbloqueada = true;
+
+if ($nivelLeccion > 1) {
+
+    $nivelAnterior = $nivelLeccion - 1;
+
+    $sqlBloqueo = "
+        SELECT
+            COUNT(DISTINCT l.id) AS total_lecciones,
+            COUNT(
+                DISTINCT CASE
+                    WHEN p.completada = 1 THEN l.id
+                END
+            ) AS lecciones_completadas
+        FROM capy_lecciones l
+        LEFT JOIN capy_progreso p
+            ON p.leccion_id = l.id
+            AND p.userID = ?
+        WHERE l.nivel = ?
+          AND l.activa = 1
+    ";
+
+    $stmtBloqueo =
+        $conn->prepare($sqlBloqueo);
+
+    if (!$stmtBloqueo) {
+        header("Location: aventura2.php");
+        exit();
+    }
+
+    $stmtBloqueo->bind_param(
+        'ii',
+        $userID,
+        $nivelAnterior
+    );
+
+    $stmtBloqueo->execute();
+
+    $resultadoBloqueo =
+        $stmtBloqueo->get_result();
+
+    $filaBloqueo =
+        $resultadoBloqueo->fetch_assoc();
+
+    $totalLecciones =
+        intval(
+            $filaBloqueo['total_lecciones'] ?? 0
+        );
+
+    $leccionesCompletadas =
+        intval(
+            $filaBloqueo['lecciones_completadas'] ?? 0
+        );
+
+    $stmtBloqueo->close();
+     
+    if (
+        $totalLecciones <= 0 ||
+        $leccionesCompletadas < $totalLecciones
+    ) {
+        $desbloqueada = false;
+    }
+}
+
+if (!$desbloqueada) {
+    header("Location: aventura2.php");
+    exit();
+}
+
 
 $progresoGuardado = [
     'actividad_actual' => 1,
@@ -58,157 +146,190 @@ $progresoGuardado = [
     'completada' => 0
 ];
 
-$sqlProgreso = "SELECT actividad_actual, porcentaje, puntos, completada
-                FROM capy_progreso
-                WHERE userID = ? AND leccion_id = ?
-                LIMIT 1";
+$sqlProgreso = "
+    SELECT
+        actividad_actual,
+        porcentaje,
+        puntos,
+        completada
+    FROM capy_progreso
+    WHERE userID = ?
+      AND leccion_id = ?
+    ORDER BY id DESC
+    LIMIT 1
+";
 
-$stmtProgreso = $conn->prepare($sqlProgreso);
+$stmtProgreso =
+    $conn->prepare($sqlProgreso);
 
 if ($stmtProgreso) {
 
     $stmtProgreso->bind_param(
-        "ii",
+        'ii',
         $userID,
-        $leccion_id
+        $leccionID
     );
 
     $stmtProgreso->execute();
 
-    $resultProgreso = $stmtProgreso->get_result();
+    $resultadoProgreso =
+        $stmtProgreso->get_result();
 
-    if ($resultProgreso->num_rows > 0) {
-        $datosProgreso = $resultProgreso->fetch_assoc();
+    $filaProgreso =
+        $resultadoProgreso->fetch_assoc();
 
-        $progresoGuardado = [
-            'actividad_actual' => max(
-                1,
-                intval($datosProgreso['actividad_actual'])
-            ),
-            'porcentaje' => max(
-                0,
-                min(
-                    100,
-                    intval($datosProgreso['porcentaje'])
-                )
-            ),
-            'puntos' => max(
-                0,
-                intval($datosProgreso['puntos'])
-            ),
-            'completada' => intval(
-                $datosProgreso['completada']
-            )
-        ];
+    if ($filaProgreso) {
+
+        $progresoGuardado =
+            array_merge(
+                $progresoGuardado,
+                $filaProgreso
+            );
     }
 
     $stmtProgreso->close();
 }
 
-/* =========================================================
-   ACTIVIDADES
-========================================================= */
 
-$sqlActividades = "SELECT id, leccion_id, numero_actividad, tipo,
-                          titulo, instruccion, contenido,
-                          explicacion, audio_url, imagen,
-                          puntos, activa
-                   FROM capy_actividades
-                   WHERE leccion_id = ? AND activa = 1
-                   ORDER BY numero_actividad ASC";
+$sqlActividades = "
+    SELECT
+        id,
+        leccion_id,
+        numero_actividad,
+        tipo,
+        titulo,
+        instruccion,
+        contenido,
+        explicacion,
+        audio_url,
+        imagen,
+        puntos,
+        activa
+    FROM capy_actividades
+    WHERE leccion_id = ?
+      AND activa = 1
+    ORDER BY numero_actividad ASC
+";
 
-$stmtActividades = $conn->prepare($sqlActividades);
+$stmtActividades =
+    $conn->prepare($sqlActividades);
 
 if (!$stmtActividades) {
-    header("Location: aventura2.php");
-    exit();
+    die(
+        "No se pudieron cargar las actividades."
+    );
 }
 
 $stmtActividades->bind_param(
-    "i",
-    $leccion_id
+    'i',
+    $leccionID
 );
 
 $stmtActividades->execute();
 
-$resultActividades = $stmtActividades->get_result();
+$resultadoActividades =
+    $stmtActividades->get_result();
 
 $actividades = [];
 
-while ($actividad = $resultActividades->fetch_assoc()) {
 
-    $actividad_id = intval($actividad['id']);
+while (
+    $actividad =
+    $resultadoActividades->fetch_assoc()
+) {
 
-    /* =====================================================
-       OPCIONES
-    ===================================================== */
+    $actividadID =
+        intval($actividad['id']);
 
-    $sqlOpciones = "SELECT id, actividad_id, texto, imagen,
-                           audio_url, es_correcta, orden,
-                           orden_correcto, grupo
-                    FROM capy_opciones
-                    WHERE actividad_id = ?
-                    ORDER BY
-                        CASE
-                            WHEN orden_correcto IS NULL
-                            THEN orden
-                            ELSE orden_correcto
-                        END ASC,
-                        orden ASC";
 
-    $stmtOpciones = $conn->prepare($sqlOpciones);
+    $sqlOpciones = "
+        SELECT
+            id,
+            actividad_id,
+            texto,
+            imagen,
+            audio_url,
+            es_correcta,
+            orden,
+            orden_correcto,
+            grupo
+        FROM capy_opciones
+        WHERE actividad_id = ?
+        ORDER BY
+            CASE
+                WHEN orden_correcto IS NULL
+                THEN orden
+                ELSE orden_correcto
+            END ASC,
+            orden ASC
+    ";
+
+    $stmtOpciones =
+        $conn->prepare($sqlOpciones);
 
     $opciones = [];
 
     if ($stmtOpciones) {
 
         $stmtOpciones->bind_param(
-            "i",
-            $actividad_id
+            'i',
+            $actividadID
         );
 
         $stmtOpciones->execute();
 
-        $resultOpciones = $stmtOpciones->get_result();
+        $resultadoOpciones =
+            $stmtOpciones->get_result();
 
-        while ($opcion = $resultOpciones->fetch_assoc()) {
-            $opciones[] = $opcion;
+        while (
+            $opcion =
+            $resultadoOpciones->fetch_assoc()
+        ) {
+
+            $opciones[] =
+                $opcion;
         }
 
         $stmtOpciones->close();
     }
 
-    $actividad['opciones'] = $opciones;
 
-    $actividades[] = $actividad;
+    $actividad['opciones'] =
+        $opciones;
+
+    $actividades[] =
+        $actividad;
 }
 
 $stmtActividades->close();
 
-$totalActividades = count($actividades);
 
-if ($totalActividades === 0) {
-    header("Location: aventura2.php");
-    exit();
-}
+$totalActividades =
+    count($actividades);
 
-/*
- * La actividad guardada no puede superar la cantidad
- * de actividades existentes.
- */
-$actividadInicial = min(
+$actividadInicial =
+    intval(
+        $progresoGuardado[
+            'actividad_actual'
+        ] ?? 1
+    );
+
+$actividadInicial =
     max(
         1,
-        $progresoGuardado['actividad_actual']
-    ),
-    $totalActividades
-);
+        min(
+            $totalActividades,
+            $actividadInicial
+        )
+    );
 
-/*
- * Si la lección ya está completada, comenzamos desde
- * la primera actividad para permitir repasarla.
- */
-if ($progresoGuardado['completada'] == 1) {
+
+
+if (
+    intval(
+        $progresoGuardado['completada']
+    ) === 1
+) {
     $actividadInicial = 1;
 }
 
@@ -250,9 +371,7 @@ if ($progresoGuardado['completada'] == 1) {
 <main
     class="capy-leccion-page"
 
-    data-leccion-id="<?php
-        echo (int)$leccion['id'];
-    ?>"
+    data-leccion-id="<?php echo (int)$leccionID; ?>"
 
     data-actividad-inicial="<?php
         echo (int)$actividadInicial;
@@ -393,6 +512,8 @@ if ($progresoGuardado['completada'] == 1) {
             trim($actividad['tipo'])
         );
 
+        echo '<!-- TIPO ACTIVIDAD: ' . htmlspecialchars($tipo) . ' -->';
+
         $numeroActividad = $indice + 1;
 
         ?>
@@ -415,7 +536,7 @@ if ($progresoGuardado['completada'] == 1) {
             ?>"
 
             data-leccion-id="<?php
-                echo (int)$leccion_id;
+                echo (int)$leccionID;
             ?>"
 
             data-tipo="<?php
@@ -603,62 +724,195 @@ if ($progresoGuardado['completada'] == 1) {
                 <?php endif; ?>
 
             <!-- =================================================
-                 ARRASTRAR ARTÍCULO
+                ARRASTRE DE SUSTANTIVOS
             ================================================== -->
-            <?php elseif ($tipo === 'arrastrar_articulo' || $tipo === 'arrastre'): ?>
 
-                <div class="juego-arrastrar-articulo">
-                    <div class="instruccion-arrastre">
+            <?php elseif ($tipo === 'arrastre'): ?>
+
+                <?php
+
+                $opcionesArrastre = $actividad['opciones'] ?? [];
+                $usarOpciones = !empty($opcionesArrastre);
+
+                if (!$usarOpciones) {
+                    $palabras = array_filter(
+                        array_map(
+                            'trim',
+                            explode('|', $actividad['contenido'] ?? '')
+                        )
+                    );
+                }
+                ?>
+
+                <div class="juego-arrastrar-sustantivos">
+
+                    <!-- INSTRUCCIÓN DEL JUEGO -->
+                    <div class="instruccion-sustantivos">
+
                         <i class="fa-solid fa-hand-pointer"></i>
-                        <span>Arrastra el artículo correcto hasta el espacio vacío.</span>
+
+                        <div>
+
+                            <strong>¡Encuentra los sustantivos!</strong>
+
+                            <span>
+                                Arrastra todos los sustantivos hasta el espacio de la derecha.
+                            </span>
+
+                        </div>
+
                     </div>
 
-                    <div class="frase-arrastre">
-                        <?php
-                        $frase = htmlspecialchars(
-                            $actividad['contenido'] ?? '',
-                            ENT_QUOTES,
-                            'UTF-8'
-                        );
-                        if (strpos($frase, '___') === false) {
-                            $frase .= ' ___';
-                        }
-                        $frase = str_replace(
-                            '___',
-                            '<span class="espacio-articulo" data-articulo="">?</span>',
-                            $frase
-                        );
-                        echo $frase;
-                        ?>
+
+                    <!-- ÁREA DEL JUEGO -->
+                    <div class="sustantivos-juego">
+
+
+                        <!-- PALABRAS DISPONIBLES -->
+                        <div class="sustantivos-disponibles">
+
+                            <div class="sustantivos-titulo">
+
+                                <i class="fa-solid fa-font"></i>
+
+                                <span>Palabras</span>
+
+                            </div>
+
+
+                            <div class="sustantivos-lista">
+
+                                <?php if ($usarOpciones): ?>
+
+                                    <?php foreach ($opcionesArrastre as $opcion): ?>
+
+                                        <button
+                                            type="button"
+                                            class="sustantivo-arrastrable"
+                                            draggable="true"
+                                            data-sustantivo-id="<?php
+                                                echo (int)($opcion['id'] ?? 0);
+                                            ?>"
+                                            data-texto="<?php
+                                                echo htmlspecialchars(
+                                                    trim($opcion['texto'] ?? ''),
+                                                    ENT_QUOTES,
+                                                    'UTF-8'
+                                                );
+                                            ?>"
+                                            data-correcta="<?php
+                                                echo (int)($opcion['es_correcta'] ?? 0);
+                                            ?>"
+                                        >
+
+                                            <i class="fa-solid fa-tag"></i>
+
+                                            <span>
+                                                <?php
+                                                echo htmlspecialchars(
+                                                    trim($opcion['texto'] ?? ''),
+                                                    ENT_QUOTES,
+                                                    'UTF-8'
+                                                );
+                                                ?>
+                                            </span>
+
+                                        </button>
+
+                                    <?php endforeach; ?>
+
+                                <?php else: ?>
+
+                                    <?php foreach ($palabras as $indiceSustantivo => $sustantivo): ?>
+
+                                        <button
+                                            type="button"
+                                            class="sustantivo-arrastrable"
+                                            draggable="true"
+                                            data-sustantivo-id="<?php
+                                                echo 'contenido-' . $indiceSustantivo;
+                                            ?>"
+                                            data-texto="<?php
+                                                echo htmlspecialchars(
+                                                    trim($sustantivo),
+                                                    ENT_QUOTES,
+                                                    'UTF-8'
+                                                );
+                                            ?>"
+                                            data-correcta="1"
+                                        >
+
+                                            <i class="fa-solid fa-tag"></i>
+
+                                            <span>
+                                                <?php
+                                                echo htmlspecialchars(
+                                                    trim($sustantivo),
+                                                    ENT_QUOTES,
+                                                    'UTF-8'
+                                                );
+                                                ?>
+                                            </span>
+
+                                        </button>
+
+                                    <?php endforeach; ?>
+
+                                <?php endif; ?>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ZONA DE DESTINO -->
+                        <div
+                            class="zona-sustantivos"
+                            data-placeholder="Arrastra aquí los sustantivos..."
+                        >
+
+                            <div class="zona-sustantivos-titulo">
+
+                                <i class="fa-solid fa-box-open"></i>
+
+                                <span>Sustantivos</span>
+
+                            </div>
+
+
+                            <div class="zona-sustantivos-contenido">
+
+                                <div class="zona-sustantivos-placeholder">
+
+                                    <i class="fa-solid fa-arrow-right"></i>
+
+                                    <span>
+                                        Arrastra aquí los sustantivos
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
                     </div>
 
-                    <div class="articulos-arrastrables">
-                        <?php foreach ($actividad['opciones'] as $opcion): ?>
-                            <button
-                                type="button"
-                                class="articulo-arrastrable"
-                                draggable="true"
-                                data-opcion-id="<?php echo (int)$opcion['id']; ?>"
-                                data-correcta="<?php echo (int)$opcion['es_correcta']; ?>"
-                                data-texto="<?php echo htmlspecialchars($opcion['texto'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
-                                data-audio="<?php echo htmlspecialchars($opcion['audio_url'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
-                            >
-                                <span class="articulo-icono">
-                                    <i class="fa-solid fa-puzzle-piece"></i>
-                                </span>
-                                <span><?php echo htmlspecialchars($opcion['texto'] ?? '', ENT_QUOTES, 'UTF-8'); ?></span>
-                            </button>
-                        <?php endforeach; ?>
-                    </div>
 
-                    <button
-                        type="button"
-                        class="btn-reiniciar-arrastre"
+                    <!-- MENSAJE DE RESULTADO -->
+                    <div
+                        class="resultado-sustantivos"
                         hidden
                     >
-                        <i class="fa-solid fa-rotate-right"></i>
-                        Intentar de nuevo
-                    </button>
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <span>
+                            ¡Excelente! Reconociste todos los sustantivos.
+                        </span>
+
+                    </div>
+
                 </div>
 
             <!-- =================================================
@@ -775,119 +1029,78 @@ if ($progresoGuardado['completada'] == 1) {
 
                     </div>
 
-                    <button
-                        type="button"
-                        class="btn-reiniciar-juego">
-
-                        <i class="fa-solid fa-rotate"></i>
-
-                        Reiniciar
-
-                    </button>
-
                 </div>
 
             <!-- =================================================
                  CONECTAR
             ================================================== -->
 
-            <?php elseif (
-                $tipo === 'conectar'
-            ): ?>
-
-                <?php
-
-                $opcionesTexto = [];
-                $opcionesImagen = [];
-
-                foreach (
-                    $actividad['opciones']
-                    as $opcion
-                ) {
-
-                    if (
-                        empty($opcion['imagen']) &&
-                        !empty($opcion['texto'])
-                    ) {
-
-                        $opcionesTexto[] = $opcion;
-
-                    } elseif (
-                        !empty($opcion['imagen'])
-                    ) {
-
-                        $opcionesImagen[] = $opcion;
-                    }
-                }
-
-                ?>
+            <?php elseif ($tipo === 'conectar'): ?>
 
                 <div class="conectar-juego">
 
                     <div class="conectar-instruccion">
 
-                        <div class="conectar-instruccion-icon">
+                        <i class="fa-solid fa-link"></i>
 
-                            <i class="fa-solid fa-link"></i>
-
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Une cada palabra con su imagen
-                            </strong>
-
-                            <span>
-                                Primero toca una palabra y luego
-                                toca la imagen que corresponde.
-                            </span>
-
-                        </div>
+                        <span>
+                            Une cada palabra con la imagen que corresponde.
+                        </span>
 
                     </div>
 
+
                     <div class="conectar-columnas">
 
-                        <!-- PALABRAS -->
+                        <!-- =========================================
+                            PALABRAS
+                        ========================================== -->
 
-                        <div class="conectar-columna">
+                        <div class="conectar-columna conectar-columna-palabras">
 
                             <h3>
-
                                 <i class="fa-solid fa-font"></i>
-
                                 Palabras
-
                             </h3>
 
                             <div class="conectar-palabras">
 
                                 <?php foreach (
-                                    $opcionesTexto
+                                    $actividad['opciones']
                                     as $opcion
                                 ): ?>
 
                                     <button
                                         type="button"
+                                        class="elemento-conectar palabra-conectar"
 
-                                        class="elemento-conectar
-                                               palabra-conectar"
-
-                                        data-id="<?php
+                                        data-pareja="<?php
                                             echo (int)$opcion['id'];
                                         ?>"
 
                                         data-grupo="<?php
                                             echo htmlspecialchars(
-                                                $opcion['grupo'] ?? ''
+                                                $opcion['grupo'] ?? '',
+                                                ENT_QUOTES,
+                                                'UTF-8'
                                             );
-                                        ?>">
+                                        ?>"
 
-                                        <span>
+                                        data-texto="<?php
+                                            echo htmlspecialchars(
+                                                $opcion['texto'] ?? '',
+                                                ENT_QUOTES,
+                                                'UTF-8'
+                                            );
+                                        ?>"
+                                    >
+
+                                        <span class="palabra-conectar-texto">
 
                                             <?php echo htmlspecialchars(
-                                                $opcion['texto']
+                                                $opcion['texto'] ?? '',
+                                                ENT_QUOTES,
+                                                'UTF-8'
                                             ); ?>
 
                                         </span>
@@ -900,52 +1113,71 @@ if ($progresoGuardado['completada'] == 1) {
 
                         </div>
 
-                        <!-- IMÁGENES -->
 
-                        <div class="conectar-columna">
+                        <!-- =========================================
+                            IMÁGENES
+                        ========================================== -->
+
+                        <div class="conectar-columna conectar-columna-imagenes">
 
                             <h3>
-
-                                <i class="fa-solid fa-image"></i>
-
+                                <i class="fa-regular fa-image"></i>
                                 Imágenes
-
                             </h3>
 
                             <div class="conectar-imagenes">
 
                                 <?php foreach (
-                                    $opcionesImagen
+                                    $actividad['opciones']
                                     as $opcion
                                 ): ?>
 
-                                    <button
-                                        type="button"
+                                    <?php if (
+                                        !empty($opcion['imagen'])
+                                    ): ?>
 
-                                        class="elemento-conectar
-                                               imagen-conectar"
+                                        <button
+                                            type="button"
+                                            class="elemento-conectar imagen-conectar"
 
-                                        data-id="<?php
-                                            echo (int)$opcion['id'];
-                                        ?>"
+                                            data-pareja="<?php
+                                                echo (int)$opcion['id'];
+                                            ?>"
 
-                                        data-grupo="<?php
-                                            echo htmlspecialchars(
-                                                $opcion['grupo'] ?? ''
-                                            );
-                                        ?>">
+                                            data-grupo="<?php
+                                                echo htmlspecialchars(
+                                                    $opcion['grupo'] ?? '',
+                                                    ENT_QUOTES,
+                                                    'UTF-8'
+                                                );
+                                            ?>"
 
-                                        <img
-                                            src="<?php echo htmlspecialchars(
-                                                $opcion['imagen']
-                                            ); ?>"
+                                            data-texto="<?php
+                                                echo htmlspecialchars(
+                                                    $opcion['texto'] ?? '',
+                                                    ENT_QUOTES,
+                                                    'UTF-8'
+                                                );
+                                            ?>"
+                                        >
 
-                                            alt="<?php echo htmlspecialchars(
-                                                $opcion['texto']
-                                                ?? 'Imagen'
-                                            ); ?>">
+                                            <img
+                                                src="<?php echo htmlspecialchars(
+                                                    $opcion['imagen'],
+                                                    ENT_QUOTES,
+                                                    'UTF-8'
+                                                ); ?>"
 
-                                    </button>
+                                                alt="<?php echo htmlspecialchars(
+                                                    $opcion['texto'] ?? '',
+                                                    ENT_QUOTES,
+                                                    'UTF-8'
+                                                ); ?>"
+                                            >
+
+                                        </button>
+
+                                    <?php endif; ?>
 
                                 <?php endforeach; ?>
 
@@ -953,16 +1185,30 @@ if ($progresoGuardado['completada'] == 1) {
 
                         </div>
 
+
                     </div>
 
-                    <svg
-                        class="conectar-lineas"
-                        aria-hidden="true">
-                    </svg>
+                    <!-- =========================================
+                        CONEXIONES REALIZADAS
+                    ========================================== -->
 
-                    <div class="conexiones-realizadas"></div>
+                    <div class="conexiones-realizadas">
+
+                        <span class="conexion-contador">
+                            <i class="fa-solid fa-link"></i>
+                            Parejas conectadas:
+                            <strong class="conexiones-numero">0</strong>
+                            /
+                            <strong>
+                                <?php echo count($actividad['opciones']); ?>
+                            </strong>
+                        </span>
+
+                    </div>
 
                 </div>
+
+
 
             <!-- =================================================
                  CLASIFICACIÓN
@@ -1363,12 +1609,20 @@ if ($progresoGuardado['completada'] == 1) {
             <?php endif; ?>
 
             <!-- =================================================
-                 EXPLICACIÓN DE CAPY
+                EXPLICACIÓN DE CAPY
             ================================================== -->
 
-            <?php if (
-                !empty($actividad['explicacion'])
-            ): ?>
+            <?php
+            $tipoActividad = strtolower(
+                trim($actividad['tipo'] ?? '')
+            );
+
+            $esExplicacion =
+                $tipoActividad === 'introduccion' ||
+                $tipoActividad === 'explicacion';
+            ?>
+
+            <?php if (!empty($actividad['explicacion'])): ?>
 
                 <div class="actividad-explicacion">
 
@@ -1400,8 +1654,31 @@ if ($progresoGuardado['completada'] == 1) {
 
             <?php endif; ?>
 
+
+            <?php if (
+                $esExplicacion &&
+                !empty($actividad['explicacion'])
+            ): ?>
+
+                <div class="actividad-boton-entendido">
+
+                    <button
+                        type="button"
+                        class="btn-actividad btn-completar">
+
+                        <i class="fa-solid fa-check"></i>
+
+                        ¡Entendido!
+
+                    </button>
+
+                </div>
+
+            <?php endif; ?>
+
+
             <!-- =================================================
-                 FEEDBACK
+                FEEDBACK
             ================================================== -->
 
             <div
@@ -1411,8 +1688,9 @@ if ($progresoGuardado['completada'] == 1) {
                 ?>">
             </div>
 
+
             <!-- =================================================
-                 BOTONES DE NAVEGACIÓN
+                BOTONES DE NAVEGACIÓN
             ================================================== -->
 
             <div class="actividad-actions">
@@ -1431,6 +1709,7 @@ if ($progresoGuardado['completada'] == 1) {
 
                 <?php endif; ?>
 
+
                 <?php if (
                     $indice <
                     $totalActividades - 1
@@ -1448,13 +1727,19 @@ if ($progresoGuardado['completada'] == 1) {
 
                 <?php else: ?>
 
-                    <a href="aventura2.php" type="button" class="btn-actividad btn-finalizar">
+                    <a
+                        href="aventura2.php"
+                        type="button"
+                        class="btn-actividad btn-finalizar">
+
                         <i class="fa-solid fa-star"></i>
+
                         Finalizar lección
+
                     </a>
 
                 <?php endif; ?>
-                    
+
             </div>
 
         </article>

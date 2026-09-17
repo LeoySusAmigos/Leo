@@ -1,48 +1,82 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const niveles = document.querySelectorAll(".capy-level");
+document.addEventListener('DOMContentLoaded', () => {
 
-    niveles.forEach((nivel) => {
-
-        const encabezado = nivel.querySelector(".level-header");
-        const lecciones = nivel.querySelector(".lessons-container");
-        const flecha = nivel.querySelector(".level-arrow");
+    const niveles =
+        document.querySelectorAll('.capy-level');
 
 
-        // Comprobar que existan los elementos
-        if (!encabezado || !lecciones || !flecha) {
+    niveles.forEach(nivel => {
+
+        const encabezado =
+            nivel.querySelector('.level-header');
+
+        const lecciones =
+            nivel.querySelector('.lessons-container');
+
+        const flecha =
+            nivel.querySelector('.level-arrow');
+
+
+        if (
+            !encabezado ||
+            !lecciones ||
+            !flecha
+        ) {
             return;
         }
 
-        // Todos los niveles empiezan abiertos
-        lecciones.style.display = "flex";
 
-        flecha.classList.add("fa-chevron-up");
-        flecha.classList.remove("fa-chevron-down");
+        /*
+         * Los niveles comienzan abiertos.
+         */
 
-        encabezado.addEventListener("click", () => {
+        lecciones.style.display = 'flex';
 
-            const estaAbierto =
-                lecciones.style.display !== "none";
+        flecha.classList.add(
+            'fa-chevron-up'
+        );
+
+        flecha.classList.remove(
+            'fa-chevron-down'
+        );
 
 
-            if (estaAbierto) {
+        encabezado.addEventListener(
+            'click',
+            () => {
 
-                lecciones.style.display = "none";
+                const estaAbierto =
+                    lecciones.style.display !==
+                    'none';
 
-                flecha.classList.remove("fa-chevron-up");
-                flecha.classList.add("fa-chevron-down");
 
-            } else {
+                if (estaAbierto) {
 
-                lecciones.style.display = "flex";
+                    lecciones.style.display =
+                        'none';
 
-                flecha.classList.remove("fa-chevron-down");
-                flecha.classList.add("fa-chevron-up");
+                    flecha.classList.remove(
+                        'fa-chevron-up'
+                    );
 
+                    flecha.classList.add(
+                        'fa-chevron-down'
+                    );
+
+                } else {
+
+                    lecciones.style.display =
+                        'flex';
+
+                    flecha.classList.remove(
+                        'fa-chevron-down'
+                    );
+
+                    flecha.classList.add(
+                        'fa-chevron-up'
+                    );
+                }
             }
-
-        });
-
+        );
     });
 
 });

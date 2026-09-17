@@ -10,11 +10,6 @@ if(!isset($_SESSION['userID'])){
 
 $userID = $_SESSION['userID'];
 
-
-/*=========================================
-=             DATOS DEL NIÑO
-=========================================*/
-
 $sql = "
 
 SELECT
@@ -30,10 +25,6 @@ WHERE userID = '$userID'
 
 $usuario = $conn->query($sql)->fetch_assoc();
 
-
-/*=========================================
-=           PROGRESO GENERAL
-=========================================*/
 
 $sql = "
 
@@ -53,10 +44,6 @@ WHERE userID = '$userID'
 $progreso = $conn->query($sql)->fetch_assoc();
 
 
-/*=========================================
-=          NIVELES DE LEO
-=========================================*/
-
 $sql = "
 
 SELECT
@@ -66,7 +53,10 @@ n.nombre,
 n.vocal,
 n.orden,
 
-COALESCE(d.desbloqueado,0) AS desbloqueado
+CASE
+    WHEN n.orden = 1 THEN 1
+    ELSE COALESCE(d.desbloqueado,0)
+END AS desbloqueado
 
 FROM leo_niveles n
 
@@ -81,10 +71,6 @@ ORDER BY n.orden
 ";
 
 $niveles = $conn->query($sql);
-
-/*=========================================
-=        LECCIONES DE CADA NIVEL
-=========================================*/
 
 $sql = "
 
@@ -111,11 +97,6 @@ while($leccion = $resLecciones->fetch_assoc()){
 
 }
 
-
-
-/*=========================================
-=      PALABRAS DE CADA LECCIÓN
-=========================================*/
 
 $sql = "
 
@@ -145,11 +126,6 @@ while($palabra = $resPalabras->fetch_assoc()){
 
 }
 
-
-
-/*=========================================
-=   PALABRAS COMPLETADAS POR EL USUARIO
-=========================================*/
 
 $sql = "
 
@@ -228,6 +204,20 @@ href="styles/aventura-leo.css">
 </head>
 
 <body>
+
+<div class="aviso-orientacion">
+    <div class="aviso-orientacion-icono">
+        <i class="bi bi-phone"></i>
+    </div>
+
+    <h2>¡Gira tu dispositivo!</h2>
+
+    <p>
+        Gira tu pantalla para comenzar la aventura.
+    </p>
+
+    <i class="bi bi-arrow-repeat aviso-orientacion-giro"></i>
+</div>
 
 <?php include 'navbar.php'; ?>
 

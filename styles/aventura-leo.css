@@ -1003,3 +1003,256 @@ body{
     font-size:18px;
 
 }
+
+
+
+
+@media (max-width:1024px) and (orientation:landscape){
+
+    .aventura-container{
+
+        width:94%;
+
+        max-width:none;
+
+        margin:25px auto 40px;
+
+    }
+
+
+    .aventura-header{
+
+        margin-top:35px;
+
+        margin-bottom:25px;
+
+    }
+
+
+    .aventura-header h1{
+
+        font-size:42px;
+
+    }
+
+
+    .aventura-header p{
+
+        font-size:17px;
+
+    }
+
+
+    .content-wrapper-modern{
+
+        padding:20px;
+
+    }
+
+
+    .info-banner-niveles{
+
+        padding:17px;
+
+        margin-bottom:25px;
+
+    }
+
+
+    .banner-icon-circle{
+
+        width:50px;
+
+        height:50px;
+
+    }
+
+
+    .banner-info-text strong{
+
+        font-size:19px;
+
+    }
+
+
+    .banner-info-text p{
+
+        font-size:14px;
+
+    }
+
+
+    .niveles-container{
+
+        gap:16px;
+
+    }
+
+
+    .nivel-row-header{
+
+        padding:17px 22px;
+
+    }
+
+
+    .nivel-content{
+        width:100%;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:15px;
+        padding:18px;
+    }
+
+    .leccion-card{
+        width:100%;
+        min-width:0;
+    }
+
+    .palabras-grid{
+        width:100%;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+
+    .word-pill{
+
+        padding:8px 10px;
+
+    }
+
+
+    .word-text{
+
+        font-size:14px;
+
+    }
+
+    .leo-bg{
+        left:20px;
+        top:5px;
+        width:150px;
+    }
+
+    .leito{
+        z-index:1;
+    }
+
+    .aventura-header{
+        position:relative;
+        z-index:10;
+    }
+
+}
+
+
+.aviso-orientacion{
+
+    display:none;
+
+}
+
+
+@media (max-width:1024px) and (orientation:portrait){
+
+    .aviso-orientacion{
+
+        position:fixed;
+
+        inset:0;
+
+        z-index:99999;
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:center;
+
+        justify-content:center;
+
+        text-align:center;
+
+        padding:30px;
+
+        background:#f7fbf4;
+
+    }
+
+
+    .aviso-orientacion-icono{
+
+        font-size:75px;
+
+        color:#2F8B44;
+
+        margin-bottom:20px;
+
+        animation:orientacionGiro 2s ease-in-out infinite;
+
+    }
+
+
+    .aviso-orientacion h2{
+
+        margin:0 0 10px;
+
+        color:#2F7D32;
+
+        font-size:30px;
+
+        font-weight:700;
+
+    }
+
+
+    .aviso-orientacion p{
+
+        margin:0;
+
+        max-width:350px;
+
+        color:#666;
+
+        font-size:18px;
+
+        line-height:1.5;
+
+    }
+
+
+    .aviso-orientacion-giro{
+
+        margin-top:20px;
+
+        font-size:32px;
+
+        color:#FD8918;
+
+        animation:orientacionGiro 2s ease-in-out infinite;
+
+    }
+
+}
+
+
+@keyframes orientacionGiro{
+
+    0%{
+
+        transform:rotate(0deg);
+
+    }
+
+    50%{
+
+        transform:rotate(90deg);
+
+    }
+
+    100%{
+
+        transform:rotate(0deg);
+
+    }
+
+}

@@ -453,6 +453,39 @@ button {
     font-weight: 700;
 }
 
+.btn-reiniciar {
+    margin: 25px auto 0;
+    padding: 12px 22px;
+
+    border: none;
+    border-radius: 14px;
+
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    width: fit-content;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.btn-reiniciar:hover {
+    transform: translateY(-2px);
+}
+
+.btn-reiniciar:active {
+    transform: translateY(0);
+}
+
 
 /* =========================================================
    CONECTAR
@@ -527,34 +560,59 @@ button {
     font-weight: 700;
 }
 
+.imagen-conectar {
+    min-height: 130px;
+    padding: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
 .imagen-conectar img {
-    width: 70px;
-    height: 70px;
+    width: 105px;
+    height: 105px;
+
     object-fit: contain;
-}
+    display: block;
 
-.elemento-conectar:hover {
-    transform: translateY(-3px);
-    border-color: #65c1dd;
-    background: #f1fbfd;
-}
-
-.elemento-conectar.seleccionado {
-    border-color: #42afd6;
-    background: #e7f8fc;
-    box-shadow: 0 0 0 4px rgba(66,175,214,.12);
-}
-
-.elemento-conectar.conectado {
-    border-color: #5dbb8a;
-    background: #edf9f2;
-    color: #34835d;
     pointer-events: none;
 }
 
+.palabra-conectar {
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px 20px;
+
+    cursor: pointer;
+}
+
+.palabra-conectar-texto {
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.elemento-conectar.seleccionado {
+    outline: 3px solid #5bc2e6;
+    transform: scale(1.03);
+}
+
+.elemento-conectar.conectado {
+    border-color: #48b878 !important;
+    background: #e6faee !important;
+
+    cursor: default;
+}
+
 .elemento-conectar.incorrecto {
-    border-color: #e29a9a;
-    background: #fff2f2;
+    animation: capy-shake .25s;
+    border-color: #e56b6b !important;
 }
 
 .conexiones-realizadas {
@@ -862,6 +920,505 @@ button {
 
 .actividad-card.activa {
     display: block;
+}
+
+.btn-completar {
+    background: #5abf83;
+    color: #fff;
+    border: none;
+}
+
+.btn-completar:hover {
+    background: #48a970;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.btn-completar:active {
+    transform: translateY(0);
+}
+
+.actividad-boton-entendido {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 22px;
+}
+
+.actividad-boton-entendido .btn-completar {
+    margin: 0;
+}
+
+/* =========================================================
+   JUEGO DE ARRASTRE DE SUSTANTIVOS
+========================================================= */
+
+.juego-arrastrar-sustantivos {
+    margin: 30px 0;
+}
+
+
+/* INSTRUCCIÓN */
+
+.instruccion-sustantivos {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    background: #eef9fd;
+    border: 1px solid #c8eaf4;
+
+    border-radius: 18px;
+
+    padding: 16px 20px;
+
+    margin-bottom: 25px;
+
+    color: #3c8199;
+}
+
+.instruccion-sustantivos > i {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #d9f3fb;
+    color: #4fb6d7;
+
+    border-radius: 13px;
+
+    font-size: 19px;
+}
+
+.instruccion-sustantivos div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.instruccion-sustantivos strong {
+    color: #247b99;
+    font-size: 17px;
+}
+
+.instruccion-sustantivos span {
+    font-size: 14px;
+}
+
+
+/* CONTENEDOR PRINCIPAL */
+
+.sustantivos-juego {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 25px;
+
+    align-items: stretch;
+}
+
+
+/* PALABRAS DISPONIBLES */
+
+.sustantivos-disponibles,
+.zona-sustantivos {
+    min-height: 300px;
+
+    background: #fbfdfe;
+
+    border: 2px dashed #c9e5ed;
+
+    border-radius: 22px;
+
+    padding: 20px;
+}
+
+
+/* TÍTULOS */
+
+.sustantivos-titulo,
+.zona-sustantivos-titulo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 18px;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    color: #3f91ad;
+}
+
+.sustantivos-titulo i,
+.zona-sustantivos-titulo i {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #e3f5fa;
+
+    color: #4eb6d5;
+}
+
+
+/* LISTA */
+
+.sustantivos-lista {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    align-content: flex-start;
+}
+
+
+/* PALABRA ARRASTRABLE */
+
+.sustantivo-arrastrable {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 13px 17px;
+
+    border-radius: 15px;
+
+    border: 2px solid #b9dce7;
+
+    background: #ffffff;
+
+    color: #397e95;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: grab;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease,
+        border-color .2s ease,
+        background .2s ease;
+}
+
+.sustantivo-arrastrable:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 12px rgba(68, 157, 184, .14);
+
+    border-color: #69bfdc;
+}
+
+.sustantivo-arrastrable:active {
+    cursor: grabbing;
+
+    transform: scale(.97);
+}
+
+.sustantivo-arrastrable i {
+    color: #62bdd8;
+}
+
+
+/* PALABRA MIENTRAS SE ARRASTRA */
+
+.sustantivo-arrastrable.arrastrando {
+    opacity: .45;
+
+    transform: scale(.96);
+}
+
+
+/* PALABRA YA COLOCADA */
+
+.sustantivo-colocado {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 12px 15px;
+
+    border-radius: 14px;
+
+    border: 2px solid #9bd5b3;
+
+    background: #ecfaf1;
+
+    color: #4d9369;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    animation: aparecerSustantivo .2s ease;
+}
+
+.sustantivo-colocado:hover {
+    border-color: #73bd92;
+
+    background: #e4f7eb;
+}
+
+.sustantivo-colocado i {
+    color: #52aa77;
+}
+
+
+/* CONTENIDO DE LA ZONA */
+
+.zona-sustantivos-contenido {
+    min-height: 205px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-content: flex-start;
+
+    gap: 10px;
+
+    padding: 10px;
+
+    border-radius: 17px;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease;
+}
+
+
+/* PLACEHOLDER */
+
+.zona-sustantivos-placeholder {
+    width: 100%;
+
+    min-height: 180px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    color: #9ab8c2;
+
+    text-align: center;
+
+    border: 2px dashed #d8e9ee;
+
+    border-radius: 16px;
+
+    background: #f8fcfd;
+}
+
+.zona-sustantivos-placeholder i {
+    font-size: 25px;
+
+    color: #8bc7d8;
+}
+
+.zona-sustantivos-placeholder span {
+    font-size: 14px;
+}
+
+
+/* ZONA ACTIVA DURANTE DRAG */
+
+.zona-sustantivos.arrastre-activo {
+    border-color: #5abbd9;
+
+    background: #f3fbfe;
+}
+
+.zona-sustantivos.arrastre-activo
+.zona-sustantivos-contenido {
+    background: #eefaff;
+}
+
+
+/* ZONA COMPLETADA */
+
+.zona-sustantivos.completada {
+    border-color: #8dccaa;
+
+    background: #f4fcf7;
+}
+
+
+/* RESULTADO */
+
+.resultado-sustantivos {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+    padding: 14px 18px;
+
+    border-radius: 15px;
+
+    background: #e9faef;
+
+    border: 1px solid #a9dfbc;
+
+    color: #43865f;
+
+    font-weight: 700;
+
+    text-align: center;
+}
+
+.resultado-sustantivos i {
+    font-size: 19px;
+}
+
+
+/* REINICIAR */
+
+.btn-reiniciar-sustantivos {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin: 18px auto 0;
+
+    padding: 11px 17px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #edf7fa;
+
+    color: #438da4;
+
+    font-family: inherit;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+.btn-reiniciar-sustantivos:hover {
+    background: #dff1f6;
+
+    transform: translateY(-1px);
+}
+
+.sustantivo-arrastrable.usado {
+    display: none !important;
+}
+
+/* ANIMACIÓN */
+
+@keyframes aparecerSustantivo {
+
+    from {
+        opacity: 0;
+
+        transform: scale(.9);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: scale(1);
+    }
+
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:800px) {
+
+    .sustantivos-juego {
+        grid-template-columns: 1fr;
+    }
+
+    .sustantivos-disponibles,
+    .zona-sustantivos {
+        min-height: 240px;
+    }
+
+    .zona-sustantivos-placeholder {
+        min-height: 130px;
+    }
+
+}
+
+@media(max-width:500px) {
+
+    .instruccion-sustantivos {
+        align-items: flex-start;
+
+        padding: 14px;
+    }
+
+    .instruccion-sustantivos strong {
+        font-size: 15px;
+    }
+
+    .instruccion-sustantivos span {
+        font-size: 13px;
+    }
+
+    .sustantivos-disponibles,
+    .zona-sustantivos {
+        padding: 15px;
+    }
+
+    .sustantivo-arrastrable,
+    .sustantivo-colocado {
+        font-size: 14px;
+
+        padding: 10px 13px;
+    }
+
 }
 
 

@@ -318,18 +318,11 @@ href="styles/navbar.css">
 
                 <div class="leo-container">
                     <img src="images/aventuraLeo/leo-tronco.png" class="leo-personaje" alt="Leo">
-
                     <div class="leo-dialogo" id="dialogoFase1">
-
-                        ¡Hola!
-
-                        Escucha atentamente cómo suena esta sílaba.
-
-                        Después la reconoceremos juntos.
-
+                        Escucha atentamente cómo suena esta sílaba, repite y después la reconoceremos juntos.
                     </div>
-
                 </div>
+                
                 <div class="lesson-buttons">
                     <button
                         id="btnEscuchar"
@@ -404,7 +397,7 @@ href="styles/navbar.css">
 
                         ¡Excelente!
 
-                        Ganaste +5 puntos ⭐
+                        Ganaste +5 puntos 
 
                     </div>
 
@@ -464,9 +457,9 @@ href="styles/navbar.css">
 
         <p>
 
-            Tu progreso ya guardado no se perderá.
+            Tu progreso no se perderá.
 
-            Podrás continuar esta aventura cuando quieras.
+            Podrás continuar la lección cuando quieras.
 
         </p>
 

@@ -10,6 +10,7 @@ include 'php/conexion.php';
 
 $userID = $_SESSION['userID'];
 
+
 $sql = "SELECT * FROM capy_lecciones
         WHERE activa = 1
         ORDER BY nivel ASC, numero_leccion ASC";
@@ -25,6 +26,77 @@ $leccionesPorNivel = [];
 while ($leccion = $resultado->fetch_assoc()) {
     $leccionesPorNivel[$leccion['nivel']][] = $leccion;
 }
+
+
+$nivelesDesbloqueados = [
+    1 => true,
+    2 => false,
+    3 => false,
+    4 => false,
+    5 => false
+];
+
+$sqlDesbloqueo = "
+    SELECT
+        l.nivel,
+        COUNT(DISTINCT l.id) AS total_lecciones,
+        COUNT(
+            DISTINCT CASE
+                WHEN p.completada = 1 THEN l.id
+            END
+        ) AS lecciones_completadas
+    FROM capy_lecciones l
+    LEFT JOIN capy_progreso p
+        ON p.leccion_id = l.id
+        AND p.userID = ?
+    WHERE l.activa = 1
+    GROUP BY l.nivel
+    ORDER BY l.nivel ASC
+";
+
+$stmtDesbloqueo = $conn->prepare($sqlDesbloqueo);
+
+if (!$stmtDesbloqueo) {
+    die("Error al comprobar el desbloqueo de niveles: " . $conn->error);
+}
+
+$stmtDesbloqueo->bind_param("i", $userID);
+$stmtDesbloqueo->execute();
+
+$resultadoDesbloqueo = $stmtDesbloqueo->get_result();
+
+$progresoNiveles = [];
+
+while ($fila = $resultadoDesbloqueo->fetch_assoc()) {
+    $nivel = (int)$fila['nivel'];
+
+    $progresoNiveles[$nivel] = [
+        'total' => (int)$fila['total_lecciones'],
+        'completadas' => (int)$fila['lecciones_completadas']
+    ];
+}
+
+$stmtDesbloqueo->close();
+
+
+for ($nivel = 2; $nivel <= 5; $nivel++) {
+
+    $nivelAnterior = $nivel - 1;
+
+    $totalAnterior =
+        $progresoNiveles[$nivelAnterior]['total'] ?? 0;
+
+    $completadasAnterior =
+        $progresoNiveles[$nivelAnterior]['completadas'] ?? 0;
+
+    if (
+        $totalAnterior > 0 &&
+        $completadasAnterior >= $totalAnterior
+    ) {
+        $nivelesDesbloqueados[$nivel] = true;
+    }
+}
+
 
 $niveles = [
     1 => [
@@ -141,51 +213,113 @@ $niveles = [
 
 
             <?php for ($nivel = 1; $nivel <= 5; $nivel++): ?>
+
                 <?php
-                $infoNivel = $niveles[$nivel];
-                $lecciones = $leccionesPorNivel[$nivel] ?? [];
+                    $infoNivel = $niveles[$nivel];
+                    $lecciones = $leccionesPorNivel[$nivel] ?? [];
+
+                    $desbloqueado = $nivelesDesbloqueados[$nivel] ?? false;
                 ?>
 
-                <section class="capy-level">
+                <section
+                    class="capy-level <?php echo $desbloqueado ? 'nivel-desbloqueado' : 'nivel-bloqueado'; ?>"
+                    data-desbloqueado="<?php echo $desbloqueado ? '1' : '0'; ?>"
+                >
+
                     <div class="level-header">
+
                         <div class="level-number">
                             Nivel <?php echo $nivel; ?>
                         </div>
+
                         <div class="level-information">
+
                             <h2>
                                 <?php echo htmlspecialchars($infoNivel['titulo']); ?>
                             </h2>
+
                             <p>
                                 <?php echo htmlspecialchars($infoNivel['descripcion']); ?>
                             </p>
+
                         </div>
 
-                        <i class="fa-solid fa-chevron-up level-arrow"></i>
+                        <div class="level-state">
+
+                            <?php if (!$desbloqueado): ?>
+
+                                <i class="fa-solid fa-lock level-lock"></i>
+
+                            <?php endif; ?>
+
+                            <i
+                                class="fa-solid <?php echo $desbloqueado ? 'fa-chevron-up' : 'fa-chevron-down'; ?> level-arrow"
+                            ></i>
+
+                        </div>
+
                     </div>
 
 
                     <div class="lessons-container">
-                        <?php foreach ($lecciones as $leccion): ?>
-                            <a href="leccion-capy.php?id=<?php echo (int)$leccion['id']; ?>" class="lesson-card">
 
-                                <div class="lesson-icon">
-                                    <i class="<?php echo htmlspecialchars($leccion['icono']); ?>"></i>
-                                </div>
-                                <div class="lesson-info">
-                                    <h3>
-                                        <?php echo htmlspecialchars($leccion['titulo']); ?>
-                                    </h3>
+                        <?php if (!$desbloqueado): ?>
+
+                            <div class="level-locked-message">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                                <div>
+                                    <strong>Nivel bloqueado</strong>
+
                                     <span>
-                                        <?php echo htmlspecialchars($leccion['descripcion']); ?>
+                                        Completa todas las lecciones del nivel anterior para desbloquearlo.
                                     </span>
                                 </div>
-                                <div class="lesson-status">
-                                    <span></span>
-                                </div>
-                            </a>
-                        <?php endforeach; ?>
+
+                            </div>
+
+                        <?php else: ?>
+
+                            <?php foreach ($lecciones as $leccion): ?>
+
+                                <a
+                                    href="leccion-capy.php?id=<?php echo (int)$leccion['id']; ?>"
+                                    class="lesson-card"
+                                >
+
+                                    <div class="lesson-icon">
+
+                                        <i class="<?php echo htmlspecialchars($leccion['icono']); ?>"></i>
+
+                                    </div>
+
+                                    <div class="lesson-info">
+
+                                        <h3>
+                                            <?php echo htmlspecialchars($leccion['titulo']); ?>
+                                        </h3>
+
+                                        <span>
+                                            <?php echo htmlspecialchars($leccion['descripcion']); ?>
+                                        </span>
+
+                                    </div>
+
+                                    <div class="lesson-status">
+                                        <span></span>
+                                    </div>
+
+                                </a>
+
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
+
                     </div>
+
                 </section>
+
             <?php endfor; ?>
         </main>
     </div>

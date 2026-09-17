@@ -1,12 +1,8 @@
-
 document.addEventListener("DOMContentLoaded", () => {
-    const btnEscuchar =
-    document.getElementById("btnEscuchar");
-    const btnContinuar =
-    document.getElementById("btnContinuar");
+    const btnEscuchar = document.getElementById("btnEscuchar");
+    const btnContinuar = document.getElementById("btnContinuar");
 
     iniciarLeccion();
-
     if(btnEscuchar){
         btnEscuchar.addEventListener("click", () => {
             const rutaAudio =
@@ -135,16 +131,30 @@ function iniciarLeccion(){
             break;
         }
 
-        if(Number(progreso.fase) < 3){
+        if(
+            Number(progreso.fase) < 3 ||
+            (
+                Number(progreso.fase) === 3 &&
+                Number(progreso.porcentaje) < 100
+            )
+        ){
+
             console.log(
                 "Palabra pendiente:",
                 palabras[i].palabraID,
                 "Fase guardada:",
-                progreso.fase
+                progreso.fase,
+                "Porcentaje:",
+                progreso.porcentaje
             );
+
             indicePendiente = i;
-            fasePendiente = Number(progreso.fase);
+
+            fasePendiente =
+            Number(progreso.fase);
+
             break;
+
         }
     }
 
@@ -158,9 +168,22 @@ function iniciarLeccion(){
     cargarNuevaPalabra();
 
     if(fasePendiente === 2){
+
         mostrarFase2();
+
         return;
+
     }
+
+
+    if(fasePendiente === 3){
+
+        mostrarFase3();
+
+        return;
+
+    }
+
 
     mostrarFase1();
 }
@@ -317,22 +340,35 @@ function hablarLeo(tipo,idBurbuja){
 }
 
 
-async function guardarProgreso(fase){
+async function guardarProgreso(fase, porcentaje = null){
+
     const respuesta = await fetch("php/guardarProgreso-leo.php",{
+
         method:"POST",
+
         headers:{
             "Content-Type":"application/json"
         },
 
         body:JSON.stringify({
+
             nivelID:nivelID,
+
             leccionID:leccionID,
-            palabraID:palabras[indiceActual].palabraID,
-            fase:fase
+
+            palabraID:
+            palabras[indiceActual].palabraID,
+
+            fase:fase,
+
+            porcentaje:porcentaje
+
         })
+
     });
 
     return await respuesta.json();
+
 }
 
 const fase1 = document.getElementById("fase1");
@@ -428,30 +464,34 @@ function validarSilaba(boton,silaba){
         const audioLeo =
         hablarLeo("fase2Correcto","dialogoFase2");
 
-        audioLeo.onended = ()=>{
+        audioLeo.onended = async ()=>{
+
+    setTimeout(async ()=>{
+
+        await guardarProgreso(3, 99);
+
+            document.getElementById("fase2").style.display="none";
+
+            document.getElementById("step2").classList.remove("active");
+            document.getElementById("step2").classList.add("completed");
+
+            document.getElementById("step3").classList.add("active");
+
+            document.getElementById("fase3").style.display="block";
+
+
+            cargarFase3();
+
 
             setTimeout(()=>{
 
-                document.getElementById("fase2").style.display="none";
+                reproducirLeo(mensajesLeo.fase3.audio);
 
-                document.getElementById("step2").classList.remove("active");
-                document.getElementById("step2").classList.add("completed");
+            },150);
 
-                document.getElementById("step3").classList.add("active");
+        },500);
 
-                document.getElementById("fase3").style.display="block";
-
-                cargarFase3();
-
-                setTimeout(()=>{
-
-                     reproducirLeo(mensajesLeo.fase3.audio);
-
-                },150);
-
-            },500);
-
-        };
+    };
 
     }
 
@@ -492,6 +532,7 @@ function cargarFase3(){
         }
 
     }
+
 
     opciones = mezclar(opciones);
 
@@ -537,20 +578,19 @@ function validarPalabra(card, opcion){
 
         audioLeo.onended = ()=>{
 
-            guardarProgreso(3).then(()=>{
-
+            guardarProgreso(3,100).then(()=>{
                 document.getElementById("opcionesPalabras").style.display="none";
-
                 document.getElementById("resultadoFinal").style.display="flex";
-
                 document.getElementById("contenedorSiguiente").style.display="flex";
 
+                if(indiceActual === palabras.length - 1){
+                    reproducirLeoAleatorio(
+                        "leccion_completada", 4
+                    );
+                }
             });
-
         };
-
     }
-
     else{
 
         card.classList.add("incorrecta");
@@ -625,9 +665,6 @@ function cargarNuevaPalabra(){
 
 }
 
-/*=========================================
-=          VOLVER AL MAPA
-=========================================*/
 
 const btnVolverMapa =
 document.getElementById("btnVolverNiveles");
@@ -643,34 +680,24 @@ document.getElementById("confirmarSalir");
 
 
 btnVolverMapa.onclick = (e)=>{
-
     e.preventDefault();
-
+    reproducirLeo("volver");
     modalSalir.style.display="flex";
-
 };
 
 
 cancelarSalir.onclick=()=>{
-
     modalSalir.style.display="none";
-
 };
 
 
 confirmarSalir.onclick=()=>{
-
     window.location="aventura-leo.php";
-
 };
 
 
 modalSalir.onclick=(e)=>{
-
     if(e.target===modalSalir){
-
         modalSalir.style.display="none";
-
     }
-
 };
