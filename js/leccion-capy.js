@@ -1033,6 +1033,315 @@ document.addEventListener('DOMContentLoaded', () => {
 
     };
 
+    const esActividad4Leccion1 = card => {
+
+        if (!card) {
+            return false;
+        }
+
+        const leccionId =
+            String(
+                page.dataset.leccionId || ''
+            ).trim();
+
+        const numeroActividad =
+            Number(
+                card.dataset.actividad || 0
+            );
+
+        return (
+            leccionId === '1' &&
+            numeroActividad === 4
+        );
+    };
+
+    /*
+    * =========================================
+    * ACTIVIDAD 5 - LECCIÓN 1
+    * RECONOCER SUSTANTIVOS
+    * =========================================
+    */
+
+    const esActividad5Leccion1 = card => {
+
+        if (!card) {
+            return false;
+        }
+
+        const leccionId =
+            String(
+                page.dataset.leccionId || ''
+            ).trim();
+
+        const numeroActividad =
+            Number(
+                card.dataset.actividad || 0
+            );
+
+        return (
+            leccionId === '1' &&
+            numeroActividad === 5
+        );
+    };
+
+    /*
+    * =========================================
+    * ACTIVIDAD 5 - SELECCIÓN MÚLTIPLE
+    * =========================================
+    */
+
+    page.addEventListener(
+        'click',
+        event => {
+
+            const option =
+                event.target.closest(
+                    '.opcion-capy'
+                );
+
+
+            if (!option) {
+                return;
+            }
+
+
+            const card =
+                option.closest(
+                    '.actividad-card'
+                );
+
+
+            if (
+                !card ||
+                !esActividad5Leccion1(card)
+            ) {
+                return;
+            }
+
+
+            event.stopImmediatePropagation();
+
+
+            if (
+                card.dataset.resuelta === '1'
+            ) {
+                return;
+            }
+
+
+            const data =
+                prepararConstruccionSeleccion(
+                    card
+                );
+
+
+            if (!data) {
+                return;
+            }
+
+
+            option.classList.toggle(
+                'seleccionada'
+            );
+
+
+            /*
+            * Cuando selecciona una opción
+            * correcta, damos una pequeña
+            * confirmación visual.
+            */
+            if (
+                option.classList.contains(
+                    'seleccionada'
+                )
+            ) {
+
+                if (
+                    option.dataset.correcta === '1'
+                ) {
+
+                    showFeedback(
+                        card,
+                        '¡Bien! Sigue buscando los sustantivos.',
+                        true
+                    );
+
+                } else {
+
+                    showFeedback(
+                        card,
+                        'Esa palabra no es un sustantivo. Revisa las demás.',
+                        false
+                    );
+
+                }
+
+            }
+
+
+            comprobarConstruccionSeleccion(
+                card
+            );
+
+        },
+        true
+    );
+
+    /*
+    * =========================================
+    * ACTIVIDAD 4 - LECCIÓN 1
+    * SELECCIÓN DEL SUSTANTIVO
+    * =========================================
+    *
+    * Esta actividad es una excepción:
+    * no ordena palabras, solo selecciona
+    * cuál es el sustantivo correcto.
+    */
+
+    page.addEventListener(
+        'click',
+        event => {
+
+            const word =
+                event.target.closest(
+                    '.palabra-orden'
+                );
+
+
+            if (!word) {
+                return;
+            }
+
+
+            const card =
+                word.closest(
+                    '.actividad-card'
+                );
+
+
+            if (
+                !card ||
+                !esActividad4Leccion1(card)
+            ) {
+                return;
+            }
+
+
+            /*
+            * Evitamos que el manejador genérico
+            * de "ordenar" procese esta actividad.
+            */
+            event.stopImmediatePropagation();
+
+
+            /*
+            * Si la actividad ya está resuelta,
+            * no hacemos nada.
+            */
+            if (
+                card.dataset.resuelta === '1'
+            ) {
+                return;
+            }
+
+
+            /*
+            * Limpiamos cualquier estado
+            * visual anterior.
+            */
+            card.querySelectorAll(
+                '.palabra-orden'
+            ).forEach(
+                opcion => {
+
+                    opcion.classList.remove(
+                        'correcto',
+                        'incorrecto',
+                        'seleccionado'
+                    );
+
+                }
+            );
+
+
+            /*
+            * =================================
+            * RESPUESTA CORRECTA
+            * =================================
+            */
+
+            if (
+                word.dataset.correcta === '1'
+            ) {
+
+                word.classList.add(
+                    'correcto'
+                );
+
+                word.style.backgroundColor =
+                    '#e8f7e3';
+
+                word.style.borderColor =
+                    '#6ebe45';
+
+                word.style.color =
+                    '#2f8b44';
+
+                word.style.boxShadow =
+                    '0 0 0 2px rgba(110, 190, 69, 0.15)';
+
+                word.style.transform =
+                    'translateY(-1px)';
+
+
+                completeActivity(
+                    card
+                );
+
+
+                showFeedback(
+                    card,
+                    '¡Correcto! Gato es un sustantivo porque nombra a un animal.',
+                    true
+                );
+
+
+                return;
+            }
+
+
+            /*
+            * =================================
+            * RESPUESTA INCORRECTA
+            * =================================
+            */
+
+            word.classList.add(
+                'incorrecto'
+            );
+
+
+            showFeedback(
+                card,
+                'Esa palabra no es un sustantivo. Inténtalo de nuevo.',
+                false
+            );
+
+
+            setTimeout(
+                () => {
+
+                    word.classList.remove(
+                        'incorrecto'
+                    );
+
+                },
+                500
+            );
+
+        },
+        true
+    );
 
     /*
      * =========================================
@@ -1544,6 +1853,24 @@ document.addEventListener('DOMContentLoaded', () => {
             'actividad-completada'
         );
 
+        card.querySelectorAll(
+            '.palabra-orden'
+        ).forEach(
+            opcion => {
+
+                opcion.style.backgroundColor = '';
+
+                opcion.style.borderColor = '';
+
+                opcion.style.color = '';
+
+                opcion.style.boxShadow = '';
+
+                opcion.style.transform = '';
+
+            }
+        );
+
 
         /*
         * =========================================
@@ -1983,6 +2310,98 @@ document.addEventListener('DOMContentLoaded', () => {
 
         prepararConstruccion(card);
 
+        /*
+        * =========================================
+        * ACTIVIDAD 4 - LECCIÓN 1
+        * RECONOCER SUSTANTIVO
+        * =========================================
+        */
+
+        if (
+            esActividad4Leccion1(card)
+        ) {
+
+            /*
+            * Esta actividad no necesita
+            * una zona para construir.
+            */
+            const zone =
+                card.querySelector(
+                    '.zona-oracion'
+                );
+
+            if (zone) {
+                zone.remove();
+            }
+
+            const titulo =
+                card.querySelector(
+                    'h2'
+                );
+
+            if (titulo) {
+
+                titulo.textContent =
+                    'Reconoce el sustantivo de animal';
+
+            }
+
+            /*
+            * Cambiamos únicamente la instrucción
+            * visible de esta actividad.
+            */
+            const textos =
+                card.querySelectorAll(
+                    'p, span, div'
+                );
+
+            textos.forEach(
+                element => {
+
+                    const texto =
+                        normalize(
+                            element.textContent
+                        );
+
+                    if (
+                        texto ===
+                        'ordena las palabras para formar una oracion con sentido.'
+                    ) {
+
+                        element.textContent =
+                            'Selecciona la palabra que es un sustantivo.';
+
+                    }
+
+                }
+            );
+        }
+
+        if (
+            esActividad5Leccion1(card)
+        ) {
+
+            const zone =
+                card.querySelector(
+                    '.zona-construccion'
+                );
+
+            if (zone) {
+                zone.remove();
+            }
+
+
+            const mensaje =
+                card.querySelector(
+                    '.construir-mensaje'
+                );
+
+            if (mensaje) {
+                mensaje.remove();
+            }
+
+        }
+
         const type =
             normalize(
                 card.dataset.tipo
@@ -2398,10 +2817,88 @@ document.addEventListener('DOMContentLoaded', () => {
                         constructionData
                     ) {
 
+                        const estabaSeleccionada =
+                            option.classList.contains(
+                                'seleccionada'
+                            );
+
+
                         option.classList.toggle(
                             'seleccionada'
                         );
 
+
+                        /*
+                        * ---------------------------------
+                        * MARCADO VISUAL
+                        * ---------------------------------
+                        */
+
+                        if (
+                            !estabaSeleccionada
+                        ) {
+
+                            if (
+                                option.dataset.correcta === '1'
+                            ) {
+
+                                option.classList.add(
+                                    'correcto'
+                                );
+
+                                option.classList.remove(
+                                    'incorrecto'
+                                );
+
+                                option.style.backgroundColor =
+                                    '#d7f5d0';
+
+                                option.style.borderColor =
+                                    '#62c554';
+
+                                option.style.color =
+                                    '#2f7d2a';
+
+                            } else {
+
+                                option.classList.add(
+                                    'incorrecto'
+                                );
+
+                                option.classList.remove(
+                                    'correcto'
+                                );
+
+                                option.style.backgroundColor =
+                                    '#ffd9d9';
+
+                                option.style.borderColor =
+                                    '#e45b5b';
+
+                                option.style.color =
+                                    '#a83232';
+
+                            }
+
+                        } else {
+
+                            option.classList.remove(
+                                'correcto',
+                                'incorrecto'
+                            );
+
+                            option.style.backgroundColor = '';
+                            option.style.borderColor = '';
+                            option.style.color = '';
+
+                        }
+
+
+                        /*
+                        * ---------------------------------
+                        * MENSAJE
+                        * ---------------------------------
+                        */
 
                         if (
                             option.classList.contains(
@@ -2409,14 +2906,34 @@ document.addEventListener('DOMContentLoaded', () => {
                             )
                         ) {
 
-                            showFeedback(
-                                card,
-                                '¡Bien! Sigue seleccionando las palabras que forman la oración.',
-                                true
-                            );
+                            if (
+                                option.dataset.correcta === '1'
+                            ) {
+
+                                showFeedback(
+                                    card,
+                                    '¡Correcto! Esa palabra es un sustantivo.',
+                                    true
+                                );
+
+                            } else {
+
+                                showFeedback(
+                                    card,
+                                    'Esa palabra no es un sustantivo.',
+                                    false
+                                );
+
+                            }
 
                         }
 
+
+                        /*
+                        * ---------------------------------
+                        * COMPROBAR ACTIVIDAD
+                        * ---------------------------------
+                        */
 
                         comprobarConstruccionSeleccion(
                             card
@@ -2603,47 +3120,49 @@ document.addEventListener('DOMContentLoaded', () => {
                     );
 
 
-                const zone =
-                    card
-                        ? card.querySelector(
-                            '.zona-oracion'
-                        )
-                        : null;
-
-
                 if (
                     !card ||
-                    !zone ||
-                    card.dataset.resuelta === '1' ||
-                    word.classList.contains(
-                        'usada'
-                    )
+                    card.dataset.resuelta === '1'
                 ) {
-
                     return;
-
                 }
 
 
                 /*
-                 * Si esta actividad no tiene
-                 * orden verdadero, no intentamos
-                 * tratarla como ordenamiento.
-                 */
+                * =====================================
+                * ORDENAR QUE EN REALIDAD ES SELECCIÓN
+                * =====================================
+                *
+                * Ejemplo:
+                * gato      -> correcta
+                * correr    -> incorrecta
+                * bonito    -> incorrecta
+                * rápido    -> incorrecta
+                */
+
                 if (
-                    getOrder(word) === null
+                    esActividadSeleccionOrdenar(card)
                 ) {
 
                     /*
-                     * Algunas actividades antiguas
-                     * pueden estar marcadas como
-                     * "ordenar" pero realmente son
-                     * opciones de respuesta.
-                     *
-                     * Si tienen es_correcta,
-                     * usamos esa respuesta.
-                     */
+                    * Quitamos cualquier estado anterior.
+                    */
+                    card.querySelectorAll(
+                        '.palabra-orden'
+                    ).forEach(
+                        opcion => {
 
+                            opcion.classList.remove(
+                                'seleccionado'
+                            );
+
+                        }
+                    );
+
+
+                    /*
+                    * Respuesta correcta.
+                    */
                     if (
                         word.dataset.correcta === '1'
                     ) {
@@ -2660,12 +3179,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         showFeedback(
                             card,
-                            '¡Correcto! ¡Excelente trabajo!',
+                            '¡Correcto! Gato es un sustantivo porque nombra a un animal.',
                             true
                         );
 
+
                     } else {
 
+                        /*
+                        * Respuesta incorrecta.
+                        */
                         word.classList.add(
                             'incorrecto'
                         );
@@ -2673,20 +3196,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         showFeedback(
                             card,
-                            'Inténtalo otra vez.',
+                            'Esa palabra no es un sustantivo. Inténtalo de nuevo.',
                             false
+                        );
+
+
+                        /*
+                        * Quitamos el estado después
+                        * de un momento para permitir
+                        * volver a intentarlo.
+                        */
+                        setTimeout(
+                            () => {
+
+                                word.classList.remove(
+                                    'incorrecto'
+                                );
+
+                            },
+                            500
                         );
 
                     }
 
-                    return;
 
+                    return;
                 }
 
 
                 /*
-                 * Construimos la oración.
-                 */
+                * =====================================
+                * ORDENAMIENTO REAL
+                * =====================================
+                *
+                * Las actividades que sí tienen
+                * orden_correcto continúan usando
+                * la lógica original.
+                */
+
+                const zone =
+                    card.querySelector(
+                        '.zona-oracion'
+                    );
+
+
+                if (
+                    !zone ||
+                    word.classList.contains(
+                        'usada'
+                    )
+                ) {
+                    return;
+                }
+
+
+                const order =
+                    getOrder(word);
+
+
+                if (
+                    order === null
+                ) {
+                    return;
+                }
+
 
                 const clone =
                     word.cloneNode(true);
@@ -2744,60 +3317,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
                 if (
-                    selectedWords.length ===
+                    selectedWords.length !==
                     expectedWords.length
                 ) {
-
-                    const isCorrect =
-                        selectedWords.every(
-                            (
-                                element,
-                                index
-                            ) => {
-
-                                return (
-                                    normalize(
-                                        element.textContent
-                                    ) ===
-                                    normalize(
-                                        expectedWords[
-                                            index
-                                        ].textContent
-                                    )
-                                );
-
-                            }
-                        );
+                    return;
+                }
 
 
-                    if (isCorrect) {
+                const isCorrect =
+                    selectedWords.every(
+                        (
+                            element,
+                            index
+                        ) => {
 
-                        completeActivity(
-                            card
-                        );
+                            return (
+                                normalize(
+                                    element.textContent
+                                ) ===
+                                normalize(
+                                    expectedWords[
+                                        index
+                                    ].textContent
+                                )
+                            );
+
+                        }
+                    );
 
 
-                        showFeedback(
-                            card,
-                            '¡Orden perfecto! Formaste la oración correctamente.',
-                            true
-                        );
+                if (isCorrect) {
 
-                    } else {
+                    completeActivity(
+                        card
+                    );
 
-                        showFeedback(
-                            card,
-                            'Revisa el orden de la oración.',
-                            false
-                        );
 
-                    }
+                    showFeedback(
+                        card,
+                        '¡Orden perfecto! Formaste la oración correctamente.',
+                        true
+                    );
+
+                } else {
+
+                    showFeedback(
+                        card,
+                        'Revisa el orden de la oración.',
+                        false
+                    );
 
                 }
 
 
                 return;
-
             }
 
 

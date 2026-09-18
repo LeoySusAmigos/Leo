@@ -916,13 +916,22 @@ if (
                 </div>
 
             <!-- =================================================
-                 ORDENAR
+                ORDENAR
             ================================================== -->
 
             <?php elseif (
-                $tipo === 'ordenar' ||
-                $tipo === 'orden'
+                (
+                    $tipo === 'ordenar' ||
+                    $tipo === 'orden'
+                ) &&
+                (int)($actividad['leccion_id'] ?? 0) === 1 &&
+                (int)($actividad['numero_actividad'] ?? 0) === 4
             ): ?>
+
+                <!-- =========================================
+                    ACTIVIDAD 4 - LECCIÓN 1
+                    RECONOCER EL SUSTANTIVO
+                ========================================== -->
 
                 <div class="ordenar-juego">
 
@@ -930,23 +939,146 @@ if (
 
                         <div class="ordenar-mensaje-icon">
 
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <i class="fa-solid fa-magnifying-glass"></i>
 
                         </div>
 
                         <div>
 
                             <strong>
-                                Construye la oración
+                                ¡Encuentra el sustantivo de animal!
                             </strong>
-
-                            <span>
-                                Coloca las palabras en el orden correcto.
-                            </span>
 
                         </div>
 
                     </div>
+
+
+                    <div class="palabras-orden">
+
+                        <?php foreach (
+                            $actividad['opciones']
+                            as $opcion
+                        ): ?>
+
+                            <button
+                                type="button"
+
+                                class="palabra-orden"
+
+                                draggable="false"
+
+                                data-opcion-id="<?php
+                                    echo (int)$opcion['id'];
+                                ?>"
+
+                                data-orden=""
+
+                                data-correcta="<?php
+                                    echo (int)($opcion['es_correcta'] ?? 0);
+                                ?>"
+
+                                data-grupo="<?php
+                                    echo htmlspecialchars(
+                                        $opcion['grupo'] ?? '',
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    );
+                                ?>"
+
+                                data-audio="<?php
+                                    echo htmlspecialchars(
+                                        $opcion['audio_url'] ?? '',
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    );
+                                ?>">
+
+                                <?php if (
+                                    !empty($opcion['imagen'])
+                                ): ?>
+
+                                    <img
+                                        src="<?php
+                                            echo htmlspecialchars(
+                                                $opcion['imagen'],
+                                                ENT_QUOTES,
+                                                'UTF-8'
+                                            );
+                                        ?>"
+
+                                        alt="<?php
+                                            echo htmlspecialchars(
+                                                $opcion['texto'] ?? '',
+                                                ENT_QUOTES,
+                                                'UTF-8'
+                                            );
+                                        ?>">
+
+                                <?php endif; ?>
+
+
+                                <span>
+
+                                    <?php
+                                    echo htmlspecialchars(
+                                        $opcion['texto'] ?? '',
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    );
+                                    ?>
+
+                                </span>
+
+                            </button>
+
+                        <?php endforeach; ?>
+
+                    </div>
+
+
+                    <!-- =========================================
+                        RETROALIMENTACIÓN
+                    ========================================== -->
+
+                    <div
+                        class="actividad-feedback"
+                        hidden
+                    ></div>
+
+                </div>
+
+
+            <?php elseif (
+                $tipo === 'ordenar' ||
+                $tipo === 'orden'
+            ): ?>
+
+                <!-- =========================================
+                    ORDENAR NORMAL
+                    Todas las demás actividades
+                ========================================== -->
+
+                <div class="ordenar-juego">
+
+                    <div class="ordenar-mensaje">
+
+                        <div class="ordenar-mensaje-icon">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                ¡Encuentra el sustantivo de animal!
+                            </strong>
+
+                        </div>
+
+                    </div>
+
 
                     <div class="oracion-resultado">
 
@@ -963,6 +1095,7 @@ if (
                         </div>
 
                     </div>
+
 
                     <div class="palabras-orden">
 
@@ -988,15 +1121,23 @@ if (
                                         : '';
                                 ?>"
 
+                                data-correcta="<?php
+                                    echo (int)($opcion['es_correcta'] ?? 0);
+                                ?>"
+
                                 data-grupo="<?php
                                     echo htmlspecialchars(
-                                        $opcion['grupo'] ?? ''
+                                        $opcion['grupo'] ?? '',
+                                        ENT_QUOTES,
+                                        'UTF-8'
                                     );
                                 ?>"
 
                                 data-audio="<?php
                                     echo htmlspecialchars(
-                                        $opcion['audio_url'] ?? ''
+                                        $opcion['audio_url'] ?? '',
+                                        ENT_QUOTES,
+                                        'UTF-8'
                                     );
                                 ?>">
 
@@ -1005,21 +1146,34 @@ if (
                                 ): ?>
 
                                     <img
-                                        src="<?php echo htmlspecialchars(
-                                            $opcion['imagen']
-                                        ); ?>"
+                                        src="<?php
+                                            echo htmlspecialchars(
+                                                $opcion['imagen'],
+                                                ENT_QUOTES,
+                                                'UTF-8'
+                                            );
+                                        ?>"
 
-                                        alt="<?php echo htmlspecialchars(
-                                            $opcion['texto'] ?? ''
-                                        ); ?>">
+                                        alt="<?php
+                                            echo htmlspecialchars(
+                                                $opcion['texto'] ?? '',
+                                                ENT_QUOTES,
+                                                'UTF-8'
+                                            );
+                                        ?>">
 
                                 <?php endif; ?>
 
+
                                 <span>
 
-                                    <?php echo htmlspecialchars(
-                                        $opcion['texto'] ?? ''
-                                    ); ?>
+                                    <?php
+                                    echo htmlspecialchars(
+                                        $opcion['texto'] ?? '',
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    );
+                                    ?>
 
                                 </span>
 
