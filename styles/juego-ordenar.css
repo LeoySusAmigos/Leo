@@ -12,6 +12,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  overflow-x: hidden;
 }
 
 #pantallaLibros {
@@ -325,6 +326,10 @@ body {
     padding: 9px 13px;
     font-size: 13px;
   }
+
+  #puzzleFlexRow {
+    zoom: 0.85; /* AGREGADO: achica rompecabezas + imagen de apoyo juntos */
+  }
 }
 
 @media (max-width: 480px) {
@@ -392,6 +397,7 @@ body {
   #puzzleFlexRow {
     flex-direction: column !important;
     gap: 20px !important;
+    zoom: 0.6; /* AGREGADO: achica más en pantallas chicas */
   }
 
   #stripsWrap {
@@ -406,7 +412,7 @@ body {
 
   #refImg {
     width: 100% !important;
-    max-width: 280px;
+    max-width: 220px; /* CAMBIADO: era 280px, ahora más chico */
   }
 }
 

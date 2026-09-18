@@ -89,7 +89,7 @@ include("php/conexion.php");
         data-paso="2"
         data-titulo="Actividades para reforzar lo aprendido"
         data-texto="Pon a prueba lo aprendido con actividades interactivas de gramática. Capy acompaña a los niños en retos diseñados para aprender de forma divertida y dinámica."
-        data-video="videos/paso-03-actividades.mp4"
+        data-video="videos/capyAventuras.mp4"
         data-mascota="images/capy-carrusel.png"
         data-mascota-alt="Capy">
         <span class="carrusel-paso-circulo"><i class="fa-solid fa-spell-check carrusel-paso-icono"></i><span class="carrusel-paso-numero">03</span></span>
@@ -101,7 +101,7 @@ include("php/conexion.php");
         data-paso="3"
         data-titulo="Una biblioteca hecha para explorar"
         data-texto="Explora cuentos educativos con Finx y refuerza lo aprendido con actividades interactivas, como un rompecabezas basado en la portada de cada cuento."
-        data-video=""
+        data-video="videos/finxMiniLibreria.mp4"
         data-mascota="images/finx-carrusel.png"
         data-mascota-alt="Mascota de biblioteca">
         <span class="carrusel-paso-circulo"><i class="fa-solid fa-book carrusel-paso-icono"></i><span class="carrusel-paso-numero">04</span></span>
@@ -113,7 +113,7 @@ include("php/conexion.php");
         data-paso="4"
         data-titulo="Progreso: acompaña cada paso de su aprendizaje"
         data-texto="Consulta los avances de tu hijo, reconoce sus fortalezas e identifica las áreas que necesitan mayor refuerzo. Así podrás acompañar de cerca su aprendizaje."
-        data-video="videos/paso-05-padres.mp4"
+        data-video="videos/paginaProgreso.mp4"
         data-mascota="images/leoandfriends-carrusel.png"
         data-mascota-alt="Mascotitas">
         <span class="carrusel-paso-circulo"><i class="fa-solid fa-chart-line carrusel-paso-icono"></i><span class="carrusel-paso-numero">05</span></span>

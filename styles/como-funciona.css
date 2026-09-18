@@ -394,14 +394,68 @@ body {
 }
 
 @media (max-width: 700px) {
+  .carrusel {
+    padding: 20px 14px;
+  }
+
   .carrusel-contenido {
     flex-direction: column;
+    min-height: auto;
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .carrusel-etiqueta {
+    font-size: 12px;
+  }
+
+  .carrusel-texto h2 {
+    font-size: 22px;
+    margin: 8px 0;
+  }
+
+  .carrusel-texto p {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .carrusel-boton {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+
+  .carrusel-flechas {
+    margin-top: 16px;
+  }
+
+  .carrusel-video {
+    order: 2;
   }
 
   .carrusel-mascota {
-    width: 130px;
-    left: 50%;
-    bottom: 0;
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    bottom: auto !important;
+    display: block;
+    margin: 0 auto 12px;
+    width: 180px;
+  }
+
+  .container-2 .carrusel-mascota {
+    width: 220px !important;
+  }
+
+  .container-3 .carrusel-mascota {
+    width: 220px !important;
+  }
+
+  .container-4 .carrusel-mascota {
+    width: 220px !important;
+  }
+
+  .container-5 .carrusel-mascota {
+    width: 220px !important;
   }
 
   .carrusel-progreso {
@@ -412,5 +466,35 @@ body {
 
   .carrusel-paso-label {
     font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carrusel-texto h2 {
+    font-size: 19px;
+  }
+
+  .carrusel-texto p {
+    font-size: 14px;
+  }
+
+  .carrusel-mascota {
+    width: 120px !important;
+  }
+
+  .container-2 .carrusel-mascota {
+    width: 190px !important;
+  }
+
+  .container-3 .carrusel-mascota {
+    width: 195px !important;
+  }
+
+  .container-4 .carrusel-mascota {
+    width: 205px !important;
+  }
+  
+  .container-5 .carrusel-mascota {
+    width: 210px !important;
   }
 }
