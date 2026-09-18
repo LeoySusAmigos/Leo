@@ -1,3 +1,4 @@
+```php
 <?php
 
 session_start();
@@ -11,7 +12,6 @@ include 'php/conexion.php';
 
 $userID = intval($_SESSION['userID']);
 
-
 $leccionID = isset($_GET['id'])
     ? intval($_GET['id'])
     : 0;
@@ -21,6 +21,10 @@ if ($leccionID <= 0) {
     exit();
 }
 
+
+/* =========================================================
+   LECCIÓN
+========================================================= */
 
 $sqlLeccion = "
     SELECT
@@ -68,6 +72,10 @@ if (!$leccion) {
 
 $nivelLeccion = intval($leccion['nivel']);
 
+
+/* =========================================================
+   DESBLOQUEO
+========================================================= */
 
 $desbloqueada = true;
 
@@ -124,7 +132,7 @@ if ($nivelLeccion > 1) {
         );
 
     $stmtBloqueo->close();
-     
+
     if (
         $totalLecciones <= 0 ||
         $leccionesCompletadas < $totalLecciones
@@ -138,6 +146,10 @@ if (!$desbloqueada) {
     exit();
 }
 
+
+/* =========================================================
+   PROGRESO
+========================================================= */
 
 $progresoGuardado = [
     'actividad_actual' => 1,
@@ -191,6 +203,10 @@ if ($stmtProgreso) {
 }
 
 
+/* =========================================================
+   ACTIVIDADES
+========================================================= */
+
 $sqlActividades = "
     SELECT
         id,
@@ -232,7 +248,6 @@ $resultadoActividades =
 
 $actividades = [];
 
-
 while (
     $actividad =
     $resultadoActividades->fetch_assoc()
@@ -241,6 +256,10 @@ while (
     $actividadID =
         intval($actividad['id']);
 
+
+    /* =====================================================
+       OPCIONES
+    ====================================================== */
 
     $sqlOpciones = "
         SELECT
@@ -314,15 +333,21 @@ $actividadInicial =
         ] ?? 1
     );
 
-$actividadInicial =
-    max(
-        1,
-        min(
-            $totalActividades,
-            $actividadInicial
-        )
-    );
+if ($totalActividades > 0) {
 
+    $actividadInicial =
+        max(
+            1,
+            min(
+                $totalActividades,
+                $actividadInicial
+            )
+        );
+
+} else {
+
+    $actividadInicial = 1;
+}
 
 
 if (
@@ -389,10 +414,6 @@ if (
         echo (int)$progresoGuardado['completada'];
     ?>">
 
-    <!-- =====================================================
-         ENCABEZADO
-    ====================================================== -->
-
     <section class="leccion-header">
 
         <a
@@ -452,9 +473,6 @@ if (
 
         </div>
 
-        <!-- =================================================
-             PROGRESO
-        ================================================== -->
 
         <div class="leccion-progress">
 
@@ -485,7 +503,7 @@ if (
                     id="progressFill"
                     style="width:
                     <?php
-                    echo $progresoGuardado['porcentaje'];
+                    echo (int)$progresoGuardado['porcentaje'];
                     ?>%;">
 
                 </div>
@@ -496,9 +514,6 @@ if (
 
     </section>
 
-    <!-- =====================================================
-         CONTENIDO DE LA LECCIÓN
-    ====================================================== -->
 
     <section class="leccion-content">
 
@@ -511,8 +526,6 @@ if (
         $tipo = strtolower(
             trim($actividad['tipo'])
         );
-
-        echo '<!-- TIPO ACTIVIDAD: ' . htmlspecialchars($tipo) . ' -->';
 
         $numeroActividad = $indice + 1;
 
@@ -547,10 +560,6 @@ if (
                 echo (int)$actividad['puntos'];
             ?>">
 
-            <!-- =================================================
-                 PARTE SUPERIOR
-            ================================================== -->
-
             <div class="actividad-top">
 
                 <span class="actividad-numero">
@@ -570,9 +579,6 @@ if (
 
             </div>
 
-            <!-- =================================================
-                 ICONO
-            ================================================== -->
 
             <div class="actividad-icon">
 
@@ -611,6 +617,10 @@ if (
                     case 'arrastrar_articulo':
                         $icono = "fa-puzzle-piece";
                         break;
+
+                    case 'arrastre':
+                        $icono = "fa-hand-pointer";
+                        break;
                 }
 
                 ?>
@@ -619,9 +629,6 @@ if (
 
             </div>
 
-            <!-- =================================================
-                 TÍTULO
-            ================================================== -->
 
             <h2>
 
@@ -631,9 +638,6 @@ if (
 
             </h2>
 
-            <!-- =================================================
-                 INSTRUCCIÓN
-            ================================================== -->
 
             <?php if (
                 !empty($actividad['instruccion'])
@@ -655,9 +659,6 @@ if (
 
             <?php endif; ?>
 
-            <!-- =================================================
-                 INTRODUCCIÓN / EXPLICACIÓN
-            ================================================== -->
 
             <?php if (
                 $tipo === 'introduccion' ||
@@ -684,6 +685,7 @@ if (
 
                 <?php endif; ?>
 
+
                 <?php if (
                     !empty($actividad['imagen'])
                 ): ?>
@@ -702,6 +704,7 @@ if (
                     </div>
 
                 <?php endif; ?>
+
 
                 <?php if (
                     !empty($actividad['audio_url'])
@@ -723,37 +726,46 @@ if (
 
                 <?php endif; ?>
 
-            <!-- =================================================
-                ARRASTRE DE SUSTANTIVOS
-            ================================================== -->
 
             <?php elseif ($tipo === 'arrastre'): ?>
 
                 <?php
 
-                $opcionesArrastre = $actividad['opciones'] ?? [];
-                $usarOpciones = !empty($opcionesArrastre);
+                $opcionesArrastre =
+                    $actividad['opciones'] ?? [];
+
+                $usarOpciones =
+                    !empty($opcionesArrastre);
+
+                $palabras = [];
 
                 if (!$usarOpciones) {
-                    $palabras = array_filter(
-                        array_map(
-                            'trim',
-                            explode('|', $actividad['contenido'] ?? '')
-                        )
-                    );
+
+                    $palabras =
+                        array_filter(
+                            array_map(
+                                'trim',
+                                explode(
+                                    '|',
+                                    $actividad['contenido'] ?? ''
+                                )
+                            )
+                        );
                 }
+
                 ?>
 
                 <div class="juego-arrastrar-sustantivos">
 
-                    <!-- INSTRUCCIÓN DEL JUEGO -->
                     <div class="instruccion-sustantivos">
 
                         <i class="fa-solid fa-hand-pointer"></i>
 
                         <div>
 
-                            <strong>¡Encuentra los sustantivos!</strong>
+                            <strong>
+                                ¡Encuentra los sustantivos!
+                            </strong>
 
                             <span>
                                 Arrastra todos los sustantivos hasta el espacio de la derecha.
@@ -764,11 +776,9 @@ if (
                     </div>
 
 
-                    <!-- ÁREA DEL JUEGO -->
                     <div class="sustantivos-juego">
 
 
-                        <!-- PALABRAS DISPONIBLES -->
                         <div class="sustantivos-disponibles">
 
                             <div class="sustantivos-titulo">
@@ -784,37 +794,51 @@ if (
 
                                 <?php if ($usarOpciones): ?>
 
-                                    <?php foreach ($opcionesArrastre as $opcion): ?>
+                                    <?php foreach (
+                                        $opcionesArrastre as $opcion
+                                    ): ?>
 
                                         <button
                                             type="button"
                                             class="sustantivo-arrastrable"
                                             draggable="true"
+
                                             data-sustantivo-id="<?php
-                                                echo (int)($opcion['id'] ?? 0);
+                                                echo (int)(
+                                                    $opcion['id'] ?? 0
+                                                );
                                             ?>"
+
                                             data-texto="<?php
                                                 echo htmlspecialchars(
-                                                    trim($opcion['texto'] ?? ''),
+                                                    trim(
+                                                        $opcion['texto'] ?? ''
+                                                    ),
                                                     ENT_QUOTES,
                                                     'UTF-8'
                                                 );
                                             ?>"
+
                                             data-correcta="<?php
-                                                echo (int)($opcion['es_correcta'] ?? 0);
-                                            ?>"
-                                        >
+                                                echo (int)(
+                                                    $opcion['es_correcta'] ?? 0
+                                                );
+                                            ?>">
 
                                             <i class="fa-solid fa-tag"></i>
 
                                             <span>
+
                                                 <?php
                                                 echo htmlspecialchars(
-                                                    trim($opcion['texto'] ?? ''),
+                                                    trim(
+                                                        $opcion['texto'] ?? ''
+                                                    ),
                                                     ENT_QUOTES,
                                                     'UTF-8'
                                                 );
                                                 ?>
+
                                             </span>
 
                                         </button>
@@ -823,15 +847,21 @@ if (
 
                                 <?php else: ?>
 
-                                    <?php foreach ($palabras as $indiceSustantivo => $sustantivo): ?>
+                                    <?php foreach (
+                                        $palabras
+                                        as $indiceSustantivo => $sustantivo
+                                    ): ?>
 
                                         <button
                                             type="button"
                                             class="sustantivo-arrastrable"
                                             draggable="true"
+
                                             data-sustantivo-id="<?php
-                                                echo 'contenido-' . $indiceSustantivo;
+                                                echo 'contenido-' .
+                                                    $indiceSustantivo;
                                             ?>"
+
                                             data-texto="<?php
                                                 echo htmlspecialchars(
                                                     trim($sustantivo),
@@ -839,12 +869,13 @@ if (
                                                     'UTF-8'
                                                 );
                                             ?>"
-                                            data-correcta="1"
-                                        >
+
+                                            data-correcta="1">
 
                                             <i class="fa-solid fa-tag"></i>
 
                                             <span>
+
                                                 <?php
                                                 echo htmlspecialchars(
                                                     trim($sustantivo),
@@ -852,6 +883,7 @@ if (
                                                     'UTF-8'
                                                 );
                                                 ?>
+
                                             </span>
 
                                         </button>
@@ -865,7 +897,6 @@ if (
                         </div>
 
 
-                        <!-- ZONA DE DESTINO -->
                         <div
                             class="zona-sustantivos"
                             data-placeholder="Arrastra aquí los sustantivos..."
@@ -899,7 +930,6 @@ if (
                     </div>
 
 
-                    <!-- MENSAJE DE RESULTADO -->
                     <div
                         class="resultado-sustantivos"
                         hidden
@@ -915,9 +945,6 @@ if (
 
                 </div>
 
-            <!-- =================================================
-                 ORDENAR
-            ================================================== -->
 
             <?php elseif (
                 $tipo === 'ordenar' ||
@@ -948,6 +975,7 @@ if (
 
                     </div>
 
+
                     <div class="oracion-resultado">
 
                         <div class="resultado-icon">
@@ -958,11 +986,13 @@ if (
 
                         <div
                             class="zona-oracion"
-                            data-placeholder="Coloca aquí las palabras...">
+                            data-placeholder="Coloca aquí las palabras..."
+                        >
 
                         </div>
 
                     </div>
+
 
                     <div class="palabras-orden">
 
@@ -1031,9 +1061,6 @@ if (
 
                 </div>
 
-            <!-- =================================================
-                 CONECTAR
-            ================================================== -->
 
             <?php elseif ($tipo === 'conectar'): ?>
 
@@ -1052,15 +1079,15 @@ if (
 
                     <div class="conectar-columnas">
 
-                        <!-- =========================================
-                            PALABRAS
-                        ========================================== -->
 
                         <div class="conectar-columna conectar-columna-palabras">
 
                             <h3>
+
                                 <i class="fa-solid fa-font"></i>
+
                                 Palabras
+
                             </h3>
 
                             <div class="conectar-palabras">
@@ -1092,8 +1119,7 @@ if (
                                                 ENT_QUOTES,
                                                 'UTF-8'
                                             );
-                                        ?>"
-                                    >
+                                        ?>">
 
                                         <span class="palabra-conectar-texto">
 
@@ -1114,15 +1140,14 @@ if (
                         </div>
 
 
-                        <!-- =========================================
-                            IMÁGENES
-                        ========================================== -->
-
                         <div class="conectar-columna conectar-columna-imagenes">
 
                             <h3>
+
                                 <i class="fa-regular fa-image"></i>
+
                                 Imágenes
+
                             </h3>
 
                             <div class="conectar-imagenes">
@@ -1158,8 +1183,7 @@ if (
                                                     ENT_QUOTES,
                                                     'UTF-8'
                                                 );
-                                            ?>"
-                                        >
+                                            ?>">
 
                                             <img
                                                 src="<?php echo htmlspecialchars(
@@ -1172,8 +1196,7 @@ if (
                                                     $opcion['texto'] ?? '',
                                                     ENT_QUOTES,
                                                     'UTF-8'
-                                                ); ?>"
-                                            >
+                                                ); ?>">
 
                                         </button>
 
@@ -1185,34 +1208,35 @@ if (
 
                         </div>
 
-
                     </div>
 
-                    <!-- =========================================
-                        CONEXIONES REALIZADAS
-                    ========================================== -->
 
                     <div class="conexiones-realizadas">
 
                         <span class="conexion-contador">
+
                             <i class="fa-solid fa-link"></i>
+
                             Parejas conectadas:
-                            <strong class="conexiones-numero">0</strong>
-                            /
-                            <strong>
-                                <?php echo count($actividad['opciones']); ?>
+
+                            <strong class="conexiones-numero">
+                                0
                             </strong>
+
+                            /
+
+                            <strong>
+                                <?php echo count(
+                                    $actividad['opciones']
+                                ); ?>
+                            </strong>
+
                         </span>
 
                     </div>
 
                 </div>
 
-
-
-            <!-- =================================================
-                 CLASIFICACIÓN
-            ================================================== -->
 
             <?php elseif (
                 $tipo === 'clasificacion'
@@ -1304,6 +1328,7 @@ if (
 
                     </div>
 
+
                     <div class="grupos-destino">
 
                         <?php
@@ -1385,9 +1410,6 @@ if (
 
                 </div>
 
-            <!-- =================================================
-                 SELECCIÓN / RETO
-            ================================================== -->
 
             <?php else: ?>
 
@@ -1454,6 +1476,7 @@ if (
 
                 <?php endif; ?>
 
+
                 <?php if (
                     !empty($actividad['audio_url'])
                 ): ?>
@@ -1475,6 +1498,7 @@ if (
                     </button>
 
                 <?php endif; ?>
+
 
                 <?php if (
                     !empty($actividad['imagen'])
@@ -1498,6 +1522,7 @@ if (
                     </div>
 
                 <?php endif; ?>
+
 
                 <?php if (
                     !empty($actividad['opciones'])
@@ -1565,6 +1590,7 @@ if (
 
                                 <?php endif; ?>
 
+
                                 <?php if (
                                     !empty($opcion['texto'])
                                 ): ?>
@@ -1578,6 +1604,7 @@ if (
                                     </span>
 
                                 <?php endif; ?>
+
 
                                 <?php if (
                                     !empty($opcion['audio_url'])
@@ -1608,21 +1635,25 @@ if (
 
             <?php endif; ?>
 
-            <!-- =================================================
-                EXPLICACIÓN DE CAPY
-            ================================================== -->
 
             <?php
+
             $tipoActividad = strtolower(
-                trim($actividad['tipo'] ?? '')
+                trim(
+                    $actividad['tipo'] ?? ''
+                )
             );
 
             $esExplicacion =
                 $tipoActividad === 'introduccion' ||
                 $tipoActividad === 'explicacion';
+
             ?>
 
-            <?php if (!empty($actividad['explicacion'])): ?>
+
+            <?php if (
+                !empty($actividad['explicacion'])
+            ): ?>
 
                 <div class="actividad-explicacion">
 
@@ -1677,10 +1708,6 @@ if (
             <?php endif; ?>
 
 
-            <!-- =================================================
-                FEEDBACK
-            ================================================== -->
-
             <div
                 class="actividad-feedback"
                 id="feedback-<?php
@@ -1688,10 +1715,6 @@ if (
                 ?>">
             </div>
 
-
-            <!-- =================================================
-                BOTONES DE NAVEGACIÓN
-            ================================================== -->
 
             <div class="actividad-actions">
 
@@ -1729,7 +1752,6 @@ if (
 
                     <a
                         href="aventura2.php"
-                        type="button"
                         class="btn-actividad btn-finalizar">
 
                         <i class="fa-solid fa-star"></i>
